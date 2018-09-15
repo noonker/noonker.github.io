@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>but what for</title>
-    <link>http://example.org/</link>
-    <description>Recent content on but what for</description>
+    <title></title>
+    <link>/</link>
+    <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <lastBuildDate>Sat, 15 Sep 2018 12:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A Less Than Ideal Way To Do 2-factor</title>
+      <link>/post/nophonetwofactor/</link>
+      <pubDate>Sat, 15 Sep 2018 12:00:00 +0000</pubDate>
+      
+      <guid>/post/nophonetwofactor/</guid>
+      <description>I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.
+The issue:
+ If a user has their password compromised it&amp;rsquo;s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication.  Attacker required information:
+ User password Phone number  The attack:</description>
+    </item>
     
   </channel>
 </rss>

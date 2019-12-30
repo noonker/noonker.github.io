@@ -117,7 +117,7 @@ a[itemprop="url"]:hover {
 
 <meta itemprop="datePublished" content="2019-12-28T12:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-28T12:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="681">
+<meta itemprop="wordCount" content="714">
 
 
 
@@ -151,10 +151,11 @@ a[itemprop="url"]:hover {
 
 <p>I recently switched to Protonmail due to privacy concerns with Google&rsquo;s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address. This just made things worse.  I also didn&rsquo;t want to rely on another company- because like all things in technology there are&rsquo;s no way to know how long before I need to switch to another service.</p>
 
-<p>So what I&rsquo;ve done is attempt to decouple my email address from a specific service. Here&rsquo;s the steps I took:</p>
+<p>So what I&rsquo;ve done is attempt to decouple my email address from a specific service. I bought a custom domain and will be forwarding mail from that to whatever email service I am using. Here&rsquo;s the steps I took:</p>
 
 <ul>
 <li>Enumerate all the accounts I&rsquo;ve used my (several) gmail accounts with</li>
+<li>Buy a custom domain and set up email forwarding records to my Protonmail account.</li>
 <li>Create a tier system for emails
 
 <ul>
@@ -228,7 +229,7 @@ with open(&quot;domains.org&quot;, &quot;w&quot;) as f:
         f.write(&quot;|{}|{}|{}|{}|||||\n&quot;.format(key, cs(str(results[key]['to'])), results[key]['date'], results[key]['count']))
 </code></pre>
 
-<p>This script will iterate thruogh every email in the mbox format, pull out the domain it came from, the number of emails I&rsquo;ve recieved from it, and the last time I got an email. It will put this into an org-mode table to I can keep track of which services I need to contact.</p>
+<p>This script will iterate through every email in the mbox format, pull out the domain it came from, the number of emails I&rsquo;ve recieved from it, and the last time I got an email. It will put this into an org-mode table to I can keep track of which services I need to contact.</p>
 
 <p>The output of this shows that I&rsquo;m dealing with 1.4k domains. Big oof.</p>
 
@@ -267,7 +268,7 @@ with open(&quot;domains.org&quot;, &quot;w&quot;) as f:
     in <span itemprop="articleSection"><a href="/categories/technology/">technology</a></span>
   
   
-  using <span itemprop="wordCount">681</span> words.
+  using <span itemprop="wordCount">714</span> words.
 </p>
 
       

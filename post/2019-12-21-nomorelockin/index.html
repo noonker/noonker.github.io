@@ -4,7 +4,7 @@
     <meta name="generator" content="Hugo 0.48" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moving Away From Email Lockin | </title>
+    <title>Moving Away From Email Lock-in | </title>
     <meta name="description" content="decoupling the address from the service">
     <meta name="keywords" content="social engineering, technology, ">
     
@@ -16,13 +16,13 @@
   <meta name="author" content="">
 
 
-    <meta property="og:title" content="Moving Away From Email Lockin" />
+    <meta property="og:title" content="Moving Away From Email Lock-in" />
 <meta property="og:description" content="decoupling the address from the service" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/2019-12-21-nomorelockin/" /><meta property="article:published_time" content="2019-12-28T12:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2019-12-28T12:00:00&#43;00:00"/>
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Moving Away From Email Lockin"/>
+<meta name="twitter:title" content="Moving Away From Email Lock-in"/>
 <meta name="twitter:description" content="decoupling the address from the service"/>
 
     
@@ -111,20 +111,20 @@ a[itemprop="url"]:hover {
     <main>
   <article itemscope itemtype="http://schema.org/BlogPosting">
     
-<meta itemprop="name" content="Moving Away From Email Lockin">
+<meta itemprop="name" content="Moving Away From Email Lock-in">
 <meta itemprop="description" content="decoupling the address from the service">
 
 
 <meta itemprop="datePublished" content="2019-12-28T12:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-28T12:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="660">
+<meta itemprop="wordCount" content="698">
 
 
 
 <meta itemprop="keywords" content="" />
 
     <header>
-      <h1 itemprop="headline">Moving Away From Email Lockin</h1>
+      <h1 itemprop="headline">Moving Away From Email Lock-in</h1>
       <p class="muted">
         <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
   <circle cx="16" cy="16" r="14" />
@@ -147,22 +147,22 @@ a[itemprop="url"]:hover {
     
 
     <div itemprop="articleBody">
-      <p>I&rsquo;ve been using gmail since it was an invite only beta. My email address has accumulated so much cruft over the years and my email feels difficult to manage. I&rsquo;ve switched to Protonmail due to privacy concerns with Google&rsquo;s monopoly on data but like all things in technology there are&rsquo;s no way to know how long someting good can last. I&rsquo;m going to attempt to decouple my email address from a specific service. Here&rsquo;s the steps I took:</p>
+      <p>I&rsquo;ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls. I recently switched to Protonmail due to privacy concerns with Google&rsquo;s monopoly on data. I had hoped I could get this under control by just switching important email addresses to this new service and forwarding the rest. This didn&rsquo;t really work- I was signed up for too many services.  I also didn&rsquo;t want to rely on another company because like all things in technology there are&rsquo;s no way to know how long someting good can last. So what I&rsquo;ve done is attempt to decouple my email address from a specific service. Here&rsquo;s the steps I took:</p>
 
 <ul>
-<li>Enumerate all the accounts I&rsquo;ve used my (several) gmail accounts with
+<li>Enumerate all the accounts I&rsquo;ve used my (several) gmail accounts with</li>
+<li>Create a tier system for emails
 
 <ul>
-<li>Create a tier system for emails</li>
 <li>Tier 1: An email address I give to people- These are the emails I want to see.</li>
 <li>Tier 2: An email address I use for services I care about- newsletters, github, bank accounts, etc.</li>
 <li>Tier 3: An email address I give to services I don&rsquo;t care about and that are likely going to spam me.</li>
-<li>Log in / Recover any accounts tied to this email and either delete them or move them to a new email address</li>
-<li>Once all accounts have been migrated identify edge cases and plan for them. (autoreply emails, auto delete, forward?)</li>
 </ul></li>
+<li>Log in / Recover any accounts tied to this email and either delete them or move them to a new email address.</li>
+<li>Create forwarding rules for things that still come through old emails.</li>
 </ul>
 
-<p>I have not yet but I&rsquo;m also considering paying for a higher tier of protonmail to I can use <a href="https://protonmail.com/support/knowledge-base/catch-all/">catch all</a> email addresses to attempt to catch and shame the services that sell / &ldquo;lose&rdquo; my email address. This might be overkill.</p>
+<p>I&rsquo;m also considering paying for a higher tier of Protonmail to I can use <a href="https://protonmail.com/support/knowledge-base/catch-all/">catch all</a> email addresses to attempt to catch and shame the services that sell / &ldquo;lose&rdquo; my email address. This might be overkill.</p>
 
 <p>The first thing I need to do is figure out WHICH services I&rsquo;ve signed up for. To do that I&rsquo;m going to request my emails in MBOX format from Google&rsquo;s <a href="https://takeout.google.com/settings/takeout">Takeout</a> service.</p>
 
@@ -171,65 +171,67 @@ a[itemprop="url"]:hover {
 For this I&rsquo;m using python.</li>
 </ul>
 
-<p>#+begin_src python
-import mailbox
+<pre><code class="language-python">import mailbox
 import re
-import dateutil.parser</p>
+import dateutil.parser
 
-<p>domain_re = re.compile(&ldquo;@([A-Za-z.]*)&gt;&ldquo;)
+
+
+domain_re = re.compile(&quot;@([A-Za-z\.]*)&gt;&quot;)
 mailboxes = []
-mailboxes.append(mailbox.mbox(&ldquo;All mail Including Spam and Trash-001.mbox&rdquo;))
-mailboxes.append(mailbox.mbox(&ldquo;All mail Including Spam and Trash-001-2.mbox&rdquo;))
+mailboxes.append(mailbox.mbox(&quot;All mail Including Spam and Trash-001.mbox&quot;))
+mailboxes.append(mailbox.mbox(&quot;All mail Including Spam and Trash-001-2.mbox&quot;))
 results = {}
-failures = []</p>
+failures = []
 
-<p>for mailb in mailboxes:
+for mailb in mailboxes:
     for message in mailb:
-    try:
-        domain = domain_re.findall(message[&lsquo;from&rsquo;])[0]
-    except:
-        failures.append(message)
-        continue
-    to = message[&lsquo;To&rsquo;]
-    try:
-        date = dateutil.parser.parse(message[&lsquo;date&rsquo;]).replace(tzinfo=None)
-    except:
-        print(message[&lsquo;date&rsquo;])
-        date = datetime(2000, 12, 6, 15, 29, 43, 0000).replace(tzinfo=None)
-    if domain in results.keys():
-        if date &gt; results[domain][&lsquo;date&rsquo;]:
-        results[domain][&lsquo;date&rsquo;] = date
-        results[domain][&lsquo;count&rsquo;] += 1
-        if to not in results[domain][&lsquo;to&rsquo;]:
-        results[domain][&lsquo;to&rsquo;].append(to)
-    else:
-        results[domain] = {&ldquo;date&rdquo;: date, &ldquo;count&rdquo;: 1, &ldquo;to&rdquo;: [to]}</p>
+	try:
+	    domain = domain_re.findall(message['from'])[0]
+	except:
+	    failures.append(message)
+	    continue
+	to = message['To']
+	try:
+	    date = dateutil.parser.parse(message['date']).replace(tzinfo=None)
+	except:
+	    print(message['date'])
+	    date = datetime(2000, 12, 6, 15, 29, 43, 0000).replace(tzinfo=None)
+	if domain in results.keys():
+	    if date &gt; results[domain]['date']:
+		results[domain]['date'] = date
+	    results[domain]['count'] += 1
+	    if to not in results[domain]['to']:
+		results[domain]['to'].append(to)
+	else:
+	    results[domain] = {&quot;date&quot;: date, &quot;count&quot;: 1, &quot;to&quot;: [to]}
 
-<p>def cs(string):
-    &ldquo;&rdquo;&ldquo;Replaces any string org mode wouldn&rsquo;t like&rdquo;&ldquo;&rdquo;
-    # string = string.strip(&rdquo;\&lsquo;&ldquo;)
-    string = string.replace(&rdquo;\r&rdquo;,&ldquo;&rdquo;)
-    string = string.replace(&rdquo;\n&rdquo;,&ldquo;&rdquo;)
-    string = string.replace(&ldquo;|&rdquo;, &ldquo;&rdquo;)
-    return string</p>
 
-<p>with open(&ldquo;domains.org&rdquo;, &ldquo;w&rdquo;) as f:
-    f.write(&ldquo;#+STARTUP: align\n\n&rdquo;)
-    f.write(&ldquo;|Domain|To|Date|Count|Unsubscribed|Deleted|Ignored|Other|\n&rdquo;)
-    f.write(&ldquo;||<15>|||||||\n&rdquo;)
-    f.write(&ldquo;|-\n&rdquo;)
+def cs(string):
+    &quot;&quot;&quot;Replaces any string org mode wouldn't like&quot;&quot;&quot;
+    # string = string.strip(&quot;\'&quot;)
+    string = string.replace(&quot;\r&quot;,&quot;&quot;)
+    string = string.replace(&quot;\n&quot;,&quot;&quot;)
+    string = string.replace(&quot;|&quot;, &quot;&quot;)
+    return string
+
+with open(&quot;domains.org&quot;, &quot;w&quot;) as f:
+    f.write(&quot;#+STARTUP: align\n\n&quot;)
+    f.write(&quot;|Domain|To|Date|Count|Unsubscribed|Deleted|Ignored|Other|\n&quot;)
+    f.write(&quot;||&lt;15&gt;|||||||\n&quot;)
+    f.write(&quot;|-\n&quot;)
     for key in results.keys():
-        f.write(&ldquo;|{}|{}|{}|{}|||||\n&rdquo;.format(key, cs(str(results[key][&lsquo;to&rsquo;])), results[key][&lsquo;date&rsquo;], results[key][&lsquo;count&rsquo;]))
-#+end_src</p>
+        f.write(&quot;|{}|{}|{}|{}|||||\n&quot;.format(key, cs(str(results[key]['to'])), results[key]['date'], results[key]['count']))
+</code></pre>
 
-<p>This script will iterate throgh every email in the mbox format, pull out the domain it came from, the number of emails I&rsquo;ve recieved from it, and the last time I got an email. It will put this into an org-mode table to I can keep track of which services I need to contact.</p>
+<p>This script will iterate thruogh every email in the mbox format, pull out the domain it came from, the number of emails I&rsquo;ve recieved from it, and the last time I got an email. It will put this into an org-mode table to I can keep track of which services I need to contact.</p>
 
 <p>The output of this shows that I&rsquo;m dealing with 1.4k domains. Big oof.</p>
 
 <p>It took me roughly ~15 hours to go through this giant list of emails.</p>
 
-<p>I have  couple of key takeaways from this:
- - Most websited have a delete account button.
+<p>I have couple of key takeaways from this:
+ - Most websited have a &ldquo;delete account&rdquo; button.
  - Most support agents are actually really quick to delete your account for you. There are two notable exceptions to this. EA has ~20 questions they have to ask you before they will close your account. Hotels.com support staff are useless and instead of closing your account may sign you up for their rewards program.
  - This sucks
  - Use burner emails and fake accounts unless you /need/ to be on a mailing list. Some services will never let your remove your account
@@ -258,7 +260,7 @@ failures = []</p>
     in <span itemprop="articleSection"><a href="/categories/technology/">technology</a></span>
   
   
-  using <span itemprop="wordCount">660</span> words.
+  using <span itemprop="wordCount">698</span> words.
 </p>
 
       

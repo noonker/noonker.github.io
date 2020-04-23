@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Noonker</title>
-    <link>http://noonker.github.io/</link>
+    <link>https://noonker.github.io/</link>
     <description>Recent content on Noonker</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 22 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://noonker.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://noonker.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Elfeed Rules!</title>
-      <link>http://noonker.github.io/posts/2020-04-22-elfeed/</link>
+      <link>https://noonker.github.io/posts/2020-04-22-elfeed/</link>
       <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://noonker.github.io/posts/2020-04-22-elfeed/</guid>
+      <guid>https://noonker.github.io/posts/2020-04-22-elfeed/</guid>
       <description>I recently got the question- &amp;#34;What is the use case for elfeed?&amp;#34;. When I get a chance to talk about my favorite software I will NEVER pass up that opportunity.  Elfeed is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&amp;#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by (url tag1 tag2 tagN) .</description>
     </item>
     
     <item>
       <title>No More Lock-in</title>
-      <link>http://noonker.github.io/posts/2019-12-28-nomorelockin/</link>
+      <link>https://noonker.github.io/posts/2019-12-28-nomorelockin/</link>
       <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://noonker.github.io/posts/2019-12-28-nomorelockin/</guid>
+      <guid>https://noonker.github.io/posts/2019-12-28-nomorelockin/</guid>
       <description>decoupling the address from the service   I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.  I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address.</description>
     </item>
     
     <item>
       <title>A Less Than Ideal Way To Do 2-factor</title>
-      <link>http://noonker.github.io/posts/2018-10-15-duo-twofactor/</link>
+      <link>https://noonker.github.io/posts/2018-10-15-duo-twofactor/</link>
       <pubDate>Mon, 15 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://noonker.github.io/posts/2018-10-15-duo-twofactor/</guid>
+      <guid>https://noonker.github.io/posts/2018-10-15-duo-twofactor/</guid>
       <description>probably just shouldn&amp;#39;t use cell networks for 2-factor   I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.  The issue:    If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication.</description>
     </item>
     

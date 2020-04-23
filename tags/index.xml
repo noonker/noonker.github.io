@@ -2,57 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Noonker</title>
-    <link>http://noonker.github.io/tags/</link>
+    <link>https://noonker.github.io/tags/</link>
     <description>Recent content in Tags on Noonker</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 22 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://noonker.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://noonker.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>emacs</title>
-      <link>http://noonker.github.io/tags/emacs/</link>
+      <link>https://noonker.github.io/tags/emacs/</link>
       <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://noonker.github.io/tags/emacs/</guid>
+      <guid>https://noonker.github.io/tags/emacs/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tech</title>
-      <link>http://noonker.github.io/tags/tech/</link>
+      <link>https://noonker.github.io/tags/tech/</link>
       <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://noonker.github.io/tags/tech/</guid>
+      <guid>https://noonker.github.io/tags/tech/</guid>
       <description></description>
     </item>
     
     <item>
       <title>email,</title>
-      <link>http://noonker.github.io/tags/email/</link>
+      <link>https://noonker.github.io/tags/email/</link>
       <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://noonker.github.io/tags/email/</guid>
+      <guid>https://noonker.github.io/tags/email/</guid>
       <description></description>
     </item>
     
     <item>
       <title>privacy</title>
-      <link>http://noonker.github.io/tags/privacy/</link>
+      <link>https://noonker.github.io/tags/privacy/</link>
       <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://noonker.github.io/tags/privacy/</guid>
+      <guid>https://noonker.github.io/tags/privacy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>security,</title>
-      <link>http://noonker.github.io/tags/security/</link>
+      <link>https://noonker.github.io/tags/security/</link>
       <pubDate>Mon, 15 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://noonker.github.io/tags/security/</guid>
+      <guid>https://noonker.github.io/tags/security/</guid>
       <description></description>
     </item>
     

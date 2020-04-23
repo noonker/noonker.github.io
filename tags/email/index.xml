@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>email, on Noonker</title>
+    <link>http://noonker.github.io/tags/email/</link>
+    <description>Recent content in email, on Noonker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://noonker.github.io/tags/email/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>No More Lock-in</title>
+      <link>http://noonker.github.io/posts/2019-12-28-nomorelockin/</link>
+      <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://noonker.github.io/posts/2019-12-28-nomorelockin/</guid>
+      <description>decoupling the address from the service   I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.  I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address.</description>
+    </item>
+    
+  </channel>
+</rss>

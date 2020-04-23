@@ -1,49 +1,64 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/2019-12-21-nomorelockin/</loc>
-    <lastmod>2019-12-28T12:00:00+00:00</lastmod>
+    <loc>http://noonker.github.io/posts/2020-04-22-elfeed/</loc>
+    <lastmod>2020-04-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/nophonetwofactor/</loc>
-    <lastmod>2018-09-15T12:00:00+00:00</lastmod>
+    <loc>http://noonker.github.io/tags/emacs/</loc>
+    <lastmod>2020-04-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2019-12-28T12:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>http://noonker.github.io/</loc>
+    <lastmod>2020-04-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <priority>0</priority>
+    <loc>http://noonker.github.io/posts/</loc>
+    <lastmod>2020-04-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2019-12-28T12:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>http://noonker.github.io/tags/</loc>
+    <lastmod>2020-04-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/social-engineering/</loc>
-    <lastmod>2018-09-15T12:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>http://noonker.github.io/tags/tech/</loc>
+    <lastmod>2020-04-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <priority>0</priority>
+    <loc>http://noonker.github.io/tags/email/</loc>
+    <lastmod>2019-12-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/technology/</loc>
-    <lastmod>2019-12-28T12:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>http://noonker.github.io/posts/2019-12-28-nomorelockin/</loc>
+    <lastmod>2019-12-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://noonker.github.io/tags/privacy/</loc>
+    <lastmod>2019-12-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://noonker.github.io/posts/2018-10-15-duo-twofactor/</loc>
+    <lastmod>2018-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://noonker.github.io/tags/security/</loc>
+    <lastmod>2018-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://noonker.github.io/categories/</loc>
   </url>
   
 </urlset>

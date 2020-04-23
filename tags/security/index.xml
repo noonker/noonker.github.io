@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>security, on Noonker</title>
+    <link>http://noonker.github.io/tags/security/</link>
+    <description>Recent content in security, on Noonker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://noonker.github.io/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A Less Than Ideal Way To Do 2-factor</title>
+      <link>http://noonker.github.io/posts/2018-10-15-duo-twofactor/</link>
+      <pubDate>Mon, 15 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://noonker.github.io/posts/2018-10-15-duo-twofactor/</guid>
+      <description>probably just shouldn&amp;#39;t use cell networks for 2-factor   I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.  The issue:    If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication.</description>
+    </item>
+    
+  </channel>
+</rss>

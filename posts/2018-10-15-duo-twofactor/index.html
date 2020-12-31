@@ -6,7 +6,9 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content="probably just shouldn&amp;#39;t use cell networks for 2-factor   I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.  The issue:    If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication." />
+<meta name="description" content="probably just shouldn&amp;#39;t use cell networks for 2-factor   I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.
+ The issue:
+  If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="https://noonker.github.io/posts/2018-10-15-duo-twofactor/" />
@@ -39,7 +41,9 @@
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="A Less Than Ideal Way To Do 2-factor :: Noonker">
-<meta property="og:description" content="probably just shouldn&amp;#39;t use cell networks for 2-factor   I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.  The issue:    If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication." />
+<meta property="og:description" content="probably just shouldn&amp;#39;t use cell networks for 2-factor   I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.
+ The issue:
+  If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication." />
 <meta property="og:url" content="https://noonker.github.io/posts/2018-10-15-duo-twofactor/" />
 <meta property="og:site_name" content="A Less Than Ideal Way To Do 2-factor" />
 
@@ -114,102 +118,70 @@
 
   <div class="post-content"><div>
         
+<div id="outline-container-headline-1" class="outline-3">
 <h3 id="headline-1">
 probably just shouldn&#39;t use cell networks for 2-factor
 </h3>
+<div id="outline-text-headline-1" class="outline-text-3">
 <p>
-I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.
-</p>
+I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.</p>
 <p>
-The issue:
-</p>
+The issue:</p>
 <ul>
 <li>
-<p>
-If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication.
-</p>
+<p>If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication.</p>
 </li>
 </ul>
-<p>
-Attacker required information:
-</p>
+<p>Attacker required information:</p>
 <ul>
 <li>
-<p>
-User password
-</p>
+<p>User password</p>
 </li>
 <li>
-<p>
-Phone number
-</p>
+<p>Phone number</p>
 </li>
 </ul>
-<p>
-The attack:
-</p>
+<p>The attack:</p>
 <ul>
 <li>
-<p>
-Threat actor compromises a password
-</p>
+<p>Threat actor compromises a password</p>
 </li>
 <li>
-<p>
-Threat actor uses OSINT to determine victim’s phone number based on the last 4 numbers that duo discloses in the 2-factor login.
-</p>
+<p>Threat actor uses OSINT to determine victim’s phone number based on the last 4 numbers that duo discloses in the 2-factor login.</p>
 </li>
 <li>
-<p>
-Threat actor calls the victim and uses any facade to convince a user to merge a call (transferring between departments, bringing manager to the call, verification call to verify phone number (My phone carrier has done this))
-</p>
+<p>Threat actor calls the victim and uses any facade to convince a user to merge a call (transferring between departments, bringing manager to the call, verification call to verify phone number (My phone carrier has done this))</p>
 </li>
 <li>
-<p>
-Threat actor send two factor phone request and user merges the call.
-</p>
+<p>Threat actor send two factor phone request and user merges the call.</p>
 </li>
 <li>
-<p>
-Threat actor (not user) presses a key to authenticate the 2-factor request.
-</p>
+<p>Threat actor (not user) presses a key to authenticate the 2-factor request.</p>
 </li>
 </ul>
-<p>
-Why this works:
-</p>
+<p>Why this works:</p>
 <ul>
 <li>
-<p>
-User only needs to be convinced to merge a call- this will probably not set off a red flag since it’s not a probe for more information.
-</p>
+<p>User only needs to be convinced to merge a call- this will probably not set off a red flag since it’s not a probe for more information.</p>
 </li>
 <li>
-<p>
-Duo does not tell the user what is being authenticated that would set off any red flags
-</p>
+<p>Duo does not tell the user what is being authenticated that would set off any red flags</p>
 </li>
 <li>
-<p>
-Duo accepts input before the the push call explains the context of the call
-</p>
+<p>Duo accepts input before the the push call explains the context of the call</p>
 </li>
 </ul>
-<p>
-How to fix this:
-</p>
+<p>How to fix this:</p>
 <ul>
 <li>
-<p>
-Full disclosure of the context of the call before accepting user input ex: “You are authenticating for user@account.com. If you were not expecting this call please hang up now otherwise press any key after the beep”
-</p>
+<p>Full disclosure of the context of the call before accepting user input ex: “You are authenticating for user@account.com. If you were not expecting this call please hang up now otherwise press any key after the beep”</p>
 </li>
 <li>
-<p>
-Switch to the method Google uses: Give context for the call and give the users a token to type in. This gives a user more time to realize something is wrong
-</p>
+<p>Switch to the method Google uses: Give context for the call and give the users a token to type in. This gives a user more time to realize something is wrong</p>
 </li>
 </ul>
+</div>
+</div>
 
       </div></div>
   

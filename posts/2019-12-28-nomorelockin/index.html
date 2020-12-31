@@ -6,7 +6,8 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content="decoupling the address from the service   I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.  I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address." />
+<meta name="description" content="decoupling the address from the service   I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.
+ I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="https://noonker.github.io/posts/2019-12-28-nomorelockin/" />
@@ -39,7 +40,8 @@
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="No More Lock-in :: Noonker">
-<meta property="og:description" content="decoupling the address from the service   I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.  I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address." />
+<meta property="og:description" content="decoupling the address from the service   I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.
+ I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address." />
 <meta property="og:url" content="https://noonker.github.io/posts/2019-12-28-nomorelockin/" />
 <meta property="og:site_name" content="No More Lock-in" />
 
@@ -116,73 +118,51 @@
 
   <div class="post-content"><div>
         
+<div id="outline-container-headline-1" class="outline-3">
 <h3 id="headline-1">
 decoupling the address from the service
 </h3>
+<div id="outline-text-headline-1" class="outline-text-3">
 <p>
-I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.
-</p>
+I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.</p>
 <p>
-I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address. This just made things worse. I also didn’t want to rely on another company- because like all things in technology there are’s no way to know how long before I need to switch to another service.
-</p>
+I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address. This just made things worse. I also didn’t want to rely on another company- because like all things in technology there are’s no way to know how long before I need to switch to another service.</p>
 <p>
-So what I’ve done is attempt to decouple my email address from a specific service. I bought a custom domain and will be forwarding mail from that to whatever email service I am using. Here’s the steps I took:
-</p>
+So what I’ve done is attempt to decouple my email address from a specific service. I bought a custom domain and will be forwarding mail from that to whatever email service I am using. Here’s the steps I took:</p>
 <ul>
 <li>
-<p>
-Enumerate all the accounts I’ve used my (several) gmail accounts with
-</p>
+<p>Enumerate all the accounts I’ve used my (several) gmail accounts with</p>
 </li>
 <li>
-<p>
-Buy a custom domain and set up email forwarding records to my Protonmail account.
-</p>
+<p>Buy a custom domain and set up email forwarding records to my Protonmail account.</p>
 </li>
 <li>
-<p>
-Create a tier system for emails
-</p>
+<p>Create a tier system for emails</p>
 <ul>
 <li>
-<p>
-Tier 1: An email address I give to people- These are the emails I want to see.
-</p>
+<p>Tier 1: An email address I give to people- These are the emails I want to see.</p>
 </li>
 <li>
-<p>
-Tier 2: An email address I use for services I care about- newsletters, github, bank accounts, etc.
-</p>
+<p>Tier 2: An email address I use for services I care about- newsletters, github, bank accounts, etc.</p>
 </li>
 <li>
-<p>
-Tier 3: An email address I give to services I don’t care about and that are likely going to spam me.
-</p>
+<p>Tier 3: An email address I give to services I don’t care about and that are likely going to spam me.</p>
 </li>
 </ul>
 </li>
 <li>
-<p>
-Log in / Recover any accounts tied to this email and either delete them or move them to a new email address.
-</p>
+<p>Log in / Recover any accounts tied to this email and either delete them or move them to a new email address.</p>
 </li>
 <li>
-<p>
-Create forwarding rules for things that still come through old emails.
-</p>
+<p>Create forwarding rules for things that still come through old emails.</p>
 </li>
 </ul>
+<p>I’m also considering paying for a higher tier of Protonmail to I can use catch all email addresses to attempt to catch and shame the services that sell / “lose” my email address. This might be overkill.</p>
 <p>
-I’m also considering paying for a higher tier of Protonmail to I can use catch all email addresses to attempt to catch and shame the services that sell / “lose” my email address. This might be overkill.
-</p>
-<p>
-The first thing I need to do is figure out WHICH services I’ve signed up for. To do that I’m going to request my emails in MBOX format from Google’s Takeout service.
-</p>
+The first thing I need to do is figure out WHICH services I’ve signed up for. To do that I’m going to request my emails in MBOX format from Google’s Takeout service.</p>
 <ul>
 <li>
-<p>
-Enumerating Websites For this I’m using python.
-</p>
+<p>Enumerating Websites For this I’m using python.</p>
 </li>
 </ul>
 <div class="src src-python">
@@ -239,62 +219,42 @@ failures <span style="color:#f92672">=</span> []
         f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#34;|{}|{}|{}|{}|||||</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(key, cs(str(results[key][<span style="color:#e6db74">&#39;to&#39;</span>])), results[key][<span style="color:#e6db74">&#39;date&#39;</span>], results[key][<span style="color:#e6db74">&#39;count&#39;</span>]))</code></pre></div>
 </div>
 <p>
-This script will iterate through every email in the mbox format, pull out the domain it came from, the number of emails I’ve recieved from it, and the last time I got an email. It will put this into an org-mode table to I can keep track of which services I need to contact.
-</p>
+This script will iterate through every email in the mbox format, pull out the domain it came from, the number of emails I’ve recieved from it, and the last time I got an email. It will put this into an org-mode table to I can keep track of which services I need to contact.</p>
 <p>
-The output of this shows that I’m dealing with 1.4k domains. Big oof.
-</p>
+The output of this shows that I’m dealing with 1.4k domains. Big oof.</p>
 <p>
-It took me roughly ~15 hours to go through this giant list of emails.
-</p>
+It took me roughly ~15 hours to go through this giant list of emails.</p>
 <p>
-I have couple of key takeaways from this:
-</p>
+I have couple of key takeaways from this:</p>
 <ul>
 <li>
-<p>
-Most websited have a “delete account” button.
-</p>
+<p>Most websited have a “delete account” button.</p>
 </li>
 <li>
-<p>
-Most support agents are actually really quick to delete your account for you. There are two notable exceptions to this. EA has ~20 questions they have to ask you before they will close your account. Hotels.com support staff are useless and instead of closing your account may sign you up for their rewards program.
-</p>
+<p>Most support agents are actually really quick to delete your account for you. There are two notable exceptions to this. EA has ~20 questions they have to ask you before they will close your account. Hotels.com support staff are useless and instead of closing your account may sign you up for their rewards program.</p>
 </li>
 <li>
-<p>
-This sucks
-</p>
+<p>This sucks</p>
 </li>
 <li>
-<p>
-Use burner emails and fake accounts unless you <em>need</em> to be on a mailing list. Some services will never let your remove your account
-</p>
+<p>Use burner emails and fake accounts unless you <em>need</em> to be on a mailing list. Some services will never let your remove your account</p>
 </li>
 <li>
-<p>
-Unsubscribe as soon as your register
-</p>
+<p>Unsubscribe as soon as your register</p>
 </li>
 <li>
-<p>
-Never need to change your email
-</p>
+<p>Never need to change your email</p>
 </li>
 <li>
-<p>
-The TLD .company is not accepted eveywhere as a valid email address. I really should have considered this before buying a domain.
-</p>
+<p>The TLD .company is not accepted eveywhere as a valid email address. I really should have considered this before buying a domain.</p>
 </li>
 <li>
-<p>
-I’ve given google so much ML data
-</p>
+<p>I’ve given google so much ML data</p>
 </li>
 </ul>
-<p>
-It’s still a little eerie I can log into a decade+ year old account and have it work. We should really have expiration dates on these.
-</p>
+<p>It’s still a little eerie I can log into a decade+ year old account and have it work. We should really have expiration dates on these.</p>
+</div>
+</div>
 
       </div></div>
   

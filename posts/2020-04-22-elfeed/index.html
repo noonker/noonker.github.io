@@ -6,7 +6,8 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content="I recently got the question- &amp;#34;What is the use case for elfeed?&amp;#34;. When I get a chance to talk about my favorite software I will NEVER pass up that opportunity.  Elfeed is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&amp;#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by (url tag1 tag2 tagN) ." />
+<meta name="description" content="I recently got the question- &amp;#34;What is the use case for elfeed?&amp;#34;. When I get a chance to talk about my favorite software I will NEVER pass up that opportunity.
+ Elfeed is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&amp;#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by (url tag1 tag2 tagN) ." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="https://noonker.github.io/posts/2020-04-22-elfeed/" />
@@ -39,7 +40,8 @@
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Elfeed Rules! :: Noonker">
-<meta property="og:description" content="I recently got the question- &amp;#34;What is the use case for elfeed?&amp;#34;. When I get a chance to talk about my favorite software I will NEVER pass up that opportunity.  Elfeed is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&amp;#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by (url tag1 tag2 tagN) ." />
+<meta property="og:description" content="I recently got the question- &amp;#34;What is the use case for elfeed?&amp;#34;. When I get a chance to talk about my favorite software I will NEVER pass up that opportunity.
+ Elfeed is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&amp;#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by (url tag1 tag2 tagN) ." />
 <meta property="og:url" content="https://noonker.github.io/posts/2020-04-22-elfeed/" />
 <meta property="og:site_name" content="Elfeed Rules!" />
 
@@ -115,11 +117,9 @@
   <div class="post-content"><div>
         
 <p>
-I recently got the question- &#34;What is the use case for elfeed?&#34;. When I get a chance to talk about my favorite software I will <em>NEVER</em> pass up that opportunity.
-</p>
+I recently got the question- &#34;What is the use case for elfeed?&#34;. When I get a chance to talk about my favorite software I will <em>NEVER</em> pass up that opportunity.</p>
 <p>
-<a href="https://github.com/skeeto/elfeed">Elfeed</a> is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by <code class="verbatim">(url tag1 tag2 tagN)</code> . This combination is the start of a lot of very powerful workflows.
-</p>
+<a href="https://github.com/skeeto/elfeed">Elfeed</a> is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by <code class="verbatim">(url tag1 tag2 tagN)</code> . This combination is the start of a lot of very powerful workflows.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq elfeed-feeds
       <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">&#34;http://asert.arbornetworks.com/feed/&#34;</span> security second)
@@ -151,74 +151,59 @@ I recently got the question- &#34;What is the use case for elfeed?&#34;. When I 
 ))</code></pre></div>
 </div>
 <p>
-This is only a small snippet of all the feeds I subscribe to. RSS is used to make sure that you can stay on top of all of your feeds but also importantly for me it&#39;s a way to efficiently manage all of the 100+ feeds I subscribe to. So let&#39;s dive in to a couple of the use cases! 
-</p>
+This is only a small snippet of all the feeds I subscribe to. RSS is used to make sure that you can stay on top of all of your feeds but also importantly for me it&#39;s a way to efficiently manage all of the 100+ feeds I subscribe to. So let&#39;s dive in to a couple of the use cases! </p>
+<div id="outline-container-headline-1" class="outline-3">
 <h3 id="headline-1">
 Tagging for level of attention required
 </h3>
+<div id="outline-text-headline-1" class="outline-text-3">
 <p>
-There&#39;s a few tags I use to help me orient the stories I&#39;m looking at to see which I want to read. <code class="verbatim">first</code>, <code class="verbatim">second</code>, and <code class="verbatim">local</code>.
-</p>
+There&#39;s a few tags I use to help me orient the stories I&#39;m looking at to see which I want to read. <code class="verbatim">first</code>, <code class="verbatim">second</code>, and <code class="verbatim">local</code>.</p>
 <ul>
 <li>
-<p>
-First is the tag I use for anything that I&#39;m not REALLY interested in but like to fetch for potential search later. For this tag I will briefly skim the list and mark the whole thing as read. 
-</p>
+<p>First is the tag I use for anything that I&#39;m not REALLY interested in but like to fetch for potential search later. For this tag I will briefly skim the list and mark the whole thing as read. </p>
 </li>
 <li>
-<p>
-Second is the tag I use for security related news. These are the feeds I&#39;m reading for work and filtering on that allows me to reorient how I look at the stories. I can quickly mark things as read if they do not pertain to any topics I&#39;m currently tasked on or strike my interest.
-</p>
+<p>Second is the tag I use for security related news. These are the feeds I&#39;m reading for work and filtering on that allows me to reorient how I look at the stories. I can quickly mark things as read if they do not pertain to any topics I&#39;m currently tasked on or strike my interest.</p>
 </li>
 <li>
-<p>
-Local is my tag for local headlines. Filtering on this allows me to read headlines within the context of my local community. Headlines that may not jump out in a global feed may suddenly be more interesting when they&#39;re happening down the street.
-</p>
+<p>Local is my tag for local headlines. Filtering on this allows me to read headlines within the context of my local community. Headlines that may not jump out in a global feed may suddenly be more interesting when they&#39;re happening down the street.</p>
 </li>
 </ul>
-<p>
-Focusing my attention based on the stories displayed is made possible by all sorts of tagging and sorting that you can do within elfeed.
-</p>
+<p>Focusing my attention based on the stories displayed is made possible by all sorts of tagging and sorting that you can do within elfeed.</p>
 <ul>
 <li>
-<p>
-<code class="verbatim">+/-</code> before a search term to add or remove a tag
-</p>
+<p><code class="verbatim">+/-</code> before a search term to add or remove a tag</p>
 </li>
 <li>
-<p>
-<code class="verbatim">=</code> before a search term to filter by name of source
-</p>
+<p><code class="verbatim">=</code> before a search term to filter by name of source</p>
 </li>
 <li>
-<p>
-You can start typing to search the title or any of the body of the feed
-</p>
+<p>You can start typing to search the title or any of the body of the feed</p>
 </li>
 <li>
-<p>
-<code class="verbatim">@</code> operator to specify a time range
-</p>
+<p><code class="verbatim">@</code> operator to specify a time range</p>
 </li>
 </ul>
-<p>
-<img src="/images/attention.gif" alt="/images/attention.gif" title="/images/attention.gif" />
-</p>
+<p><img src="/images/attention.gif" alt="/images/attention.gif" title="/images/attention.gif" /></p>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-3">
 <h3 id="headline-2">
 NoSurf
 </h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>I also use elfeed to aid my <a href="https://www.reddit.com/r/nosurf/">NoSurf</a> efforts. Two of my three biggest time wasters are Reddit and Youtube. Both of these services have RSS feeds to subscribe to channels and subreddits.</p>
 <p>
-I also use elfeed to aid my <a href="https://www.reddit.com/r/nosurf/">NoSurf</a> efforts. Two of my three biggest time wasters are Reddit and Youtube. Both of these services have RSS feeds to subscribe to channels and subreddits.
-</p>
-<p>
-<img src="/images/nosurf.gif" alt="/images/nosurf.gif" title="/images/nosurf.gif" />
-</p>
+<img src="/images/nosurf.gif" alt="/images/nosurf.gif" title="/images/nosurf.gif" /></p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
 <h3 id="headline-3">
 Music
 </h3>
-<p>
-After a friend showed me the subreddit <a href="https://www.reddit.com/r/listentothis/">ListenToThis</a> I&#39;ve found it a pretty valuable resource for finding new music. I can add the tags <code class="verbatim">+music</code> removing the <code class="verbatim">+unread</code> tag and just searching for genres I&#39;m feeling at the moment. It&#39;s made even better by extending elfeed just a little:
-</p>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>After a friend showed me the subreddit <a href="https://www.reddit.com/r/listentothis/">ListenToThis</a> I&#39;ve found it a pretty valuable resource for finding new music. I can add the tags <code class="verbatim">+music</code> removing the <code class="verbatim">+unread</code> tag and just searching for genres I&#39;m feeling at the moment. It&#39;s made even better by extending elfeed just a little:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(require <span style="color:#e6db74">&#39;elfeed</span>)
 
@@ -241,29 +226,30 @@ After a friend showed me the subreddit <a href="https://www.reddit.com/r/listent
 (<span style="color:#a6e22e">define-key</span> elfeed-search-mode-map (kbd <span style="color:#e6db74">&#34;d&#34;</span>) <span style="color:#e6db74">&#39;elfeed-youtube-dl</span>)</code></pre></div>
 </div>
 <p>
-This allows me to download the feed item at point by pressing <code class="verbatim">d</code>. I also do this for Youtubes in my feed since I&#39;ve been burned by having my favorite videos removed in the past. 
-</p>
+This allows me to download the feed item at point by pressing <code class="verbatim">d</code>. I also do this for Youtubes in my feed since I&#39;ve been burned by having my favorite videos removed in the past. </p>
 <p>
-<img src="/images/newmusic.gif" alt="/images/newmusic.gif" title="/images/newmusic.gif" />
-</p>
+<img src="/images/newmusic.gif" alt="/images/newmusic.gif" title="/images/newmusic.gif" /></p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
 <h3 id="headline-4">
 Podcasts
 </h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>On the go I normally just use the Apple podcasts app to listen to my podcasts on my phone but when I&#39;m at my desk it&#39;s nice to be able to use elfeed to just grab the newest podcast.</p>
 <p>
-On the go I normally just use the Apple podcasts app to listen to my podcasts on my phone but when I&#39;m at my desk it&#39;s nice to be able to use elfeed to just grab the newest podcast.
-</p>
-<p>
-<img src="/images/podcast.gif" alt="/images/podcast.gif" title="/images/podcast.gif" />
-</p>
+<img src="/images/podcast.gif" alt="/images/podcast.gif" title="/images/podcast.gif" /></p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
 <h3 id="headline-5">
 Multiple Browsers
 </h3>
+<div id="outline-text-headline-5" class="outline-text-3">
 <p>
-I&#39;ve extended elfeed in a couple of ways to make reading of feeds easier. Sometimes I want to read feeds in my default browser but often I would just rather read them in w3m. This often gets around ad blockers and stops a lot of privacy invading javascript. I can also then use <a href="https://github.com/emacsmirror/spray">Spray</a> to effectively read a lot of news articles. 
-</p>
+I&#39;ve extended elfeed in a couple of ways to make reading of feeds easier. Sometimes I want to read feeds in my default browser but often I would just rather read them in w3m. This often gets around ad blockers and stops a lot of privacy invading javascript. I can also then use <a href="https://github.com/emacsmirror/spray">Spray</a> to effectively read a lot of news articles. </p>
 <p>
-Here&#39;s what I&#39;ve added to my config for alternate browsers:
-</p>
+Here&#39;s what I&#39;ve added to my config for alternate browsers:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(defun elfeed-eww-open (<span style="color:#66d9ef">&amp;optional</span> use-generic-p)
   <span style="color:#e6db74">&#34;open with eww&#34;</span>
@@ -303,14 +289,16 @@ Here&#39;s what I&#39;ve added to my config for alternate browsers:
 (<span style="color:#a6e22e">define-key</span> elfeed-search-mode-map (kbd <span style="color:#e6db74">&#34;f&#34;</span>) <span style="color:#e6db74">&#39;elfeed-firefox-open</span>)</code></pre></div>
 </div>
 <p>
-<img src="/images/w3m.gif" alt="/images/w3m.gif" title="/images/w3m.gif" />
-</p>
+<img src="/images/w3m.gif" alt="/images/w3m.gif" title="/images/w3m.gif" /></p>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
 <h3 id="headline-6">
 Note to Self
 </h3>
+<div id="outline-text-headline-6" class="outline-text-3">
 <p>
-Sometimes when I see a story it&#39;s not one I want to read now but I know it&#39;s one I want to check out later I&#39;ll often email the link to myself so I can check it out when I&#39;m on the bus, laying in bed, or some other time I have a spare couple of minutes.
-</p>
+Sometimes when I see a story it&#39;s not one I want to read now but I know it&#39;s one I want to check out later I&#39;ll often email the link to myself so I can check it out when I&#39;m on the bus, laying in bed, or some other time I have a spare couple of minutes.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(defun todo (text <span style="color:#66d9ef">&amp;optional</span> body)
   (interactive <span style="color:#e6db74">&#34;sTodo: &#34;</span>)
@@ -333,18 +321,20 @@ Sometimes when I see a story it&#39;s not one I want to read now but I know it&#
 
 (<span style="color:#a6e22e">define-key</span> elfeed-search-mode-map (kbd <span style="color:#e6db74">&#34;m&#34;</span>) <span style="color:#e6db74">&#39;elfeed-mail-todo</span>)</code></pre></div>
 </div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
 <h3 id="headline-7">
 Hunting
 </h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<p>I also use Elfeed to keep up on some things I&#39;m searching for. This includes VirusTotal hunting hits, Craigslist search terms in my area, and Google custom search terms.</p>
 <p>
-I also use Elfeed to keep up on some things I&#39;m searching for. This includes VirusTotal hunting hits, Craigslist search terms in my area, and Google custom search terms.
-</p>
+<img src="/images/hunt.gif" alt="/images/hunt.gif" title="/images/hunt.gif" /></p>
 <p>
-<img src="/images/hunt.gif" alt="/images/hunt.gif" title="/images/hunt.gif" />
-</p>
-<p>
-I hope this inspired you to give elfeed a shot. I haven&#39;t been this happy with an RSS reader since Google Reader 🪦
-</p>
+I hope this inspired you to give elfeed a shot. I haven&#39;t been this happy with an RSS reader since Google Reader 🪦</p>
+</div>
+</div>
 
       </div></div>
   
@@ -355,6 +345,13 @@ I hope this inspired you to give elfeed a shot. I haven&#39;t been this happy wi
       <hr />
     </div>
     <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="https://noonker.github.io/posts/2020-12-31-org-config-manager/">
+          <span class="button__icon">←</span>
+          <span class="button__text">Using Org-Mode to Manage Configs</span>
+        </a>
+      </span>
       
       
       <span class="button next">

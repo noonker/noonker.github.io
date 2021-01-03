@@ -6,7 +6,17 @@
     <description>Recent content in emacs on Noonker</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 31 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://noonker.github.io/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://noonker.github.io/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Json To Org-Mode Table</title>
+      <link>https://noonker.github.io/posts/2021-01-03-json-to-org-table/</link>
+      <pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://noonker.github.io/posts/2021-01-03-json-to-org-table/</guid>
+      <description>As part of the Emacs minor mode I&amp;#39;m working on I&amp;#39;ve created a useful function to turn json into Org tables while maintaining the linkage of nested structures. The is cleverly named json-to-org-table.
+Why?  Json is a great format for programming and parsing structures but a less good language for human consumption. I created this tool so I could interact with APIs and have a human readable format (and one that exports nicely too!</description>
+    </item>
+    
     <item>
       <title>Using Org-Mode to Manage Configs</title>
       <link>https://noonker.github.io/posts/2020-12-31-org-config-manager/</link>

@@ -154,49 +154,10 @@ As JSON</p>
 </div>
 <p>
 … and as linked tables</p>
-<div class="src src-emacs-lisp">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(json-to-org-table-parse-json-string str)</code></pre></div>
-</div>
 <p>
 <img src="/images/linked_tables.png" alt="/images/linked_tables.png" title="/images/linked_tables.png" /></p>
 <p>
 In an org buffer it would look like this:</p>
-<div class="src src-org">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-org" data-lang="org"><span style="color:#75715e">#+name</span><span style="color:#75715e">: requester</span>
-<span style="color:#75715e">#+begin_src </span><span style="color:#75715e">bash</span><span style="color:#75715e"> :results drawer
-</span><span style="color:#75715e"></span>curl -X GET <span style="color:#e6db74">&#34;https://archive.org/wayback/available?url=noonker.github.io&#34;</span>
-<span style="color:#75715e">#+end_src</span>
-
-<span style="color:#75715e">#+RESULTS</span><span style="color:#75715e">:</span>
-<span style="color:#75715e">:results:
-</span><span style="color:#75715e"></span><span style="color:#75715e">{&#34;url&#34;: &#34;noonker.github.io&#34;, &#34;archived_snapshots&#34;: {&#34;closest&#34;: {&#34;url&#34;: &#34;http://web.archive.org/web/20201209030058/https://noonker.github.io/&#34;, &#34;status&#34;: &#34;200&#34;, &#34;timestamp&#34;: &#34;20201209030058&#34;, &#34;available&#34;: true}}}
-</span><span style="color:#75715e"></span><span style="color:#75715e">:end:</span>
-
-
-<span style="color:#75715e">#+name</span><span style="color:#75715e">: to-json-table</span>
-<span style="color:#75715e">#+begin_src </span><span style="color:#75715e">emacs-lisp</span><span style="color:#75715e"> :var str=requester() :results raw
-</span><span style="color:#75715e"></span>(json-to-org-table-parse-json-string str)
-<span style="color:#75715e">#+end_src</span>
-
-<span style="color:#75715e">#+RESULTS</span><span style="color:#75715e">: to-json-table</span>
-<span style="color:#e6db74">| key                | value              |</span>
-<span style="color:#e6db74">|--------------------+--------------------|</span>
-<span style="color:#e6db74">| archived_snapshots | [[archived_snapshots]] |</span>
-<span style="color:#e6db74">| url                | noonker.github.io  |</span>
-
-<span style="color:#75715e">#+name</span><span style="color:#75715e">: archived_snapshots</span>
-<span style="color:#e6db74">| key     | value                      |</span>
-<span style="color:#e6db74">|---------+----------------------------|</span>
-<span style="color:#e6db74">| closest | [[closest_archived_snapshots]] |</span>
-
-<span style="color:#75715e">#+name</span><span style="color:#75715e">: closest_archived_snapshots</span>
-<span style="color:#e6db74">| key       | value                                                                |</span>
-<span style="color:#e6db74">|-----------+----------------------------------------------------------------------|</span>
-<span style="color:#e6db74">| timestamp | 20201209030058                                                       |</span>
-<span style="color:#e6db74">| available | t                                                                    |</span>
-<span style="color:#e6db74">| status    | 200                                                                  |</span>
-<span style="color:#e6db74">| url       | http://web.archive.org/web/20201209030058/https://noonker.github.io/ |</span></code></pre></div>
-</div>
 <pre class="example">
 #+name: requester
 #+begin_src bash :results drawer

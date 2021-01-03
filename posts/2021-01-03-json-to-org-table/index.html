@@ -133,6 +133,34 @@ What&#39;s that look like?
 <div id="outline-text-headline-2" class="outline-text-3">
 <p>
 Much of the tool is covered on the github <code class="verbatim">README.md</code>. Here&#39;s an example of using it in org mode to build a set of linked tables</p>
+<p>
+As JSON</p>
+<div class="src src-bash">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X GET <span style="color:#e6db74">&#34;https://archive.org/wayback/available?url=noonker.github.io&#34;</span></code></pre></div>
+</div>
+<div class="src src-js">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">{
+    <span style="color:#e6db74">&#34;archived_snapshots&#34;</span><span style="color:#f92672">:</span> {
+        <span style="color:#e6db74">&#34;closest&#34;</span><span style="color:#f92672">:</span> {
+            <span style="color:#e6db74">&#34;available&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+            <span style="color:#e6db74">&#34;timestamp&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;20201209030058&#34;</span>,
+            <span style="color:#e6db74">&#34;status&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;200&#34;</span>,
+            <span style="color:#e6db74">&#34;url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;http://web.archive.org/web/20201209030058/https://noonker.github.io/&#34;</span>
+        }
+    },
+    <span style="color:#e6db74">&#34;url&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;noonker.github.io&#34;</span>
+}
+</code></pre></div>
+</div>
+<p>
+… and as linked tables</p>
+<div class="src src-emacs-lisp">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(json-to-org-table-parse-json-string str)</code></pre></div>
+</div>
+<p>
+<img src="/images/linked_tables.png" alt="/images/linked_tables.png" title="/images/linked_tables.png" /></p>
+<p>
+In an org buffer it would look like this:</p>
 <div class="src src-org">
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-org" data-lang="org"><span style="color:#75715e">#+name</span><span style="color:#75715e">: requester</span>
 <span style="color:#75715e">#+begin_src </span><span style="color:#75715e">bash</span><span style="color:#75715e"> :results drawer
@@ -169,6 +197,42 @@ Much of the tool is covered on the github <code class="verbatim">README.md</code
 <span style="color:#e6db74">| status    | 200                                                                  |</span>
 <span style="color:#e6db74">| url       | http://web.archive.org/web/20201209030058/https://noonker.github.io/ |</span></code></pre></div>
 </div>
+<pre class="example">
+#+name: requester
+#+begin_src bash :results drawer
+curl -X GET &#34;https://archive.org/wayback/available?url=noonker.github.io&#34;
+#+end_src
+
+#+RESULTS:
+:results:
+{&#34;url&#34;: &#34;noonker.github.io&#34;, &#34;archived_snapshots&#34;: {&#34;closest&#34;: {&#34;url&#34;: &#34;http://web.archive.org/web/20201209030058/https://noonker.github.io/&#34;, &#34;status&#34;: &#34;200&#34;, &#34;timestamp&#34;: &#34;20201209030058&#34;, &#34;available&#34;: true}}}
+:end:
+
+
+#+name: to-json-table
+#+begin_src emacs-lisp :var str=requester() :results raw
+(json-to-org-table-parse-json-string str)
+#+end_src
+
+#+RESULTS: to-json-table
+| key                | value              |
+|--------------------+--------------------|
+| archived_snapshots | [[archived_snapshots]] |
+| url                | noonker.github.io  |
+
+#+name: archived_snapshots
+| key     | value                      |
+|---------+----------------------------|
+| closest | [[closest_archived_snapshots]] |
+
+#+name: closest_archived_snapshots
+| key       | value                                                                |
+|-----------+----------------------------------------------------------------------|
+| timestamp | 20201209030058                                                       |
+| available | t                                                                    |
+| status    | 200                                                                  |
+| url       | http://web.archive.org/web/20201209030058/https://noonker.github.io/ |
+</pre>
 </div>
 </div>
 <div id="outline-container-headline-3" class="outline-3">

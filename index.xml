@@ -6,10 +6,20 @@
     <description>Recent content on Noonker</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 01 Feb 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://noonker.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CrowdStrike Adversary Quest CTF</title>
+      <link>https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/</link>
+      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/</guid>
+      <description>Overview  I recently took part in the Adversary Quest CTF. I utimately got stopped at 5/12 challenges. Thanks to CrowdStrike for an awesome CTF and I look forward to completing it next year. Below are writeups for some of the challenges I was able to complete.
+ I&amp;#39;m excluding The Proclamation from a writeup as this was my solution- this was a very cool challenge so I&amp;#39;m going to refer you to @Vinopaljiri&amp;#39;s excellent writeup.</description>
+    </item>
     
     <item>
       <title>Json To Org-Mode Table</title>

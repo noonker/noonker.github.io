@@ -472,11 +472,11 @@ This was probably suboptimal but I used <code class="verbatim">strings -n 1 malw
 
     <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">socket</span>, <span style="color:#a6e22e">handler</span>) {
         <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_packet</span> <span style="color:#f92672">=</span> {};
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_process</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_state</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;HEADER&#39;</span>;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_payloadLength</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">packet</span> <span style="color:#f92672">=</span> {};
+        <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">process</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;HEADER&#39;</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">payloadLength</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">bufferedBytes</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
         <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span> <span style="color:#f92672">=</span> [];
         <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handler</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">handler</span>;
     };
@@ -485,10 +485,10 @@ This was probably suboptimal but I used <code class="verbatim">strings -n 1 malw
         <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">hmac_key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">pbkdf2Sync</span>(<span style="color:#a6e22e">hmac_key</span>, <span style="color:#a6e22e">salty_wow</span>, <span style="color:#ae81ff">4096</span>, <span style="color:#ae81ff">16</span>, <span style="color:#e6db74">&#39;sha256&#39;</span>);
         <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">aes_key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">pbkdf2Sync</span>(<span style="color:#a6e22e">aes_key</span>, <span style="color:#a6e22e">salty_wow</span>, <span style="color:#ae81ff">4096</span>, <span style="color:#ae81ff">16</span>, <span style="color:#e6db74">&#39;sha256&#39;</span>);
         <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">f1</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">data</span>) =&gt; {
-            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">length</span>;
+            <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">bufferedBytes</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">length</span>;
             <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">data</span>);
-            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_process</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
-            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_onData</span>();
+            <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">process</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+            <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">onData</span>();
         };
         <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;data&#39;</span>, <span style="color:#a6e22e">f1</span>);
 
@@ -498,19 +498,19 @@ This was probably suboptimal but I used <code class="verbatim">strings -n 1 malw
         <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">dis_handle</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handler</span>;
         <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;served&#39;</span>, <span style="color:#a6e22e">dis_handle</span>);
     };
-    <span style="color:#a6e22e">_hasEnough</span>(<span style="color:#a6e22e">size</span>) {
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;BufferedBytes: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;Needs to be &gt; than: payloadLength: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">size</span> );
-        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span> <span style="color:#f92672">&gt;=</span> <span style="color:#a6e22e">size</span>) {
+    <span style="color:#ae81ff">_</span><span style="color:#a6e22e">hasEnough</span>(<span style="color:#a6e22e">size</span>) {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;BufferedBytes: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">bufferedBytes</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;Needs to be &gt; than: payloadLength: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">size</span> );
+        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">bufferedBytes</span> <span style="color:#f92672">&gt;=</span> <span style="color:#a6e22e">size</span>) {
             <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
         } <span style="color:#66d9ef">else</span> { <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;not enough bytes :(&#34;</span>) }
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_process</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">process</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
     };
-    <span style="color:#a6e22e">_readBytes</span>(<span style="color:#a6e22e">size</span>) {
+    <span style="color:#ae81ff">_</span><span style="color:#a6e22e">readBytes</span>(<span style="color:#a6e22e">size</span>) {
         <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span>;
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;buffered bytes before: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span>);
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span> <span style="color:#f92672">-=</span> <span style="color:#a6e22e">size</span>; <span style="color:#75715e">// buffered bytes will be -4
-</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;buffered bytes after: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span>);
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;buffered bytes before: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">bufferedBytes</span>);
+        <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">bufferedBytes</span> <span style="color:#f92672">-=</span> <span style="color:#a6e22e">size</span>; <span style="color:#75715e">// buffered bytes will be -4
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;buffered bytes after: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">bufferedBytes</span>);
         <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>);
         <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;queue0: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>]);
         <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;queue0_len: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">length</span>);
@@ -543,45 +543,45 @@ This was probably suboptimal but I used <code class="verbatim">strings -n 1 malw
         }
         <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
     };
-    <span style="color:#a6e22e">_getHeader</span>() {
-        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">stupid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_hasEnough</span>(<span style="color:#ae81ff">4</span>);
+    <span style="color:#ae81ff">_</span><span style="color:#a6e22e">getHeader</span>() {
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">stupid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">hasEnough</span>(<span style="color:#ae81ff">4</span>);
         <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">stupid</span>) {
-            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_payloadLength</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_readBytes</span>(<span style="color:#ae81ff">4</span>).<span style="color:#a6e22e">readUInt32BE</span>(<span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">true</span>);
+            <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">payloadLength</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">readBytes</span>(<span style="color:#ae81ff">4</span>).<span style="color:#a6e22e">readUInt32BE</span>(<span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">true</span>);
             <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;payload length set to: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">payloadLength</span>)
-            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_state</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;PAYLOAD&#39;</span>;
+            <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;PAYLOAD&#39;</span>;
         }
     };
-    <span style="color:#a6e22e">_getPayload</span>() {
+    <span style="color:#ae81ff">_</span><span style="color:#a6e22e">getPayload</span>() {
 
-        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">stupid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_hasEnough</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_payloadLength</span>);
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">stupid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">hasEnough</span>(<span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">payloadLength</span>);
         <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">stupid</span>) {
             <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Oh yeah, it&#39;s stupid&#34;</span>)
-            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">received</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_readBytes</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_payloadLength</span>);
+            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">received</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">readBytes</span>(<span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">payloadLength</span>);
             <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Recieved: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">received</span>)
-            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_parseMessage</span>(<span style="color:#a6e22e">received</span>);
-            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_state</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;HEADER&#39;</span>;
+            <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">parseMessage</span>(<span style="color:#a6e22e">received</span>);
+            <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;HEADER&#39;</span>;
         }
     };
-    <span style="color:#a6e22e">_onData</span>(<span style="color:#a6e22e">data</span>) {
+    <span style="color:#ae81ff">_</span><span style="color:#a6e22e">onData</span>(<span style="color:#a6e22e">data</span>) {
         <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;parsing data: &#34;</span>);
         <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>)
-        <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_process</span>) {
-            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_state</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;HEADER&#39;</span>) {
-                <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_getHeader</span>();
+        <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">process</span>) {
+            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">state</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;HEADER&#39;</span>) {
+                <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">getHeader</span>();
             }
             <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Its a payload!&#34;</span>)
-            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_state</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;PAYLOAD&#39;</span>) {
-                <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_getPayload</span>();
+            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">state</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;PAYLOAD&#39;</span>) {
+                <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">getPayload</span>();
             }
         }
     };
-    <span style="color:#a6e22e">_encrypt</span>(<span style="color:#a6e22e">data</span>) {
+    <span style="color:#ae81ff">_</span><span style="color:#a6e22e">encrypt</span>(<span style="color:#a6e22e">data</span>) {
         <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">iv</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">alloc</span>(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">0</span>);
         <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wow_cripter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createCipheriv</span>(<span style="color:#e6db74">&#39;aes-128-cbc&#39;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">aes_key</span>, <span style="color:#a6e22e">iv</span>);
         <span style="color:#a6e22e">wow_cripter</span>.<span style="color:#a6e22e">setAutoPadding</span>(<span style="color:#66d9ef">true</span>);
         <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">wow_cripter</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">data</span>), <span style="color:#a6e22e">wow_cripter</span>.<span style="color:#66d9ef">final</span>()]);
     };
-    <span style="color:#a6e22e">_decrypt</span>(<span style="color:#a6e22e">data</span>) {
+    <span style="color:#ae81ff">_</span><span style="color:#a6e22e">decrypt</span>(<span style="color:#a6e22e">data</span>) {
         <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">iv</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">alloc</span>(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">0</span>);
         <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wow_decripter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createDecipheriv</span>(<span style="color:#e6db74">&#39;aes-128-cbc&#39;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">aes_key</span>, <span style="color:#a6e22e">iv</span>);
         <span style="color:#a6e22e">wow_decripter</span>.<span style="color:#a6e22e">setAutoPadding</span>(<span style="color:#66d9ef">true</span>);
@@ -589,15 +589,15 @@ This was probably suboptimal but I used <code class="verbatim">strings -n 1 malw
     };
     <span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">message</span>) {
         <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">hmac</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createHmac</span>(<span style="color:#e6db74">&#39;sha256&#39;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">hmac_key</span>);
-        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">mbuf</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_encrypt</span>(<span style="color:#a6e22e">message</span>);
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">mbuf</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">encrypt</span>(<span style="color:#a6e22e">message</span>);
         <span style="color:#a6e22e">hmac</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">mbuf</span>);
         <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">chksum</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">hmac</span>.<span style="color:#a6e22e">digest</span>();
         <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">buffer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">chksum</span>, <span style="color:#a6e22e">mbuf</span>]);
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_header</span>(<span style="color:#a6e22e">buffer</span>.<span style="color:#a6e22e">length</span>);
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_packet</span>.<span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">buffer</span>;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_send</span>();
+        <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">header</span>(<span style="color:#a6e22e">buffer</span>.<span style="color:#a6e22e">length</span>);
+        <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">packet</span>.<span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">buffer</span>;
+        <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">send</span>();
     };
-    <span style="color:#a6e22e">_parseMessage</span>(<span style="color:#a6e22e">received</span>) {
+    <span style="color:#ae81ff">_</span><span style="color:#a6e22e">parseMessage</span>(<span style="color:#a6e22e">received</span>) {
         <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">hmac</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createHmac</span>(<span style="color:#e6db74">&#39;sha256&#39;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">hmac_key</span>);
         <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;parseMessage_recieved: &#39;</span>);
         <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">received</span>)
@@ -612,21 +612,21 @@ This was probably suboptimal but I used <code class="verbatim">strings -n 1 malw
         <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;stupid: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">stupid</span>);
         <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">checksum</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">stupid</span>) {
             <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;oh yes it&#39;s VERY VERY stupid!&#34;</span>)
-            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">dec_message</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_decrypt</span>(<span style="color:#a6e22e">message</span>);
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">dec_message</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">decrypt</span>(<span style="color:#a6e22e">message</span>);
             <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">emit</span>(<span style="color:#e6db74">&#39;served&#39;</span>, <span style="color:#a6e22e">dec_message</span>);
         }
     };
-    <span style="color:#a6e22e">_header</span>(<span style="color:#a6e22e">messageLength</span>) {
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_packet</span>.<span style="color:#a6e22e">header</span> <span style="color:#f92672">=</span> {
+    <span style="color:#ae81ff">_</span><span style="color:#a6e22e">header</span>(<span style="color:#a6e22e">messageLength</span>) {
+        <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">packet</span>.<span style="color:#a6e22e">header</span> <span style="color:#f92672">=</span> {
             <span style="color:#a6e22e">length</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">messageLength</span>
         };
     };
-    <span style="color:#a6e22e">_send</span>() {
+    <span style="color:#ae81ff">_</span><span style="color:#a6e22e">send</span>() {
         <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">contentLength</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">allocUnsafe</span>(<span style="color:#ae81ff">4</span>);
-        <span style="color:#a6e22e">contentLength</span>.<span style="color:#a6e22e">writeUInt32BE</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_packet</span>.<span style="color:#a6e22e">header</span>.<span style="color:#a6e22e">length</span>);
+        <span style="color:#a6e22e">contentLength</span>.<span style="color:#a6e22e">writeUInt32BE</span>(<span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">packet</span>.<span style="color:#a6e22e">header</span>.<span style="color:#a6e22e">length</span>);
         <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">contentLength</span>);
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">write</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_packet</span>.<span style="color:#a6e22e">message</span>);
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_packet</span> <span style="color:#f92672">=</span> {};
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">socket</span>.<span style="color:#a6e22e">write</span>(<span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">packet</span>.<span style="color:#a6e22e">message</span>);
+        <span style="color:#66d9ef">this</span>.<span style="color:#ae81ff">_</span><span style="color:#a6e22e">packet</span> <span style="color:#f92672">=</span> {};
     };
 }
 
@@ -807,8 +807,7 @@ This was probably suboptimal but I used <code class="verbatim">strings -n 1 malw
 });
 <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;secureConnect&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">c</span>) {
     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;doge connect secure&#39;</span>);
-});
-</code></pre></div>
+});</code></pre></div>
 </div>
 <p>
 Based on the code it was pretty clear that the flag would be in the <code class="verbatim">CRYPTZ</code> environment variable. <code class="verbatim">CRYPTZ</code> was &#34;cripted&#34;, stored to a key called <code class="verbatim">secrit_key</code>, and then destroyed.</p>
@@ -842,8 +841,7 @@ The first challenge was to be able to speak to the C2 server. I accomplished tha
     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>);
     <span style="color:#75715e">// Close the connection after the error occurred.
 </span><span style="color:#75715e"></span>    <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">destroy</span>();
-});
-</code></pre></div>
+});</code></pre></div>
 </div>
 <p>
 This worked to establish a network connection between me and the C2. Next was to start speaking to the C2 in a language it could understand… a custom encrypted binary format that decodes to dogescript…</p>
@@ -888,8 +886,7 @@ Here&#39;s the helper functions I created to build the binary format.</p>
     <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">hmac</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createHmac</span>(<span style="color:#e6db74">&#39;sha256&#39;</span>, <span style="color:#a6e22e">hmac_key</span>);
     <span style="color:#a6e22e">hmac</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">s</span>)
     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">hmac</span>.<span style="color:#a6e22e">digest</span>()
-}
-</code></pre></div>
+}</code></pre></div>
 </div>
 <p>
 I also created a function to decrypt the messages from the server:</p>
@@ -900,8 +897,7 @@ I also created a function to decrypt the messages from the server:</p>
         <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wow_decripter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createDecipheriv</span>(<span style="color:#e6db74">&#39;aes-128-cbc&#39;</span>, <span style="color:#a6e22e">aes_key</span>, <span style="color:#a6e22e">iv</span>);
         <span style="color:#a6e22e">wow_decripter</span>.<span style="color:#a6e22e">setAutoPadding</span>(<span style="color:#66d9ef">true</span>);
         <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">wow_decripter</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">data</span>), <span style="color:#a6e22e">wow_decripter</span>.<span style="color:#66d9ef">final</span>()]);
-};
-</code></pre></div>
+};</code></pre></div>
 </div>
 <p>
 Now that I could speak to the server it was time to figure out what higher level application layer traffic was expected.</p>
@@ -925,16 +921,14 @@ To make things easier on myself I created two more helper functions to generate 
     <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">checksum</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">generate_checksum</span>(<span style="color:#a6e22e">encrypted_string</span>);
     <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">elen</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">toBytesInt32</span>(<span style="color:#a6e22e">encrypted_string</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">checksum</span>.<span style="color:#a6e22e">length</span>);
     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">elen</span>, <span style="color:#a6e22e">checksum</span>, <span style="color:#a6e22e">encrypted_string</span>]);
-};
-</code></pre></div>
+};</code></pre></div>
 </div>
 <p>
 Tying this all together we could start sending messages to the server. Following the logic of the code in the <code class="verbatim">dogeParam</code> there were two options: I could have either execute custom dogescript with <code class="verbatim">dogesez</code> &amp; <code class="verbatim">do me a favor</code> OR execute custom scripts with the <code class="verbatim">dogesez</code> &amp; <code class="verbatim">hot doge</code> commands. Here&#39;s what happens when we have doge do us a favor.</p>
 <p>
 After a bit of trial and error I was able to get the bytes by having the secrit_key serialized to json from a bytes Buffer.</p>
 <div class="src src-javascript">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">doge_generate_string</span>(<span style="color:#e6db74">&#39;such &#34;dogesez&#34; is &#34;do me a favor&#34; next &#34;ohmaze&#34; is &#34;Buffer.from(secrit_key) dose toJSON&#34; wow&#39;</span>))
-</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">doge_generate_string</span>(<span style="color:#e6db74">&#39;such &#34;dogesez&#34; is &#34;do me a favor&#34; next &#34;ohmaze&#34; is &#34;Buffer.from(secrit_key) dose toJSON&#34; wow&#39;</span>))</code></pre></div>
 </div>
 <p>
 The output needed a little cleanup though…</p>
@@ -959,8 +953,7 @@ Now that I had the cyphertext output from the cript funciton. Could that be reve
         <span style="color:#a6e22e">c</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">ib</span>[<span style="color:#a6e22e">i</span>] <span style="color:#f92672">^</span> <span style="color:#a6e22e">kb</span>[<span style="color:#a6e22e">i</span>]
     }
     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">toString</span>();
-}
-</code></pre></div>
+}</code></pre></div>
 </div>
 <p>
 All this does is XOR the input with some key that was passed to the function- so calling it with the same key and the cyphertext should yield our plaintext key</p>
@@ -968,8 +961,7 @@ All this does is XOR the input with some key that was passed to the function- so
 So I asked doge to get the cript_key as well</p>
 <div class="src src-javascript">
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">doge_generate_string</span>(<span style="color:#e6db74">&#39;such &#34;dogesez&#34; is &#34;do me a favor&#34; next &#34;ohmaze&#34; is &#34;cript_key&#34; wow&#39;</span>))
-<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">such</span> <span style="color:#e6db74">&#34;dogesez&#34;</span> <span style="color:#a6e22e">is</span> <span style="color:#e6db74">&#34;welcome&#34;</span> <span style="color:#a6e22e">next</span> <span style="color:#e6db74">&#34;ohmaze&#34;</span> <span style="color:#a6e22e">is</span> <span style="color:#e6db74">&#34;dzm3xz5w3c9&#34;</span> <span style="color:#a6e22e">wow</span>
-</code></pre></div>
+<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">such</span> <span style="color:#e6db74">&#34;dogesez&#34;</span> <span style="color:#a6e22e">is</span> <span style="color:#e6db74">&#34;welcome&#34;</span> <span style="color:#a6e22e">next</span> <span style="color:#e6db74">&#34;ohmaze&#34;</span> <span style="color:#a6e22e">is</span> <span style="color:#e6db74">&#34;dzm3xz5w3c9&#34;</span> <span style="color:#a6e22e">wow</span></code></pre></div>
 </div>
 <p>
 If we apply the <code class="verbatim">cript</code> function to the cript_key + cyphertext we get the final key</p>
@@ -1147,6 +1139,13 @@ Key: <code class="verbatim">CS{crypt0_an4lys1s_0n_c0d3}</code></p>
       <hr />
     </div>
     <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="https://noonker.github.io/posts/2021-05-24-northsec-ctf/">
+          <span class="button__icon">←</span>
+          <span class="button__text">Northsec CTF</span>
+        </a>
+      </span>
       
       
       <span class="button next">

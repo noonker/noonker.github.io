@@ -7,7 +7,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <meta name="description" content="I recently got the question- &amp;#34;What is the use case for elfeed?&amp;#34;. When I get a chance to talk about my favorite software I will NEVER pass up that opportunity.
- Elfeed is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&amp;#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by (url tag1 tag2 tagN) ." />
+Elfeed is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&amp;#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by (url tag1 tag2 tagN) ." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="https://noonker.github.io/posts/2020-04-22-elfeed/" />
@@ -41,7 +41,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Elfeed Rules! :: Noonker">
 <meta property="og:description" content="I recently got the question- &amp;#34;What is the use case for elfeed?&amp;#34;. When I get a chance to talk about my favorite software I will NEVER pass up that opportunity.
- Elfeed is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&amp;#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by (url tag1 tag2 tagN) ." />
+Elfeed is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&amp;#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by (url tag1 tag2 tagN) ." />
 <meta property="og:url" content="https://noonker.github.io/posts/2020-04-22-elfeed/" />
 <meta property="og:site_name" content="Elfeed Rules!" />
 
@@ -121,34 +121,34 @@ I recently got the question- &#34;What is the use case for elfeed?&#34;. When I 
 <p>
 <a href="https://github.com/skeeto/elfeed">Elfeed</a> is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by <code class="verbatim">(url tag1 tag2 tagN)</code> . This combination is the start of a lot of very powerful workflows.</p>
 <div class="src src-emacs-lisp">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(setq elfeed-feeds
-      <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">&#34;http://asert.arbornetworks.com/feed/&#34;</span> security second)
-        (<span style="color:#e6db74">&#34;http://feeds.feedburner.com/feedburner/Talos?format=xml&#34;</span> security second)
-        (<span style="color:#e6db74">&#34;http://feeds.trendmicro.com/Anti-MalwareBlog/&#34;</span> security second)
-        (<span style="color:#e6db74">&#34;http://researchcenter.paloaltonetworks.com/unit42/feed/&#34;</span> security second)
-        (<span style="color:#e6db74">&#34;https://www.proofpoint.com/rss.xml&#34;</span> security second)
-        (<span style="color:#e6db74">&#34;https://www.bellingcat.com/feed/&#34;</span> security second)
-        (<span style="color:#e6db74">&#34;https://nomasters.io/index.xml&#34;</span> blog tech)
-        (<span style="color:#e6db74">&#34;http://www.reddit.com/r/ReverseEngineering/.rss&#34;</span> security second reddit)
-        (<span style="color:#e6db74">&#34;https://www.reddit.com/r/listentothis/.rss&#34;</span> music reddit)
-        (<span style="color:#e6db74">&#34;https://www.youtube.com/feeds/videos.xml?channel_id=UCWZ3HFiJkxG1K8C4HVnyBvQ&#34;</span> youtube) <span style="color:#75715e">;; Vic Berger</span>
-        (<span style="color:#e6db74">&#34;https://www.youtube.com/feeds/videos.xml?channel_id=UC--DwaiMV-jtO-6EvmKOnqg&#34;</span> youtube) <span style="color:#75715e">;; OA Labs</span>
-        (<span style="color:#e6db74">&#34;https://www.youtube.com/feeds/videos.xml?channel_id=UCbpMy0Fg74eXXkvxJrtEn3w&#34;</span> youtube) <span style="color:#75715e">;; Bon Apetit</span>
-        (<span style="color:#e6db74">&#34;https://www.youtube.com/feeds/videos.xml?channel_id=UC5fdssPqmmGhkhsJi4VcckA&#34;</span> youtube) <span style="color:#75715e">;; Innuendo Studios</span>
-        (<span style="color:#e6db74">&#34;https://usesthis.com/feed.atom&#34;</span>)
-        (<span style="color:#e6db74">&#34;https://greenbay.craigslist.org/search/sss?format=rss&amp;query=accordion&amp;sort=rel&#34;</span> hunt)
-        (<span style="color:#e6db74">&#34;http://rss.acast.com/nature&#34;</span> podcast) <span style="color:#75715e">;; Nature</span>
-        (<span style="color:#e6db74">&#34;http://feeds.feedburner.com/birdnote/OYfP&#34;</span> podcast) <span style="color:#75715e">;; Bird Note</span>
-        (<span style="color:#e6db74">&#34;https://www.kcrw.com/culture/shows/nocturne/rss.xml&#34;</span> podcast) <span style="color:#75715e">;; Nocturne</span>
-        (<span style="color:#e6db74">&#34;http://feeds.wnyc.org/onthemedia&#34;</span> podcast) <span style="color:#75715e">;; On The Media</span>
-        (<span style="color:#e6db74">&#34;https://www.npr.org/rss/podcast.php?id=510289&#34;</span> podcast) <span style="color:#75715e">;; Planet Money</span>
-        (<span style="color:#e6db74">&#34;http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml&#34;</span> news first)
-        (<span style="color:#e6db74">&#34;https://www.ftc.gov/feeds/press-release-consumer-protection.xml&#34;</span> gov first ftc)
-        (<span style="color:#e6db74">&#34;https://api2.fcc.gov/edocs/public/api/v1/rss/&#34;</span> gov first fcc)
-        (<span style="color:#e6db74">&#34;https://api2.fcc.gov/edocs/public/api/v1/rss/docTypes/Cit&#34;</span> gov first fcc)
-        (<span style="color:#e6db74">&#34;http://licensing.fcc.gov/myibfs/yesterdaysFilingsFeed.do&#34;</span> gov first fcc)
-        (<span style="color:#e6db74">&#34;http://licensing.fcc.gov/myibfs/yesterdaysActionsFeed.do&#34;</span> gov first fcc)
-))</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span style="display:flex;"><span>(setq elfeed-feeds
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">&#34;http://asert.arbornetworks.com/feed/&#34;</span> security second)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;http://feeds.feedburner.com/feedburner/Talos?format=xml&#34;</span> security second)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;http://feeds.trendmicro.com/Anti-MalwareBlog/&#34;</span> security second)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;http://researchcenter.paloaltonetworks.com/unit42/feed/&#34;</span> security second)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://www.proofpoint.com/rss.xml&#34;</span> security second)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://www.bellingcat.com/feed/&#34;</span> security second)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://nomasters.io/index.xml&#34;</span> blog tech)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;http://www.reddit.com/r/ReverseEngineering/.rss&#34;</span> security second reddit)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://www.reddit.com/r/listentothis/.rss&#34;</span> music reddit)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://www.youtube.com/feeds/videos.xml?channel_id=UCWZ3HFiJkxG1K8C4HVnyBvQ&#34;</span> youtube) <span style="color:#75715e">;; Vic Berger</span>
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://www.youtube.com/feeds/videos.xml?channel_id=UC--DwaiMV-jtO-6EvmKOnqg&#34;</span> youtube) <span style="color:#75715e">;; OA Labs</span>
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://www.youtube.com/feeds/videos.xml?channel_id=UCbpMy0Fg74eXXkvxJrtEn3w&#34;</span> youtube) <span style="color:#75715e">;; Bon Apetit</span>
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://www.youtube.com/feeds/videos.xml?channel_id=UC5fdssPqmmGhkhsJi4VcckA&#34;</span> youtube) <span style="color:#75715e">;; Innuendo Studios</span>
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://usesthis.com/feed.atom&#34;</span>)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://greenbay.craigslist.org/search/sss?format=rss&amp;query=accordion&amp;sort=rel&#34;</span> hunt)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;http://rss.acast.com/nature&#34;</span> podcast) <span style="color:#75715e">;; Nature</span>
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;http://feeds.feedburner.com/birdnote/OYfP&#34;</span> podcast) <span style="color:#75715e">;; Bird Note</span>
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://www.kcrw.com/culture/shows/nocturne/rss.xml&#34;</span> podcast) <span style="color:#75715e">;; Nocturne</span>
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;http://feeds.wnyc.org/onthemedia&#34;</span> podcast) <span style="color:#75715e">;; On The Media</span>
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://www.npr.org/rss/podcast.php?id=510289&#34;</span> podcast) <span style="color:#75715e">;; Planet Money</span>
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml&#34;</span> news first)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://www.ftc.gov/feeds/press-release-consumer-protection.xml&#34;</span> gov first ftc)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://api2.fcc.gov/edocs/public/api/v1/rss/&#34;</span> gov first fcc)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;https://api2.fcc.gov/edocs/public/api/v1/rss/docTypes/Cit&#34;</span> gov first fcc)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;http://licensing.fcc.gov/myibfs/yesterdaysFilingsFeed.do&#34;</span> gov first fcc)
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;http://licensing.fcc.gov/myibfs/yesterdaysActionsFeed.do&#34;</span> gov first fcc)
+</span></span><span style="display:flex;"><span>))</span></span></code></pre></div>
 </div>
 <p>
 This is only a small snippet of all the feeds I subscribe to. RSS is used to make sure that you can stay on top of all of your feeds but also importantly for me it&#39;s a way to efficiently manage all of the 100+ feeds I subscribe to. So let&#39;s dive in to a couple of the use cases! </p>
@@ -160,30 +160,16 @@ Tagging for level of attention required
 <p>
 There&#39;s a few tags I use to help me orient the stories I&#39;m looking at to see which I want to read. <code class="verbatim">first</code>, <code class="verbatim">second</code>, and <code class="verbatim">local</code>.</p>
 <ul>
-<li>
-<p>First is the tag I use for anything that I&#39;m not REALLY interested in but like to fetch for potential search later. For this tag I will briefly skim the list and mark the whole thing as read. </p>
-</li>
-<li>
-<p>Second is the tag I use for security related news. These are the feeds I&#39;m reading for work and filtering on that allows me to reorient how I look at the stories. I can quickly mark things as read if they do not pertain to any topics I&#39;m currently tasked on or strike my interest.</p>
-</li>
-<li>
-<p>Local is my tag for local headlines. Filtering on this allows me to read headlines within the context of my local community. Headlines that may not jump out in a global feed may suddenly be more interesting when they&#39;re happening down the street.</p>
-</li>
+<li>First is the tag I use for anything that I&#39;m not REALLY interested in but like to fetch for potential search later. For this tag I will briefly skim the list and mark the whole thing as read. </li>
+<li>Second is the tag I use for security related news. These are the feeds I&#39;m reading for work and filtering on that allows me to reorient how I look at the stories. I can quickly mark things as read if they do not pertain to any topics I&#39;m currently tasked on or strike my interest.</li>
+<li>Local is my tag for local headlines. Filtering on this allows me to read headlines within the context of my local community. Headlines that may not jump out in a global feed may suddenly be more interesting when they&#39;re happening down the street.</li>
 </ul>
 <p>Focusing my attention based on the stories displayed is made possible by all sorts of tagging and sorting that you can do within elfeed.</p>
 <ul>
-<li>
-<p><code class="verbatim">+/-</code> before a search term to add or remove a tag</p>
-</li>
-<li>
-<p><code class="verbatim">=</code> before a search term to filter by name of source</p>
-</li>
-<li>
-<p>You can start typing to search the title or any of the body of the feed</p>
-</li>
-<li>
-<p><code class="verbatim">@</code> operator to specify a time range</p>
-</li>
+<li><code class="verbatim">+/-</code> before a search term to add or remove a tag</li>
+<li><code class="verbatim">=</code> before a search term to filter by name of source</li>
+<li>You can start typing to search the title or any of the body of the feed</li>
+<li><code class="verbatim">@</code> operator to specify a time range</li>
 </ul>
 <p><img src="/images/attention.gif" alt="/images/attention.gif" title="/images/attention.gif" /></p>
 </div>
@@ -205,25 +191,25 @@ Music
 <div id="outline-text-headline-3" class="outline-text-3">
 <p>After a friend showed me the subreddit <a href="https://www.reddit.com/r/listentothis/">ListenToThis</a> I&#39;ve found it a pretty valuable resource for finding new music. I can add the tags <code class="verbatim">+music</code> removing the <code class="verbatim">+unread</code> tag and just searching for genres I&#39;m feeling at the moment. It&#39;s made even better by extending elfeed just a little:</p>
 <div class="src src-emacs-lisp">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(require <span style="color:#e6db74">&#39;elfeed</span>)
-
-(defun yt-dl-it (url)
-  <span style="color:#e6db74">&#34;Downloads the URL in an async shell&#34;</span>
-  (let ((default-directory <span style="color:#e6db74">&#34;~/Videos&#34;</span>))
-    (async-shell-command (<span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;youtube-dl %s&#34;</span> url))))
-
-(defun elfeed-youtube-dl (<span style="color:#66d9ef">&amp;optional</span> use-generic-p)
-  <span style="color:#e6db74">&#34;Youtube-DL link&#34;</span>
-  (interactive <span style="color:#e6db74">&#34;P&#34;</span>)
-  (let ((entries (elfeed-search-selected)))
-    (cl-loop for entry in entries
-             do (elfeed-untag entry <span style="color:#e6db74">&#39;unread</span>)
-             when (elfeed-entry-link entry)
-             do (yt-dl-it it))
-    (<span style="color:#a6e22e">mapc</span> <span style="color:#a6e22e">#&#39;</span>elfeed-search-update-entry entries)
-    (unless (use-region-p) (<span style="color:#a6e22e">forward-line</span>))))
-
-(<span style="color:#a6e22e">define-key</span> elfeed-search-mode-map (kbd <span style="color:#e6db74">&#34;d&#34;</span>) <span style="color:#e6db74">&#39;elfeed-youtube-dl</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span style="display:flex;"><span>(require <span style="color:#e6db74">&#39;elfeed</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(defun yt-dl-it (url)
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Downloads the URL in an async shell&#34;</span>
+</span></span><span style="display:flex;"><span>  (let ((default-directory <span style="color:#e6db74">&#34;~/Videos&#34;</span>))
+</span></span><span style="display:flex;"><span>    (async-shell-command (<span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;youtube-dl %s&#34;</span> url))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(defun elfeed-youtube-dl (<span style="color:#66d9ef">&amp;optional</span> use-generic-p)
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Youtube-DL link&#34;</span>
+</span></span><span style="display:flex;"><span>  (interactive <span style="color:#e6db74">&#34;P&#34;</span>)
+</span></span><span style="display:flex;"><span>  (let ((entries (elfeed-search-selected)))
+</span></span><span style="display:flex;"><span>    (cl-loop for entry in entries
+</span></span><span style="display:flex;"><span>             do (elfeed-untag entry <span style="color:#e6db74">&#39;unread</span>)
+</span></span><span style="display:flex;"><span>             when (elfeed-entry-link entry)
+</span></span><span style="display:flex;"><span>             do (yt-dl-it it))
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">mapc</span> <span style="color:#a6e22e">#&#39;</span>elfeed-search-update-entry entries)
+</span></span><span style="display:flex;"><span>    (unless (use-region-p) (<span style="color:#a6e22e">forward-line</span>))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> elfeed-search-mode-map (kbd <span style="color:#e6db74">&#34;d&#34;</span>) <span style="color:#e6db74">&#39;elfeed-youtube-dl</span>)</span></span></code></pre></div>
 </div>
 <p>
 This allows me to download the feed item at point by pressing <code class="verbatim">d</code>. I also do this for Youtubes in my feed since I&#39;ve been burned by having my favorite videos removed in the past. </p>
@@ -251,42 +237,42 @@ I&#39;ve extended elfeed in a couple of ways to make reading of feeds easier. So
 <p>
 Here&#39;s what I&#39;ve added to my config for alternate browsers:</p>
 <div class="src src-emacs-lisp">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(defun elfeed-eww-open (<span style="color:#66d9ef">&amp;optional</span> use-generic-p)
-  <span style="color:#e6db74">&#34;open with eww&#34;</span>
-  (interactive <span style="color:#e6db74">&#34;P&#34;</span>)
-  (let ((entries (elfeed-search-selected)))
-    (cl-loop for entry in entries
-             do (elfeed-untag entry <span style="color:#e6db74">&#39;unread</span>)
-             when (elfeed-entry-link entry)
-             do (eww-browse-url it))
-    (<span style="color:#a6e22e">mapc</span> <span style="color:#a6e22e">#&#39;</span>elfeed-search-update-entry entries)
-    (unless (use-region-p) (<span style="color:#a6e22e">forward-line</span>))))
-
-(defun elfeed-firefox-open (<span style="color:#66d9ef">&amp;optional</span> use-generic-p)
-  <span style="color:#e6db74">&#34;open with firefox&#34;</span>
-  (interactive <span style="color:#e6db74">&#34;P&#34;</span>)
-  (let ((entries (elfeed-search-selected)))
-    (cl-loop for entry in entries
-             do (elfeed-untag entry <span style="color:#e6db74">&#39;unread</span>)
-             when (elfeed-entry-link entry)
-             do (browse-url-firefox it))
-    (<span style="color:#a6e22e">mapc</span> <span style="color:#a6e22e">#&#39;</span>elfeed-search-update-entry entries)
-    (unless (use-region-p) (<span style="color:#a6e22e">forward-line</span>))))
-
-(defun elfeed-w3m-open (<span style="color:#66d9ef">&amp;optional</span> use-generic-p)
-  <span style="color:#e6db74">&#34;open with w3m&#34;</span>
-  (interactive <span style="color:#e6db74">&#34;P&#34;</span>)
-  (let ((entries (elfeed-search-selected)))
-    (cl-loop for entry in entries
-             do (elfeed-untag entry <span style="color:#e6db74">&#39;unread</span>)
-             when (elfeed-entry-link entry)
-             do (ffap-w3m-other-window it))
-    (<span style="color:#a6e22e">mapc</span> <span style="color:#a6e22e">#&#39;</span>elfeed-search-update-entry entries)
-    (unless (use-region-p) (<span style="color:#a6e22e">forward-line</span>))))
-
-(<span style="color:#a6e22e">define-key</span> elfeed-search-mode-map (kbd <span style="color:#e6db74">&#34;t&#34;</span>) <span style="color:#e6db74">&#39;elfeed-w3m-open</span>)
-(<span style="color:#a6e22e">define-key</span> elfeed-search-mode-map (kbd <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#e6db74">&#39;elfeed-eww-open</span>)
-(<span style="color:#a6e22e">define-key</span> elfeed-search-mode-map (kbd <span style="color:#e6db74">&#34;f&#34;</span>) <span style="color:#e6db74">&#39;elfeed-firefox-open</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span style="display:flex;"><span>(defun elfeed-eww-open (<span style="color:#66d9ef">&amp;optional</span> use-generic-p)
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;open with eww&#34;</span>
+</span></span><span style="display:flex;"><span>  (interactive <span style="color:#e6db74">&#34;P&#34;</span>)
+</span></span><span style="display:flex;"><span>  (let ((entries (elfeed-search-selected)))
+</span></span><span style="display:flex;"><span>    (cl-loop for entry in entries
+</span></span><span style="display:flex;"><span>             do (elfeed-untag entry <span style="color:#e6db74">&#39;unread</span>)
+</span></span><span style="display:flex;"><span>             when (elfeed-entry-link entry)
+</span></span><span style="display:flex;"><span>             do (eww-browse-url it))
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">mapc</span> <span style="color:#a6e22e">#&#39;</span>elfeed-search-update-entry entries)
+</span></span><span style="display:flex;"><span>    (unless (use-region-p) (<span style="color:#a6e22e">forward-line</span>))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(defun elfeed-firefox-open (<span style="color:#66d9ef">&amp;optional</span> use-generic-p)
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;open with firefox&#34;</span>
+</span></span><span style="display:flex;"><span>  (interactive <span style="color:#e6db74">&#34;P&#34;</span>)
+</span></span><span style="display:flex;"><span>  (let ((entries (elfeed-search-selected)))
+</span></span><span style="display:flex;"><span>    (cl-loop for entry in entries
+</span></span><span style="display:flex;"><span>             do (elfeed-untag entry <span style="color:#e6db74">&#39;unread</span>)
+</span></span><span style="display:flex;"><span>             when (elfeed-entry-link entry)
+</span></span><span style="display:flex;"><span>             do (browse-url-firefox it))
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">mapc</span> <span style="color:#a6e22e">#&#39;</span>elfeed-search-update-entry entries)
+</span></span><span style="display:flex;"><span>    (unless (use-region-p) (<span style="color:#a6e22e">forward-line</span>))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(defun elfeed-w3m-open (<span style="color:#66d9ef">&amp;optional</span> use-generic-p)
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;open with w3m&#34;</span>
+</span></span><span style="display:flex;"><span>  (interactive <span style="color:#e6db74">&#34;P&#34;</span>)
+</span></span><span style="display:flex;"><span>  (let ((entries (elfeed-search-selected)))
+</span></span><span style="display:flex;"><span>    (cl-loop for entry in entries
+</span></span><span style="display:flex;"><span>             do (elfeed-untag entry <span style="color:#e6db74">&#39;unread</span>)
+</span></span><span style="display:flex;"><span>             when (elfeed-entry-link entry)
+</span></span><span style="display:flex;"><span>             do (ffap-w3m-other-window it))
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">mapc</span> <span style="color:#a6e22e">#&#39;</span>elfeed-search-update-entry entries)
+</span></span><span style="display:flex;"><span>    (unless (use-region-p) (<span style="color:#a6e22e">forward-line</span>))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> elfeed-search-mode-map (kbd <span style="color:#e6db74">&#34;t&#34;</span>) <span style="color:#e6db74">&#39;elfeed-w3m-open</span>)
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> elfeed-search-mode-map (kbd <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#e6db74">&#39;elfeed-eww-open</span>)
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> elfeed-search-mode-map (kbd <span style="color:#e6db74">&#34;f&#34;</span>) <span style="color:#e6db74">&#39;elfeed-firefox-open</span>)</span></span></code></pre></div>
 </div>
 <p>
 <img src="/images/w3m.gif" alt="/images/w3m.gif" title="/images/w3m.gif" /></p>
@@ -300,26 +286,26 @@ Note to Self
 <p>
 Sometimes when I see a story it&#39;s not one I want to read now but I know it&#39;s one I want to check out later I&#39;ll often email the link to myself so I can check it out when I&#39;m on the bus, laying in bed, or some other time I have a spare couple of minutes.</p>
 <div class="src src-emacs-lisp">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs-lisp" data-lang="emacs-lisp">(defun todo (text <span style="color:#66d9ef">&amp;optional</span> body)
-  (interactive <span style="color:#e6db74">&#34;sTodo: &#34;</span>)
-  (compose-mail-other-window <span style="color:#e6db74">&#34;mailroom@legitimate.company&#34;</span> text)
-  (mail-text)
-  (if body
-      (<span style="color:#a6e22e">insert</span> body))
-  (message-send-and-exit))
-
-(defun elfeed-mail-todo (<span style="color:#66d9ef">&amp;optional</span> use-generic-p)
-  <span style="color:#e6db74">&#34;Mail this to myself for later reading&#34;</span>
-  (interactive <span style="color:#e6db74">&#34;P&#34;</span>)
-  (let ((entries (elfeed-search-selected)))
-    (cl-loop for entry in entries
-             do (elfeed-untag entry <span style="color:#e6db74">&#39;unread</span>)
-             when (elfeed-entry-title entry)
-             do (todo it (elfeed-entry-link entry)))
-    (<span style="color:#a6e22e">mapc</span> <span style="color:#a6e22e">#&#39;</span>elfeed-search-update-entry entries)
-    (unless (use-region-p) (<span style="color:#a6e22e">forward-line</span>))))
-
-(<span style="color:#a6e22e">define-key</span> elfeed-search-mode-map (kbd <span style="color:#e6db74">&#34;m&#34;</span>) <span style="color:#e6db74">&#39;elfeed-mail-todo</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span style="display:flex;"><span>(defun todo (text <span style="color:#66d9ef">&amp;optional</span> body)
+</span></span><span style="display:flex;"><span>  (interactive <span style="color:#e6db74">&#34;sTodo: &#34;</span>)
+</span></span><span style="display:flex;"><span>  (compose-mail-other-window <span style="color:#e6db74">&#34;mailroom@legitimate.company&#34;</span> text)
+</span></span><span style="display:flex;"><span>  (mail-text)
+</span></span><span style="display:flex;"><span>  (if body
+</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">insert</span> body))
+</span></span><span style="display:flex;"><span>  (message-send-and-exit))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(defun elfeed-mail-todo (<span style="color:#66d9ef">&amp;optional</span> use-generic-p)
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Mail this to myself for later reading&#34;</span>
+</span></span><span style="display:flex;"><span>  (interactive <span style="color:#e6db74">&#34;P&#34;</span>)
+</span></span><span style="display:flex;"><span>  (let ((entries (elfeed-search-selected)))
+</span></span><span style="display:flex;"><span>    (cl-loop for entry in entries
+</span></span><span style="display:flex;"><span>             do (elfeed-untag entry <span style="color:#e6db74">&#39;unread</span>)
+</span></span><span style="display:flex;"><span>             when (elfeed-entry-title entry)
+</span></span><span style="display:flex;"><span>             do (todo it (elfeed-entry-link entry)))
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">mapc</span> <span style="color:#a6e22e">#&#39;</span>elfeed-search-update-entry entries)
+</span></span><span style="display:flex;"><span>    (unless (use-region-p) (<span style="color:#a6e22e">forward-line</span>))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">define-key</span> elfeed-search-mode-map (kbd <span style="color:#e6db74">&#34;m&#34;</span>) <span style="color:#e6db74">&#39;elfeed-mail-todo</span>)</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -376,7 +362,7 @@ I hope this inspired you to give elfeed a shot. I haven&#39;t been this happy wi
   <div class="footer__inner">
     
       <div class="copyright">
-        <span>© 2021 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>© 2022 Powered by <a href="http://gohugo.io">Hugo</a></span>
     
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>

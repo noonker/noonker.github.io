@@ -6,9 +6,9 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content="probably just shouldn&amp;#39;t use cell networks for 2-factor   I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.
- The issue:
-  If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication." />
+<meta name="description" content="probably just shouldn&amp;#39;t use cell networks for 2-factor I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.
+The issue:
+If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="https://noonker.github.io/posts/2018-10-15-duo-twofactor/" />
@@ -41,9 +41,9 @@
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="A Less Than Ideal Way To Do 2-factor :: Noonker">
-<meta property="og:description" content="probably just shouldn&amp;#39;t use cell networks for 2-factor   I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.
- The issue:
-  If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication." />
+<meta property="og:description" content="probably just shouldn&amp;#39;t use cell networks for 2-factor I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.
+The issue:
+If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication." />
 <meta property="og:url" content="https://noonker.github.io/posts/2018-10-15-duo-twofactor/" />
 <meta property="og:site_name" content="A Less Than Ideal Way To Do 2-factor" />
 
@@ -128,57 +128,31 @@ I have concerns with how Duo does phone two-factor authentication and think we c
 <p>
 The issue:</p>
 <ul>
-<li>
-<p>If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication.</p>
-</li>
+<li>If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication.</li>
 </ul>
 <p>Attacker required information:</p>
 <ul>
-<li>
-<p>User password</p>
-</li>
-<li>
-<p>Phone number</p>
-</li>
+<li>User password</li>
+<li>Phone number</li>
 </ul>
 <p>The attack:</p>
 <ul>
-<li>
-<p>Threat actor compromises a password</p>
-</li>
-<li>
-<p>Threat actor uses OSINT to determine victim’s phone number based on the last 4 numbers that duo discloses in the 2-factor login.</p>
-</li>
-<li>
-<p>Threat actor calls the victim and uses any facade to convince a user to merge a call (transferring between departments, bringing manager to the call, verification call to verify phone number (My phone carrier has done this))</p>
-</li>
-<li>
-<p>Threat actor send two factor phone request and user merges the call.</p>
-</li>
-<li>
-<p>Threat actor (not user) presses a key to authenticate the 2-factor request.</p>
-</li>
+<li>Threat actor compromises a password</li>
+<li>Threat actor uses OSINT to determine victim’s phone number based on the last 4 numbers that duo discloses in the 2-factor login.</li>
+<li>Threat actor calls the victim and uses any facade to convince a user to merge a call (transferring between departments, bringing manager to the call, verification call to verify phone number (My phone carrier has done this))</li>
+<li>Threat actor send two factor phone request and user merges the call.</li>
+<li>Threat actor (not user) presses a key to authenticate the 2-factor request.</li>
 </ul>
 <p>Why this works:</p>
 <ul>
-<li>
-<p>User only needs to be convinced to merge a call- this will probably not set off a red flag since it’s not a probe for more information.</p>
-</li>
-<li>
-<p>Duo does not tell the user what is being authenticated that would set off any red flags</p>
-</li>
-<li>
-<p>Duo accepts input before the the push call explains the context of the call</p>
-</li>
+<li>User only needs to be convinced to merge a call- this will probably not set off a red flag since it’s not a probe for more information.</li>
+<li>Duo does not tell the user what is being authenticated that would set off any red flags</li>
+<li>Duo accepts input before the the push call explains the context of the call</li>
 </ul>
 <p>How to fix this:</p>
 <ul>
-<li>
-<p>Full disclosure of the context of the call before accepting user input ex: “You are authenticating for user@account.com. If you were not expecting this call please hang up now otherwise press any key after the beep”</p>
-</li>
-<li>
-<p>Switch to the method Google uses: Give context for the call and give the users a token to type in. This gives a user more time to realize something is wrong</p>
-</li>
+<li>Full disclosure of the context of the call before accepting user input ex: “You are authenticating for user@account.com. If you were not expecting this call please hang up now otherwise press any key after the beep”</li>
+<li>Switch to the method Google uses: Give context for the call and give the users a token to type in. This gives a user more time to realize something is wrong</li>
 </ul>
 </div>
 </div>
@@ -216,7 +190,7 @@ The issue:</p>
   <div class="footer__inner">
     
       <div class="copyright">
-        <span>© 2021 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>© 2022 Powered by <a href="http://gohugo.io">Hugo</a></span>
     
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>

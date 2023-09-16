@@ -19,9 +19,26 @@
     let remainingMiles = (expectedLife - miles)
     let carCost = cost / remainingMiles;
     if (electric) {
-	return mpg * electricityPrice;
+	return (mpg * electricityPrice) + carCost;
     } else {
 	let gasCosts = (gasPrice / mpg)
+	return carCost + gasCosts;
+    }
+      }
+
+      function calculateTotalCost(gasPrice,
+		       electricityPrice,
+		       expectedLife,
+		       cost,
+		       miles,
+		       mpg,
+		       electric) {
+	  let remainingMiles = (expectedLife - miles)
+	  let carCost = cost;
+    if (electric) {
+	return (mpg * electricityPrice * remainingMiles) + carCost ;
+    } else {
+	let gasCosts = (gasPrice / mpg) * remainingMiles;
 	return carCost + gasCosts;
     }
 }
@@ -42,8 +59,10 @@ function resolveNode(car) {
 
     // Result
     let result = car.querySelectorAll("em#result")[0]
-
+    let total = car.querySelectorAll("em#total")[0]
+    
     result.innerHTML = calculateCost(gasPrice, electricityPrice, expectedLife, cost, miles, mpg, electric);
+    total.innerHTML = calculateTotalCost(gasPrice, electricityPrice, expectedLife, cost, miles, mpg, electric);
     
     return calculateCost(gasPrice, electricityPrice, expectedLife, cost, miles, mpg, electric);
 }
@@ -70,6 +89,7 @@ function update() {
 	<th>MPG or kWh/mile</th>
 	<th>Electric?</th>
 	<th>CPM</th>
+	<th>Total Cost</th>
       </tr>
       <tr name="car">
 	<td><input type="text" id="nickname" name="nickname"></th>
@@ -77,7 +97,8 @@ function update() {
         <td><input type="number" id="miles" name="miles"></th>
 	<td><input type="number" id="mpg" name="mpg"></th>
         <td><input type="checkbox" id="electric" name="electric"></th>
-        <td><em id="result">hello</em></td>
+<td><em id="result">CPM</em></td>
+        <td><em id="total">Total Cost</em></td>
 </tr>
       <tr name="car">
 	<td><input type="text" id="nickname" name="nickname"></th>
@@ -85,48 +106,10 @@ function update() {
         <td><input type="number" id="miles" name="miles"></th>
 	<td><input type="number" id="mpg" name="mpg"></th>
         <td><input type="checkbox" id="electric" name="electric"></th>
-        <td><em id="result">hello</em></td>
+      <td><em id="result"></em></td>
+        <td><em id="total"></em></td>
 </tr>
-      <tr name="car">
-	<td><input type="text" id="nickname" name="nickname"></th>
-	<td><input type="number" id="cost" name="cost"></th>
-        <td><input type="number" id="miles" name="miles"></th>
-	<td><input type="number" id="mpg" name="mpg"></th>
-        <td><input type="checkbox" id="electric" name="electric"></th>
-        <td><em id="result">hello</em></td>
-</tr>
-      <tr name="car">
-	<td><input type="text" id="nickname" name="nickname"></th>
-	<td><input type="number" id="cost" name="cost"></th>
-        <td><input type="number" id="miles" name="miles"></th>
-	<td><input type="number" id="mpg" name="mpg"></th>
-        <td><input type="checkbox" id="electric" name="electric"></th>
-        <td><em id="result">hello</em></td>
-</tr>
-      <tr name="car">
-	<td><input type="text" id="nickname" name="nickname"></th>
-	<td><input type="number" id="cost" name="cost"></th>
-        <td><input type="number" id="miles" name="miles"></th>
-	<td><input type="number" id="mpg" name="mpg"></th>
-        <td><input type="checkbox" id="electric" name="electric"></th>
-        <td><em id="result">hello</em></td>
-</tr>
-      <tr name="car">
-	<td><input type="text" id="nickname" name="nickname"></th>
-	<td><input type="number" id="cost" name="cost"></th>
-        <td><input type="number" id="miles" name="miles"></th>
-	<td><input type="number" id="mpg" name="mpg"></th>
-        <td><input type="checkbox" id="electric" name="electric"></th>
-        <td><em id="result">hello</em></td>
-</tr>
-      <tr name="car">
-	<td><input type="text" id="nickname" name="nickname"></th>
-	<td><input type="number" id="cost" name="cost"></th>
-        <td><input type="number" id="miles" name="miles"></th>
-	<td><input type="number" id="mpg" name="mpg"></th>
-        <td><input type="checkbox" id="electric" name="electric"></th>
-        <td><em id="result">hello</em></td>
-</tr>
+
 </table>
 <button onClick="update()">recalculate</button>
   </body>

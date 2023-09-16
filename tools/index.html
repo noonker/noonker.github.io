@@ -17,12 +17,12 @@
 		       mpg,
 		       electric) {
     let remainingMiles = (expectedLife - miles)
-    let carCost = cost / remainingMiles;
+	  let carCost = parseFloat(cost) / remainingMiles;
     if (electric) {
-	return (mpg * electricityPrice) + carCost;
+	return ((mpg * electricityPrice) + carCost).toFixed(4);
     } else {
 	let gasCosts = (gasPrice / mpg)
-	return carCost + gasCosts;
+	return (carCost + gasCosts).toFixed(4);
     }
       }
 
@@ -34,12 +34,16 @@
 		       mpg,
 		       electric) {
 	  let remainingMiles = (expectedLife - miles)
-	  let carCost = cost;
-    if (electric) {
-	return (mpg * electricityPrice * remainingMiles) + carCost ;
-    } else {
-	let gasCosts = (gasPrice / mpg) * remainingMiles;
-	return carCost + gasCosts;
+	  let carCost = parseFloat(cost);
+	  if (electric) {
+	      let total = ((mpg * electricityPrice * remainingMiles) + carCost).toFixed(2)
+	return  total;
+	  } else {
+	      let gasCosts = (gasPrice / mpg) * remainingMiles;
+	      console.log(typeof(gasCosts))
+	      console.log(typeof(carCost))
+	      let result = (carCost + gasCosts).toFixed(2);
+	return result;
     }
 }
 
@@ -73,12 +77,12 @@ function update() {
     </script>
     <h1>Globals</h1>
      <label for="fname">Average Gas Price Over Lifetime:</label>
-     <input type="text" id="gasprice" name="gasprice" value="4.00">
+     <input type="number" id="gasprice" name="gasprice" value="4.00">
      <label for="fname">Energy Charge (per kWh)</label>
-     <input type="text" id="electricityprice" name="electricityprice" value="0.136">
+     <input type="number" id="electricityprice" name="electricityprice" value="0.136">
      <br>
      <label for="fname">Car Life (In Miles)</label>
-     <input type="text" id="expectedlife" name="expectedlife" value=200000>
+     <input type="number" id="expectedlife" name="expectedlife" value=200000>
      <h1>Cars</h1>
      <a href="https://ecocostsavings.com/electric-car-kwh-per-mile-list/">KWH/Mile Report</a>
     <table id="cars">

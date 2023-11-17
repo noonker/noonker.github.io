@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>thoughts on Noonker</title>
+    <link>https://noonker.github.io/tags/thoughts/</link>
+    <description>Recent content in thoughts on Noonker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 23 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://noonker.github.io/tags/thoughts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Soft Language</title>
+      <link>https://noonker.github.io/posts/2023-10-29-soft-language/</link>
+      <pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>https://noonker.github.io/posts/2023-10-29-soft-language/</guid>
+      <description>I came across this article on Hackernews by Richard Nordquist on Soft Language.
+This is one of those articles I read and it wasn&amp;#39;t apparent that this would resonate with me as hard as it did. I&amp;#39;ve heard of concepts like the &amp;#34;euphemism treadmill&amp;#34; before but this is the first time I&amp;#39;m thinking of language being soft.
+Is it better to use &amp;#34;hard&amp;#34; language? Is it more honest? Or do we just need to be more cognizant of not softening our language unintentionally?</description>
+    </item>
+  </channel>
+</rss>

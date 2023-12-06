@@ -6,10 +6,35 @@
     <description>Recent content on Noonker</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 23 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 05 Dec 2023 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://noonker.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Installing Native Instruments Komplete in Wine</title>
+      <link>https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/</link>
+      <pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/</guid>
+      <description>Installing Komplete in Wine to use with the AWESOME tool yabridge has a big pain point
+The .iso applications will not install because they do not mount correctly
+https://github.com/robbert-vdh/yabridge#known-issues-and-fixes
+The fix here is fine but there&amp;#39;s one gotcha:
+The documentation says that you should take two steps to install the packages with wine:
+udisksctl loop-setup -f ~/Downloads/&amp;lt;filename&amp;gt;.iso # load the .iso file udisksctl mount -t udf -o unhide -b /dev/loopX # where /dev/loopX corresponds to the loop device printed by the loop-setup The problem is that in Fedora 39 once you create the loop device it will automount.</description>
+    </item>
+    
+    <item>
+      <title>Pipewire and Jack on Fedora 39</title>
+      <link>https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/</link>
+      <pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/</guid>
+      <description>I recently switched from a MacBook Pro to an AMD Framework 13 Laptop. That means that I need to actually figure out how to make Linux audio work.
+There were no issues using Pipewire for ALSA sound but I was unable to get Jack clients connected with errors like:
+Cannot connect to server socket err = No such file or directory Cannot connect to server request channel jack server is not running or cannot be started JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock</description>
+    </item>
     
     <item>
       <title>Roland FR-4X USB Drives</title>

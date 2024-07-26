@@ -4,75 +4,96 @@
     <title>Tags on Noonker</title>
     <link>https://noonker.github.io/tags/</link>
     <description>Recent content in Tags on Noonker</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 05 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://noonker.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>tech</title>
+      <title>Ai</title>
+      <link>https://noonker.github.io/tags/ai/</link>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://noonker.github.io/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tech,</title>
+      <link>https://noonker.github.io/tags/tech/</link>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://noonker.github.io/tags/tech/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tech</title>
       <link>https://noonker.github.io/tags/tech/</link>
       <pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate>
       <guid>https://noonker.github.io/tags/tech/</guid>
       <description></description>
     </item>
     <item>
-      <title>accordion</title>
+      <title>Accordion</title>
       <link>https://noonker.github.io/tags/accordion/</link>
       <pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://noonker.github.io/tags/accordion/</guid>
       <description></description>
     </item>
     <item>
-      <title>thoughts</title>
+      <title>Thoughts</title>
       <link>https://noonker.github.io/tags/thoughts/</link>
       <pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://noonker.github.io/tags/thoughts/</guid>
       <description></description>
     </item>
     <item>
-      <title>tools</title>
+      <title>Tools</title>
       <link>https://noonker.github.io/tags/tools/</link>
       <pubDate>Tue, 03 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://noonker.github.io/tags/tools/</guid>
       <description></description>
     </item>
     <item>
-      <title>hell</title>
+      <title>Hell</title>
       <link>https://noonker.github.io/tags/hell/</link>
       <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
       <guid>https://noonker.github.io/tags/hell/</guid>
       <description></description>
     </item>
     <item>
-      <title>emacs</title>
+      <title>Emacs</title>
       <link>https://noonker.github.io/tags/emacs/</link>
       <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
       <guid>https://noonker.github.io/tags/emacs/</guid>
       <description></description>
     </item>
     <item>
-      <title>ctf</title>
+      <title>Ctf</title>
       <link>https://noonker.github.io/tags/ctf/</link>
       <pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate>
       <guid>https://noonker.github.io/tags/ctf/</guid>
       <description></description>
     </item>
     <item>
-      <title>email,</title>
+      <title>Emacs,</title>
+      <link>https://noonker.github.io/tags/emacs/</link>
+      <pubDate>Thu, 31 Dec 2020 00:00:00 +0000</pubDate>
+      <guid>https://noonker.github.io/tags/emacs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Email,</title>
       <link>https://noonker.github.io/tags/email/</link>
       <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
       <guid>https://noonker.github.io/tags/email/</guid>
       <description></description>
     </item>
     <item>
-      <title>privacy</title>
+      <title>Privacy</title>
       <link>https://noonker.github.io/tags/privacy/</link>
       <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
       <guid>https://noonker.github.io/tags/privacy/</guid>
       <description></description>
     </item>
     <item>
-      <title>security,</title>
+      <title>Security,</title>
       <link>https://noonker.github.io/tags/security/</link>
       <pubDate>Mon, 15 Oct 2018 00:00:00 +0000</pubDate>
       <guid>https://noonker.github.io/tags/security/</guid>

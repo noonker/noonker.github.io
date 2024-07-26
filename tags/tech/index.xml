@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tech on Noonker</title>
+    <title>Tech, on Noonker</title>
     <link>https://noonker.github.io/tags/tech/</link>
-    <description>Recent content in tech on Noonker</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Tech, on Noonker</description>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 05 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://noonker.github.io/tags/tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Installing Native Instruments Komplete in Wine</title>
-      <link>https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/</link>
-      <pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/</guid>
-      <description>Installing Komplete in Wine to use with the AWESOME tool yabridge has a big pain point&#xA;The .iso applications will not install because they do not mount correctly&#xA;https://github.com/robbert-vdh/yabridge#known-issues-and-fixes&#xA;The fix here is fine but there&amp;#39;s one gotcha:&#xA;The documentation says that you should take two steps to install the packages with wine:&#xA;udisksctl loop-setup -f ~/Downloads/&amp;lt;filename&amp;gt;.iso # load the .iso file udisksctl mount -t udf -o unhide -b /dev/loopX # where /dev/loopX corresponds to the loop device printed by the loop-setup The problem is that in Fedora 39 once you create the loop device it will automount.</description>
-    </item>
-    <item>
-      <title>Pipewire and Jack on Fedora 39</title>
-      <link>https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/</link>
-      <pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/</guid>
-      <description>I recently switched from a MacBook Pro to an AMD Framework 13 Laptop. That means that I need to actually figure out how to make Linux audio work.&#xA;There were no issues using Pipewire for ALSA sound but I was unable to get Jack clients connected with errors like:&#xA;Cannot connect to server socket err = No such file or directory Cannot connect to server request channel jack server is not running or cannot be started JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock</description>
+      <title>I Respect Our Shared Humanity</title>
+      <link>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</link>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</guid>
+      <description>Intro I used to be a person who cared greatly about ensuring that my prose were correct, and that I spelled everything correctly.&#xA;I&amp;#39;m actually going to avoid that here and I&amp;#39;m not even going to bother with a spell checker. For most casual communication I now like to focus on being fast and funny at the expense of the red squiggly lines or appeasing the specter of my english teacher.</description>
     </item>
     <item>
       <title>Car Cost Calculator</title>
@@ -58,13 +51,6 @@
       <description>As part of the Emacs minor mode I&amp;#39;m working on I&amp;#39;ve created a useful function to turn json into Org tables while maintaining the linkage of nested structures. The is cleverly named json-to-org-table.&#xA;Why? Json is a great format for programming and parsing structures but a less good language for human consumption. I created this tool so I could interact with APIs and have a human readable format (and one that exports nicely too!</description>
     </item>
     <item>
-      <title>Using Org-Mode to Manage Configs</title>
-      <link>https://noonker.github.io/posts/2020-12-31-org-config-manager/</link>
-      <pubDate>Thu, 31 Dec 2020 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2020-12-31-org-config-manager/</guid>
-      <description>I&amp;#39;ve just started to use Org-Mode as a way to manage my configs. Previously I&amp;#39;ve kept my configs in a git repo and just had a post-install script to put all the configs in the right place.&#xA;For now, I&amp;#39;m testing using Org-Mode for this purpose and I think I like the results.&#xA;I have a config.org file that is arranged something like this:&#xA;#+TITLE: Configs - Tangle a single block with =C-u C-c C-v t= - Tangle all blocks with =C-v C-c t= #+name: secret #+begin_src emacs-lisp :var name=&amp;#34;&amp;#34;, fld=&amp;#34;&amp;#34; (if (string-equal fld &amp;#34;password&amp;#34;) (password-store-get name) (password-store-get-field name fld)) #+end_src * tmux #+begin_src bash :noweb tangle :tangle ~/.</description>
-    </item>
-    <item>
       <title>Elfeed Rules!</title>
       <link>https://noonker.github.io/posts/2020-04-22-elfeed/</link>
       <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
@@ -77,13 +63,6 @@
       <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
       <guid>https://noonker.github.io/posts/2019-12-28-nomorelockin/</guid>
       <description>decoupling the address from the service I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.&#xA;I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address.</description>
-    </item>
-    <item>
-      <title>A Less Than Ideal Way To Do 2-factor</title>
-      <link>https://noonker.github.io/posts/2018-10-15-duo-twofactor/</link>
-      <pubDate>Mon, 15 Oct 2018 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2018-10-15-duo-twofactor/</guid>
-      <description>probably just shouldn&amp;#39;t use cell networks for 2-factor I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.&#xA;The issue:&#xA;If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication.</description>
     </item>
   </channel>
 </rss>

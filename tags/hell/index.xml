@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>hell on Noonker</title>
+    <title>Hell on Noonker</title>
     <link>https://noonker.github.io/tags/hell/</link>
-    <description>Recent content in hell on Noonker</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Hell on Noonker</description>
+    <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sat, 19 Aug 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://noonker.github.io/tags/hell/index.xml" rel="self" type="application/rss+xml" />

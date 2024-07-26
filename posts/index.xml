@@ -4,10 +4,17 @@
     <title>Posts on Noonker</title>
     <link>https://noonker.github.io/posts/</link>
     <description>Recent content in Posts on Noonker</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 05 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://noonker.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>I Respect Our Shared Humanity</title>
+      <link>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</link>
+      <pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</guid>
+      <description>Intro I used to be a person who cared greatly about ensuring that my prose were correct, and that I spelled everything correctly.&#xA;I&amp;#39;m actually going to avoid that here and I&amp;#39;m not even going to bother with a spell checker. For most casual communication I now like to focus on being fast and funny at the expense of the red squiggly lines or appeasing the specter of my english teacher.</description>
+    </item>
     <item>
       <title>Installing Native Instruments Komplete in Wine</title>
       <link>https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/</link>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   
-    <title>tech :: Noonker — thoughts, guides, etc</title>
+    <title>Tech, :: Noonker — thoughts, guides, etc</title>
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -10,6 +10,9 @@
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="https://noonker.github.io/tags/tech/" />
+
+
+  
 
 
 
@@ -38,10 +41,10 @@
 
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="tech :: Noonker">
+<meta property="og:title" content="Tech, :: Noonker">
 <meta property="og:description" content="" />
 <meta property="og:url" content="https://noonker.github.io/tags/tech/" />
-<meta property="og:site_name" content="tech" />
+<meta property="og:site_name" content="Tech," />
 
   
     <meta property="og:image" content="https://noonker.github.io/img/favicon/blue.png">
@@ -99,10 +102,10 @@
   
   <div class="post on-list">
     <h1 class="post-title">
-      <a href="https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/">Installing Native Instruments Komplete in Wine</a></h1>
+      <a href="https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/">I Respect Our Shared Humanity</a></h1>
     <div class="post-meta">
       <span class="post-date">
-        2023-12-05
+        2024-07-25
       </span>
       
     </div>
@@ -110,7 +113,9 @@
     
     <span class="post-tags">
       
-      #<a href="https://noonker.github.io/tags/tech/">tech</a>&nbsp;
+      #<a href="https://noonker.github.io/tags/tech/">tech,</a>&nbsp;
+      
+      #<a href="https://noonker.github.io/tags/ai/">ai</a>&nbsp;
       
     </span>
     
@@ -120,12 +125,8 @@
     <div class="post-content">
       
       
-      Installing Komplete in Wine to use with the AWESOME tool yabridge has a big pain point
-The .iso applications will not install because they do not mount correctly
-<a href="https://github.com/robbert-vdh/yabridge#known-issues-and-fixes">https://github.com/robbert-vdh/yabridge#known-issues-and-fixes</a>
-The fix here is fine but there's one gotcha:
-The documentation says that you should take two steps to install the packages with wine:
-udisksctl loop-setup -f ~/Downloads/&lt;filename&gt;.iso # load the .iso file udisksctl mount -t udf -o unhide -b /dev/loopX # where /dev/loopX corresponds to the loop device printed by the loop-setup The problem is that in Fedora 39 once you create the loop device it will automount.
+      Intro I used to be a person who cared greatly about ensuring that my prose were correct, and that I spelled everything correctly.
+I'm actually going to avoid that here and I'm not even going to bother with a spell checker. For most casual communication I now like to focus on being fast and funny at the expense of the red squiggly lines or appeasing the specter of my english teacher.
       
       
     </div>
@@ -133,45 +134,7 @@ udisksctl loop-setup -f ~/Downloads/&lt;filename&gt;.iso # load the .iso file ud
     
     <div>
       <a class="read-more button"
-        href="/posts/2023-12-05-yabridge-and-komplete/">Read more →</a>
-    </div>
-    
-  </div>
-  
-  <div class="post on-list">
-    <h1 class="post-title">
-      <a href="https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/">Pipewire and Jack on Fedora 39</a></h1>
-    <div class="post-meta">
-      <span class="post-date">
-        2023-12-05
-      </span>
-      
-    </div>
-
-    
-    <span class="post-tags">
-      
-      #<a href="https://noonker.github.io/tags/tech/">tech</a>&nbsp;
-      
-    </span>
-    
-
-    
-
-    <div class="post-content">
-      
-      
-      I recently switched from a MacBook Pro to an AMD Framework 13 Laptop. That means that I need to actually figure out how to make Linux audio work.
-There were no issues using Pipewire for ALSA sound but I was unable to get Jack clients connected with errors like:
-Cannot connect to server socket err = No such file or directory Cannot connect to server request channel jack server is not running or cannot be started JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
-      
-      
-    </div>
-
-    
-    <div>
-      <a class="read-more button"
-        href="/posts/2023-12-05-pipewire-and-jack-on-fedora-39/">Read more →</a>
+        href="/posts/2024-07-25-i-respect-our-shared-humanity/">Read more →</a>
     </div>
     
   </div>
@@ -293,6 +256,45 @@ Scammed Again The first thing I did was go to the web page to find that it was a
     
   </div>
   
+  <div class="post on-list">
+    <h1 class="post-title">
+      <a href="https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/">CrowdStrike Adversary Quest CTF</a></h1>
+    <div class="post-meta">
+      <span class="post-date">
+        2021-02-01
+      </span>
+      
+    </div>
+
+    
+    <span class="post-tags">
+      
+      #<a href="https://noonker.github.io/tags/tech/">tech,</a>&nbsp;
+      
+      #<a href="https://noonker.github.io/tags/ctf/">ctf</a>&nbsp;
+      
+    </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      
+      Overview I recently took part in the Adversary Quest CTF. I utimately got stopped at 5/12 challenges. Thanks to CrowdStrike for an awesome CTF and I look forward to completing it next year. Below are writeups for some of the challenges I was able to complete.
+I'm excluding The Proclamation from a writeup as this was my solution- this was a very cool challenge so I'm going to refer you to @Vinopaljiri's excellent writeup.
+      
+      
+    </div>
+
+    
+    <div>
+      <a class="read-more button"
+        href="/posts/2021-02-01-crowdstrike-adversary-zone/">Read more →</a>
+    </div>
+    
+  </div>
+  
   <div class="pagination">
   <div class="pagination__buttons">
     
@@ -316,7 +318,7 @@ Scammed Again The first thing I did was go to the web page to find that it was a
   <div class="footer__inner">
     
       <div class="copyright">
-        <span>© 2023 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>© 2024 Powered by <a href="http://gohugo.io">Hugo</a></span>
     
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>

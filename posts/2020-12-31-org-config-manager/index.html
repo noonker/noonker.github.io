@@ -1,74 +1,279 @@
-<!doctype html><html lang=en><head><title>Using Org-Mode to Manage Configs :: Noonker</title>
-<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=description content=' I&#39;ve just started to use Org-Mode as a way to manage my configs. Previously I&#39;ve kept my configs in a git repo and just had a post-install script to put all the configs in the right place.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Using Org-Mode to Manage Configs :: Noonker</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content=" I&#39;ve just started to use Org-Mode as a way to manage my configs. Previously I&#39;ve kept my configs in a git repo and just had a post-install script to put all the configs in the right place.
 For now, I&#39;m testing using Org-Mode for this purpose and I think I like the results.
 I have a config.org file that is arranged something like this:
-#+TITLE: Configs - Tangle a single block with =C-u C-c C-v t= - Tangle all blocks with =C-v C-c t= #+name: secret #+begin_src emacs-lisp :var name="", fld="" (if (string-equal fld "password") (password-store-get name) (password-store-get-field name fld)) #+end_src * tmux #+begin_src bash :noweb tangle :tangle ~/.tmux.conf # start window numbering at 1 for easier switching set -g base-index 1 # colors set -g default-terminal "screen-256color" # Need that longer tmux display time set -g display-panes-time 2000 # status bar config set -g status-left "#h:[#S]" set -g status-left-length 50 set -g status-right-length 100 if-shell "uname | grep -q Darwin" "set -g status-right \"#[fg=white] ⚡#[fg=yellow] #(battery) #[fg=white][✉#(curl icanhazip.com)] %H:%M %d-%h-%Y\"" setw -g window-status-current-format "|#I:#W|" ... #+end_src * mopidy #+begin_src conf :noweb tangle :tangle ~/.config/mopidy/mopidy.conf [mpd] enabled = true hostname = 127.0.0.1 port = 6600 password = max_connections = 20 connection_timeout = 60 zeroconf = Mopidy MPD server on $hostname [gmusic] username = <<secret("Internet/mopidy", "Username")>> password = <<secret("Internet/mopidy", "password")>> bitrate = 320 all_access = true radio_stations_in_browse = true radio_stations_as_playlists = true refresh_token = <<secret("Internet/mopidy", "RefreshToken")>> #+end_src ** etc... What&#39;s going on here? Firstly I have some hints at the top of my file to remind of of the hotkeys I need to use to manage my configs
-'><meta name=keywords content><meta name=robots content="noodp"><link rel=canonical href=https://noonker.github.io/posts/2020-12-31-org-config-manager/><link rel=stylesheet href=https://noonker.github.io/assets/style.css><link rel=stylesheet href=https://noonker.github.io/assets/blue.css><link rel=apple-touch-icon-precomposed sizes=144x144 href=https://noonker.github.io/img/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=https://noonker.github.io/img/favicon/blue.png><meta name=twitter:card content="summary"><meta name=twitter:site content="https://twitter.com"><meta name=twitter:creator content><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="og:title" content="Using Org-Mode to Manage Configs :: Noonker"><meta property="og:description" content=' I&#39;ve just started to use Org-Mode as a way to manage my configs. Previously I&#39;ve kept my configs in a git repo and just had a post-install script to put all the configs in the right place.
+#&#43;TITLE: Configs - Tangle a single block with =C-u C-c C-v t= - Tangle all blocks with =C-v C-c t= #&#43;name: secret #&#43;begin_src emacs-lisp :var name=&#34;&#34;, fld=&#34;&#34; (if (string-equal fld &#34;password&#34;) (password-store-get name) (password-store-get-field name fld)) #&#43;end_src * tmux #&#43;begin_src bash :noweb tangle :tangle ~/.tmux.conf # start window numbering at 1 for easier switching set -g base-index 1 # colors set -g default-terminal &#34;screen-256color&#34; # Need that longer tmux display time set -g display-panes-time 2000 # status bar config set -g status-left &#34;#h:[#S]&#34; set -g status-left-length 50 set -g status-right-length 100 if-shell &#34;uname | grep -q Darwin&#34; &#34;set -g status-right \&#34;#[fg=white] ⚡#[fg=yellow] #(battery) #[fg=white][✉#(curl icanhazip.com)] %H:%M %d-%h-%Y\&#34;&#34; setw -g window-status-current-format &#34;|#I:#W|&#34; ... #&#43;end_src * mopidy #&#43;begin_src conf :noweb tangle :tangle ~/.config/mopidy/mopidy.conf [mpd] enabled = true hostname = 127.0.0.1 port = 6600 password = max_connections = 20 connection_timeout = 60 zeroconf = Mopidy MPD server on $hostname [gmusic] username = &lt;&lt;secret(&#34;Internet/mopidy&#34;, &#34;Username&#34;)&gt;&gt; password = &lt;&lt;secret(&#34;Internet/mopidy&#34;, &#34;password&#34;)&gt;&gt; bitrate = 320 all_access = true radio_stations_in_browse = true radio_stations_as_playlists = true refresh_token = &lt;&lt;secret(&#34;Internet/mopidy&#34;, &#34;RefreshToken&#34;)&gt;&gt; #&#43;end_src ** etc... What&#39;s going on here? Firstly I have some hints at the top of my file to remind of of the hotkeys I need to use to manage my configs
+" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://noonker.github.io/posts/2020-12-31-org-config-manager/" />
+
+
+
+
+<link rel="stylesheet" href="https://noonker.github.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://noonker.github.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://noonker.github.io/img/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="https://noonker.github.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  <meta name="twitter:site" content="https://twitter.com" />
+
+<meta name="twitter:creator" content="" />
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Using Org-Mode to Manage Configs :: Noonker">
+<meta property="og:description" content=" I&#39;ve just started to use Org-Mode as a way to manage my configs. Previously I&#39;ve kept my configs in a git repo and just had a post-install script to put all the configs in the right place.
 For now, I&#39;m testing using Org-Mode for this purpose and I think I like the results.
 I have a config.org file that is arranged something like this:
-#+TITLE: Configs - Tangle a single block with =C-u C-c C-v t= - Tangle all blocks with =C-v C-c t= #+name: secret #+begin_src emacs-lisp :var name="", fld="" (if (string-equal fld "password") (password-store-get name) (password-store-get-field name fld)) #+end_src * tmux #+begin_src bash :noweb tangle :tangle ~/.tmux.conf # start window numbering at 1 for easier switching set -g base-index 1 # colors set -g default-terminal "screen-256color" # Need that longer tmux display time set -g display-panes-time 2000 # status bar config set -g status-left "#h:[#S]" set -g status-left-length 50 set -g status-right-length 100 if-shell "uname | grep -q Darwin" "set -g status-right \"#[fg=white] ⚡#[fg=yellow] #(battery) #[fg=white][✉#(curl icanhazip.com)] %H:%M %d-%h-%Y\"" setw -g window-status-current-format "|#I:#W|" ... #+end_src * mopidy #+begin_src conf :noweb tangle :tangle ~/.config/mopidy/mopidy.conf [mpd] enabled = true hostname = 127.0.0.1 port = 6600 password = max_connections = 20 connection_timeout = 60 zeroconf = Mopidy MPD server on $hostname [gmusic] username = <<secret("Internet/mopidy", "Username")>> password = <<secret("Internet/mopidy", "password")>> bitrate = 320 all_access = true radio_stations_in_browse = true radio_stations_as_playlists = true refresh_token = <<secret("Internet/mopidy", "RefreshToken")>> #+end_src ** etc... What&#39;s going on here? Firstly I have some hints at the top of my file to remind of of the hotkeys I need to use to manage my configs
-'><meta property="og:url" content="https://noonker.github.io/posts/2020-12-31-org-config-manager/"><meta property="og:site_name" content="Using Org-Mode to Manage Configs"><meta property="og:image" content="https://noonker.github.io/img/favicon/blue.png"><meta property="og:image:width" content="2048"><meta property="og:image:height" content="1024"><meta property="article:published_time" content="2020-12-31 00:00:00 +0000 UTC"></head><body><div class="container center headings--one-size"><header class=header><div class=header__inner><div class=header__logo><a href=/><div class=logo>Terminal</div></a></div><div class=menu-trigger>menu</div></div></header><div class=content><div class=post><h1 class=post-title><a href=https://noonker.github.io/posts/2020-12-31-org-config-manager/>Using Org-Mode to Manage Configs</a></h1><div class=post-meta><span class=post-date>2020-12-31</span></div><span class=post-tags>#<a href=https://noonker.github.io/tags/emacs/>emacs,</a>&nbsp;
-#<a href=https://noonker.github.io/tags/tech/>tech</a>&nbsp;</span><div class=post-content><div><p>I've just started to use Org-Mode as a way to manage my configs. Previously I've kept my configs in a git repo and just had a post-install script to put all the configs in the right place.</p><p>For now, I'm testing using Org-Mode for this purpose and I think I like the results.</p><p>I have a config.org file that is arranged something like this:</p><div class="src src-org"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-org data-lang=org><span style=display:flex><span><span style=color:#75715e>#+TITLE</span><span style=color:#75715e>: Configs</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span> <span style=color:#66d9ef>- </span>Tangle a single block with <span style=color:#a6e22e>=C-u C-c C-v t=</span>
-</span></span><span style=display:flex><span> <span style=color:#66d9ef>- </span>Tangle all blocks with <span style=color:#a6e22e>=C-v C-c t=</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#+name</span><span style=color:#75715e>: secret</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#+begin_src </span><span style=color:#75715e>emacs-lisp</span><span style=color:#75715e> :var name=&#34;&#34;, fld=&#34;&#34;
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>(if (<span style=color:#a6e22e>string-equal</span> fld <span style=color:#e6db74>&#34;password&#34;</span>)
-</span></span><span style=display:flex><span>    (password-store-get name)
-</span></span><span style=display:flex><span>  (password-store-get-field name fld))
-</span></span><span style=display:flex><span><span style=color:#75715e>#+end_src</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>*<span style=font-weight:700> tmux</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#+begin_src </span><span style=color:#75715e>bash</span><span style=color:#75715e> :noweb tangle :tangle ~/.tmux.conf
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e># start window numbering at 1 for easier switching</span>
-</span></span><span style=display:flex><span>set -g base-index <span style=color:#ae81ff>1</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># colors</span>
-</span></span><span style=display:flex><span>set -g default-terminal <span style=color:#e6db74>&#34;screen-256color&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Need that longer tmux display time</span>
-</span></span><span style=display:flex><span>set -g display-panes-time <span style=color:#ae81ff>2000</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># status bar config</span>
-</span></span><span style=display:flex><span>set -g status-left <span style=color:#e6db74>&#34;#h:[#S]&#34;</span>
-</span></span><span style=display:flex><span>set -g status-left-length <span style=color:#ae81ff>50</span>
-</span></span><span style=display:flex><span>set -g status-right-length <span style=color:#ae81ff>100</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span>-shell <span style=color:#e6db74>&#34;uname | grep -q Darwin&#34;</span> <span style=color:#e6db74>&#34;set -g status-right \&#34;#[fg=white] ⚡#[fg=yellow] #(battery) #[fg=white][✉#(curl icanhazip.com)] %H:%M %d-%h-%Y\&#34;&#34;</span>
-</span></span><span style=display:flex><span>setw -g window-status-current-format <span style=color:#e6db74>&#34;|#I:#W|&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>...
-</span></span><span style=display:flex><span><span style=color:#75715e>#+end_src</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>*<span style=font-weight:700> mopidy</span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#+begin_src </span><span style=color:#75715e>conf</span><span style=color:#75715e> :noweb tangle  :tangle  ~/.config/mopidy/mopidy.conf
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>[mpd]
-</span></span><span style=display:flex><span>enabled = true
-</span></span><span style=display:flex><span>hostname = 127.0.0.1
-</span></span><span style=display:flex><span>port = 6600
-</span></span><span style=display:flex><span>password =
-</span></span><span style=display:flex><span>max_connections = 20
-</span></span><span style=display:flex><span>connection_timeout = 60
-</span></span><span style=display:flex><span>zeroconf = Mopidy MPD server on $hostname
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>[gmusic]
-</span></span><span style=display:flex><span>username = &lt;&lt;secret(&#34;Internet/mopidy&#34;, &#34;Username&#34;)&gt;&gt;
-</span></span><span style=display:flex><span>password = &lt;&lt;secret(&#34;Internet/mopidy&#34;, &#34;password&#34;)&gt;&gt;
-</span></span><span style=display:flex><span>bitrate = 320
-</span></span><span style=display:flex><span>all_access = true
-</span></span><span style=display:flex><span>radio_stations_in_browse = true
-</span></span><span style=display:flex><span>radio_stations_as_playlists = true
-</span></span><span style=display:flex><span>refresh_token = &lt;&lt;secret(&#34;Internet/mopidy&#34;, &#34;RefreshToken&#34;)&gt;&gt;
-</span></span><span style=display:flex><span><span style=color:#75715e>#+end_src</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>**</span> etc...</span></span></code></pre></div></div><div id=outline-container-headline-1 class=outline-2><h2 id=headline-1>What's going on here?</h2><div id=outline-text-headline-1 class=outline-text-2><p>Firstly I have some hints at the top of my file to remind of of the hotkeys I need to use to manage my configs</p><blockquote><ul><li>Tangle a single block with <code class=verbatim>C-u C-c C-v t</code></li><li>Tangle all blocks with <code class=verbatim>C-v C-c t</code></li></ul></blockquote><p>I'm taking advantage of Org's <a href=https://orgmode.org/manual/Extracting-Source-Code.html>tangle</a> feature to actually write the configs to the location where they belong. For example my tmux config source block has the header <code class=verbatim>:tangle ~/.tmux.conf</code> which means when I tangle the file write it out to <code class=verbatim>~/.tmux.conf</code> . This means I can make quick edits in the config file then just tangle that block to install it on my system</p><p>I also have a little helper function which allows me to combine Orgs <a href=https://orgmode.org/manual/Noweb-Reference-Syntax.html>noweb</a> syntax and <a href=https://www.passwordstore.org>pass</a> to include secrets in my configs without exposing them in my configs.</p><div class="src src-org"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-org data-lang=org><span style=display:flex><span><span style=color:#75715e>#+name</span><span style=color:#75715e>: secret</span>
-</span></span><span style=display:flex><span>#+begin_src emacs-lisp :var name<span style=color:#a6e22e>=&#34;&#34;, fld=</span>&#34;&#34;
-</span></span><span style=display:flex><span>(if (string-equal fld &#34;password&#34;)
-</span></span><span style=display:flex><span>    (password-store-get name)
-</span></span><span style=display:flex><span>  (password-store-get-field name fld))</span></span></code></pre></div></div><p>#+end_src</p><p>With this defined I can just add snippets like this <code class=verbatim>&lt;&lt;secret("Internet/mopidy", "Username")>></code> to my configs which will call out to password-store and retrieve these secrets before writing them out to a file</p><p>All this allows me some added control over how I write my configs, allows me to manage and annotate them in the same file, and still provides me with per config type syntax highlighting thanks to <a href=https://orgmode.org/worg/org-contrib/babel/>org-babel</a>.</p></div></div></div></div><div class=pagination><div class=pagination__title><span class=pagination__title-h></span><hr></div><div class=pagination__buttons><span class="button previous"><a href=https://noonker.github.io/posts/2021-01-03-json-to-org-table/><span class=button__icon>←</span>
-<span class=button__text>Json To Org-Mode Table</span>
-</a></span><span class="button next"><a href=https://noonker.github.io/posts/2020-04-22-elfeed/><span class=button__text>Elfeed Rules!</span>
-<span class=button__icon>→</span></a></span></div></div></div></div><footer class=footer><div class=footer__inner><div class=copyright><span>© 2024 Powered by <a href=http://gohugo.io>Hugo</a></span>
-<span>:: Theme made by <a href=https://twitter.com/panr>panr</a></span></div></div></footer><script src=https://noonker.github.io/assets/main.js></script><script src=https://noonker.github.io/assets/prism.js></script></div></body></html>
+#&#43;TITLE: Configs - Tangle a single block with =C-u C-c C-v t= - Tangle all blocks with =C-v C-c t= #&#43;name: secret #&#43;begin_src emacs-lisp :var name=&#34;&#34;, fld=&#34;&#34; (if (string-equal fld &#34;password&#34;) (password-store-get name) (password-store-get-field name fld)) #&#43;end_src * tmux #&#43;begin_src bash :noweb tangle :tangle ~/.tmux.conf # start window numbering at 1 for easier switching set -g base-index 1 # colors set -g default-terminal &#34;screen-256color&#34; # Need that longer tmux display time set -g display-panes-time 2000 # status bar config set -g status-left &#34;#h:[#S]&#34; set -g status-left-length 50 set -g status-right-length 100 if-shell &#34;uname | grep -q Darwin&#34; &#34;set -g status-right \&#34;#[fg=white] ⚡#[fg=yellow] #(battery) #[fg=white][✉#(curl icanhazip.com)] %H:%M %d-%h-%Y\&#34;&#34; setw -g window-status-current-format &#34;|#I:#W|&#34; ... #&#43;end_src * mopidy #&#43;begin_src conf :noweb tangle :tangle ~/.config/mopidy/mopidy.conf [mpd] enabled = true hostname = 127.0.0.1 port = 6600 password = max_connections = 20 connection_timeout = 60 zeroconf = Mopidy MPD server on $hostname [gmusic] username = &lt;&lt;secret(&#34;Internet/mopidy&#34;, &#34;Username&#34;)&gt;&gt; password = &lt;&lt;secret(&#34;Internet/mopidy&#34;, &#34;password&#34;)&gt;&gt; bitrate = 320 all_access = true radio_stations_in_browse = true radio_stations_as_playlists = true refresh_token = &lt;&lt;secret(&#34;Internet/mopidy&#34;, &#34;RefreshToken&#34;)&gt;&gt; #&#43;end_src ** etc... What&#39;s going on here? Firstly I have some hints at the top of my file to remind of of the hotkeys I need to use to manage my configs
+" />
+<meta property="og:url" content="https://noonker.github.io/posts/2020-12-31-org-config-manager/" />
+<meta property="og:site_name" content="Using Org-Mode to Manage Configs" />
+
+  
+    <meta property="og:image" content="https://noonker.github.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2020-12-31 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://noonker.github.io/posts/2020-12-31-org-config-manager/">Using Org-Mode to Manage Configs</a></h1>
+  <div class="post-meta">
+      
+    <span class="post-date">
+      2020-12-31
+    </span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="https://noonker.github.io/tags/emacs/">emacs,</a>&nbsp;
+    
+    #<a href="https://noonker.github.io/tags/tech/">tech</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  <div class="post-content"><div>
+        
+<p>
+I&#39;ve just started to use Org-Mode as a way to manage my configs. Previously I&#39;ve kept my configs in a git repo and just had a post-install script to put all the configs in the right place.</p>
+<p>
+For now, I&#39;m testing using Org-Mode for this purpose and I think I like the results.</p>
+<p>
+I have a config.org file that is arranged something like this:</p>
+<div class="src src-org">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span><span style="color:#75715e">#+TITLE</span><span style="color:#75715e">: Configs</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- </span>Tangle a single block with <span style="color:#a6e22e">=C-u C-c C-v t=</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">- </span>Tangle all blocks with <span style="color:#a6e22e">=C-v C-c t=</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+name</span><span style="color:#75715e">: secret</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+begin_src </span><span style="color:#75715e">emacs-lisp</span><span style="color:#75715e"> :var name=&#34;&#34;, fld=&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>(if (<span style="color:#a6e22e">string-equal</span> fld <span style="color:#e6db74">&#34;password&#34;</span>)
+</span></span><span style="display:flex;"><span>    (password-store-get name)
+</span></span><span style="display:flex;"><span>  (password-store-get-field name fld))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+end_src</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>*<span style="font-weight:bold"> tmux</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+begin_src </span><span style="color:#75715e">bash</span><span style="color:#75715e"> :noweb tangle :tangle ~/.tmux.conf
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e"># start window numbering at 1 for easier switching</span>
+</span></span><span style="display:flex;"><span>set -g base-index <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># colors</span>
+</span></span><span style="display:flex;"><span>set -g default-terminal <span style="color:#e6db74">&#34;screen-256color&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Need that longer tmux display time</span>
+</span></span><span style="display:flex;"><span>set -g display-panes-time <span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># status bar config</span>
+</span></span><span style="display:flex;"><span>set -g status-left <span style="color:#e6db74">&#34;#h:[#S]&#34;</span>
+</span></span><span style="display:flex;"><span>set -g status-left-length <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>set -g status-right-length <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>-shell <span style="color:#e6db74">&#34;uname | grep -q Darwin&#34;</span> <span style="color:#e6db74">&#34;set -g status-right \&#34;#[fg=white] ⚡#[fg=yellow] #(battery) #[fg=white][✉#(curl icanhazip.com)] %H:%M %d-%h-%Y\&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>setw -g window-status-current-format <span style="color:#e6db74">&#34;|#I:#W|&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+end_src</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>*<span style="font-weight:bold"> mopidy</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+begin_src </span><span style="color:#75715e">conf</span><span style="color:#75715e"> :noweb tangle  :tangle  ~/.config/mopidy/mopidy.conf
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>[mpd]
+</span></span><span style="display:flex;"><span>enabled = true
+</span></span><span style="display:flex;"><span>hostname = 127.0.0.1
+</span></span><span style="display:flex;"><span>port = 6600
+</span></span><span style="display:flex;"><span>password =
+</span></span><span style="display:flex;"><span>max_connections = 20
+</span></span><span style="display:flex;"><span>connection_timeout = 60
+</span></span><span style="display:flex;"><span>zeroconf = Mopidy MPD server on $hostname
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[gmusic]
+</span></span><span style="display:flex;"><span>username = &lt;&lt;secret(&#34;Internet/mopidy&#34;, &#34;Username&#34;)&gt;&gt;
+</span></span><span style="display:flex;"><span>password = &lt;&lt;secret(&#34;Internet/mopidy&#34;, &#34;password&#34;)&gt;&gt;
+</span></span><span style="display:flex;"><span>bitrate = 320
+</span></span><span style="display:flex;"><span>all_access = true
+</span></span><span style="display:flex;"><span>radio_stations_in_browse = true
+</span></span><span style="display:flex;"><span>radio_stations_as_playlists = true
+</span></span><span style="display:flex;"><span>refresh_token = &lt;&lt;secret(&#34;Internet/mopidy&#34;, &#34;RefreshToken&#34;)&gt;&gt;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#+end_src</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">**</span> etc...</span></span></code></pre></div>
+</div>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+What&#39;s going on here?
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>
+Firstly I have some hints at the top of my file to remind of of the hotkeys I need to use to manage my configs</p>
+<blockquote>
+<ul>
+<li>Tangle a single block with <code class="verbatim">C-u C-c C-v t</code></li>
+<li>Tangle all blocks with <code class="verbatim">C-v C-c t</code></li>
+</ul>
+</blockquote>
+<p>
+I&#39;m taking advantage of Org&#39;s <a href="https://orgmode.org/manual/Extracting-Source-Code.html">tangle</a> feature to actually write the configs to the location where they belong. For example my tmux config source block has the header <code class="verbatim">:tangle ~/.tmux.conf</code> which means when I tangle the file write it out to <code class="verbatim">~/.tmux.conf</code> . This means I can make quick edits in the config file then just tangle that block to install it on my system</p>
+<p>
+I also have a little helper function which allows me to combine Orgs <a href="https://orgmode.org/manual/Noweb-Reference-Syntax.html">noweb</a> syntax and <a href="https://www.passwordstore.org">pass</a> to include secrets in my configs without exposing them in my configs.</p>
+<div class="src src-org">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-org" data-lang="org"><span style="display:flex;"><span><span style="color:#75715e">#+name</span><span style="color:#75715e">: secret</span>
+</span></span><span style="display:flex;"><span>#+begin_src emacs-lisp :var name<span style="color:#a6e22e">=&#34;&#34;, fld=</span>&#34;&#34;
+</span></span><span style="display:flex;"><span>(if (string-equal fld &#34;password&#34;)
+</span></span><span style="display:flex;"><span>    (password-store-get name)
+</span></span><span style="display:flex;"><span>  (password-store-get-field name fld))</span></span></code></pre></div>
+</div>
+<p>#+end_src</p>
+<p>
+With this defined I can just add snippets like this <code class="verbatim">&lt;&lt;secret(&#34;Internet/mopidy&#34;, &#34;Username&#34;)&gt;&gt;</code> to my configs which will call out to password-store and retrieve these secrets before writing them out to a file</p>
+<p>
+All this allows me some added control over how I write my configs, allows me to manage and annotate them in the same file, and still provides me with per config type syntax highlighting thanks to <a href="https://orgmode.org/worg/org-contrib/babel/">org-babel</a>.</p>
+</div>
+</div>
+
+      </div></div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h"></span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="https://noonker.github.io/posts/2021-01-03-json-to-org-table/">
+          <span class="button__icon">←</span>
+          <span class="button__text">Json To Org-Mode Table</span>
+        </a>
+      </span>
+      
+      
+      <span class="button next">
+        <a href="https://noonker.github.io/posts/2020-04-22-elfeed/">
+          <span class="button__text">Elfeed Rules!</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2024 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://noonker.github.io/assets/main.js"></script>
+<script src="https://noonker.github.io/assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

@@ -1,46 +1,255 @@
-<!doctype html><html lang=en><head><title>Installing Native Instruments Komplete in Wine :: Noonker</title>
-<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=description content=" Installing Komplete in Wine to use with the AWESOME tool yabridge has a big pain point
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Installing Native Instruments Komplete in Wine :: Noonker</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content=" Installing Komplete in Wine to use with the AWESOME tool yabridge has a big pain point
 The .iso applications will not install because they do not mount correctly
 https://github.com/robbert-vdh/yabridge#known-issues-and-fixes
-The fix here is fine but there's one gotcha:
+The fix here is fine but there&#39;s one gotcha:
 The documentation says that you should take two steps to install the packages with wine:
-udisksctl loop-setup -f ~/Downloads/<filename>.iso # load the .iso file udisksctl mount -t udf -o unhide -b /dev/loopX # where /dev/loopX corresponds to the loop device printed by the loop-setup The problem is that in Fedora 39 once you create the loop device it will automount.
-"><meta name=keywords content><meta name=robots content="noodp"><link rel=canonical href=https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/><link rel=stylesheet href=https://noonker.github.io/assets/style.css><link rel=stylesheet href=https://noonker.github.io/assets/blue.css><link rel=apple-touch-icon-precomposed sizes=144x144 href=https://noonker.github.io/img/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=https://noonker.github.io/img/favicon/blue.png><meta name=twitter:card content="summary"><meta name=twitter:site content="https://twitter.com"><meta name=twitter:creator content><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="og:title" content="Installing Native Instruments Komplete in Wine :: Noonker"><meta property="og:description" content=" Installing Komplete in Wine to use with the AWESOME tool yabridge has a big pain point
+udisksctl loop-setup -f ~/Downloads/&lt;filename&gt;.iso # load the .iso file udisksctl mount -t udf -o unhide -b /dev/loopX # where /dev/loopX corresponds to the loop device printed by the loop-setup The problem is that in Fedora 39 once you create the loop device it will automount.
+" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/" />
+
+
+
+
+<link rel="stylesheet" href="https://noonker.github.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://noonker.github.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://noonker.github.io/img/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="https://noonker.github.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  <meta name="twitter:site" content="https://twitter.com" />
+
+<meta name="twitter:creator" content="" />
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Installing Native Instruments Komplete in Wine :: Noonker">
+<meta property="og:description" content=" Installing Komplete in Wine to use with the AWESOME tool yabridge has a big pain point
 The .iso applications will not install because they do not mount correctly
 https://github.com/robbert-vdh/yabridge#known-issues-and-fixes
-The fix here is fine but there's one gotcha:
+The fix here is fine but there&#39;s one gotcha:
 The documentation says that you should take two steps to install the packages with wine:
-udisksctl loop-setup -f ~/Downloads/<filename>.iso # load the .iso file udisksctl mount -t udf -o unhide -b /dev/loopX # where /dev/loopX corresponds to the loop device printed by the loop-setup The problem is that in Fedora 39 once you create the loop device it will automount.
-"><meta property="og:url" content="https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/"><meta property="og:site_name" content="Installing Native Instruments Komplete in Wine"><meta property="og:image" content="https://noonker.github.io/img/favicon/blue.png"><meta property="og:image:width" content="2048"><meta property="og:image:height" content="1024"><meta property="article:published_time" content="2023-12-05 00:00:00 +0000 UTC"></head><body><div class="container center headings--one-size"><header class=header><div class=header__inner><div class=header__logo><a href=/><div class=logo>Terminal</div></a></div><div class=menu-trigger>menu</div></div></header><div class=content><div class=post><h1 class=post-title><a href=https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/>Installing Native Instruments Komplete in Wine</a></h1><div class=post-meta><span class=post-date>2023-12-05</span></div><span class=post-tags>#<a href=https://noonker.github.io/tags/tech/>tech</a>&nbsp;</span><div class=post-content><div><p>Installing Komplete in Wine to use with the AWESOME tool yabridge has a big pain point</p><p>The .iso applications will not install because they do not mount correctly</p><p>https://github.com/robbert-vdh/yabridge#known-issues-and-fixes</p><p>The fix here is fine but there's one gotcha:</p><p>The documentation says that you should take two steps to install the packages with wine:</p><div class="src src-bash"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>udisksctl loop-setup -f ~/Downloads/&lt;filename&gt;.iso <span style=color:#75715e># load the .iso file</span>
-</span></span><span style=display:flex><span>udisksctl mount -t udf -o unhide -b /dev/loopX <span style=color:#75715e># where /dev/loopX corresponds to the loop device printed by the loop-setup</span></span></span></code></pre></div></div><p>The problem is that in Fedora 39 once you create the loop device it will automount.</p><p>This needs to be temporarily disabled otherwise it will not mount with the correct option:</p><p>(re-enable by changing the <code class=verbatim>false</code> to <code class=verbatim>true</code> and rerunning)</p><div class="src src-bash"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>gsettings set org.gnome.desktop.media-handling automount false
-</span></span><span style=display:flex><span>gsettings set org.gnome.desktop.media-handling automount-open false 
-</span></span><span style=display:flex><span>systemctl restart gdm.service</span></span></code></pre></div></div><p>then you should be able to install the plugins.</p><p>It would also be very tedious to do this for all the packages in Komplete- I made a little helper script which can be used to speed up this process:</p><div class="src src-bash"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Mounts a native ISO file to a loop device</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>DEVICE<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>udisksctl loop-setup -f $1 | grep -E -o <span style=color:#e6db74>&#34;/dev/loop[0-9]{1,3}&#34;</span><span style=color:#66d9ef>)</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#34;Mounted: </span>$DEVICE<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>MOUNT<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>udisksctl mount -t udf -o unhide -b $DEVICE | grep -E -o <span style=color:#e6db74>&#34;/run/media/.*&#34;</span><span style=color:#66d9ef>)</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>xdg-open <span style=color:#e6db74>&#34;</span>$MOUNT<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#34;Press enter when you&#39;re done installing&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>read
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>umount <span style=color:#e6db74>&#34;</span>$MOUNT<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>udisksctl loop-delete -b <span style=color:#e6db74>&#34;</span>$DEVICE<span style=color:#e6db74>&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#34;Delete the file?&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>read -p <span style=color:#e6db74>&#34;y/n: &#34;</span> -n <span style=color:#ae81ff>1</span> -r
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#f92672>[[</span> $REPLY <span style=color:#f92672>=</span>~ ^<span style=color:#f92672>[</span>Yy<span style=color:#f92672>]</span>$ <span style=color:#f92672>]]</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>then</span>
-</span></span><span style=display:flex><span>	rm $1
-</span></span><span style=display:flex><span><span style=color:#66d9ef>fi</span></span></span></code></pre></div></div><p>Save this to a file (ni-install.sh) and run <code class=verbatim>chmod +x ni-install.sh</code></p><p>Run this like : <code class=verbatim>./ni-install.sh ~/Downloads/&lt;NotInstalledVST>.iso</code></p><p>This will:</p><ol><li>Mount the file with the correct options</li><li>Open the directory for you and wait for you to finish installing</li><li>Unmount everything</li><li>Prompt to delete the iso</li></ol><p>✌</p></div></div><div class=pagination><div class=pagination__title><span class=pagination__title-h></span><hr></div><div class=pagination__buttons><span class="button previous"><a href=https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/><span class=button__icon>←</span>
-<span class=button__text>I Respect Our Shared Humanity</span>
-</a></span><span class="button next"><a href=https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/><span class=button__text>Pipewire and Jack on Fedora 39</span>
-<span class=button__icon>→</span></a></span></div></div></div></div><footer class=footer><div class=footer__inner><div class=copyright><span>© 2024 Powered by <a href=http://gohugo.io>Hugo</a></span>
-<span>:: Theme made by <a href=https://twitter.com/panr>panr</a></span></div></div></footer><script src=https://noonker.github.io/assets/main.js></script><script src=https://noonker.github.io/assets/prism.js></script></div></body></html>
+udisksctl loop-setup -f ~/Downloads/&lt;filename&gt;.iso # load the .iso file udisksctl mount -t udf -o unhide -b /dev/loopX # where /dev/loopX corresponds to the loop device printed by the loop-setup The problem is that in Fedora 39 once you create the loop device it will automount.
+" />
+<meta property="og:url" content="https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/" />
+<meta property="og:site_name" content="Installing Native Instruments Komplete in Wine" />
+
+  
+    <meta property="og:image" content="https://noonker.github.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2023-12-05 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/">Installing Native Instruments Komplete in Wine</a></h1>
+  <div class="post-meta">
+      
+    <span class="post-date">
+      2023-12-05
+    </span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="https://noonker.github.io/tags/tech/">tech</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  <div class="post-content"><div>
+        <p>
+Installing Komplete in Wine to use with the AWESOME tool yabridge has a big pain point</p>
+<p>
+The .iso applications will not install because they do not mount correctly</p>
+<p>
+https://github.com/robbert-vdh/yabridge#known-issues-and-fixes</p>
+<p>
+The fix here is fine but there&#39;s one gotcha:</p>
+<p>
+The documentation says that you should take two steps to install the packages with wine:</p>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>udisksctl loop-setup -f ~/Downloads/&lt;filename&gt;.iso <span style="color:#75715e"># load the .iso file</span>
+</span></span><span style="display:flex;"><span>udisksctl mount -t udf -o unhide -b /dev/loopX <span style="color:#75715e"># where /dev/loopX corresponds to the loop device printed by the loop-setup</span></span></span></code></pre></div>
+</div>
+<p>
+The problem is that in Fedora 39 once you create the loop device it will automount.</p>
+<p>
+This needs to be temporarily disabled otherwise it will not mount with the correct option:</p>
+<p>
+(re-enable by changing the <code class="verbatim">false</code> to <code class="verbatim">true</code> and rerunning)</p>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gsettings set org.gnome.desktop.media-handling automount false
+</span></span><span style="display:flex;"><span>gsettings set org.gnome.desktop.media-handling automount-open false 
+</span></span><span style="display:flex;"><span>systemctl restart gdm.service</span></span></code></pre></div>
+</div>
+<p>
+then you should be able to install the plugins.</p>
+<p>
+It would also be very tedious to do this for all the packages in Komplete- I made a little helper script which can be used to speed up this process:</p>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Mounts a native ISO file to a loop device</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DEVICE<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>udisksctl loop-setup -f $1 | grep -E -o <span style="color:#e6db74">&#34;/dev/loop[0-9]{1,3}&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Mounted: </span>$DEVICE<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>MOUNT<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>udisksctl mount -t udf -o unhide -b $DEVICE | grep -E -o <span style="color:#e6db74">&#34;/run/media/.*&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>xdg-open <span style="color:#e6db74">&#34;</span>$MOUNT<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Press enter when you&#39;re done installing&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>read
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>umount <span style="color:#e6db74">&#34;</span>$MOUNT<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>udisksctl loop-delete -b <span style="color:#e6db74">&#34;</span>$DEVICE<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Delete the file?&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>read -p <span style="color:#e6db74">&#34;y/n: &#34;</span> -n <span style="color:#ae81ff">1</span> -r
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $REPLY <span style="color:#f92672">=</span>~ ^<span style="color:#f92672">[</span>Yy<span style="color:#f92672">]</span>$ <span style="color:#f92672">]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>	rm $1
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span></span></span></code></pre></div>
+</div>
+<p>
+Save this to a file (ni-install.sh) and run <code class="verbatim">chmod +x ni-install.sh</code></p>
+<p>
+Run this like : <code class="verbatim">./ni-install.sh ~/Downloads/&lt;NotInstalledVST&gt;.iso</code></p>
+<p>
+This will:</p>
+<ol>
+<li>Mount the file with the correct options</li>
+<li>Open the directory for you and wait for you to finish installing</li>
+<li>Unmount everything</li>
+<li>Prompt to delete the iso</li>
+</ol>
+<p>✌</p>
+
+      </div></div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h"></span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      <span class="button previous">
+        <a href="https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/">
+          <span class="button__icon">←</span>
+          <span class="button__text">I Respect Our Shared Humanity</span>
+        </a>
+      </span>
+      
+      
+      <span class="button next">
+        <a href="https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/">
+          <span class="button__text">Pipewire and Jack on Fedora 39</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2024 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://noonker.github.io/assets/main.js"></script>
+<script src="https://noonker.github.io/assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

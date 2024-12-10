@@ -1,215 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  
-    <title>Pipewire and Jack on Fedora 39 :: Noonker — thoughts, guides, etc</title>
-  
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content="I recently switched from a MacBook Pro to an AMD Framework 13 Laptop. That means that I need to actually figure out how to make Linux audio work.
+<!doctype html><html lang=en><head><title>Pipewire and Jack on Fedora 39 :: Noonker</title>
+<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=description content=" I recently switched from a MacBook Pro to an AMD Framework 13 Laptop. That means that I need to actually figure out how to make Linux audio work.
 There were no issues using Pipewire for ALSA sound but I was unable to get Jack clients connected with errors like:
-Cannot connect to server socket err = No such file or directory Cannot connect to server request channel jack server is not running or cannot be started JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock" />
-<meta name="keywords" content="" />
-<meta name="robots" content="noodp" />
-<link rel="canonical" href="https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/" />
-
-
-  
-
-
-
-
-<link rel="stylesheet" href="https://noonker.github.io/assets/style.css">
-
-  <link rel="stylesheet" href="https://noonker.github.io/assets/blue.css">
-
-
-
-
-
-
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://noonker.github.io/img/apple-touch-icon-144-precomposed.png">
-
-  <link rel="shortcut icon" href="https://noonker.github.io/img/favicon/blue.png">
-
-
-
-<meta name="twitter:card" content="summary" />
-
-  <meta name="twitter:site" content="https://twitter.com" />
-
-<meta name="twitter:creator" content="" />
-
-
-<meta property="og:locale" content="en" />
-<meta property="og:type" content="article" />
-<meta property="og:title" content="Pipewire and Jack on Fedora 39 :: Noonker">
-<meta property="og:description" content="I recently switched from a MacBook Pro to an AMD Framework 13 Laptop. That means that I need to actually figure out how to make Linux audio work.
+Cannot connect to server socket err = No such file or directory Cannot connect to server request channel jack server is not running or cannot be started JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+"><meta name=keywords content><meta name=robots content="noodp"><link rel=canonical href=https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/><link rel=stylesheet href=https://noonker.github.io/assets/style.css><link rel=stylesheet href=https://noonker.github.io/assets/blue.css><link rel=apple-touch-icon-precomposed sizes=144x144 href=https://noonker.github.io/img/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=https://noonker.github.io/img/favicon/blue.png><meta name=twitter:card content="summary"><meta name=twitter:site content="https://twitter.com"><meta name=twitter:creator content><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="og:title" content="Pipewire and Jack on Fedora 39 :: Noonker"><meta property="og:description" content=" I recently switched from a MacBook Pro to an AMD Framework 13 Laptop. That means that I need to actually figure out how to make Linux audio work.
 There were no issues using Pipewire for ALSA sound but I was unable to get Jack clients connected with errors like:
-Cannot connect to server socket err = No such file or directory Cannot connect to server request channel jack server is not running or cannot be started JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock" />
-<meta property="og:url" content="https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/" />
-<meta property="og:site_name" content="Pipewire and Jack on Fedora 39" />
-
-  
-    <meta property="og:image" content="https://noonker.github.io/img/favicon/blue.png">
-  
-
-<meta property="og:image:width" content="2048">
-<meta property="og:image:height" content="1024">
-
-
-  <meta property="article:published_time" content="2023-12-05 00:00:00 &#43;0000 UTC" />
-
-
-
-
-
-
-
-
-
-
-
-
-</head>
-<body class="">
-
-
-<div class="container center headings--one-size">
-
-  <header class="header">
-  <div class="header__inner">
-    <div class="header__logo">
-      <a href="/">
-  <div class="logo">
-    Terminal
-  </div>
-</a>
-
-    </div>
-    <div class="menu-trigger">menu</div>
-  </div>
-  
-</header>
-
-
-  <div class="content">
-    
-<div class="post">
-  <h1 class="post-title">
-    <a href="https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/">Pipewire and Jack on Fedora 39</a></h1>
-  <div class="post-meta">
-      
-    <span class="post-date">
-      2023-12-05
-    </span>
-    
-    
-  </div>
-
-  
-  <span class="post-tags">
-    
-    #<a href="https://noonker.github.io/tags/tech/">tech</a>&nbsp;
-    
-  </span>
-  
-
-  
-
-  <div class="post-content"><div>
-        <p>
-I recently switched from a MacBook Pro to an AMD Framework 13 Laptop. That means that I need to actually figure out how to make Linux audio work.</p>
-<p>
-There were no issues using Pipewire for ALSA sound but I was unable to get Jack clients connected with errors like:</p>
-<blockquote>
-<p>Cannot connect to server socket err = No such file or directory
+Cannot connect to server socket err = No such file or directory Cannot connect to server request channel jack server is not running or cannot be started JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+"><meta property="og:url" content="https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/"><meta property="og:site_name" content="Pipewire and Jack on Fedora 39"><meta property="og:image" content="https://noonker.github.io/img/favicon/blue.png"><meta property="og:image:width" content="2048"><meta property="og:image:height" content="1024"><meta property="article:published_time" content="2023-12-05 00:00:00 +0000 UTC"></head><body><div class="container center headings--one-size"><header class=header><div class=header__inner><div class=header__logo><a href=/><div class=logo>Terminal</div></a></div><div class=menu-trigger>menu</div></div></header><div class=content><div class=post><h1 class=post-title><a href=https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/>Pipewire and Jack on Fedora 39</a></h1><div class=post-meta><span class=post-date>2023-12-05</span></div><span class=post-tags>#<a href=https://noonker.github.io/tags/tech/>tech</a>&nbsp;</span><div class=post-content><div><p>I recently switched from a MacBook Pro to an AMD Framework 13 Laptop. That means that I need to actually figure out how to make Linux audio work.</p><p>There were no issues using Pipewire for ALSA sound but I was unable to get Jack clients connected with errors like:</p><blockquote><p>Cannot connect to server socket err = No such file or directory
 Cannot connect to server request channel jack server is not running or cannot be started
 JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
-JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock</p>
-</blockquote>
-<p>
-Which lead me to <a href="https://www.reddit.com/r/debian/comments/15a184k/if_you_want_to_use_pipewire_jack_you_need_this/">https://www.reddit.com/r/debian/comments/15a184k/if_you_want_to_use_pipewire_jack_you_need_this/</a></p>
-<p>
-Because there were no specific pipewire configs in my <code class="verbatim">/etc/ld.so.conf.d/</code> folder I assumed this was probably my issue as well since this had previously fixed  a similar issue on my previous debian install.</p>
-<p>
-But the other bummer is that this file was nowhere to be found in Fedora 39- it DID appear it was in another version of <code class="verbatim">pipewire-jack-audio-connection-kit</code> but I was not interested in overwriting the system installed version of that package</p>
-<p>
-So the solution for me was to go grab the RPM and copy the file from there:</p>
-<div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Download the package that provides pipewire-jack-x86_64.conf</span>
-</span></span><span style="display:flex;"><span>dnf download pipewire-jack-audio-connection-kit-1.0.0-1.fc39
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Extract it</span>
-</span></span><span style="display:flex;"><span>rpm2cpio pipewire-jack-audio-connection-kit-1.0.0-1.fc39.x86_64.rpm | cpio -idmv
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Move it</span>
-</span></span><span style="display:flex;"><span>sudo mv pipewire-jack-x86_64.conf /etc/ld.so.conf.d/
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load it</span>
-</span></span><span style="display:flex;"><span>sudo ldconfig</span></span></code></pre></div>
-</div>
-<p>
-And that was it, the jack server started and clients could connect.</p>
-<p>
-Deep diving into Linux audio systems avoided for another year</p>
-
-      </div></div>
-  
-  <div class="pagination">
-    <div class="pagination__title">
-      <span
-        class="pagination__title-h">Read other posts</span>
-      <hr />
-    </div>
-    <div class="pagination__buttons">
-      
-      <span class="button previous">
-        <a href="https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/">
-          <span class="button__icon">←</span>
-          <span class="button__text">Installing Native Instruments Komplete in Wine</span>
-        </a>
-      </span>
-      
-      
-      <span class="button next">
-        <a href="https://noonker.github.io/posts/2023-10-29-roland-fr-4x-usb-drives/">
-          <span class="button__text">Roland FR-4X USB Drives</span>
-          <span class="button__icon">→</span>
-        </a>
-      </span>
-      
-    </div>
-  </div>
-  
-
-  
-
-</div>
-
-  </div>
-
-  
-    <footer class="footer">
-  <div class="footer__inner">
-    
-      <div class="copyright">
-        <span>© 2024 Powered by <a href="http://gohugo.io">Hugo</a></span>
-    
-        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
-      </div>
-  </div>
-</footer>
-
-<script src="https://noonker.github.io/assets/main.js"></script>
-<script src="https://noonker.github.io/assets/prism.js"></script>
-
-
-
-
-
-  
-</div>
-
-</body>
-</html>
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock</p></blockquote><p>Which lead me to <a href=https://www.reddit.com/r/debian/comments/15a184k/if_you_want_to_use_pipewire_jack_you_need_this/>https://www.reddit.com/r/debian/comments/15a184k/if_you_want_to_use_pipewire_jack_you_need_this/</a></p><p>Because there were no specific pipewire configs in my <code class=verbatim>/etc/ld.so.conf.d/</code> folder I assumed this was probably my issue as well since this had previously fixed a similar issue on my previous debian install.</p><p>But the other bummer is that this file was nowhere to be found in Fedora 39- it DID appear it was in another version of <code class=verbatim>pipewire-jack-audio-connection-kit</code> but I was not interested in overwriting the system installed version of that package</p><p>So the solution for me was to go grab the RPM and copy the file from there:</p><div class="src src-bash"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Download the package that provides pipewire-jack-x86_64.conf</span>
+</span></span><span style=display:flex><span>dnf download pipewire-jack-audio-connection-kit-1.0.0-1.fc39
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Extract it</span>
+</span></span><span style=display:flex><span>rpm2cpio pipewire-jack-audio-connection-kit-1.0.0-1.fc39.x86_64.rpm | cpio -idmv
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Move it</span>
+</span></span><span style=display:flex><span>sudo mv pipewire-jack-x86_64.conf /etc/ld.so.conf.d/
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Load it</span>
+</span></span><span style=display:flex><span>sudo ldconfig</span></span></code></pre></div></div><p>And that was it, the jack server started and clients could connect.</p><p>Deep diving into Linux audio systems avoided for another year</p></div></div><div class=pagination><div class=pagination__title><span class=pagination__title-h></span><hr></div><div class=pagination__buttons><span class="button previous"><a href=https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/><span class=button__icon>←</span>
+<span class=button__text>Installing Native Instruments Komplete in Wine</span>
+</a></span><span class="button next"><a href=https://noonker.github.io/posts/2023-10-29-roland-fr-4x-usb-drives/><span class=button__text>Roland FR-4X USB Drives</span>
+<span class=button__icon>→</span></a></span></div></div></div></div><footer class=footer><div class=footer__inner><div class=copyright><span>© 2024 Powered by <a href=http://gohugo.io>Hugo</a></span>
+<span>:: Theme made by <a href=https://twitter.com/panr>panr</a></span></div></div></footer><script src=https://noonker.github.io/assets/main.js></script><script src=https://noonker.github.io/assets/prism.js></script></div></body></html>

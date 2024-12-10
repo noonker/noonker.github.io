@@ -1,288 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  
-    <title>No More Lock-in :: Noonker — thoughts, guides, etc</title>
-  
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content="decoupling the address from the service I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.
-I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address." />
-<meta name="keywords" content="" />
-<meta name="robots" content="noodp" />
-<link rel="canonical" href="https://noonker.github.io/posts/2019-12-28-nomorelockin/" />
-
-
-  
-
-
-
-
-<link rel="stylesheet" href="https://noonker.github.io/assets/style.css">
-
-  <link rel="stylesheet" href="https://noonker.github.io/assets/blue.css">
-
-
-
-
-
-
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://noonker.github.io/img/apple-touch-icon-144-precomposed.png">
-
-  <link rel="shortcut icon" href="https://noonker.github.io/img/favicon/blue.png">
-
-
-
-<meta name="twitter:card" content="summary" />
-
-  <meta name="twitter:site" content="https://twitter.com" />
-
-<meta name="twitter:creator" content="" />
-
-
-<meta property="og:locale" content="en" />
-<meta property="og:type" content="article" />
-<meta property="og:title" content="No More Lock-in :: Noonker">
-<meta property="og:description" content="decoupling the address from the service I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.
-I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address." />
-<meta property="og:url" content="https://noonker.github.io/posts/2019-12-28-nomorelockin/" />
-<meta property="og:site_name" content="No More Lock-in" />
-
-  
-    <meta property="og:image" content="https://noonker.github.io/img/favicon/blue.png">
-  
-
-<meta property="og:image:width" content="2048">
-<meta property="og:image:height" content="1024">
-
-
-  <meta property="article:published_time" content="2019-12-28 00:00:00 &#43;0000 UTC" />
-
-
-
-
-
-
-
-
-
-
-
-
-</head>
-<body class="">
-
-
-<div class="container center headings--one-size">
-
-  <header class="header">
-  <div class="header__inner">
-    <div class="header__logo">
-      <a href="/">
-  <div class="logo">
-    Terminal
-  </div>
-</a>
-
-    </div>
-    <div class="menu-trigger">menu</div>
-  </div>
-  
-</header>
-
-
-  <div class="content">
-    
-<div class="post">
-  <h1 class="post-title">
-    <a href="https://noonker.github.io/posts/2019-12-28-nomorelockin/">No More Lock-in</a></h1>
-  <div class="post-meta">
-      
-    <span class="post-date">
-      2019-12-28
-    </span>
-    
-    
-  </div>
-
-  
-  <span class="post-tags">
-    
-    #<a href="https://noonker.github.io/tags/email/">email,</a>&nbsp;
-    
-    #<a href="https://noonker.github.io/tags/tech/">tech,</a>&nbsp;
-    
-    #<a href="https://noonker.github.io/tags/privacy/">privacy</a>&nbsp;
-    
-  </span>
-  
-
-  
-
-  <div class="post-content"><div>
-        
-<div id="outline-container-headline-1" class="outline-3">
-<h3 id="headline-1">
-decoupling the address from the service
-</h3>
-<div id="outline-text-headline-1" class="outline-text-3">
-<p>
-I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.</p>
-<p>
-I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address. This just made things worse. I also didn’t want to rely on another company- because like all things in technology there are’s no way to know how long before I need to switch to another service.</p>
-<p>
-So what I’ve done is attempt to decouple my email address from a specific service. I bought a custom domain and will be forwarding mail from that to whatever email service I am using. Here’s the steps I took:</p>
-<ul>
-<li>Enumerate all the accounts I’ve used my (several) gmail accounts with</li>
-<li>Buy a custom domain and set up email forwarding records to my Protonmail account.</li>
-<li>
-<p>Create a tier system for emails</p>
-<ul>
-<li>Tier 1: An email address I give to people- These are the emails I want to see.</li>
-<li>Tier 2: An email address I use for services I care about- newsletters, github, bank accounts, etc.</li>
-<li>Tier 3: An email address I give to services I don’t care about and that are likely going to spam me.</li>
-</ul>
-</li>
-<li>Log in / Recover any accounts tied to this email and either delete them or move them to a new email address.</li>
-<li>Create forwarding rules for things that still come through old emails.</li>
-</ul>
-<p>I’m also considering paying for a higher tier of Protonmail to I can use catch all email addresses to attempt to catch and shame the services that sell / “lose” my email address. This might be overkill.</p>
-<p>
-The first thing I need to do is figure out WHICH services I’ve signed up for. To do that I’m going to request my emails in MBOX format from Google’s Takeout service.</p>
-<ul>
-<li>Enumerating Websites For this I’m using python.</li>
-</ul>
-<div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> mailbox
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> re
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> dateutil.parser
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>domain_re <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">&#34;@([A-Za-z\.]*)&gt;&#34;</span>)
-</span></span><span style="display:flex;"><span>mailboxes <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span>mailboxes<span style="color:#f92672">.</span>append(mailbox<span style="color:#f92672">.</span>mbox(<span style="color:#e6db74">&#34;All mail Including Spam and Trash-001.mbox&#34;</span>))
-</span></span><span style="display:flex;"><span>mailboxes<span style="color:#f92672">.</span>append(mailbox<span style="color:#f92672">.</span>mbox(<span style="color:#e6db74">&#34;All mail Including Spam and Trash-001-2.mbox&#34;</span>))
-</span></span><span style="display:flex;"><span>results <span style="color:#f92672">=</span> {}
-</span></span><span style="display:flex;"><span>failures <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> mailb <span style="color:#f92672">in</span> mailboxes:
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> message <span style="color:#f92672">in</span> mailb:
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>	    domain <span style="color:#f92672">=</span> domain_re<span style="color:#f92672">.</span>findall(message[<span style="color:#e6db74">&#39;from&#39;</span>])[<span style="color:#ae81ff">0</span>]
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">except</span>:
-</span></span><span style="display:flex;"><span>	    failures<span style="color:#f92672">.</span>append(message)
-</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">continue</span>
-</span></span><span style="display:flex;"><span>	to <span style="color:#f92672">=</span> message[<span style="color:#e6db74">&#39;To&#39;</span>]
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>	    date <span style="color:#f92672">=</span> dateutil<span style="color:#f92672">.</span>parser<span style="color:#f92672">.</span>parse(message[<span style="color:#e6db74">&#39;date&#39;</span>])<span style="color:#f92672">.</span>replace(tzinfo<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>)
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">except</span>:
-</span></span><span style="display:flex;"><span>	    print(message[<span style="color:#e6db74">&#39;date&#39;</span>])
-</span></span><span style="display:flex;"><span>	    date <span style="color:#f92672">=</span> datetime(<span style="color:#ae81ff">2000</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">29</span>, <span style="color:#ae81ff">43</span>, <span style="color:#ae81ff">0000</span>)<span style="color:#f92672">.</span>replace(tzinfo<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>)
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> domain <span style="color:#f92672">in</span> results<span style="color:#f92672">.</span>keys():
-</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">if</span> date <span style="color:#f92672">&gt;</span> results[domain][<span style="color:#e6db74">&#39;date&#39;</span>]:
-</span></span><span style="display:flex;"><span>		results[domain][<span style="color:#e6db74">&#39;date&#39;</span>] <span style="color:#f92672">=</span> date
-</span></span><span style="display:flex;"><span>	    results[domain][<span style="color:#e6db74">&#39;count&#39;</span>] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">if</span> to <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> results[domain][<span style="color:#e6db74">&#39;to&#39;</span>]:
-</span></span><span style="display:flex;"><span>		results[domain][<span style="color:#e6db74">&#39;to&#39;</span>]<span style="color:#f92672">.</span>append(to)
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>	    results[domain] <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;date&#34;</span>: date, <span style="color:#e6db74">&#34;count&#34;</span>: <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;to&#34;</span>: [to]}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cs</span>(string):
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Replaces any string org mode wouldn&#39;t like&#34;&#34;&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># string = string.strip(&#34;\&#39;&#34;)</span>
-</span></span><span style="display:flex;"><span>    string <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;&#34;</span>)
-</span></span><span style="display:flex;"><span>    string <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;&#34;</span>)
-</span></span><span style="display:flex;"><span>    string <span style="color:#f92672">=</span> string<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;|&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> string
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;domains.org&#34;</span>, <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#66d9ef">as</span> f:
-</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#34;#+STARTUP: align</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#34;|Domain|To|Date|Count|Unsubscribed|Deleted|Ignored|Other|</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#34;||&lt;15&gt;|||||||</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#34;|-</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> key <span style="color:#f92672">in</span> results<span style="color:#f92672">.</span>keys():
-</span></span><span style="display:flex;"><span>        f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#34;|</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">|</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">|</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">|</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">|||||</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(key, cs(str(results[key][<span style="color:#e6db74">&#39;to&#39;</span>])), results[key][<span style="color:#e6db74">&#39;date&#39;</span>], results[key][<span style="color:#e6db74">&#39;count&#39;</span>]))</span></span></code></pre></div>
-</div>
-<p>
-This script will iterate through every email in the mbox format, pull out the domain it came from, the number of emails I’ve recieved from it, and the last time I got an email. It will put this into an org-mode table to I can keep track of which services I need to contact.</p>
-<p>
-The output of this shows that I’m dealing with 1.4k domains. Big oof.</p>
-<p>
-It took me roughly ~15 hours to go through this giant list of emails.</p>
-<p>
-I have couple of key takeaways from this:</p>
-<ul>
-<li>Most websited have a “delete account” button.</li>
-<li>Most support agents are actually really quick to delete your account for you. There are two notable exceptions to this. EA has ~20 questions they have to ask you before they will close your account. Hotels.com support staff are useless and instead of closing your account may sign you up for their rewards program.</li>
-<li>This sucks</li>
-<li>Use burner emails and fake accounts unless you <em>need</em> to be on a mailing list. Some services will never let your remove your account</li>
-<li>Unsubscribe as soon as your register</li>
-<li>Never need to change your email</li>
-<li>The TLD .company is not accepted eveywhere as a valid email address. I really should have considered this before buying a domain.</li>
-<li>I’ve given google so much ML data</li>
-</ul>
-<p>It’s still a little eerie I can log into a decade+ year old account and have it work. We should really have expiration dates on these.</p>
-</div>
-</div>
-
-      </div></div>
-  
-  <div class="pagination">
-    <div class="pagination__title">
-      <span
-        class="pagination__title-h">Read other posts</span>
-      <hr />
-    </div>
-    <div class="pagination__buttons">
-      
-      <span class="button previous">
-        <a href="https://noonker.github.io/posts/2020-04-22-elfeed/">
-          <span class="button__icon">←</span>
-          <span class="button__text">Elfeed Rules!</span>
-        </a>
-      </span>
-      
-      
-      <span class="button next">
-        <a href="https://noonker.github.io/posts/2018-10-15-duo-twofactor/">
-          <span class="button__text">A Less Than Ideal Way To Do 2-factor</span>
-          <span class="button__icon">→</span>
-        </a>
-      </span>
-      
-    </div>
-  </div>
-  
-
-  
-
-</div>
-
-  </div>
-
-  
-    <footer class="footer">
-  <div class="footer__inner">
-    
-      <div class="copyright">
-        <span>© 2024 Powered by <a href="http://gohugo.io">Hugo</a></span>
-    
-        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
-      </div>
-  </div>
-</footer>
-
-<script src="https://noonker.github.io/assets/main.js"></script>
-<script src="https://noonker.github.io/assets/prism.js"></script>
-
-
-
-
-
-  
-</div>
-
-</body>
-</html>
+<!doctype html><html lang=en><head><title>No More Lock-in :: Noonker</title>
+<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta name=description content=" decoupling the address from the service I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.
+I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address. This just made things worse. I also didn’t want to rely on another company- because like all things in technology there are’s no way to know how long before I need to switch to another service.
+"><meta name=keywords content><meta name=robots content="noodp"><link rel=canonical href=https://noonker.github.io/posts/2019-12-28-nomorelockin/><link rel=stylesheet href=https://noonker.github.io/assets/style.css><link rel=stylesheet href=https://noonker.github.io/assets/blue.css><link rel=apple-touch-icon-precomposed sizes=144x144 href=https://noonker.github.io/img/apple-touch-icon-144-precomposed.png><link rel="shortcut icon" href=https://noonker.github.io/img/favicon/blue.png><meta name=twitter:card content="summary"><meta name=twitter:site content="https://twitter.com"><meta name=twitter:creator content><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="og:title" content="No More Lock-in :: Noonker"><meta property="og:description" content=" decoupling the address from the service I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.
+I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address. This just made things worse. I also didn’t want to rely on another company- because like all things in technology there are’s no way to know how long before I need to switch to another service.
+"><meta property="og:url" content="https://noonker.github.io/posts/2019-12-28-nomorelockin/"><meta property="og:site_name" content="No More Lock-in"><meta property="og:image" content="https://noonker.github.io/img/favicon/blue.png"><meta property="og:image:width" content="2048"><meta property="og:image:height" content="1024"><meta property="article:published_time" content="2019-12-28 00:00:00 +0000 UTC"></head><body><div class="container center headings--one-size"><header class=header><div class=header__inner><div class=header__logo><a href=/><div class=logo>Terminal</div></a></div><div class=menu-trigger>menu</div></div></header><div class=content><div class=post><h1 class=post-title><a href=https://noonker.github.io/posts/2019-12-28-nomorelockin/>No More Lock-in</a></h1><div class=post-meta><span class=post-date>2019-12-28</span></div><span class=post-tags>#<a href=https://noonker.github.io/tags/email/>email,</a>&nbsp;
+#<a href=https://noonker.github.io/tags/tech/>tech,</a>&nbsp;
+#<a href=https://noonker.github.io/tags/privacy/>privacy</a>&nbsp;</span><div class=post-content><div><div id=outline-container-headline-1 class=outline-3><h3 id=headline-1>decoupling the address from the service</h3><div id=outline-text-headline-1 class=outline-text-3><p>I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.</p><p>I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address. This just made things worse. I also didn’t want to rely on another company- because like all things in technology there are’s no way to know how long before I need to switch to another service.</p><p>So what I’ve done is attempt to decouple my email address from a specific service. I bought a custom domain and will be forwarding mail from that to whatever email service I am using. Here’s the steps I took:</p><ul><li>Enumerate all the accounts I’ve used my (several) gmail accounts with</li><li>Buy a custom domain and set up email forwarding records to my Protonmail account.</li><li><p>Create a tier system for emails</p><ul><li>Tier 1: An email address I give to people- These are the emails I want to see.</li><li>Tier 2: An email address I use for services I care about- newsletters, github, bank accounts, etc.</li><li>Tier 3: An email address I give to services I don’t care about and that are likely going to spam me.</li></ul></li><li>Log in / Recover any accounts tied to this email and either delete them or move them to a new email address.</li><li>Create forwarding rules for things that still come through old emails.</li></ul><p>I’m also considering paying for a higher tier of Protonmail to I can use catch all email addresses to attempt to catch and shame the services that sell / “lose” my email address. This might be overkill.</p><p>The first thing I need to do is figure out WHICH services I’ve signed up for. To do that I’m going to request my emails in MBOX format from Google’s Takeout service.</p><ul><li>Enumerating Websites For this I’m using python.</li></ul><div class="src src-python"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> mailbox
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> re
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> dateutil.parser
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>domain_re <span style=color:#f92672>=</span> re<span style=color:#f92672>.</span>compile(<span style=color:#e6db74>&#34;@([A-Za-z\.]*)&gt;&#34;</span>)
+</span></span><span style=display:flex><span>mailboxes <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>mailboxes<span style=color:#f92672>.</span>append(mailbox<span style=color:#f92672>.</span>mbox(<span style=color:#e6db74>&#34;All mail Including Spam and Trash-001.mbox&#34;</span>))
+</span></span><span style=display:flex><span>mailboxes<span style=color:#f92672>.</span>append(mailbox<span style=color:#f92672>.</span>mbox(<span style=color:#e6db74>&#34;All mail Including Spam and Trash-001-2.mbox&#34;</span>))
+</span></span><span style=display:flex><span>results <span style=color:#f92672>=</span> {}
+</span></span><span style=display:flex><span>failures <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> mailb <span style=color:#f92672>in</span> mailboxes:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> message <span style=color:#f92672>in</span> mailb:
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>	    domain <span style=color:#f92672>=</span> domain_re<span style=color:#f92672>.</span>findall(message[<span style=color:#e6db74>&#39;from&#39;</span>])[<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>except</span>:
+</span></span><span style=display:flex><span>	    failures<span style=color:#f92672>.</span>append(message)
+</span></span><span style=display:flex><span>	    <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>	to <span style=color:#f92672>=</span> message[<span style=color:#e6db74>&#39;To&#39;</span>]
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>try</span>:
+</span></span><span style=display:flex><span>	    date <span style=color:#f92672>=</span> dateutil<span style=color:#f92672>.</span>parser<span style=color:#f92672>.</span>parse(message[<span style=color:#e6db74>&#39;date&#39;</span>])<span style=color:#f92672>.</span>replace(tzinfo<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>)
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>except</span>:
+</span></span><span style=display:flex><span>	    print(message[<span style=color:#e6db74>&#39;date&#39;</span>])
+</span></span><span style=display:flex><span>	    date <span style=color:#f92672>=</span> datetime(<span style=color:#ae81ff>2000</span>, <span style=color:#ae81ff>12</span>, <span style=color:#ae81ff>6</span>, <span style=color:#ae81ff>15</span>, <span style=color:#ae81ff>29</span>, <span style=color:#ae81ff>43</span>, <span style=color:#ae81ff>0000</span>)<span style=color:#f92672>.</span>replace(tzinfo<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>)
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>if</span> domain <span style=color:#f92672>in</span> results<span style=color:#f92672>.</span>keys():
+</span></span><span style=display:flex><span>	    <span style=color:#66d9ef>if</span> date <span style=color:#f92672>&gt;</span> results[domain][<span style=color:#e6db74>&#39;date&#39;</span>]:
+</span></span><span style=display:flex><span>		results[domain][<span style=color:#e6db74>&#39;date&#39;</span>] <span style=color:#f92672>=</span> date
+</span></span><span style=display:flex><span>	    results[domain][<span style=color:#e6db74>&#39;count&#39;</span>] <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>	    <span style=color:#66d9ef>if</span> to <span style=color:#f92672>not</span> <span style=color:#f92672>in</span> results[domain][<span style=color:#e6db74>&#39;to&#39;</span>]:
+</span></span><span style=display:flex><span>		results[domain][<span style=color:#e6db74>&#39;to&#39;</span>]<span style=color:#f92672>.</span>append(to)
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>	    results[domain] <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;date&#34;</span>: date, <span style=color:#e6db74>&#34;count&#34;</span>: <span style=color:#ae81ff>1</span>, <span style=color:#e6db74>&#34;to&#34;</span>: [to]}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>cs</span>(string):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;Replaces any string org mode wouldn&#39;t like&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># string = string.strip(&#34;\&#39;&#34;)</span>
+</span></span><span style=display:flex><span>    string <span style=color:#f92672>=</span> string<span style=color:#f92672>.</span>replace(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\r</span><span style=color:#e6db74>&#34;</span>,<span style=color:#e6db74>&#34;&#34;</span>)
+</span></span><span style=display:flex><span>    string <span style=color:#f92672>=</span> string<span style=color:#f92672>.</span>replace(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>,<span style=color:#e6db74>&#34;&#34;</span>)
+</span></span><span style=display:flex><span>    string <span style=color:#f92672>=</span> string<span style=color:#f92672>.</span>replace(<span style=color:#e6db74>&#34;|&#34;</span>, <span style=color:#e6db74>&#34;&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> string
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>with</span> open(<span style=color:#e6db74>&#34;domains.org&#34;</span>, <span style=color:#e6db74>&#34;w&#34;</span>) <span style=color:#66d9ef>as</span> f:
+</span></span><span style=display:flex><span>    f<span style=color:#f92672>.</span>write(<span style=color:#e6db74>&#34;#+STARTUP: align</span><span style=color:#ae81ff>\n\n</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    f<span style=color:#f92672>.</span>write(<span style=color:#e6db74>&#34;|Domain|To|Date|Count|Unsubscribed|Deleted|Ignored|Other|</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    f<span style=color:#f92672>.</span>write(<span style=color:#e6db74>&#34;||&lt;15&gt;|||||||</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    f<span style=color:#f92672>.</span>write(<span style=color:#e6db74>&#34;|-</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> key <span style=color:#f92672>in</span> results<span style=color:#f92672>.</span>keys():
+</span></span><span style=display:flex><span>        f<span style=color:#f92672>.</span>write(<span style=color:#e6db74>&#34;|</span><span style=color:#e6db74>{}</span><span style=color:#e6db74>|</span><span style=color:#e6db74>{}</span><span style=color:#e6db74>|</span><span style=color:#e6db74>{}</span><span style=color:#e6db74>|</span><span style=color:#e6db74>{}</span><span style=color:#e6db74>|||||</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span><span style=color:#f92672>.</span>format(key, cs(str(results[key][<span style=color:#e6db74>&#39;to&#39;</span>])), results[key][<span style=color:#e6db74>&#39;date&#39;</span>], results[key][<span style=color:#e6db74>&#39;count&#39;</span>]))</span></span></code></pre></div></div><p>This script will iterate through every email in the mbox format, pull out the domain it came from, the number of emails I’ve recieved from it, and the last time I got an email. It will put this into an org-mode table to I can keep track of which services I need to contact.</p><p>The output of this shows that I’m dealing with 1.4k domains. Big oof.</p><p>It took me roughly ~15 hours to go through this giant list of emails.</p><p>I have couple of key takeaways from this:</p><ul><li>Most websited have a “delete account” button.</li><li>Most support agents are actually really quick to delete your account for you. There are two notable exceptions to this. EA has ~20 questions they have to ask you before they will close your account. Hotels.com support staff are useless and instead of closing your account may sign you up for their rewards program.</li><li>This sucks</li><li>Use burner emails and fake accounts unless you <em>need</em> to be on a mailing list. Some services will never let your remove your account</li><li>Unsubscribe as soon as your register</li><li>Never need to change your email</li><li>The TLD .company is not accepted eveywhere as a valid email address. I really should have considered this before buying a domain.</li><li>I’ve given google so much ML data</li></ul><p>It’s still a little eerie I can log into a decade+ year old account and have it work. We should really have expiration dates on these.</p></div></div></div></div><div class=pagination><div class=pagination__title><span class=pagination__title-h></span><hr></div><div class=pagination__buttons><span class="button previous"><a href=https://noonker.github.io/posts/2020-04-22-elfeed/><span class=button__icon>←</span>
+<span class=button__text>Elfeed Rules!</span>
+</a></span><span class="button next"><a href=https://noonker.github.io/posts/2018-10-15-duo-twofactor/><span class=button__text>A Less Than Ideal Way To Do 2-factor</span>
+<span class=button__icon>→</span></a></span></div></div></div></div><footer class=footer><div class=footer__inner><div class=copyright><span>© 2024 Powered by <a href=http://gohugo.io>Hugo</a></span>
+<span>:: Theme made by <a href=https://twitter.com/panr>panr</a></span></div></div></footer><script src=https://noonker.github.io/assets/main.js></script><script src=https://noonker.github.io/assets/prism.js></script></div></body></html>

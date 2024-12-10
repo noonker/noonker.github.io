@@ -1,26 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Ai on Noonker</title>
-    <link>https://noonker.github.io/tags/ai/</link>
-    <description>Recent content in Ai on Noonker</description>
-    <generator>Hugo</generator>
-    <language>en</language>
-    <lastBuildDate>Fri, 26 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://noonker.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Summarized: I Respect Our Shared Humanity</title>
-      <link>https://noonker.github.io/posts/2024-07-26-fixed-by-chat-gpt/</link>
-      <pubDate>Fri, 26 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2024-07-26-fixed-by-chat-gpt/</guid>
-      <description>ChatGPT. Was that coherent?&#xA;You are a scholar of technical writing and the english language. Please give me a summary of what the writer was trying to say:&#xA;Summary The writer discusses the evolution of their communication style, initially emphasizing correctness and spelling but now prioritizing speed and humor, even at the expense of errors. They reflect on how technology, specifically AI, has changed communication. While AI can handle some interactions, the writer stresses the importance of human-to-human communication, particularly in situations where nuance and personality are crucial.</description>
-    </item>
-    <item>
-      <title>I Respect Our Shared Humanity</title>
-      <link>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</link>
-      <pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</guid>
-      <description>Intro I used to be a person who cared greatly about ensuring that my prose were correct, and that I spelled everything correctly.&#xA;I&amp;#39;m actually going to avoid that here and I&amp;#39;m not even going to bother with a spell checker. For most casual communication I now like to focus on being fast and funny at the expense of the red squiggly lines or appeasing the specter of my english teacher.</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ai on Noonker</title><link>https://noonker.github.io/tags/ai/</link><description>Recent content in Ai on Noonker</description><generator>Hugo</generator><language>en</language><lastBuildDate>Fri, 26 Jul 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://noonker.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>Summarized: I Respect Our Shared Humanity</title><link>https://noonker.github.io/posts/2024-07-26-fixed-by-chat-gpt/</link><pubDate>Fri, 26 Jul 2024 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2024-07-26-fixed-by-chat-gpt/</guid><description>&lt;p>
+ChatGPT. &lt;a href="https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/">Was that coherent&lt;/a>?&lt;/p>
+&lt;blockquote>
+&lt;p>You are a scholar of technical writing and the english language. Please give me a summary of what the writer was trying to say:&lt;/p>
+&lt;/blockquote>
+&lt;div id="outline-container-headline-1" class="outline-2">
+&lt;h2 id="headline-1">
+Summary
+&lt;/h2>
+&lt;div id="outline-text-headline-1" class="outline-text-2">
+&lt;p>
+The writer discusses the evolution of their communication style, initially emphasizing correctness and spelling but now prioritizing speed and humor, even at the expense of errors. They reflect on how technology, specifically AI, has changed communication. While AI can handle some interactions, the writer stresses the importance of human-to-human communication, particularly in situations where nuance and personality are crucial. They highlight the potential loss of human voice when AI mediates conversations and argue for using AI selectively, suggesting that only the receiver might benefit from AI assistance. The essay concludes with a plea to maintain humanity in communication, emphasizing that AI should not replace the human touch in meaningful interactions.&lt;/p></description></item><item><title>I Respect Our Shared Humanity</title><link>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</link><pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</guid><description>&lt;div id="outline-container-headline-1" class="outline-2">
+&lt;h2 id="headline-1">
+Intro
+&lt;/h2>
+&lt;div id="outline-text-headline-1" class="outline-text-2">
+&lt;p>
+I used to be a person who cared greatly about ensuring that my prose were correct, and that I spelled everything correctly.&lt;/p>
+&lt;p>
+I&amp;#39;m actually going to avoid that here and I&amp;#39;m not even going to bother with a spell checker. For most casual communication I now like to focus on being fast and funny at the expense of the red squiggly lines or appeasing the specter of my english teacher.&lt;/p></description></item></channel></rss>

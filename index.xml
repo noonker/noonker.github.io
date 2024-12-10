@@ -1,188 +1,210 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Noonker</title>
-    <link>https://noonker.github.io/</link>
-    <description>Recent content on Noonker</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Fri, 26 Jul 2024 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://noonker.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Summarized: I Respect Our Shared Humanity</title>
-      <link>https://noonker.github.io/posts/2024-07-26-fixed-by-chat-gpt/</link>
-      <pubDate>Fri, 26 Jul 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2024-07-26-fixed-by-chat-gpt/</guid>
-      <description>ChatGPT. Was that coherent?
-You are a scholar of technical writing and the english language. Please give me a summary of what the writer was trying to say:
-Summary The writer discusses the evolution of their communication style, initially emphasizing correctness and spelling but now prioritizing speed and humor, even at the expense of errors. They reflect on how technology, specifically AI, has changed communication. While AI can handle some interactions, the writer stresses the importance of human-to-human communication, particularly in situations where nuance and personality are crucial.</description>
-    </item>
-    
-    <item>
-      <title>I Respect Our Shared Humanity</title>
-      <link>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</link>
-      <pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</guid>
-      <description>Intro I used to be a person who cared greatly about ensuring that my prose were correct, and that I spelled everything correctly.
-I&amp;#39;m actually going to avoid that here and I&amp;#39;m not even going to bother with a spell checker. For most casual communication I now like to focus on being fast and funny at the expense of the red squiggly lines or appeasing the specter of my english teacher.</description>
-    </item>
-    
-    <item>
-      <title>Installing Native Instruments Komplete in Wine</title>
-      <link>https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/</link>
-      <pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/</guid>
-      <description>Installing Komplete in Wine to use with the AWESOME tool yabridge has a big pain point
-The .iso applications will not install because they do not mount correctly
-https://github.com/robbert-vdh/yabridge#known-issues-and-fixes
-The fix here is fine but there&amp;#39;s one gotcha:
-The documentation says that you should take two steps to install the packages with wine:
-udisksctl loop-setup -f ~/Downloads/&amp;lt;filename&amp;gt;.iso # load the .iso file udisksctl mount -t udf -o unhide -b /dev/loopX # where /dev/loopX corresponds to the loop device printed by the loop-setup The problem is that in Fedora 39 once you create the loop device it will automount.</description>
-    </item>
-    
-    <item>
-      <title>Pipewire and Jack on Fedora 39</title>
-      <link>https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/</link>
-      <pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/</guid>
-      <description>I recently switched from a MacBook Pro to an AMD Framework 13 Laptop. That means that I need to actually figure out how to make Linux audio work.
-There were no issues using Pipewire for ALSA sound but I was unable to get Jack clients connected with errors like:
-Cannot connect to server socket err = No such file or directory Cannot connect to server request channel jack server is not running or cannot be started JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock</description>
-    </item>
-    
-    <item>
-      <title>Roland FR-4X USB Drives</title>
-      <link>https://noonker.github.io/posts/2023-10-29-roland-fr-4x-usb-drives/</link>
-      <pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2023-10-29-roland-fr-4x-usb-drives/</guid>
-      <description>If you&amp;#39;re a subscriber to this blog, thank you. This is almost certainly not interesting for you.
-If you&amp;#39;re the owner of a Roland FR-4x digital accordion and trying to find which USB sticks can be used with your accordion I tried out every stick in my house with no luck. I learned:
-They need to be FAT32 (not ExFat) They need to be USB2.0 16GB seems to be the ideal size?</description>
-    </item>
-    
-    <item>
-      <title>Soft Language</title>
-      <link>https://noonker.github.io/posts/2023-10-29-soft-language/</link>
-      <pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2023-10-29-soft-language/</guid>
-      <description>I came across this article on Hackernews by Richard Nordquist on Soft Language.
-This is one of those articles I read and it wasn&amp;#39;t apparent that this would resonate with me as hard as it did. I&amp;#39;ve heard of concepts like the &amp;#34;euphemism treadmill&amp;#34; before but this is the first time I&amp;#39;m thinking of language being soft.
-Is it better to use &amp;#34;hard&amp;#34; language? Is it more honest? Or do we just need to be more cognizant of not softening our language unintentionally?</description>
-    </item>
-    
-    <item>
-      <title>Car Cost Calculator</title>
-      <link>https://noonker.github.io/posts/2023-10-03-car-cost-calculator/</link>
-      <pubDate>Tue, 03 Oct 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2023-10-03-car-cost-calculator/</guid>
-      <description>Made a tool to calculate the cost-per-mile (cpm) for cars. Might be helpful to compare vehicles to purchase.</description>
-    </item>
-    
-    <item>
-      <title>We&#39;re In Hell</title>
-      <link>https://noonker.github.io/posts/2023-08-19-were-in-hell/</link>
-      <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2023-08-19-were-in-hell/</guid>
-      <description>In an attempt to blog more I am sharing my good read of of the day
-hahaha we live in hell</description>
-    </item>
-    
-    <item>
-      <title>Org Mode Insert Table Reference</title>
-      <link>https://noonker.github.io/posts/2022-11-20-org-create-reference/</link>
-      <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2022-11-20-org-create-reference/</guid>
-      <description>Emacs Org-Mode tables are very powerful. The formula editor can execute elisp commands which makes for a really powerful spreadsheet editor (especially when combined with org-sbe). One big limitation I&amp;#39;ve faced is multi-line content.
-To solve this I&amp;#39;ve created a simple function to wrap around results of some elisp block to always return the most useful data.
-(org-table-create-and-insert-reference &amp;#34;hello&amp;#34;) -&amp;gt; &amp;#34;hello&amp;#34;
-(org-table-create-and-insert-reference &amp;#34;&amp;#34;) -&amp;gt; &amp;#34;nil&amp;#34;
-(org-table-create-and-insert-reference nil) -&amp;gt; &amp;#34;nil&amp;#34;</description>
-    </item>
-    
-    <item>
-      <title>Northsec CTF</title>
-      <link>https://noonker.github.io/posts/2021-05-24-northsec-ctf/</link>
-      <pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2021-05-24-northsec-ctf/</guid>
-      <description>I was lucky enough to get to compete in the Northsec CTF this weekend with the cold_root team. We ended up placing 4th out of 88 teams. There was a ton of awesome (and maddening) challenges and plenty of Malört consumed. The challenges showed up on a fantasy themed forum:
-Scammed Again The first thing I did was go to the web page to find that it was a chat dialogue with an enchanter named….</description>
-    </item>
-    
-    <item>
-      <title>CrowdStrike Adversary Quest CTF</title>
-      <link>https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/</link>
-      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/</guid>
-      <description>Overview I recently took part in the Adversary Quest CTF. I utimately got stopped at 5/12 challenges. Thanks to CrowdStrike for an awesome CTF and I look forward to completing it next year. Below are writeups for some of the challenges I was able to complete.
-I&amp;#39;m excluding The Proclamation from a writeup as this was my solution- this was a very cool challenge so I&amp;#39;m going to refer you to @Vinopaljiri&amp;#39;s excellent writeup.</description>
-    </item>
-    
-    <item>
-      <title>Json To Org-Mode Table</title>
-      <link>https://noonker.github.io/posts/2021-01-03-json-to-org-table/</link>
-      <pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2021-01-03-json-to-org-table/</guid>
-      <description>As part of the Emacs minor mode I&amp;#39;m working on I&amp;#39;ve created a useful function to turn json into Org tables while maintaining the linkage of nested structures. The is cleverly named json-to-org-table.
-Why? Json is a great format for programming and parsing structures but a less good language for human consumption. I created this tool so I could interact with APIs and have a human readable format (and one that exports nicely too!</description>
-    </item>
-    
-    <item>
-      <title>Using Org-Mode to Manage Configs</title>
-      <link>https://noonker.github.io/posts/2020-12-31-org-config-manager/</link>
-      <pubDate>Thu, 31 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2020-12-31-org-config-manager/</guid>
-      <description>I&amp;#39;ve just started to use Org-Mode as a way to manage my configs. Previously I&amp;#39;ve kept my configs in a git repo and just had a post-install script to put all the configs in the right place.
-For now, I&amp;#39;m testing using Org-Mode for this purpose and I think I like the results.
-I have a config.org file that is arranged something like this:
-#+TITLE: Configs - Tangle a single block with =C-u C-c C-v t= - Tangle all blocks with =C-v C-c t= #+name: secret #+begin_src emacs-lisp :var name=&amp;#34;&amp;#34;, fld=&amp;#34;&amp;#34; (if (string-equal fld &amp;#34;password&amp;#34;) (password-store-get name) (password-store-get-field name fld)) #+end_src * tmux #+begin_src bash :noweb tangle :tangle ~/.</description>
-    </item>
-    
-    <item>
-      <title>Elfeed Rules!</title>
-      <link>https://noonker.github.io/posts/2020-04-22-elfeed/</link>
-      <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2020-04-22-elfeed/</guid>
-      <description>I recently got the question- &amp;#34;What is the use case for elfeed?&amp;#34;. When I get a chance to talk about my favorite software I will NEVER pass up that opportunity.
-Elfeed is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&amp;#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by (url tag1 tag2 tagN) .</description>
-    </item>
-    
-    <item>
-      <title>No More Lock-in</title>
-      <link>https://noonker.github.io/posts/2019-12-28-nomorelockin/</link>
-      <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2019-12-28-nomorelockin/</guid>
-      <description>decoupling the address from the service I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.
-I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address.</description>
-    </item>
-    
-    <item>
-      <title>A Less Than Ideal Way To Do 2-factor</title>
-      <link>https://noonker.github.io/posts/2018-10-15-duo-twofactor/</link>
-      <pubDate>Mon, 15 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://noonker.github.io/posts/2018-10-15-duo-twofactor/</guid>
-      <description>probably just shouldn&amp;#39;t use cell networks for 2-factor I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.
-The issue:
-If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication.</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Noonker</title><link>https://noonker.github.io/</link><description>Recent content on Noonker</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://noonker.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Be Yourself</title><link>https://noonker.github.io/posts/2024-12-05-be-yourself/</link><pubDate>Wed, 04 Dec 2024 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2024-12-05-be-yourself/</guid><description>&lt;p>
+People have been saying &amp;#34;Be Yourself&amp;#34; for &lt;a href="https://philosophy.stackexchange.com/questions/40686/does-the-philosophy-of-be-yourself-come-from-the-nietzsches-philosophy">hundreds of years&lt;/a>.&lt;/p>
+&lt;p>
+But on the Internet it&amp;#39;s important to remember you should only &amp;#34;Be Yourself&amp;#34; on end-to-end encrypted messengers like &lt;a href="https://signal.org/">Signal&lt;/a>, iMessage, and Telegram.&lt;/p>
+&lt;p>
+Everywhere else you&amp;#39;re a future politician.&lt;/p></description></item><item><title>Summarized: I Respect Our Shared Humanity</title><link>https://noonker.github.io/posts/2024-07-26-fixed-by-chat-gpt/</link><pubDate>Fri, 26 Jul 2024 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2024-07-26-fixed-by-chat-gpt/</guid><description>&lt;p>
+ChatGPT. &lt;a href="https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/">Was that coherent&lt;/a>?&lt;/p>
+&lt;blockquote>
+&lt;p>You are a scholar of technical writing and the english language. Please give me a summary of what the writer was trying to say:&lt;/p>
+&lt;/blockquote>
+&lt;div id="outline-container-headline-1" class="outline-2">
+&lt;h2 id="headline-1">
+Summary
+&lt;/h2>
+&lt;div id="outline-text-headline-1" class="outline-text-2">
+&lt;p>
+The writer discusses the evolution of their communication style, initially emphasizing correctness and spelling but now prioritizing speed and humor, even at the expense of errors. They reflect on how technology, specifically AI, has changed communication. While AI can handle some interactions, the writer stresses the importance of human-to-human communication, particularly in situations where nuance and personality are crucial. They highlight the potential loss of human voice when AI mediates conversations and argue for using AI selectively, suggesting that only the receiver might benefit from AI assistance. The essay concludes with a plea to maintain humanity in communication, emphasizing that AI should not replace the human touch in meaningful interactions.&lt;/p></description></item><item><title>I Respect Our Shared Humanity</title><link>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</link><pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</guid><description>&lt;div id="outline-container-headline-1" class="outline-2">
+&lt;h2 id="headline-1">
+Intro
+&lt;/h2>
+&lt;div id="outline-text-headline-1" class="outline-text-2">
+&lt;p>
+I used to be a person who cared greatly about ensuring that my prose were correct, and that I spelled everything correctly.&lt;/p>
+&lt;p>
+I&amp;#39;m actually going to avoid that here and I&amp;#39;m not even going to bother with a spell checker. For most casual communication I now like to focus on being fast and funny at the expense of the red squiggly lines or appeasing the specter of my english teacher.&lt;/p></description></item><item><title>Installing Native Instruments Komplete in Wine</title><link>https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/</link><pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2023-12-05-yabridge-and-komplete/</guid><description>&lt;p>
+Installing Komplete in Wine to use with the AWESOME tool yabridge has a big pain point&lt;/p>
+&lt;p>
+The .iso applications will not install because they do not mount correctly&lt;/p>
+&lt;p>
+https://github.com/robbert-vdh/yabridge#known-issues-and-fixes&lt;/p>
+&lt;p>
+The fix here is fine but there&amp;#39;s one gotcha:&lt;/p>
+&lt;p>
+The documentation says that you should take two steps to install the packages with wine:&lt;/p>
+&lt;div class="src src-bash">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>udisksctl loop-setup -f ~/Downloads/&amp;lt;filename&amp;gt;.iso &lt;span style="color:#75715e"># load the .iso file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>udisksctl mount -t udf -o unhide -b /dev/loopX &lt;span style="color:#75715e"># where /dev/loopX corresponds to the loop device printed by the loop-setup&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;/div>
+&lt;p>
+The problem is that in Fedora 39 once you create the loop device it will automount.&lt;/p></description></item><item><title>Pipewire and Jack on Fedora 39</title><link>https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/</link><pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2023-12-05-pipewire-and-jack-on-fedora-39/</guid><description>&lt;p>
+I recently switched from a MacBook Pro to an AMD Framework 13 Laptop. That means that I need to actually figure out how to make Linux audio work.&lt;/p>
+&lt;p>
+There were no issues using Pipewire for ALSA sound but I was unable to get Jack clients connected with errors like:&lt;/p>
+&lt;blockquote>
+&lt;p>Cannot connect to server socket err = No such file or directory
+Cannot connect to server request channel jack server is not running or cannot be started
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock
+JackShmReadWritePtr::~JackShmReadWritePtr - Init not done for -1, skipping unlock&lt;/p></description></item><item><title>Roland FR-4X USB Drives</title><link>https://noonker.github.io/posts/2023-10-29-roland-fr-4x-usb-drives/</link><pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2023-10-29-roland-fr-4x-usb-drives/</guid><description>&lt;p>
+If you&amp;#39;re a subscriber to this blog, thank you. This is almost certainly not interesting for you.&lt;/p>
+&lt;p>
+If you&amp;#39;re the owner of a Roland FR-4x digital accordion and trying to find which USB sticks can be used with your accordion I tried out every stick in my house with no luck. I learned:&lt;/p>
+&lt;ol>
+&lt;li>They need to be FAT32 (not ExFat)&lt;/li>
+&lt;li>They need to be USB2.0&lt;/li>
+&lt;li>16GB seems to be the ideal size? &lt;a href="https://www.accordionists.info/threads/usb-stick-for-roland-fr3x.3870/">there&amp;#39;s some reports&lt;/a> of other sizes working.&lt;/li>
+&lt;li>Not every usb drive that meets these criteria work 🥴&lt;/li>
+&lt;/ol>
+&lt;p>I can attest that these &lt;a href="https://www.amazon.com/dp/B01M68GUP8">PNY 16GB Attaché 3 USB 2.0 Flash Drive&lt;/a> work.&lt;/p></description></item><item><title>Soft Language</title><link>https://noonker.github.io/posts/2023-10-29-soft-language/</link><pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2023-10-29-soft-language/</guid><description>&lt;p>
+I came across &lt;a href="https://www.thoughtco.com/soft-language-euphemism-1692111">this article&lt;/a> on Hackernews by Richard Nordquist on Soft Language.&lt;/p>
+&lt;p>
+This is one of those articles I read and it wasn&amp;#39;t apparent that this would resonate with me as hard as it did. I&amp;#39;ve heard of concepts like the &amp;#34;euphemism treadmill&amp;#34; before but this is the first time I&amp;#39;m thinking of language being soft.&lt;/p>
+&lt;p>
+Is it better to use &amp;#34;hard&amp;#34; language? Is it more honest? Or do we just need to be more cognizant of not softening our language unintentionally?&lt;/p></description></item><item><title>Car Cost Calculator</title><link>https://noonker.github.io/posts/2023-10-03-car-cost-calculator/</link><pubDate>Tue, 03 Oct 2023 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2023-10-03-car-cost-calculator/</guid><description>&lt;p>
+&lt;a href="https://noonker.github.io/html/carcalculator.html">Made a tool&lt;/a> to calculate the cost-per-mile (cpm) for cars. Might be helpful to compare vehicles to purchase.&lt;/p></description></item><item><title>We're In Hell</title><link>https://noonker.github.io/posts/2023-08-19-were-in-hell/</link><pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2023-08-19-were-in-hell/</guid><description>&lt;p>
+In an attempt to blog more I am sharing my good read of of the day&lt;/p>
+&lt;p>
+&lt;a href="https://cohost.org/cathoderaydude/post/2521077-hahaha-we-live-in-he">hahaha we live in hell&lt;/a>&lt;/p></description></item><item><title>Org Mode Insert Table Reference</title><link>https://noonker.github.io/posts/2022-11-20-org-create-reference/</link><pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2022-11-20-org-create-reference/</guid><description>&lt;p>
+Emacs Org-Mode tables are very powerful. The formula editor &lt;a href="https://orgmode.org/worg/org-tutorials/org-spreadsheet-intro.html">can execute elisp commands&lt;/a> which makes for a really powerful spreadsheet editor (especially when combined with &lt;code class="verbatim">org-sbe&lt;/code>). One big limitation I&amp;#39;ve faced is multi-line content.&lt;/p>
+&lt;p>
+To solve this I&amp;#39;ve created a simple function to wrap around results of some elisp block to always return the most useful data.&lt;/p>
+&lt;p>
+&lt;code class="verbatim">(org-table-create-and-insert-reference &amp;#34;hello&amp;#34;)&lt;/code> -&amp;gt; &lt;code class="verbatim">&amp;#34;hello&amp;#34;&lt;/code>&lt;/p>
+&lt;p>
+&lt;code class="verbatim">(org-table-create-and-insert-reference &amp;#34;&amp;#34;)&lt;/code> -&amp;gt; &lt;code class="verbatim">&amp;#34;nil&amp;#34;&lt;/code>&lt;/p>
+&lt;p>
+&lt;code class="verbatim">(org-table-create-and-insert-reference nil)&lt;/code> -&amp;gt; &lt;code class="verbatim">&amp;#34;nil&amp;#34;&lt;/code>&lt;/p>
+&lt;p>
+&lt;code class="verbatim">(org-table-create-and-insert-reference &amp;#34;hello\nworld&amp;#34;)&lt;/code> -&amp;gt; &lt;code class="verbatim">[[table-results-nnnnn]]&lt;/code> + an inserted named block at the bottom of the buffer&lt;/p></description></item><item><title>Northsec CTF</title><link>https://noonker.github.io/posts/2021-05-24-northsec-ctf/</link><pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2021-05-24-northsec-ctf/</guid><description>&lt;p>
+&lt;img src="https://noonker.github.io/images/northsec_blackcat.png" alt="/images/northsec_blackcat.png" title="/images/northsec_blackcat.png" />&lt;/p>
+&lt;p>
+I was lucky enough to get to compete in the &lt;a href="https://nsec.io/">Northsec&lt;/a> CTF this weekend with the cold_root team. We ended up placing 4th out of 88 teams. There was a ton of awesome (and maddening) challenges and plenty of Malört consumed. The challenges showed up on a fantasy themed forum:&lt;/p>
+&lt;div id="outline-container-headline-1" class="outline-2">
+&lt;h2 id="headline-1">
+Scammed Again
+&lt;/h2>
+&lt;div id="outline-text-headline-1" class="outline-text-2">
+&lt;p>&lt;img src="https://noonker.github.io/images/northsec_forum_scammedagain.png" alt="/images/northsec_forum_scammedagain.png" title="/images/northsec_forum_scammedagain.png" />&lt;/p>
+&lt;p>
+The first thing I did was go to the web page to find that it was a chat dialogue with an enchanter named…. Tim? I was hoping that this would include some Monthy Python trivia or perhaps an altercation with a foul and cruel creature with big pointy teeth.&lt;/p></description></item><item><title>CrowdStrike Adversary Quest CTF</title><link>https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/</link><pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/</guid><description>&lt;div id="outline-container-headline-1" class="outline-2">
+&lt;h2 id="headline-1">
+Overview
+&lt;/h2>
+&lt;div id="outline-text-headline-1" class="outline-text-2">
+&lt;p>I recently took part in the &lt;code class="verbatim">Adversary Quest&lt;/code> CTF. I utimately got stopped at &lt;code class="verbatim">5/12&lt;/code> challenges. Thanks to &lt;a href="https://twitter.com/CrowdStrike">CrowdStrike&lt;/a> for an awesome CTF and I look forward to completing it next year. Below are writeups for some of the challenges I was able to complete.&lt;/p>
+&lt;p>
+I&amp;#39;m excluding &lt;code class="verbatim">The Proclamation&lt;/code> from a writeup as &lt;a href="https://gchq.github.io/CyberChef/#recipe=From_Hexdump()XOR_Brute_Force(1,1000,0,&amp;#39;Standard&amp;#39;,false,true,false,&amp;#39;CS%7B&amp;#39;)&amp;amp;input=MDAwMDAwMCBiYyAwMCAyMCBiNCAwNyAzMCBjMCAzMSBjOSBiNyA4YSBiNiA2MSBiMiA2MSBjZAowMDAwMDEwIDEwIGI0IDAyIDMxIGQyIDMwIGZmIGNkIDEwIGViIDQ2IDVlIDgzIGM2IDE0IGIyCjAwMDAwMjAgMDkgNjYgNTIgYjMgMDAgYjQgMGUgOGEgMDQgODMgYzYgMDEgNjYgNWEgNjYgYzEKMDAwMDAzMCBlMiAwMiA2NiA4MyBjMiA0MiA2NiA4MSBlMiBmZiAwMCAwMCAwMCA2NiAzMSBkMAowMDAwMDQwIDY2IDUyIDBjIDAwIDc0IDE5IDg4IGMyIDgwIGYyIDBhIDc0IDA0IGNkIDEwIGViCjAwMDAwNTAgZDIgYjQgMDMgY2QgMTAgYjQgMDIgZmUgYzYgYjIgMDAgY2QgMTAgZWIgYzQgZmEKMDAwMDA2MCBmNCBlOCBiNyBmZiA3OSA2ZiA3NSAyNyA3MiA2NSAyMCA2ZiA2ZSAyMCA2MSAyMAowMDAwMDcwIDY3IDZmIDZmIDY0IDIwIDc3IDYxIDc5IDJlIGJmIGM2IDg2IDg1IGM0IGNhIGJkCjAwMDAwODAgOGYgY2EgOGIgOTggOGYgY2EgODYgODUgODUgODEgODMgODQgOGQgY2EgOGMgODUKMDAwMDA5MCA5OCBjYSA4MiA4MyA4ZCA4MiA4NiA5MyBjYSA4MyA4NCA5ZSA4ZiA4NiA4NiA4MwowMDAwMGEwIDhkIDhmIDg0IDllIGUwIDgzIDg0IDhlIDgzIDljIDgzIDhlIDlmIDhiIDg2IDk5CjAwMDAwYjAgYzQgY2EgYmUgODUgY2EgOGMgODMgODQgOGUgY2EgOWUgODIgOGYgODcgYzYgY2EKMDAwMDBjMCA5ZCA4ZiBjYSA4MiA4YiA5YyA4ZiBjYSA4ZSA4ZiA5YyA4MyA5OSA4ZiA4ZSBlMAowMDAwMGQwIDhiIGNhIDllIDhmIDk5IDllIGM0IGUwIGUwIGJlIDgyIDhmIDk4IDhmIGNhIDgzCjAwMDAwZTAgOTkgY2EgOGIgY2EgODcgOGYgOTkgOTkgOGIgOGQgOGYgY2EgODIgODMgOGUgOGUKMDAwMDBmMCA4ZiA4NCBjYSA4MyA4NCBjYSA5ZSA4MiA4MyA5OSBjYSA4OCA4NSA4NSA5ZSA4NgowMDAwMTAwIDg1IDhiIDhlIDhmIDk4IGM0IGUwIGUwIGFjIDgzIDg0IDhlIGNhIDgzIDllIGM2CjAwMDAxMTAgY2EgOGIgODQgOGUgY2EgODMgOWUgY2EgOWQgODMgODYgODYgY2EgODYgOGYgOGIKMDAwMDEyMCA4ZSBjYSA5MyA4NSA5ZiBjYSA4NSA4NCBjYSA5ZSA4MiA4ZiBjYSA5OCA4NSA4YgowMDAwMTMwIDhlIGNhIDllIDg1IGUwIDhjIDgzIDg0IDhlIDgzIDg0IDhkIGNhIDlmIDk5IGM0CjAwMDAxNDAgY2EgYmQgOGYgY2EgODYgODUgODUgODEgY2EgOGMgODUgOTggOWQgOGIgOTggOGUKMDAwMDE1MCBjYSA5ZSA4NSBjYSA4NyA4ZiA4ZiA5ZSBjYSA5ZSA4MiA4ZiBlMCA4YyA4ZiA5ZAowMDAwMTYwIGNhIDllIDgyIDhiIDllIGNhIDlkIDgzIDg2IDg2IGNhIDg3IDhiIDgxIDhmIGNhCjAwMDAxNzAgODMgOWUgY2EgOGIgODYgODYgY2EgOWUgODIgOGYgY2EgOWQgOGIgOTMgY2EgOWUKMDAwMDE4MCA4MiA5OCA4NSA5ZiA4ZCA4MiBjNCBlMCBlMCBhZCA4NSA4NSA4ZSBjYSA4NiA5ZgowMDAwMTkwIDg5IDgxIGM2IGNhIDhiIDg0IDhlIGNhIDk4IDhmIDg3IDhmIDg3IDg4IDhmIDk4CjAwMDAxYTAgZDAgZTAgY2EgY2EgY2EgY2EgYmQgOGYgY2EgODYgODUgOWMgOGYgY2EgOTkgOWEKMDAwMDFiMCA4YiA4OSA4ZiA5OSBjYSA4NyA5ZiA4OSA4MiBjYSA4NyA4NSA5OCA4ZiBjYSA5ZQowMDAwMWMwIDgyIDhiIDg0IGNhIDllIDhiIDg4IDk5IGNiIGVhIDgxIDE5IDExIGE5IGI5IDkxCjAwMDAxZDAgZGEgOTggOGUgZDkgOTggYjUgZGEgOGMgYjUgZGEgOTIgZDggZGEgYjUgODggZGEKMDAwMDFlMCBkYSA5ZSA4NiBkYSA4YiA4ZSBkOSA5OCA5NyA5NyBlYSBmNCBmNCBmNCBmNCBmNAowMDAwMWYwIGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IDU1IGFhCjAwMDAyMDA">this&lt;/a> was my solution- this was a very cool challenge so I&amp;#39;m going to refer you to &lt;a href="https://twitter.com/vinopaljiri?lang=en">@Vinopaljiri&lt;/a>&amp;#39;s &lt;a href="https://github.com/Dump-GUY/Malware-analysis-and-Reverse-engineering/blob/main/Debugging%20MBR%20-%20IDA%20+%20Bochs%20Emulator/Debugging%20MBR%20-%20IDA%20+%20Bochs%20Emulator.md">excellent writeup&lt;/a>.&lt;/p>
+&lt;/div>
+&lt;/div>
+&lt;div id="outline-container-headline-2" class="outline-2">
+&lt;h2 id="headline-2">
+Challenges
+&lt;/h2>
+&lt;div id="outline-text-headline-2" class="outline-text-2">
+&lt;div id="outline-container-headline-3" class="outline-3">
+&lt;h3 id="headline-3">
+Space Jackal - Matrix
+&lt;/h3>
+&lt;div id="outline-text-headline-3" class="outline-text-3">
+&lt;blockquote>
+&lt;p>With the help of your analysis, we got onto the trail of the group and found their hidden forum on the Deep Dark Web. Unfortunately, all messages are encrypted. While we believe that we have found their encryption tool, we are unsure how to decrypt these messages. Can you assist?&lt;/p></description></item><item><title>Json To Org-Mode Table</title><link>https://noonker.github.io/posts/2021-01-03-json-to-org-table/</link><pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2021-01-03-json-to-org-table/</guid><description>&lt;p>
+As part of the Emacs minor mode I&amp;#39;m &lt;a href="https://github.com/noonker/hunting-mode">working on&lt;/a> I&amp;#39;ve created a useful function to turn json into Org tables while maintaining the linkage of nested structures. The is cleverly named &lt;a href="https://github.com/noonker/json-to-org-table">json-to-org-table&lt;/a>.&lt;/p>
+&lt;div id="outline-container-headline-1" class="outline-3">
+&lt;h3 id="headline-1">
+Why?
+&lt;/h3>
+&lt;div id="outline-text-headline-1" class="outline-text-3">
+&lt;p>Json is a great format for programming and parsing structures but a less good language for human consumption. I created this tool so I could interact with APIs and have a human readable format (and one that exports nicely too!)&lt;/p></description></item><item><title>Using Org-Mode to Manage Configs</title><link>https://noonker.github.io/posts/2020-12-31-org-config-manager/</link><pubDate>Thu, 31 Dec 2020 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2020-12-31-org-config-manager/</guid><description>&lt;p>
+I&amp;#39;ve just started to use Org-Mode as a way to manage my configs. Previously I&amp;#39;ve kept my configs in a git repo and just had a post-install script to put all the configs in the right place.&lt;/p>
+&lt;p>
+For now, I&amp;#39;m testing using Org-Mode for this purpose and I think I like the results.&lt;/p>
+&lt;p>
+I have a config.org file that is arranged something like this:&lt;/p>
+&lt;div class="src src-org">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-org" data-lang="org">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#+TITLE&lt;/span>&lt;span style="color:#75715e">: Configs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">- &lt;/span>Tangle a single block with &lt;span style="color:#a6e22e">=C-u C-c C-v t=&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">- &lt;/span>Tangle all blocks with &lt;span style="color:#a6e22e">=C-v C-c t=&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#+name&lt;/span>&lt;span style="color:#75715e">: secret&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#+begin_src &lt;/span>&lt;span style="color:#75715e">emacs-lisp&lt;/span>&lt;span style="color:#75715e"> :var name=&amp;#34;&amp;#34;, fld=&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>(if (&lt;span style="color:#a6e22e">string-equal&lt;/span> fld &lt;span style="color:#e6db74">&amp;#34;password&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (password-store-get name)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> (password-store-get-field name fld))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#+end_src&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>*&lt;span style="font-weight:bold"> tmux&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#+begin_src &lt;/span>&lt;span style="color:#75715e">bash&lt;/span>&lt;span style="color:#75715e"> :noweb tangle :tangle ~/.tmux.conf
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#75715e"># start window numbering at 1 for easier switching&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -g base-index &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># colors&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -g default-terminal &lt;span style="color:#e6db74">&amp;#34;screen-256color&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Need that longer tmux display time&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -g display-panes-time &lt;span style="color:#ae81ff">2000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># status bar config&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -g status-left &lt;span style="color:#e6db74">&amp;#34;#h:[#S]&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -g status-left-length &lt;span style="color:#ae81ff">50&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>set -g status-right-length &lt;span style="color:#ae81ff">100&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span>-shell &lt;span style="color:#e6db74">&amp;#34;uname | grep -q Darwin&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;set -g status-right \&amp;#34;#[fg=white] ⚡#[fg=yellow] #(battery) #[fg=white][✉#(curl icanhazip.com)] %H:%M %d-%h-%Y\&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>setw -g window-status-current-format &lt;span style="color:#e6db74">&amp;#34;|#I:#W|&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#+end_src&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>*&lt;span style="font-weight:bold"> mopidy&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#+begin_src &lt;/span>&lt;span style="color:#75715e">conf&lt;/span>&lt;span style="color:#75715e"> :noweb tangle :tangle ~/.config/mopidy/mopidy.conf
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>[mpd]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>enabled = true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hostname = 127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>port = 6600
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>password =
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>max_connections = 20
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>connection_timeout = 60
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>zeroconf = Mopidy MPD server on $hostname
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[gmusic]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>username = &amp;lt;&amp;lt;secret(&amp;#34;Internet/mopidy&amp;#34;, &amp;#34;Username&amp;#34;)&amp;gt;&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>password = &amp;lt;&amp;lt;secret(&amp;#34;Internet/mopidy&amp;#34;, &amp;#34;password&amp;#34;)&amp;gt;&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bitrate = 320
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>all_access = true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>radio_stations_in_browse = true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>radio_stations_as_playlists = true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>refresh_token = &amp;lt;&amp;lt;secret(&amp;#34;Internet/mopidy&amp;#34;, &amp;#34;RefreshToken&amp;#34;)&amp;gt;&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#+end_src&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">**&lt;/span> etc...&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;/div>
+&lt;div id="outline-container-headline-1" class="outline-2">
+&lt;h2 id="headline-1">
+What&amp;#39;s going on here?
+&lt;/h2>
+&lt;div id="outline-text-headline-1" class="outline-text-2">
+&lt;p>
+Firstly I have some hints at the top of my file to remind of of the hotkeys I need to use to manage my configs&lt;/p></description></item><item><title>Elfeed Rules!</title><link>https://noonker.github.io/posts/2020-04-22-elfeed/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2020-04-22-elfeed/</guid><description>&lt;p>
+I recently got the question- &amp;#34;What is the use case for elfeed?&amp;#34;. When I get a chance to talk about my favorite software I will &lt;em>NEVER&lt;/em> pass up that opportunity.&lt;/p>
+&lt;p>
+&lt;a href="https://github.com/skeeto/elfeed">Elfeed&lt;/a> is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&amp;#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by &lt;code class="verbatim">(url tag1 tag2 tagN)&lt;/code> . This combination is the start of a lot of very powerful workflows.&lt;/p></description></item><item><title>No More Lock-in</title><link>https://noonker.github.io/posts/2019-12-28-nomorelockin/</link><pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2019-12-28-nomorelockin/</guid><description>&lt;div id="outline-container-headline-1" class="outline-3">
+&lt;h3 id="headline-1">
+decoupling the address from the service
+&lt;/h3>
+&lt;div id="outline-text-headline-1" class="outline-text-3">
+&lt;p>
+I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.&lt;/p>
+&lt;p>
+I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address. This just made things worse. I also didn’t want to rely on another company- because like all things in technology there are’s no way to know how long before I need to switch to another service.&lt;/p></description></item><item><title>A Less Than Ideal Way To Do 2-factor</title><link>https://noonker.github.io/posts/2018-10-15-duo-twofactor/</link><pubDate>Mon, 15 Oct 2018 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2018-10-15-duo-twofactor/</guid><description>&lt;div id="outline-container-headline-1" class="outline-3">
+&lt;h3 id="headline-1">
+probably just shouldn&amp;#39;t use cell networks for 2-factor
+&lt;/h3>
+&lt;div id="outline-text-headline-1" class="outline-text-3">
+&lt;p>
+I have concerns with how Duo does phone two-factor authentication and think we can all learn from the way Google does it.&lt;/p>
+&lt;p>
+The issue:&lt;/p>
+&lt;ul>
+&lt;li>If a user has their password compromised it’s easy to convince them to authenticate a 2-factor request without doing anything that would set off a red flag. This is due to the specific way Duo does phone call authentication.&lt;/li>
+&lt;/ul>
+&lt;p>Attacker required information:&lt;/p></description></item></channel></rss>

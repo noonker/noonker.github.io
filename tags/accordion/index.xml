@@ -1,19 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Accordion on Noonker</title>
-    <link>https://noonker.github.io/tags/accordion/</link>
-    <description>Recent content in Accordion on Noonker</description>
-    <generator>Hugo</generator>
-    <language>en</language>
-    <lastBuildDate>Mon, 23 Oct 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://noonker.github.io/tags/accordion/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Roland FR-4X USB Drives</title>
-      <link>https://noonker.github.io/posts/2023-10-29-roland-fr-4x-usb-drives/</link>
-      <pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2023-10-29-roland-fr-4x-usb-drives/</guid>
-      <description>If you&amp;#39;re a subscriber to this blog, thank you. This is almost certainly not interesting for you.&#xA;If you&amp;#39;re the owner of a Roland FR-4x digital accordion and trying to find which USB sticks can be used with your accordion I tried out every stick in my house with no luck. I learned:&#xA;They need to be FAT32 (not ExFat) They need to be USB2.0 16GB seems to be the ideal size?</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Accordion on Noonker</title><link>https://noonker.github.io/tags/accordion/</link><description>Recent content in Accordion on Noonker</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 23 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://noonker.github.io/tags/accordion/index.xml" rel="self" type="application/rss+xml"/><item><title>Roland FR-4X USB Drives</title><link>https://noonker.github.io/posts/2023-10-29-roland-fr-4x-usb-drives/</link><pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2023-10-29-roland-fr-4x-usb-drives/</guid><description>&lt;p>
+If you&amp;#39;re a subscriber to this blog, thank you. This is almost certainly not interesting for you.&lt;/p>
+&lt;p>
+If you&amp;#39;re the owner of a Roland FR-4x digital accordion and trying to find which USB sticks can be used with your accordion I tried out every stick in my house with no luck. I learned:&lt;/p>
+&lt;ol>
+&lt;li>They need to be FAT32 (not ExFat)&lt;/li>
+&lt;li>They need to be USB2.0&lt;/li>
+&lt;li>16GB seems to be the ideal size? &lt;a href="https://www.accordionists.info/threads/usb-stick-for-roland-fr3x.3870/">there&amp;#39;s some reports&lt;/a> of other sizes working.&lt;/li>
+&lt;li>Not every usb drive that meets these criteria work 🥴&lt;/li>
+&lt;/ol>
+&lt;p>I can attest that these &lt;a href="https://www.amazon.com/dp/B01M68GUP8">PNY 16GB Attaché 3 USB 2.0 Flash Drive&lt;/a> work.&lt;/p></description></item></channel></rss>

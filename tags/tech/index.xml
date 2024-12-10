@@ -1,75 +1,82 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Tech, on Noonker</title>
-    <link>https://noonker.github.io/tags/tech/</link>
-    <description>Recent content in Tech, on Noonker</description>
-    <generator>Hugo</generator>
-    <language>en</language>
-    <lastBuildDate>Fri, 26 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://noonker.github.io/tags/tech/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Summarized: I Respect Our Shared Humanity</title>
-      <link>https://noonker.github.io/posts/2024-07-26-fixed-by-chat-gpt/</link>
-      <pubDate>Fri, 26 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2024-07-26-fixed-by-chat-gpt/</guid>
-      <description>ChatGPT. Was that coherent?&#xA;You are a scholar of technical writing and the english language. Please give me a summary of what the writer was trying to say:&#xA;Summary The writer discusses the evolution of their communication style, initially emphasizing correctness and spelling but now prioritizing speed and humor, even at the expense of errors. They reflect on how technology, specifically AI, has changed communication. While AI can handle some interactions, the writer stresses the importance of human-to-human communication, particularly in situations where nuance and personality are crucial.</description>
-    </item>
-    <item>
-      <title>I Respect Our Shared Humanity</title>
-      <link>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</link>
-      <pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</guid>
-      <description>Intro I used to be a person who cared greatly about ensuring that my prose were correct, and that I spelled everything correctly.&#xA;I&amp;#39;m actually going to avoid that here and I&amp;#39;m not even going to bother with a spell checker. For most casual communication I now like to focus on being fast and funny at the expense of the red squiggly lines or appeasing the specter of my english teacher.</description>
-    </item>
-    <item>
-      <title>Car Cost Calculator</title>
-      <link>https://noonker.github.io/posts/2023-10-03-car-cost-calculator/</link>
-      <pubDate>Tue, 03 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2023-10-03-car-cost-calculator/</guid>
-      <description>Made a tool to calculate the cost-per-mile (cpm) for cars. Might be helpful to compare vehicles to purchase.</description>
-    </item>
-    <item>
-      <title>Org Mode Insert Table Reference</title>
-      <link>https://noonker.github.io/posts/2022-11-20-org-create-reference/</link>
-      <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2022-11-20-org-create-reference/</guid>
-      <description>Emacs Org-Mode tables are very powerful. The formula editor can execute elisp commands which makes for a really powerful spreadsheet editor (especially when combined with org-sbe). One big limitation I&amp;#39;ve faced is multi-line content.&#xA;To solve this I&amp;#39;ve created a simple function to wrap around results of some elisp block to always return the most useful data.&#xA;(org-table-create-and-insert-reference &amp;#34;hello&amp;#34;) -&amp;gt; &amp;#34;hello&amp;#34;&#xA;(org-table-create-and-insert-reference &amp;#34;&amp;#34;) -&amp;gt; &amp;#34;nil&amp;#34;&#xA;(org-table-create-and-insert-reference nil) -&amp;gt; &amp;#34;nil&amp;#34;</description>
-    </item>
-    <item>
-      <title>Northsec CTF</title>
-      <link>https://noonker.github.io/posts/2021-05-24-northsec-ctf/</link>
-      <pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2021-05-24-northsec-ctf/</guid>
-      <description>I was lucky enough to get to compete in the Northsec CTF this weekend with the cold_root team. We ended up placing 4th out of 88 teams. There was a ton of awesome (and maddening) challenges and plenty of Malört consumed. The challenges showed up on a fantasy themed forum:&#xA;Scammed Again The first thing I did was go to the web page to find that it was a chat dialogue with an enchanter named….</description>
-    </item>
-    <item>
-      <title>CrowdStrike Adversary Quest CTF</title>
-      <link>https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/</link>
-      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/</guid>
-      <description>Overview I recently took part in the Adversary Quest CTF. I utimately got stopped at 5/12 challenges. Thanks to CrowdStrike for an awesome CTF and I look forward to completing it next year. Below are writeups for some of the challenges I was able to complete.&#xA;I&amp;#39;m excluding The Proclamation from a writeup as this was my solution- this was a very cool challenge so I&amp;#39;m going to refer you to @Vinopaljiri&amp;#39;s excellent writeup.</description>
-    </item>
-    <item>
-      <title>Json To Org-Mode Table</title>
-      <link>https://noonker.github.io/posts/2021-01-03-json-to-org-table/</link>
-      <pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2021-01-03-json-to-org-table/</guid>
-      <description>As part of the Emacs minor mode I&amp;#39;m working on I&amp;#39;ve created a useful function to turn json into Org tables while maintaining the linkage of nested structures. The is cleverly named json-to-org-table.&#xA;Why? Json is a great format for programming and parsing structures but a less good language for human consumption. I created this tool so I could interact with APIs and have a human readable format (and one that exports nicely too!</description>
-    </item>
-    <item>
-      <title>Elfeed Rules!</title>
-      <link>https://noonker.github.io/posts/2020-04-22-elfeed/</link>
-      <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2020-04-22-elfeed/</guid>
-      <description>I recently got the question- &amp;#34;What is the use case for elfeed?&amp;#34;. When I get a chance to talk about my favorite software I will NEVER pass up that opportunity.&#xA;Elfeed is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&amp;#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by (url tag1 tag2 tagN) .</description>
-    </item>
-    <item>
-      <title>No More Lock-in</title>
-      <link>https://noonker.github.io/posts/2019-12-28-nomorelockin/</link>
-      <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/posts/2019-12-28-nomorelockin/</guid>
-      <description>decoupling the address from the service I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.&#xA;I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address.</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tech, on Noonker</title><link>https://noonker.github.io/tags/tech/</link><description>Recent content in Tech, on Noonker</description><generator>Hugo</generator><language>en</language><lastBuildDate>Fri, 26 Jul 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://noonker.github.io/tags/tech/index.xml" rel="self" type="application/rss+xml"/><item><title>Summarized: I Respect Our Shared Humanity</title><link>https://noonker.github.io/posts/2024-07-26-fixed-by-chat-gpt/</link><pubDate>Fri, 26 Jul 2024 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2024-07-26-fixed-by-chat-gpt/</guid><description>&lt;p>
+ChatGPT. &lt;a href="https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/">Was that coherent&lt;/a>?&lt;/p>
+&lt;blockquote>
+&lt;p>You are a scholar of technical writing and the english language. Please give me a summary of what the writer was trying to say:&lt;/p>
+&lt;/blockquote>
+&lt;div id="outline-container-headline-1" class="outline-2">
+&lt;h2 id="headline-1">
+Summary
+&lt;/h2>
+&lt;div id="outline-text-headline-1" class="outline-text-2">
+&lt;p>
+The writer discusses the evolution of their communication style, initially emphasizing correctness and spelling but now prioritizing speed and humor, even at the expense of errors. They reflect on how technology, specifically AI, has changed communication. While AI can handle some interactions, the writer stresses the importance of human-to-human communication, particularly in situations where nuance and personality are crucial. They highlight the potential loss of human voice when AI mediates conversations and argue for using AI selectively, suggesting that only the receiver might benefit from AI assistance. The essay concludes with a plea to maintain humanity in communication, emphasizing that AI should not replace the human touch in meaningful interactions.&lt;/p></description></item><item><title>I Respect Our Shared Humanity</title><link>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</link><pubDate>Thu, 25 Jul 2024 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2024-07-25-i-respect-our-shared-humanity/</guid><description>&lt;div id="outline-container-headline-1" class="outline-2">
+&lt;h2 id="headline-1">
+Intro
+&lt;/h2>
+&lt;div id="outline-text-headline-1" class="outline-text-2">
+&lt;p>
+I used to be a person who cared greatly about ensuring that my prose were correct, and that I spelled everything correctly.&lt;/p>
+&lt;p>
+I&amp;#39;m actually going to avoid that here and I&amp;#39;m not even going to bother with a spell checker. For most casual communication I now like to focus on being fast and funny at the expense of the red squiggly lines or appeasing the specter of my english teacher.&lt;/p></description></item><item><title>Car Cost Calculator</title><link>https://noonker.github.io/posts/2023-10-03-car-cost-calculator/</link><pubDate>Tue, 03 Oct 2023 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2023-10-03-car-cost-calculator/</guid><description>&lt;p>
+&lt;a href="https://noonker.github.io/html/carcalculator.html">Made a tool&lt;/a> to calculate the cost-per-mile (cpm) for cars. Might be helpful to compare vehicles to purchase.&lt;/p></description></item><item><title>Org Mode Insert Table Reference</title><link>https://noonker.github.io/posts/2022-11-20-org-create-reference/</link><pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2022-11-20-org-create-reference/</guid><description>&lt;p>
+Emacs Org-Mode tables are very powerful. The formula editor &lt;a href="https://orgmode.org/worg/org-tutorials/org-spreadsheet-intro.html">can execute elisp commands&lt;/a> which makes for a really powerful spreadsheet editor (especially when combined with &lt;code class="verbatim">org-sbe&lt;/code>). One big limitation I&amp;#39;ve faced is multi-line content.&lt;/p>
+&lt;p>
+To solve this I&amp;#39;ve created a simple function to wrap around results of some elisp block to always return the most useful data.&lt;/p>
+&lt;p>
+&lt;code class="verbatim">(org-table-create-and-insert-reference &amp;#34;hello&amp;#34;)&lt;/code> -&amp;gt; &lt;code class="verbatim">&amp;#34;hello&amp;#34;&lt;/code>&lt;/p>
+&lt;p>
+&lt;code class="verbatim">(org-table-create-and-insert-reference &amp;#34;&amp;#34;)&lt;/code> -&amp;gt; &lt;code class="verbatim">&amp;#34;nil&amp;#34;&lt;/code>&lt;/p>
+&lt;p>
+&lt;code class="verbatim">(org-table-create-and-insert-reference nil)&lt;/code> -&amp;gt; &lt;code class="verbatim">&amp;#34;nil&amp;#34;&lt;/code>&lt;/p>
+&lt;p>
+&lt;code class="verbatim">(org-table-create-and-insert-reference &amp;#34;hello\nworld&amp;#34;)&lt;/code> -&amp;gt; &lt;code class="verbatim">[[table-results-nnnnn]]&lt;/code> + an inserted named block at the bottom of the buffer&lt;/p></description></item><item><title>Northsec CTF</title><link>https://noonker.github.io/posts/2021-05-24-northsec-ctf/</link><pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2021-05-24-northsec-ctf/</guid><description>&lt;p>
+&lt;img src="https://noonker.github.io/images/northsec_blackcat.png" alt="/images/northsec_blackcat.png" title="/images/northsec_blackcat.png" />&lt;/p>
+&lt;p>
+I was lucky enough to get to compete in the &lt;a href="https://nsec.io/">Northsec&lt;/a> CTF this weekend with the cold_root team. We ended up placing 4th out of 88 teams. There was a ton of awesome (and maddening) challenges and plenty of Malört consumed. The challenges showed up on a fantasy themed forum:&lt;/p>
+&lt;div id="outline-container-headline-1" class="outline-2">
+&lt;h2 id="headline-1">
+Scammed Again
+&lt;/h2>
+&lt;div id="outline-text-headline-1" class="outline-text-2">
+&lt;p>&lt;img src="https://noonker.github.io/images/northsec_forum_scammedagain.png" alt="/images/northsec_forum_scammedagain.png" title="/images/northsec_forum_scammedagain.png" />&lt;/p>
+&lt;p>
+The first thing I did was go to the web page to find that it was a chat dialogue with an enchanter named…. Tim? I was hoping that this would include some Monthy Python trivia or perhaps an altercation with a foul and cruel creature with big pointy teeth.&lt;/p></description></item><item><title>CrowdStrike Adversary Quest CTF</title><link>https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/</link><pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2021-02-01-crowdstrike-adversary-zone/</guid><description>&lt;div id="outline-container-headline-1" class="outline-2">
+&lt;h2 id="headline-1">
+Overview
+&lt;/h2>
+&lt;div id="outline-text-headline-1" class="outline-text-2">
+&lt;p>I recently took part in the &lt;code class="verbatim">Adversary Quest&lt;/code> CTF. I utimately got stopped at &lt;code class="verbatim">5/12&lt;/code> challenges. Thanks to &lt;a href="https://twitter.com/CrowdStrike">CrowdStrike&lt;/a> for an awesome CTF and I look forward to completing it next year. Below are writeups for some of the challenges I was able to complete.&lt;/p>
+&lt;p>
+I&amp;#39;m excluding &lt;code class="verbatim">The Proclamation&lt;/code> from a writeup as &lt;a href="https://gchq.github.io/CyberChef/#recipe=From_Hexdump()XOR_Brute_Force(1,1000,0,&amp;#39;Standard&amp;#39;,false,true,false,&amp;#39;CS%7B&amp;#39;)&amp;amp;input=MDAwMDAwMCBiYyAwMCAyMCBiNCAwNyAzMCBjMCAzMSBjOSBiNyA4YSBiNiA2MSBiMiA2MSBjZAowMDAwMDEwIDEwIGI0IDAyIDMxIGQyIDMwIGZmIGNkIDEwIGViIDQ2IDVlIDgzIGM2IDE0IGIyCjAwMDAwMjAgMDkgNjYgNTIgYjMgMDAgYjQgMGUgOGEgMDQgODMgYzYgMDEgNjYgNWEgNjYgYzEKMDAwMDAzMCBlMiAwMiA2NiA4MyBjMiA0MiA2NiA4MSBlMiBmZiAwMCAwMCAwMCA2NiAzMSBkMAowMDAwMDQwIDY2IDUyIDBjIDAwIDc0IDE5IDg4IGMyIDgwIGYyIDBhIDc0IDA0IGNkIDEwIGViCjAwMDAwNTAgZDIgYjQgMDMgY2QgMTAgYjQgMDIgZmUgYzYgYjIgMDAgY2QgMTAgZWIgYzQgZmEKMDAwMDA2MCBmNCBlOCBiNyBmZiA3OSA2ZiA3NSAyNyA3MiA2NSAyMCA2ZiA2ZSAyMCA2MSAyMAowMDAwMDcwIDY3IDZmIDZmIDY0IDIwIDc3IDYxIDc5IDJlIGJmIGM2IDg2IDg1IGM0IGNhIGJkCjAwMDAwODAgOGYgY2EgOGIgOTggOGYgY2EgODYgODUgODUgODEgODMgODQgOGQgY2EgOGMgODUKMDAwMDA5MCA5OCBjYSA4MiA4MyA4ZCA4MiA4NiA5MyBjYSA4MyA4NCA5ZSA4ZiA4NiA4NiA4MwowMDAwMGEwIDhkIDhmIDg0IDllIGUwIDgzIDg0IDhlIDgzIDljIDgzIDhlIDlmIDhiIDg2IDk5CjAwMDAwYjAgYzQgY2EgYmUgODUgY2EgOGMgODMgODQgOGUgY2EgOWUgODIgOGYgODcgYzYgY2EKMDAwMDBjMCA5ZCA4ZiBjYSA4MiA4YiA5YyA4ZiBjYSA4ZSA4ZiA5YyA4MyA5OSA4ZiA4ZSBlMAowMDAwMGQwIDhiIGNhIDllIDhmIDk5IDllIGM0IGUwIGUwIGJlIDgyIDhmIDk4IDhmIGNhIDgzCjAwMDAwZTAgOTkgY2EgOGIgY2EgODcgOGYgOTkgOTkgOGIgOGQgOGYgY2EgODIgODMgOGUgOGUKMDAwMDBmMCA4ZiA4NCBjYSA4MyA4NCBjYSA5ZSA4MiA4MyA5OSBjYSA4OCA4NSA4NSA5ZSA4NgowMDAwMTAwIDg1IDhiIDhlIDhmIDk4IGM0IGUwIGUwIGFjIDgzIDg0IDhlIGNhIDgzIDllIGM2CjAwMDAxMTAgY2EgOGIgODQgOGUgY2EgODMgOWUgY2EgOWQgODMgODYgODYgY2EgODYgOGYgOGIKMDAwMDEyMCA4ZSBjYSA5MyA4NSA5ZiBjYSA4NSA4NCBjYSA5ZSA4MiA4ZiBjYSA5OCA4NSA4YgowMDAwMTMwIDhlIGNhIDllIDg1IGUwIDhjIDgzIDg0IDhlIDgzIDg0IDhkIGNhIDlmIDk5IGM0CjAwMDAxNDAgY2EgYmQgOGYgY2EgODYgODUgODUgODEgY2EgOGMgODUgOTggOWQgOGIgOTggOGUKMDAwMDE1MCBjYSA5ZSA4NSBjYSA4NyA4ZiA4ZiA5ZSBjYSA5ZSA4MiA4ZiBlMCA4YyA4ZiA5ZAowMDAwMTYwIGNhIDllIDgyIDhiIDllIGNhIDlkIDgzIDg2IDg2IGNhIDg3IDhiIDgxIDhmIGNhCjAwMDAxNzAgODMgOWUgY2EgOGIgODYgODYgY2EgOWUgODIgOGYgY2EgOWQgOGIgOTMgY2EgOWUKMDAwMDE4MCA4MiA5OCA4NSA5ZiA4ZCA4MiBjNCBlMCBlMCBhZCA4NSA4NSA4ZSBjYSA4NiA5ZgowMDAwMTkwIDg5IDgxIGM2IGNhIDhiIDg0IDhlIGNhIDk4IDhmIDg3IDhmIDg3IDg4IDhmIDk4CjAwMDAxYTAgZDAgZTAgY2EgY2EgY2EgY2EgYmQgOGYgY2EgODYgODUgOWMgOGYgY2EgOTkgOWEKMDAwMDFiMCA4YiA4OSA4ZiA5OSBjYSA4NyA5ZiA4OSA4MiBjYSA4NyA4NSA5OCA4ZiBjYSA5ZQowMDAwMWMwIDgyIDhiIDg0IGNhIDllIDhiIDg4IDk5IGNiIGVhIDgxIDE5IDExIGE5IGI5IDkxCjAwMDAxZDAgZGEgOTggOGUgZDkgOTggYjUgZGEgOGMgYjUgZGEgOTIgZDggZGEgYjUgODggZGEKMDAwMDFlMCBkYSA5ZSA4NiBkYSA4YiA4ZSBkOSA5OCA5NyA5NyBlYSBmNCBmNCBmNCBmNCBmNAowMDAwMWYwIGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IGY0IDU1IGFhCjAwMDAyMDA">this&lt;/a> was my solution- this was a very cool challenge so I&amp;#39;m going to refer you to &lt;a href="https://twitter.com/vinopaljiri?lang=en">@Vinopaljiri&lt;/a>&amp;#39;s &lt;a href="https://github.com/Dump-GUY/Malware-analysis-and-Reverse-engineering/blob/main/Debugging%20MBR%20-%20IDA%20+%20Bochs%20Emulator/Debugging%20MBR%20-%20IDA%20+%20Bochs%20Emulator.md">excellent writeup&lt;/a>.&lt;/p>
+&lt;/div>
+&lt;/div>
+&lt;div id="outline-container-headline-2" class="outline-2">
+&lt;h2 id="headline-2">
+Challenges
+&lt;/h2>
+&lt;div id="outline-text-headline-2" class="outline-text-2">
+&lt;div id="outline-container-headline-3" class="outline-3">
+&lt;h3 id="headline-3">
+Space Jackal - Matrix
+&lt;/h3>
+&lt;div id="outline-text-headline-3" class="outline-text-3">
+&lt;blockquote>
+&lt;p>With the help of your analysis, we got onto the trail of the group and found their hidden forum on the Deep Dark Web. Unfortunately, all messages are encrypted. While we believe that we have found their encryption tool, we are unsure how to decrypt these messages. Can you assist?&lt;/p></description></item><item><title>Json To Org-Mode Table</title><link>https://noonker.github.io/posts/2021-01-03-json-to-org-table/</link><pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2021-01-03-json-to-org-table/</guid><description>&lt;p>
+As part of the Emacs minor mode I&amp;#39;m &lt;a href="https://github.com/noonker/hunting-mode">working on&lt;/a> I&amp;#39;ve created a useful function to turn json into Org tables while maintaining the linkage of nested structures. The is cleverly named &lt;a href="https://github.com/noonker/json-to-org-table">json-to-org-table&lt;/a>.&lt;/p>
+&lt;div id="outline-container-headline-1" class="outline-3">
+&lt;h3 id="headline-1">
+Why?
+&lt;/h3>
+&lt;div id="outline-text-headline-1" class="outline-text-3">
+&lt;p>Json is a great format for programming and parsing structures but a less good language for human consumption. I created this tool so I could interact with APIs and have a human readable format (and one that exports nicely too!)&lt;/p></description></item><item><title>Elfeed Rules!</title><link>https://noonker.github.io/posts/2020-04-22-elfeed/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2020-04-22-elfeed/</guid><description>&lt;p>
+I recently got the question- &amp;#34;What is the use case for elfeed?&amp;#34;. When I get a chance to talk about my favorite software I will &lt;em>NEVER&lt;/em> pass up that opportunity.&lt;/p>
+&lt;p>
+&lt;a href="https://github.com/skeeto/elfeed">Elfeed&lt;/a> is a RSS feed reader for Emacs that I use daily and it solves a lot of problems for me. To understand how this works let&amp;#39;s start by looking at a snippet of my feeds config. Elfeed feeds is just a list of lists where each feed is represented by &lt;code class="verbatim">(url tag1 tag2 tagN)&lt;/code> . This combination is the start of a lot of very powerful workflows.&lt;/p></description></item><item><title>No More Lock-in</title><link>https://noonker.github.io/posts/2019-12-28-nomorelockin/</link><pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate><guid>https://noonker.github.io/posts/2019-12-28-nomorelockin/</guid><description>&lt;div id="outline-container-headline-1" class="outline-3">
+&lt;h3 id="headline-1">
+decoupling the address from the service
+&lt;/h3>
+&lt;div id="outline-text-headline-1" class="outline-text-3">
+&lt;p>
+I’ve been using gmail since it was an invite only beta. My email address has accumulated so much garbage over the years and finding important emails has become almost as difficult as determining important calls.&lt;/p>
+&lt;p>
+I recently switched to Protonmail due to privacy concerns with Google’s monopoly on data. I had hoped I could use this transition to slowly shift important emails to a new address. This just made things worse. I also didn’t want to rely on another company- because like all things in technology there are’s no way to know how long before I need to switch to another service.&lt;/p></description></item></channel></rss>

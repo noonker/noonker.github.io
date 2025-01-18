@@ -6,8 +6,8 @@
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content=" I recently made the switch to Guix on my Framework 13 laptop. Getting the install was…. not entirely trivial but was able to get it working thanks to Andy Wingo over at wingolog.com
-There was one issue which brought be back to my early linux days of trying to figure out what bcm43xx was and why I had to modprobe it. That issue was that apparently thunderbolt requires a daemon to speak to external hardware. Because I&#39;m a person who has a very cursed hardware/software combination of a Guix computer and a studio display with all my peripherals attached to the built in USB hub I was essentially locked out of all of my hardware.
+<meta name="description" content=" I recently made the switch to Guix on my Framework 13 laptop. Getting the install was…. not entirely trivial but was able to get it working thanks to the post by Andy Wingo over at wingolog.com
+There was one issue which brought me back to my early linux days of trying to figure out what bcm43xx was and why I had to modprobe it. That issue was that apparently thunderbolt requires a daemon to speak to external hardware. I&#39;m a person who has a very cursed hardware/software combination of a Guix computer and a studio display. To make things worse all my peripherals are attached to the built in USB hub so I was essentially locked out of all of my hardware.
 " />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
@@ -41,8 +41,8 @@ There was one issue which brought be back to my early linux days of trying to fi
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Hello Guix and Getting Thunderbolt Working :: Noonker">
-<meta property="og:description" content=" I recently made the switch to Guix on my Framework 13 laptop. Getting the install was…. not entirely trivial but was able to get it working thanks to Andy Wingo over at wingolog.com
-There was one issue which brought be back to my early linux days of trying to figure out what bcm43xx was and why I had to modprobe it. That issue was that apparently thunderbolt requires a daemon to speak to external hardware. Because I&#39;m a person who has a very cursed hardware/software combination of a Guix computer and a studio display with all my peripherals attached to the built in USB hub I was essentially locked out of all of my hardware.
+<meta property="og:description" content=" I recently made the switch to Guix on my Framework 13 laptop. Getting the install was…. not entirely trivial but was able to get it working thanks to the post by Andy Wingo over at wingolog.com
+There was one issue which brought me back to my early linux days of trying to figure out what bcm43xx was and why I had to modprobe it. That issue was that apparently thunderbolt requires a daemon to speak to external hardware. I&#39;m a person who has a very cursed hardware/software combination of a Guix computer and a studio display. To make things worse all my peripherals are attached to the built in USB hub so I was essentially locked out of all of my hardware.
 " />
 <meta property="og:url" content="https://noonker.github.io/posts/2025-01-17-hello-guix/" />
 <meta property="og:site_name" content="Hello Guix and Getting Thunderbolt Working" />
@@ -118,9 +118,9 @@ There was one issue which brought be back to my early linux days of trying to fi
 
   <div class="post-content"><div>
         <p>
-I recently made the switch to Guix on my Framework 13 laptop. Getting the install was…. not entirely trivial but was able to get it working thanks to Andy Wingo over at <a href="https://wingolog.org/archives/2024/02/16/guix-on-the-framework-13-amd">wingolog.com</a></p>
+I recently made the switch to Guix on my Framework 13 laptop. Getting the install was…. not entirely trivial but was able to get it working thanks to the post by Andy Wingo over at <a href="https://wingolog.org/archives/2024/02/16/guix-on-the-framework-13-amd">wingolog.com</a></p>
 <p>
-There was one issue which brought be back to my early linux days of trying to figure out what bcm43xx was and why I had to modprobe it. That issue was that apparently thunderbolt requires a daemon to speak to external hardware. Because I&#39;m a person who has a very cursed hardware/software combination of a Guix computer and a studio display with all my peripherals attached to the built in USB hub I was essentially locked out of all of my hardware.</p>
+There was one issue which brought me back to my early linux days of trying to figure out what bcm43xx was and why I had to modprobe it. That issue was that apparently thunderbolt requires a daemon to speak to external hardware. I&#39;m a person who has a very cursed hardware/software combination of a Guix computer and a studio display. To make things worse all my peripherals are attached to the built in USB hub so I was essentially locked out of all of my hardware.</p>
 <p>
 I&#39;m brand new to Guix and I know very little about hardware abstractions and systemd that the daemon seems to be coded for. I had even less of a chance of solving this problem than the folks who had <a href="https://issues.guix.gnu.org/59683">attemped</a> this <a href="https://gitlab.freedesktop.org/bolt/bolt/-/issues/177">before</a>.</p>
 <p>
@@ -133,13 +133,13 @@ Now, being new to Guix, I still didn&#39;t <strong>quite</strong> know what to d
 In Guix, you can reconfigure your system through the <code class="verbatim">guix system reconfigure /etc/config.scm</code>. What&#39;s different from other linux distros is that you don&#39;t need to modify <strong>that</strong> specific file in the /etc folder like you do for most other configs in most other distros. You can just point the <code class="verbatim">guix system reconfigure</code> command on any config :o!</p>
 <p>
 So I&#39;m starting my personal config now which will shortly live in my <a href="https://github.com/noonker/dotfiles">dotfiles repo</a>. But if you&#39;re still trying to get started at this point what I did was move my config to a new folder and then replicated part of the structure of Kenny&#39;s config. My dirs look something like this:</p>
-<blockquote>
-<p>guix-system/
-├── config.scm
-└── noonker
-    └── services
-        └── boltd.scm</p>
-</blockquote>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>guix-system/
+</span></span><span style="display:flex;"><span>├── config.scm
+</span></span><span style="display:flex;"><span>└── noonker
+</span></span><span style="display:flex;"><span>    └── services
+</span></span><span style="display:flex;"><span>        └── boltd.scm</span></span></code></pre></div>
+</div>
 <p>
 The boltd.scm is directly copied from <a href="https://github.com/kennyballou/dotfiles/blob/master/kbg/services/boltd.scm">Kenny&#39;s config</a> however the <code class="verbatim">(define-module)</code> function has been replaced to replicate the folder hierarchy above:</p>
 <div class="src src-scheme">

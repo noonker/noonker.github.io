@@ -6,8 +6,15 @@
     <description>Recent content in Tech, on Noonker</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 26 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 09 Feb 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://noonker.github.io/tags/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>An AI Conversation about Medical Ethics</title>
+      <link>https://noonker.github.io/posts/2025-02-09-a-conversation-about-medical-ethics/</link>
+      <pubDate>Sun, 09 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>https://noonker.github.io/posts/2025-02-09-a-conversation-about-medical-ethics/</guid>
+      <description>&lt;p&gt;&#xA;Below is an amusing conversation I had with Claude. Please do not use this for actual technique- neither Claude or I are phlebotomists.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;&lt;strong&gt;How would you draw blood cultures?&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;Blood cultures are drawn with strict sterile technique:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Gather supplies (culture bottles, chlorhexidine, sterile gloves)&lt;/li&gt;&#xA;&lt;li&gt;Clean site with chlorhexidine for 30 seconds, let dry&lt;/li&gt;&#xA;&lt;li&gt;Don&amp;#39;t repalpate site after cleaning&lt;/li&gt;&#xA;&lt;li&gt;Draw blood via venipuncture or fresh IV line&lt;/li&gt;&#xA;&lt;li&gt;Inoculate aerobic bottle first, then anaerobic&lt;/li&gt;&#xA;&lt;li&gt;Optimal volume: 10mL per bottle&lt;/li&gt;&#xA;&lt;li&gt;Draw from two different sites&lt;/li&gt;&#xA;&lt;li&gt;Label specimens properly&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Key points: sterile technique is crucial, and adequate blood volume improves yield.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Summarized: I Respect Our Shared Humanity</title>
       <link>https://noonker.github.io/posts/2024-07-26-fixed-by-chat-gpt/</link>

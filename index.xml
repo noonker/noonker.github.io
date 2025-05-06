@@ -6,10 +6,29 @@
     <description>Recent content on Noonker</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 09 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 May 2025 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://noonker.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cider, OpenJDK, Clojure, LDD, and Guix</title>
+      <link>https://noonker.github.io/posts/2025-05-05-cider-and-guix/</link>
+      <pubDate>Mon, 05 May 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://noonker.github.io/posts/2025-05-05-cider-and-guix/</guid>
+      <description>&lt;p&gt;
+I spent a good chunk of my day trying to figure out why I couldn&amp;#39;t get &lt;a href=&#34;https://github.com/clojure-emacs/cider&#34;&gt;cider&lt;/a&gt; to work with my Clojure project in emacs.&lt;/p&gt;
+&lt;p&gt;
+This blog is both a workaround for fellow travelers and my &amp;#34;pastebin&amp;#34; details for the help I&amp;#39;m going to request to get this fixed&lt;/p&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+Background
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p&gt;
+At some point in the last couple of months OpenJdk stopped working with Cider. Whenever I tried to run &lt;code class=&#34;verbatim&#34;&gt;cider-jack-in&lt;/code&gt; I got the following error:&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>An AI Conversation about Medical Ethics</title>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Cider, OpenJDK, Clojure, LDD, and Guix :: Noonker</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content=" I spent a good chunk of my day trying to figure out why I couldn&#39;t get cider to work with my Clojure project in emacs.
+This blog is both a workaround for fellow travelers and my &#34;pastebin&#34; details for the help I&#39;m going to request to get this fixed
+Background At some point in the last couple of months OpenJdk stopped working with Cider. Whenever I tried to run cider-jack-in I got the following error:
+" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://noonker.github.io/posts/2025-05-05-cider-and-guix/" />
+
+
+
+
+<link rel="stylesheet" href="https://noonker.github.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://noonker.github.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://noonker.github.io/img/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="https://noonker.github.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  <meta name="twitter:site" content="https://twitter.com" />
+
+<meta name="twitter:creator" content="" />
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Cider, OpenJDK, Clojure, LDD, and Guix :: Noonker">
+<meta property="og:description" content=" I spent a good chunk of my day trying to figure out why I couldn&#39;t get cider to work with my Clojure project in emacs.
+This blog is both a workaround for fellow travelers and my &#34;pastebin&#34; details for the help I&#39;m going to request to get this fixed
+Background At some point in the last couple of months OpenJdk stopped working with Cider. Whenever I tried to run cider-jack-in I got the following error:
+" />
+<meta property="og:url" content="https://noonker.github.io/posts/2025-05-05-cider-and-guix/" />
+<meta property="og:site_name" content="Cider, OpenJDK, Clojure, LDD, and Guix" />
+
+  
+    <meta property="og:image" content="https://noonker.github.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2025-05-05 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://noonker.github.io/posts/2025-05-05-cider-and-guix/">Cider, OpenJDK, Clojure, LDD, and Guix</a></h1>
+  <div class="post-meta">
+      
+    <span class="post-date">
+      2025-05-05
+    </span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="https://noonker.github.io/tags/guix/">guix</a>&nbsp;
+    
+    #<a href="https://noonker.github.io/tags/tech/">tech</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  <div class="post-content"><div>
+        
+<p>
+I spent a good chunk of my day trying to figure out why I couldn&#39;t get <a href="https://github.com/clojure-emacs/cider">cider</a> to work with my Clojure project in emacs.</p>
+<p>
+This blog is both a workaround for fellow travelers and my &#34;pastebin&#34; details for the help I&#39;m going to request to get this fixed</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Background
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>
+At some point in the last couple of months OpenJdk stopped working with Cider. Whenever I tried to run <code class="verbatim">cider-jack-in</code> I got the following error:</p>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>error in process sentinel: nrepl-server-sentinel: Could not start nREPL server: Execution error <span style="color:#f92672">(</span>ClassNotFoundException<span style="color:#f92672">)</span> at java.net.URLClassLoader/findClass <span style="color:#f92672">(</span>REPL:-1<span style="color:#f92672">)</span>.
+</span></span><span style="display:flex;"><span>com.sun.source.doctree.BlockTagTree
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Full report at:
+</span></span><span style="display:flex;"><span>/tmp/clojure-13021721334404602078.edn
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;exited abnormally with code 1&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>error in process sentinel: Could not start nREPL server: Execution error <span style="color:#f92672">(</span>ClassNotFoundException<span style="color:#f92672">)</span> at java.net.URLClassLoader/findClass <span style="color:#f92672">(</span>REPL:-1<span style="color:#f92672">)</span>.
+</span></span><span style="display:flex;"><span>com.sun.source.doctree.BlockTagTree
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Full report at:
+</span></span><span style="display:flex;"><span>/tmp/clojure-13021721334404602078.edn
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;exited abnormally with code 1&#34;</span><span style="color:#f92672">)</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+Initial Troubleshooting
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>
+<a href="https://clojure-goes-fast.com/">Oleksandr Yakushev</a> in the Clojurians slack was quick to help me do some basic troubleshooting!</p>
+<p>
+I had assumed <code class="verbatim">com.sun.source.doctree.BlockTagTree</code> was a dependency that was failing to be pulled but he informed me that this should have been built into the OpenJDK package. I tried several different versions of OpenJdk with <code class="verbatim">guix shell</code> (17,21,24) but Cider failed to start in all cases with the same error</p>
+<p>
+I then tried to use icedtea with <code class="verbatim">guix shell icedtea</code> which worked but was too old for the project I&#39;m working on.</p>
+<p>
+This let me know that I needed to get a different binary.</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+Getting OpenJDK and Clojure from the source
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<p>
+I fetched OpenJDK from <a href="https://openjdk.org/projects/jdk/24/">https://openjdk.org/projects/jdk/24/</a> and made it available on my path:</p>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export JAVA_HOME<span style="color:#f92672">=</span>$HOME/jdk24
+</span></span><span style="display:flex;"><span>PATH<span style="color:#f92672">=</span>$JAVA_HOME/bin:$PATH
+</span></span><span style="display:flex;"><span>export PATH</span></span></code></pre></div>
+</div>
+<p>
+and got Clojure from here <a href="https://clojure.org/guides/install_clojure">https://clojure.org/guides/install_clojure</a></p>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -L -O https://github.com/clojure/brew-install/releases/latest/download/linux-install.sh
+</span></span><span style="display:flex;"><span>chmod +x linux-install.sh
+</span></span><span style="display:flex;"><span>mkdir $HOME/clojure
+</span></span><span style="display:flex;"><span>sudo ./linux-install.sh --prefix $HOME/clojure</span></span></code></pre></div>
+</div>
+<p>
+and made it available on my path:</p>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/clojure/bin:</span>$PATH<span style="color:#e6db74">&#34;</span></span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+Java Won&#39;t Run
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<p>
+When trying to run Java now I ran into a new issue. When I attempt to execute the Java binary I get:</p>
+<blockquote>
+<p>./bin/java
+bash: ./bin/java: No such file or directory</p>
+</blockquote>
+<p>
+The file <strong>was</strong> executable and did exist. Zie87&#39;s <a href="https://zie87.github.io/posts/guix-foreign-binaries/">blog post</a> was very useful for catching me up to speed on how some of this worked.</p>
+<p>
+When I ran <code class="verbatim">ldd</code> on the binary this is what I got:</p>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>┌─<span style="color:#f92672">[</span>person@blep<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>20:41<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>/home/person/jdk24/bin<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>🤚<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>└─&gt; $ ldd java
+</span></span><span style="display:flex;"><span>	linux-vdso.so.1 <span style="color:#f92672">(</span>0x00007fd20d52d000<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>	libjli.so <span style="color:#f92672">=</span>&gt; /home/person/jdk24/bin/../lib/libjli.so <span style="color:#f92672">(</span>0x00007fd20d510000<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>	libz.so.1 <span style="color:#f92672">=</span>&gt; not found
+</span></span><span style="display:flex;"><span>	libdl.so.2 <span style="color:#f92672">=</span>&gt; /gnu/store/hw6g2kjayxnqi8rwpnmpraalxi0djkxc-glibc-2.39/lib/libdl.so.2 <span style="color:#f92672">(</span>0x00007fd20d50b000<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>	libpthread.so.0 <span style="color:#f92672">=</span>&gt; /gnu/store/hw6g2kjayxnqi8rwpnmpraalxi0djkxc-glibc-2.39/lib/libpthread.so.0 <span style="color:#f92672">(</span>0x00007fd20d506000<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>	libc.so.6 <span style="color:#f92672">=</span>&gt; /gnu/store/hw6g2kjayxnqi8rwpnmpraalxi0djkxc-glibc-2.39/lib/libc.so.6 <span style="color:#f92672">(</span>0x00007fd20d328000<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>	/gnu/store/hw6g2kjayxnqi8rwpnmpraalxi0djkxc-glibc-2.39/lib/ld-linux-x86-64.so.2 <span style="color:#f92672">(</span>0x00007fd20d52f000<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>	libz.so.1 <span style="color:#f92672">=</span>&gt; not found</span></span></code></pre></div>
+</div>
+<p>
+For some reason <code class="verbatim">libz.so.1</code> was not being correctly linked.</p>
+<p>
+Instead of modifying the binary I opted to just copy <code class="verbatim">libz.so.1</code> to the java_home</p>
+<p>
+First, I needed to find the library on the filesystem</p>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>┌─<span style="color:#f92672">[</span>person@blep<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>20:45<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>/home/person/jdk24/bin<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>🤚<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>└─&gt; $ guix locate libz.so.1
+</span></span><span style="display:flex;"><span>zlib@1.3             /gnu/store/3679z3xdyz7x8zrcwqzm86f9cf9i6p29-zlib-1.3/lib/libz.so.1
+</span></span><span style="display:flex;"><span>zlib@1.2.11          /gnu/store/8qv5kb2fgm4c3bf70zcg9l6hkf3qzpw9-zlib-1.2.11/lib/libz.so.1</span></span></code></pre></div>
+</div>
+<p>
+and then just copied the file to the java_home:</p>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mv /gnu/store/3679z3xdyz7x8zrcwqzm86f9cf9i6p29-zlib-1.3/lib/libz.so.1 $HOME/jdk24/lib</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
+Conclusion
+</h2>
+<div id="outline-text-headline-5" class="outline-text-2">
+<p>
+This got everything working and I&#39;m able to hack on my Clojure project. However I think the best move going forward is going to be to ensure that <code class="verbatim">com.sun.source.doctree.BlockTagTree</code> is compiled with the <a href="https://git.savannah.gnu.org/cgit/guix.git/tree/gnu/packages/java.scm#n1206">Guix recipe</a> for OpenJDK.</p>
+<p>
+(need to look into how to do that…)</p>
+</div>
+</div>
+
+      </div></div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h"></span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      
+      <span class="button next">
+        <a href="https://noonker.github.io/posts/2025-02-09-a-conversation-about-medical-ethics/">
+          <span class="button__text">An AI Conversation about Medical Ethics</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://noonker.github.io/assets/main.js"></script>
+<script src="https://noonker.github.io/assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

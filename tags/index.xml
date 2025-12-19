@@ -6,8 +6,15 @@
     <description>Recent content in Tags on Noonker</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 29 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Dec 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://noonker.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ctf</title>
+      <link>https://noonker.github.io/tags/ctf/</link>
+      <pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://noonker.github.io/tags/ctf/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Hell</title>
       <link>https://noonker.github.io/tags/hell/</link>
@@ -76,13 +83,6 @@
       <link>https://noonker.github.io/tags/emacs/</link>
       <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
       <guid>https://noonker.github.io/tags/emacs/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Ctf</title>
-      <link>https://noonker.github.io/tags/ctf/</link>
-      <pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://noonker.github.io/tags/ctf/</guid>
       <description></description>
     </item>
     <item>

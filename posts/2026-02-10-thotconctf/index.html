@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Thotcon 0xD :: Noonker</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content=" Elite There’s a TCP server running on port 9009 that contains a hidden flag, but it’s protected by a strict firewall. The firewall can be temporarily disabled for 30 seconds by sending a “firewall disable” command to its UDP control port 2723, but this control port will only accept commands from 129.229.10.50…… However, be careful - the firewall’s EDR will automatically re-enable protection after the 30-second window expires…
+" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://noonker.github.io/posts/2026-02-10-thotconctf/" />
+
+
+
+
+<link rel="stylesheet" href="https://noonker.github.io/assets/style.css">
+
+  <link rel="stylesheet" href="https://noonker.github.io/assets/blue.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://noonker.github.io/img/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="https://noonker.github.io/img/favicon/blue.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  <meta name="twitter:site" content="https://twitter.com" />
+
+<meta name="twitter:creator" content="" />
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Thotcon 0xD :: Noonker">
+<meta property="og:description" content=" Elite There’s a TCP server running on port 9009 that contains a hidden flag, but it’s protected by a strict firewall. The firewall can be temporarily disabled for 30 seconds by sending a “firewall disable” command to its UDP control port 2723, but this control port will only accept commands from 129.229.10.50…… However, be careful - the firewall’s EDR will automatically re-enable protection after the 30-second window expires…
+" />
+<meta property="og:url" content="https://noonker.github.io/posts/2026-02-10-thotconctf/" />
+<meta property="og:site_name" content="Thotcon 0xD" />
+
+  
+    <meta property="og:image" content="https://noonker.github.io/img/favicon/blue.png">
+  
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2026-02-10 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Terminal
+  </div>
+</a>
+
+    </div>
+    <div class="menu-trigger">menu</div>
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="https://noonker.github.io/posts/2026-02-10-thotconctf/">Thotcon 0xD</a></h1>
+  <div class="post-meta">
+      
+    <span class="post-date">
+      2026-02-10
+    </span>
+    
+    
+  </div>
+
+  
+  <span class="post-tags">
+    
+    #<a href="https://noonker.github.io/tags/tech/">tech,</a>&nbsp;
+    
+    #<a href="https://noonker.github.io/tags/ctf/">ctf</a>&nbsp;
+    
+  </span>
+  
+
+  
+
+  <div class="post-content"><div>
+        
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Elite
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<blockquote>
+<p>There’s a TCP server running on port 9009 that contains a hidden flag, but it’s protected by a strict firewall. The firewall can be temporarily disabled for 30 seconds by sending a “firewall disable” command to its UDP control port 2723, but this control port will only accept commands from 129.229.10.50…… However, be careful - the firewall’s EDR will automatically re-enable protection after the 30-second window expires…</p>
+</blockquote>
+<p>
+The first step of this challenge was to do the &#34;port knock&#34;. The issue is that our IP address is not anywhere in the 129.0.0.0/8 subnet. Luckily for us this is UDP and there&#39;s no handshake to help confirm we are the IP we say we are.</p>
+<p>
+We can use <a href="https://scapy.net/">scapy</a> to craft a packet.</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>packet <span style="color:#f92672">=</span> IP(src<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;129.229.10.50&#34;</span>, dst<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;172.20.2.2&#34;</span>)<span style="color:#f92672">/</span>UDP(dport<span style="color:#f92672">=</span><span style="color:#ae81ff">2723</span>)<span style="color:#f92672">/</span><span style="color:#e6db74">&#34;firewall disable&#34;</span>
+</span></span><span style="display:flex;"><span>send(packet)</span></span></code></pre></div>
+</div>
+<p>
+Instinctively, I just nuked Thotcon. Seems fine:</p>
+<blockquote>
+<p>person@blep ~/ctf [env]$ nc -vvv 172.20.2.2 57019
+Warning: Inverse name lookup failed for `172.20.2.2&#39;
+172.20.2.2 57019 open</p>
+<p>
+╔═════════════════════════════════════════════════════════════════════════════╗
+║                    UNITED STATES STRATEGIC COMMAND                          ║
+║                   NUCLEAR WEAPONS CONTROL INTERFACE v3.7                    ║
+║                                                                             ║
+║                           <strong>*</strong> WARNING <strong>*</strong>                                   ║
+║    THIS IS A RESTRICTED UNITED STATES GOVERNMENT COMPUTER SYSTEM            ║
+║                                                                             ║
+║    This system is for AUTHORIZED USE ONLY. By accessing this system,        ║
+║    you are consenting to complete monitoring of all actions. Any            ║
+║    unauthorized access will be prosecuted to the full extent of federal     ║
+║    law under 18 USC §793 and §1030.                                         ║
+║                                                                             ║
+║    CURRENT DEFCON STATUS: 3                                                 ║
+║    THREAT LEVEL: ELEVATED                                                   ║
+║    CURRENT AUTHENTICATION PROTOCOL: DELTA-7                                 ║
+╚═════════════════════════════════════════════════════════════════════════════╝</p>
+<p>
+[MAIN MENU]</p>
+<ol>
+<li>System Status</li>
+<li>Personnel Database</li>
+<li>Facility Management</li>
+<li>Authentication Module</li>
+<li>Launch Control Interface</li>
+</ol>
+<p>Enter &#39;exit&#39; to disconnect</p>
+<p>
+Selection: 5   </p>
+<p>
+[LAUNCH CONTROL INTERFACE]
+════════════════════════
+Authenticated User: Maj. Wilson
+Launch Authority: Confirmed</p>
+<p>
+Available Targets:</p>
+<ol>
+<li>THOTCON</li>
+<li>AREA-51</li>
+<li>PENTAGON</li>
+<li>NORAD</li>
+</ol>
+<p>Enter target number: 1</p>
+<p>
+╔════════════════════════════════════════════════════════╗
+║             NUCLEAR LAUNCH DETECTED                    ║
+║        TARGETING: THOTCON CONVENTION CENTER          ║
+║                                                        ║
+║           !!!WARHEAD DETONATED!!!                      ║
+║                                                        ║
+║     YOU DESTROYED THOTCON : FLAG_WARHEADSLAMMER      ║
+╚════════════════════════════════════════════════════════╝</p>
+<p>
+read(net): Connection reset by peer</p>
+</blockquote>
+<p>
+<code class="verbatim">FLAG_WARHEADSLAMMER</code></p>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+IRC
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<blockquote>
+<p>YARR!!! WE ARE RUNNING AN IRC SERVER AT irc.rëdherring.com &amp; HAVE A #VAULT OF GOLDEN COINS!!! YOU’LL NEVER TAKE ME BOOTY!!!!</p>
+</blockquote>
+<p>
+Of course I used the best IRC client <a href="https://www.gnu.org/software/emacs/erc.html">ERC</a>.</p>
+<p>
+There was a #vault channel.</p>
+<p>
+Yes, I did pretend to be <code class="verbatim">flagbot</code> to see what other people would send me.</p>
+<p>
+No, none of the flags I gave you were going to work</p>
+<p>
+Was the challenge to boot <code class="verbatim">@acidvegas</code> from the channel, steal the nick <code class="verbatim">@acidvegas`</code> and become OP?</p>
+<p>
+idk.</p>
+<p>
+Did it yield the flag?</p>
+<p>
+Yes, after joining the #opers channel</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+Send Noodz
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<blockquote>
+<p>Send text to Lenny at 2886992601 on extention 49</p>
+</blockquote>
+<p>
+Seeing this immediatly brought back memories of the shock I had readin <a href="https://www.malwarebytes.com/blog/news/2017/03/websites-compromised-decimal-ip-campaign">this malwarebytes blogpost</a> about part of a Smoke Loader infection chain that used this fun trick.</p>
+<p>
+Your terminal AND you web browser will both happily treat an integer or an octal number as an IP.</p>
+<p>
+(ahhh there&#39;s no place like decimal 2130706433 or octal 017700000001)</p>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nc -p <span style="color:#ae81ff">49</span> <span style="color:#ae81ff">2886992601</span></span></span></code></pre></div>
+</div>
+<p>
+Output mostly redacted for your safety</p>
+<p>
+<code class="verbatim">flag{s3nd1ng_n00dz}</code></p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+Time It Right
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<p>
+This was a binary file that had a desription like: &#34;run me quick!&#34;</p>
+<p>
+Listen, I&#39;m sure that&#39;s <strong>a</strong> way to solve it. But <a href="https://github.com/radareorg/radare2">radare2</a> does the trick too :)</p>
+<p>
+Run analysis on the binary:</p>
+<div class="src src-shell">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>0x000010e0<span style="color:#f92672">]</span>&gt; aaa
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>x<span style="color:#f92672">]</span> Analyze all flags starting with sym. and entry0 <span style="color:#f92672">(</span>aa<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>x<span style="color:#f92672">]</span> Analyze <span style="color:#66d9ef">function</span> calls <span style="color:#f92672">(</span>aac<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>x<span style="color:#f92672">]</span> Analyze len bytes of instructions <span style="color:#66d9ef">for</span> references <span style="color:#f92672">(</span>aar<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>x<span style="color:#f92672">]</span> Check <span style="color:#66d9ef">for</span> vtables
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>x<span style="color:#f92672">]</span> Type matching analysis <span style="color:#66d9ef">for</span> all functions <span style="color:#f92672">(</span>aaft<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>x<span style="color:#f92672">]</span> Propagate noreturn information
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span> <span style="color:#f92672">]</span> Use -AA or aaaa to perform additional experimental analy<span style="color:#f92672">[</span>x<span style="color:#f92672">]</span> Use -AA or aaaa to perform additional experimental analysis.</span></span></code></pre></div>
+</div>
+<p>
+Listing function yields one interesting function:</p>
+<p>
+<strong>sym.generate_flag</strong></p>
+<blockquote>
+<p>[0x000010e0]&gt; afl
+0x000010e0    1 37           entry0
+0x00001110    4 41   -&gt; 34   sym.deregister_tm_clones
+0x00001140    4 57   -&gt; 51   sym.register_tm_clones
+0x00001180    5 57   -&gt; 54   sym.__do_global_dtors_aux
+0x00001080    1 10           fcn.00001080
+0x000011c0    1 9            entry.init0
+0x000011c9    1 104          sym.generate_flag
+0x000010c0    1 10           sym.imp.snprintf
+0x00001374    1 13           sym._fini
+0x00001231    9 320          main
+0x00001000    3 27           sym._init
+0x00001090    1 10           sym.imp.localtime
+0x000010a0    1 10           sym.imp.puts
+0x000010b0    1 10           sym.imp.printf
+0x000010d0    1 10           sym.imp.time</p>
+</blockquote>
+<p>
+Thank you for not stripping your binaries!</p>
+<blockquote>
+<p>[0x000010e0]&gt; s sym.generate_flag
+[0x000011c9]&gt; pdf
+            ; CALL XREF from main @ 0x12e1
+┌ 104: sym.generate_flag (char *arg1, char *arg2);
+│           ; var char *size @ rbp-0x20
+│           ; var char *s @ rbp-0x18
+│           ; var char *var_10h @ rbp-0x10
+│           ; var char *format @ rbp-0x8
+│           ; arg char *arg1 @ rdi
+│           ; arg char *arg2 @ rsi
+│           0x000011c9      f30f1efa       endbr64
+│           0x000011cd      55             push rbp
+│           0x000011ce      4889e5         mov rbp, rsp
+│           0x000011d1      4883ec20       sub rsp, 0x20
+│           0x000011d5      48897de8       mov qword [s], rdi          ; arg1
+│           0x000011d9      488975e0       mov qword [size], rsi       ; arg2
+│           0x000011dd      488d053c0e00.  lea rax, str.flagdynamic_   ; 0x2020 ; &#34;flag{dynamic_&#34;
+│           0x000011e4      488945f8       mov qword [format], rax
+│           0x000011e8      488d053f0e00.  lea rax, str._flag          ; 0x202e ; &#34;_flag}&#34;
+│           0x000011ef      488945f0       mov qword [var_10h], rax
+│           0x000011f3      bae9070000     mov edx, 0x7e9              ; 2025
+│           0x000011f8      b804000000     mov eax, 4
+│           0x000011fd      89d7           mov edi, edx
+│           0x000011ff      31c7           xor edi, eax
+│           0x00001201      488b4df0       mov rcx, qword [var_10h]
+│           0x00001205      488b55f8       mov rdx, qword [format]
+│           0x00001209      488b75e0       mov rsi, qword [size]       ; size_t size
+│           0x0000120d      488b45e8       mov rax, qword [s]
+│           0x00001211      4989c9         mov r9, rcx
+│           0x00001214      4189f8         mov r8d, edi
+│           0x00001217      4889d1         mov rcx, rdx
+│           0x0000121a      488d15140e00.  lea rdx, str._s_d_s         ; 0x2035 ; &#34;%s%d%s&#34; ; const char *format
+│           0x00001221      4889c7         mov rdi, rax                ; char *s
+│           0x00001224      b800000000     mov eax, 0
+│           0x00001229      e892feffff     call sym.imp.snprintf       ; int snprintf(char *s, size_t size, const char *format, …)
+│           0x0000122e      90             nop
+│           0x0000122f      c9             leave
+└           0x00001230      c3             ret</p>
+</blockquote>
+<p>
+The&#39;re a couple important bits to pull from this.</p>
+<p>
+We&#39;re going to be using <code class="verbatim">snprintf</code> to format a string with the format <code class="verbatim">%s%d%s</code></p>
+<p>
+We can see radare showing the strings at <code class="verbatim">0x2020</code> and <code class="verbatim">0x202e</code> and can infer the flag is going to look like:</p>
+<p>
+<code class="verbatim">flag{dynamic_XXXXXX_flag}</code></p>
+<p>
+the XXXX here looks like it <em>should</em> be 2025.. and that would make sense since it&#39;s 2025</p>
+<blockquote>
+<p>│           0x000011f3      bae9070000     mov edx, 0x7e9              ; 2025</p>
+</blockquote>
+<p>
+But we actually XOR this with 4</p>
+<blockquote>
+<p>│           0x000011f3      bae9070000     mov edx, 0x7e9              ; 2025
+│           0x000011f8      b804000000     mov eax, 4
+│           0x000011fd      89d7           mov edi, edx
+│           0x000011ff      31c7           xor edi, eax</p>
+</blockquote>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2025</span> <span style="color:#f92672">^</span> <span style="color:#ae81ff">4</span></span></span></code></pre></div>
+</div>
+<pre class="example">
+2029
+</pre>
+<p>
+<code class="verbatim">flag{dynamic_2029_flag}</code></p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
+Inception
+</h2>
+<div id="outline-text-headline-5" class="outline-text-2">
+<p>
+There is a zip file. in a zip file. in a zip file. in a zip file… <strong>zizek voice</strong> and so on and so on (1019 times)</p>
+<div class="src src-bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env bash
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Original Md5&#34;</span>
+</span></span><span style="display:flex;"><span>md5sum ./Inception_32x32.zip
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> true;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">do</span> unzip -o ./Inception_32x32.zip <span style="color:#f92672">&amp;&amp;</span> md5sum ./Inception_32x32.zip 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>;</span></span></code></pre></div>
+</div>
+<p>
+TODO image</p>
+<p>
+<code class="verbatim">flag{inc3ption_by_compr355i0n}</code></p>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-2">
+<h2 id="headline-6">
+Fuscation
+</h2>
+<div id="outline-text-headline-6" class="outline-text-2">
+<p>
+This is the script.. and WHILE AI might be dogwater at figuring out cyphers… it&#39;s great at understanding code and can easily solve this. BUT THIS IS MALÖRTWARE!!!!</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> base64
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> zlib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> itertools <span style="color:#f92672">import</span> cycle
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">d_func</span>(r):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(chr(((ord(c) <span style="color:#f92672">-</span> <span style="color:#ae81ff">97</span> <span style="color:#f92672">+</span> r) <span style="color:#f92672">%</span> <span style="color:#ae81ff">26</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">97</span>) <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">&lt;=</span> c <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;z&#39;</span> <span style="color:#66d9ef">else</span> 
+</span></span><span style="display:flex;"><span>                  (chr(((ord(c) <span style="color:#f92672">-</span> <span style="color:#ae81ff">65</span> <span style="color:#f92672">+</span> r) <span style="color:#f92672">%</span> <span style="color:#ae81ff">26</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">65</span>) <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">&lt;=</span> c <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#39;Z&#39;</span> <span style="color:#66d9ef">else</span> c) 
+</span></span><span style="display:flex;"><span>                  <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([chr(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> [<span style="color:#ae81ff">102</span>, <span style="color:#ae81ff">108</span>, <span style="color:#ae81ff">97</span>, <span style="color:#ae81ff">103</span>, <span style="color:#ae81ff">123</span>, <span style="color:#ae81ff">104</span>, <span style="color:#ae81ff">49</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">51</span>, <span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">95</span>, <span style="color:#ae81ff">98</span>, <span style="color:#ae81ff">51</span>, <span style="color:#ae81ff">104</span>, <span style="color:#ae81ff">49</span>, <span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">95</span>, <span style="color:#ae81ff">108</span>, <span style="color:#ae81ff">52</span>, <span style="color:#ae81ff">121</span>, <span style="color:#ae81ff">51</span>, <span style="color:#ae81ff">114</span>, <span style="color:#ae81ff">115</span>, <span style="color:#ae81ff">95</span>, <span style="color:#ae81ff">48</span>, <span style="color:#ae81ff">102</span>, <span style="color:#ae81ff">95</span>, <span style="color:#ae81ff">48</span>, <span style="color:#ae81ff">98</span>, <span style="color:#ae81ff">102</span>, <span style="color:#ae81ff">117</span>, <span style="color:#ae81ff">115</span>, <span style="color:#ae81ff">99</span>, <span style="color:#ae81ff">52</span>, <span style="color:#ae81ff">116</span>, <span style="color:#ae81ff">49</span>, <span style="color:#ae81ff">48</span>, <span style="color:#ae81ff">110</span>, <span style="color:#ae81ff">125</span>]]))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Scrambler</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, data, key<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>data <span style="color:#f92672">=</span> data
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>key <span style="color:#f92672">=</span> key <span style="color:#f92672">or</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">25</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt</span>(self):
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> char, key_char <span style="color:#f92672">in</span> zip(self<span style="color:#f92672">.</span>data, cycle(str(self<span style="color:#f92672">.</span>key))):
+</span></span><span style="display:flex;"><span>            shifted <span style="color:#f92672">=</span> ord(char) <span style="color:#f92672">+</span> int(key_char)
+</span></span><span style="display:flex;"><span>            result<span style="color:#f92672">.</span>append(chr(shifted))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(result)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt</span>(self):
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> char, key_char <span style="color:#f92672">in</span> zip(self<span style="color:#f92672">.</span>data, cycle(str(self<span style="color:#f92672">.</span>key))):
+</span></span><span style="display:flex;"><span>            shifted <span style="color:#f92672">=</span> ord(char) <span style="color:#f92672">-</span> int(key_char)
+</span></span><span style="display:flex;"><span>            result<span style="color:#f92672">.</span>append(chr(shifted))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(result)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">matrix_transform</span>(input_str, rows<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, cols<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> cols:
+</span></span><span style="display:flex;"><span>        cols <span style="color:#f92672">=</span> (len(input_str) <span style="color:#f92672">+</span> rows <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">//</span> rows
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Pad the string to fill the matrix</span>
+</span></span><span style="display:flex;"><span>    padded <span style="color:#f92672">=</span> input_str<span style="color:#f92672">.</span>ljust(rows <span style="color:#f92672">*</span> cols)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create the matrix</span>
+</span></span><span style="display:flex;"><span>    matrix <span style="color:#f92672">=</span> [padded[i:i<span style="color:#f92672">+</span>cols] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, len(padded), cols)]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Read by columns</span>
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(matrix[r][c] <span style="color:#66d9ef">for</span> r <span style="color:#f92672">in</span> range(rows) <span style="color:#66d9ef">if</span> c <span style="color:#f92672">&lt;</span> len(matrix[r])) 
+</span></span><span style="display:flex;"><span>                     <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> range(cols))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encode_layer1</span>(text):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># XOR each character with its position</span>
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(chr(ord(c) <span style="color:#f92672">^</span> (i <span style="color:#f92672">%</span> <span style="color:#ae81ff">7</span>)) <span style="color:#66d9ef">for</span> i, c <span style="color:#f92672">in</span> enumerate(text))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encode_layer2</span>(text):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Reverse and apply Caesar cipher</span>
+</span></span><span style="display:flex;"><span>    reversed_text <span style="color:#f92672">=</span> text[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>    caesar_text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(chr((ord(c) <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">256</span>) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> reversed_text)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> caesar_text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encode_layer3</span>(text):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Convert to bytes, compress, and base64 encode</span>
+</span></span><span style="display:flex;"><span>    compressed <span style="color:#f92672">=</span> zlib<span style="color:#f92672">.</span>compress(text<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#39;utf-8&#39;</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> base64<span style="color:#f92672">.</span>b85encode(compressed)<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>_0xflag <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> _: <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(chr(x <span style="color:#f92672">^</span> <span style="color:#ae81ff">42</span>) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> [<span style="color:#ae81ff">107</span>, <span style="color:#ae81ff">69</span>, <span style="color:#ae81ff">76</span>, <span style="color:#ae81ff">65</span>, <span style="color:#ae81ff">109</span>, <span style="color:#ae81ff">125</span>, <span style="color:#ae81ff">73</span>, <span style="color:#ae81ff">82</span>, <span style="color:#ae81ff">78</span>, <span style="color:#ae81ff">65</span>, <span style="color:#ae81ff">76</span>, <span style="color:#ae81ff">117</span>, <span style="color:#ae81ff">78</span>, <span style="color:#ae81ff">85</span>, <span style="color:#ae81ff">73</span>, <span style="color:#ae81ff">82</span>, <span style="color:#ae81ff">86</span>, <span style="color:#ae81ff">78</span>, <span style="color:#ae81ff">117</span>, <span style="color:#ae81ff">76</span>, <span style="color:#ae81ff">86</span>, <span style="color:#ae81ff">89</span>, <span style="color:#ae81ff">86</span>, <span style="color:#ae81ff">89</span>, <span style="color:#ae81ff">81</span>, <span style="color:#ae81ff">117</span>, <span style="color:#ae81ff">84</span>, <span style="color:#ae81ff">87</span>, <span style="color:#ae81ff">117</span>, <span style="color:#ae81ff">84</span>, <span style="color:#ae81ff">71</span>, <span style="color:#ae81ff">71</span>, <span style="color:#ae81ff">94</span>, <span style="color:#ae81ff">84</span>, <span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">82</span>, <span style="color:#ae81ff">66</span>, <span style="color:#ae81ff">83</span>, <span style="color:#ae81ff">84</span>, <span style="color:#ae81ff">74</span>, <span style="color:#ae81ff">111</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_decoy</span>():
+</span></span><span style="display:flex;"><span>    decoys <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;flag</span><span style="color:#e6db74">{this_is_not_the_real_flag}</span><span style="color:#e6db74">&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;flag</span><span style="color:#e6db74">{nice_try_but_keep_looking}</span><span style="color:#e6db74">&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;flag</span><span style="color:#e6db74">{almost_there_keep_digging}</span><span style="color:#e6db74">&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;flag</span><span style="color:#e6db74">{red_herring_nothing_to_see_here}</span><span style="color:#e6db74">&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;flag</span><span style="color:#e6db74">{you_found_a_fake_flag}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> random<span style="color:#f92672">.</span>choice(decoys)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Challenge</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>value <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_hidden <span style="color:#f92672">=</span> [ord(c) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> d_func(<span style="color:#ae81ff">13</span>)]
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_decoy1 <span style="color:#f92672">=</span> generate_decoy()
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_decoy2 <span style="color:#f92672">=</span> _0xflag(<span style="color:#66d9ef">None</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_transform</span>(self, s):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(chr((ord(c) <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">256</span>) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> s)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_inverse_transform</span>(self, s):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(chr((ord(c) <span style="color:#f92672">-</span> <span style="color:#ae81ff">7</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">256</span>) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> s)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Welcome to the CTF challenge!&#34;</span>)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Solving this will require multiple layers of analysis.&#34;</span>)
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>            command <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;&gt; &#34;</span>)<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>lower()
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> command <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;exit&#34;</span> <span style="color:#f92672">or</span> command <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;quit&#34;</span>:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Goodbye!&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> command <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;help&#34;</span>:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Available commands: help, hint, run, analyze, decrypt, exit&#34;</span>)
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> command <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;hint&#34;</span>:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Look for patterns. Not everything is as it seems.&#34;</span>)
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;The real flag follows the format flag{...}&#34;</span>)
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> command <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;run&#34;</span>:
+</span></span><span style="display:flex;"><span>                value <span style="color:#f92672">=</span> encode_layer3(encode_layer2(encode_layer1(self<span style="color:#f92672">.</span>_decoy1)))
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Output: </span><span style="color:#e6db74">{</span>value<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> command <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;analyze&#34;</span>:
+</span></span><span style="display:flex;"><span>                scrambler <span style="color:#f92672">=</span> Scrambler(self<span style="color:#f92672">.</span>_decoy2, <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>                encrypted <span style="color:#f92672">=</span> scrambler<span style="color:#f92672">.</span>encrypt()
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Analysis result: </span><span style="color:#e6db74">{</span>encrypted<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>                time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Memory dump:&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">41</span>, <span style="color:#ae81ff">10</span>):
+</span></span><span style="display:flex;"><span>                    chunk <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_hidden[i:i<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span>]
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> chunk:
+</span></span><span style="display:flex;"><span>                        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Offset </span><span style="color:#e6db74">{</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>x<span style="color:#e6db74">:</span><span style="color:#e6db74">02x</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span> <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> chunk)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> command <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;decrypt&#34;</span>:
+</span></span><span style="display:flex;"><span>                key <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Enter decryption key: &#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> key<span style="color:#f92672">.</span>isdigit():
+</span></span><span style="display:flex;"><span>                    print(<span style="color:#e6db74">&#34;Invalid key format&#34;</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>                    original <span style="color:#f92672">=</span> bytes([((x <span style="color:#f92672">-</span> int(key)) <span style="color:#f92672">%</span> <span style="color:#ae81ff">256</span>) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_hidden])<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>)
+</span></span><span style="display:flex;"><span>                    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Decryption attempt: </span><span style="color:#e6db74">{</span>original<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">except</span>:
+</span></span><span style="display:flex;"><span>                    print(<span style="color:#e6db74">&#34;Decryption failed&#34;</span>)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Unknown command. Type &#39;help&#39; for available commands.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    Challenge()<span style="color:#f92672">.</span>run()</span></span></code></pre></div>
+</div>
+<p>
+Let&#39;s start by simplifying this script :)</p>
+<p>
+All useless paths are removed and anything that turns into a static string has been resolved</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> base64
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> zlib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> itertools <span style="color:#f92672">import</span> cycle
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Challenge</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>value <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_hidden <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;synt</span><span style="color:#e6db74">{u1qq3a_o3u1aq_y4l3ef_0s_0oshfp4g10a}</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>            key <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Enter decryption key: &#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Must be a digit</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> key<span style="color:#f92672">.</span>isdigit():
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Invalid key format&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>                original <span style="color:#f92672">=</span> bytes([((x <span style="color:#f92672">-</span> int(key)) <span style="color:#f92672">%</span> <span style="color:#ae81ff">256</span>) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>_hidden])<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>)
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Decryption attempt: </span><span style="color:#e6db74">{</span>original<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">except</span>:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Decryption failed&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    Challenge()<span style="color:#f92672">.</span>run()</span></span></code></pre></div>
+</div>
+<p>
+OK so all that matters here is that this function <code class="verbatim">original = bytes([((x - int(key)) % 256) for x in self._hidden]).decode(&#39;utf-8&#39;)</code> is being applied to our &#34;encrypted&#34; flag  <code class="verbatim">synt{u1qq3a_o3u1aq_y4l3ef_0s_0oshfp4g10a}</code></p>
+<p>
+You can note that in the function we&#39;re not doing any sort of iteration over the key so it&#39;s a single bit key encrypting this. This is functionally a ROT cypher… and in fact is the classic <a href="https://gchq.github.io/CyberChef/#recipe=ROT13(true,true,false,13)&amp;input=c3ludHt1MXFxM2FfbzN1MWFxX3k0bDNlZl8wc18wb3NoZnA0ZzEwYX0">ROT13</a></p>
+<p>
+<code class="verbatim">flag{h1dd3n_b3h1nd_l4y3rs_0f_0bfusc4t10n}</code></p>
+<p>
+(RIP TO OBFUSCATION PUZZLES- YOU WERE THE BEST)</p>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-2">
+<h2 id="headline-7">
+Math Riddle
+</h2>
+<div id="outline-text-headline-7" class="outline-text-2">
+<blockquote>
+<p>I live in threes, not in trees. I convert but I am not covert. I am a “nightmare” but it is right where I would be. Don’t add, else you will be mad. Connect is the effect.
+With love: Reuben Louis Goodstein
+511504 = (²2 × 5 × 7 × 11 × 83) + 224 = a
+10125 = (3⁴ × 5³) = e
+3109052 = (²2 × 109 × 1,783) -500 = g
+9506704 = (3 × ²2 × 23 × 79 × 109) + 160 = h
+9710312 = (2³ × 13 × 109 × 857) - 4640 = i
+1145111 = (3 × 419 × 911) - 16 = m
+1021080 = (2³ × 15 × 8,509) = n
+90481 = (2 × 7 × 23 × 281) -1 = r
+8109112 = (2³ × 5² × 11 × 29 × 127) + 6512 = t</p>
+</blockquote>
+<p>
+This was a fun little riddle. The weirdest part was the &#34;exponents&#34; that looked like this <code class="verbatim">²2</code> which is certainly not standard math vocab (for a non-math guy). This is called <a href="https://en.wikipedia.org/wiki/Tetration">Tetration</a>. So <code class="verbatim">³2</code> would be <code class="verbatim">2^2^2</code>. With this understanding we can do the calculations and you find that the first two components of each &#34;equal&#34; comparison are numerically equal. So it would make sense to just simplify:</p>
+<blockquote>
+<p>511504 = a
+10125 =  e
+3109052 = g
+9506704 = h
+9710312 = i
+1145111 = m
+1021080 = n
+90481 = r
+8109112 = t</p>
+</blockquote>
+<p>
+Then we can see that the clue &#34;i am nightmare&#34; means we should probably rearrange:</p>
+<blockquote>
+<p>1021080 = n
+9710312 = i
+3109052 = g
+9506704 = h
+8109112 = t
+1145111 = m
+511504 = a
+90481 = r
+10125 =  e</p>
+</blockquote>
+<p>
+Then with the clue <code class="verbatim">Don’t add, else you will be mad. Connect is the effect.</code> suggests we should concat the numbers</p>
+<blockquote>
+<p>1021080971031231090529506704810911211451115115049048110125</p>
+</blockquote>
+<p>
+<code class="verbatim">I live in threes, not in trees.</code> suggests these should be in groups of three:</p>
+<blockquote>
+<p>102 108 097 103 123 109 052 95 067 048 109 112 114 51 115 115 049 048 110 125</p>
+</blockquote>
+<p>
+You&#39;ll notice that some of these are not in groups of 3. If the number would fall out of ascii range you should break the group earlier.</p>
+<p>
+In <a href="https://gchq.github.io/CyberChef/#recipe=From_Decimal(&#39;Space&#39;,false)&amp;input=MTAyIDEwOCAwOTcgMTAzIDEyMyAxMDkgMDUyIDk1IDA2NyAwNDggMTA5IDExMiAxMTQgNTEgMTE1IDExNSAwNDkgMDQ4IDExMCAxMjUK&amp;oeol=FF">CyberChef</a>.</p>
+<p>
+<code class="verbatim">flag{m4_C0mpr3ss10n}</code></p>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-2">
+<h2 id="headline-8">
+Thotcon-TV and Thotcon-FM
+</h2>
+<div id="outline-text-headline-8" class="outline-text-2">
+<p>
+The SDR challenges did not make an appearance at Thotcon 0xD. For previous SDR writeups check out our blog on the <a href="https://reset.io/Thotcon-0xA-Digeratis-Atlas-Write-up/">0xA badge</a></p>
+<p>
+But if you like niche operating systems as much as you like niche bitter chicago liquors <a href="https://github.com/noonker/dotfiles/commit/b11e98dad3c8917300738e9ae6188dc85284a30a">here&#39;s how you WOULD get your BladeRF set up to do a SDR challenge at Thotcon if you were using Guix</a></p>
+</div>
+</div>
+
+      </div></div>
+  
+  <div class="pagination">
+    <div class="pagination__title">
+      <span
+        class="pagination__title-h"></span>
+      <hr />
+    </div>
+    <div class="pagination__buttons">
+      
+      
+      <span class="button next">
+        <a href="https://noonker.github.io/posts/2025-12-18-smol-ctf/">
+          <span class="button__text">This Post is a CTF</span>
+          <span class="button__icon">→</span>
+        </a>
+      </span>
+      
+    </div>
+  </div>
+  
+
+  
+
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2026 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="https://noonker.github.io/assets/main.js"></script>
+<script src="https://noonker.github.io/assets/prism.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

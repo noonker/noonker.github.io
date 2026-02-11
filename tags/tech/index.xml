@@ -5,9 +5,16 @@
     <link>https://noonker.github.io/tags/tech/</link>
     <description>Recent content in Tech, on Noonker</description>
     <generator>Hugo</generator>
-    <language>en</language>
-    <lastBuildDate>Sun, 09 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Feb 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://noonker.github.io/tags/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Thotcon 0xD</title>
+      <link>https://noonker.github.io/posts/2026-02-10-thotconctf/</link>
+      <pubDate>Tue, 10 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://noonker.github.io/posts/2026-02-10-thotconctf/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;&#xA;&lt;h2 id=&#34;headline-1&#34;&gt;&#xA;Elite&#xA;&lt;/h2&gt;&#xA;&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;There’s a TCP server running on port 9009 that contains a hidden flag, but it’s protected by a strict firewall. The firewall can be temporarily disabled for 30 seconds by sending a “firewall disable” command to its UDP control port 2723, but this control port will only accept commands from 129.229.10.50…… However, be careful - the firewall’s EDR will automatically re-enable protection after the 30-second window expires…&lt;/p&gt;</description>
+    </item>
     <item>
       <title>An AI Conversation about Medical Ethics</title>
       <link>https://noonker.github.io/posts/2025-02-09-a-conversation-about-medical-ethics/</link>

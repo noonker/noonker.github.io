@@ -134,7 +134,7 @@ In Guix, you can reconfigure your system through the <code class="verbatim">guix
 <p>
 So I&#39;m starting my personal config now which will shortly live in my <a href="https://github.com/noonker/dotfiles">dotfiles repo</a>. But if you&#39;re still trying to get started at this point what I did was move my config to a new folder and then replicated part of the structure of Kenny&#39;s config. My dirs look something like this:</p>
 <div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>guix-system/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>guix-system/
 </span></span><span style="display:flex;"><span>├── config.scm
 </span></span><span style="display:flex;"><span>└── noonker
 </span></span><span style="display:flex;"><span>    └── services
@@ -143,18 +143,18 @@ So I&#39;m starting my personal config now which will shortly live in my <a href
 <p>
 The boltd.scm is directly copied from <a href="https://github.com/kennyballou/dotfiles/blob/master/kbg/services/boltd.scm">Kenny&#39;s config</a> however the <code class="verbatim">(define-module)</code> function has been replaced to replicate the folder hierarchy above:</p>
 <div class="src src-scheme">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#a6e22e">define-module</span> (<span style="color:#a6e22e">noonker</span> services boltd)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#a6e22e">define-module</span> (<span style="color:#a6e22e">noonker</span> services boltd)
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">....</span></span></span></code></pre></div>
 </div>
 <p>
 Then, within my config.scm (which I copied from /etc/config.scm) I added the following module import:</p>
 <div class="src src-scheme">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#a6e22e">use-modules</span> (<span style="color:#a6e22e">noonker</span> services boltd))</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#a6e22e">use-modules</span> (<span style="color:#a6e22e">noonker</span> services boltd))</span></span></code></pre></div>
 </div>
 <p>
 Then, within my services definition added the bolt service:</p>
 <div class="src src-scheme">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#a6e22e">services</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#a6e22e">services</span>
 </span></span><span style="display:flex;"><span>   (<span style="color:#a6e22e">cons*</span> (<span style="color:#a6e22e">service</span> gnome-desktop-service-type)
 </span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">service</span> cups-service-type)
 </span></span><span style="display:flex;"><span>          (<span style="color:#a6e22e">service</span> boltd-service-type)
@@ -164,7 +164,7 @@ Then, within my services definition added the bolt service:</p>
 <p>
 The final step to getting this whole thing to work is to reconfigure the system. But now, we need to modify the path that Guix uses to resolve where modules should be imported from</p>
 <div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo guix system reconfigure -L /home/person/git/guix-system config.scm</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo guix system reconfigure -L /home/person/git/guix-system config.scm</span></span></code></pre></div>
 </div>
 <p>
 And this should recompile the system. On reboot Thunderbolt should work.</p>
@@ -211,7 +211,7 @@ And this should recompile the system. On reboot Thunderbolt should work.</p>
   <div class="footer__inner">
     
       <div class="copyright">
-        <span>© 2025 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>© 2026 Powered by <a href="http://gohugo.io">Hugo</a></span>
     
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>

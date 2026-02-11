@@ -132,7 +132,7 @@ Background
 <p>
 At some point in the last couple of months OpenJdk stopped working with Cider. Whenever I tried to run <code class="verbatim">cider-jack-in</code> I got the following error:</p>
 <div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>error in process sentinel: nrepl-server-sentinel: Could not start nREPL server: Execution error <span style="color:#f92672">(</span>ClassNotFoundException<span style="color:#f92672">)</span> at java.net.URLClassLoader/findClass <span style="color:#f92672">(</span>REPL:-1<span style="color:#f92672">)</span>.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>error in process sentinel: nrepl-server-sentinel: Could not start nREPL server: Execution error <span style="color:#f92672">(</span>ClassNotFoundException<span style="color:#f92672">)</span> at java.net.URLClassLoader/findClass <span style="color:#f92672">(</span>REPL:-1<span style="color:#f92672">)</span>.
 </span></span><span style="display:flex;"><span>com.sun.source.doctree.BlockTagTree
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Full report at:
@@ -170,14 +170,14 @@ Getting OpenJDK and Clojure from the source
 <p>
 I fetched OpenJDK from <a href="https://openjdk.org/projects/jdk/24/">https://openjdk.org/projects/jdk/24/</a> and made it available on my path:</p>
 <div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export JAVA_HOME<span style="color:#f92672">=</span>$HOME/jdk24
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export JAVA_HOME<span style="color:#f92672">=</span>$HOME/jdk24
 </span></span><span style="display:flex;"><span>PATH<span style="color:#f92672">=</span>$JAVA_HOME/bin:$PATH
 </span></span><span style="display:flex;"><span>export PATH</span></span></code></pre></div>
 </div>
 <p>
 and got Clojure from here <a href="https://clojure.org/guides/install_clojure">https://clojure.org/guides/install_clojure</a></p>
 <div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -L -O https://github.com/clojure/brew-install/releases/latest/download/linux-install.sh
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -L -O https://github.com/clojure/brew-install/releases/latest/download/linux-install.sh
 </span></span><span style="display:flex;"><span>chmod +x linux-install.sh
 </span></span><span style="display:flex;"><span>mkdir $HOME/clojure
 </span></span><span style="display:flex;"><span>sudo ./linux-install.sh --prefix $HOME/clojure</span></span></code></pre></div>
@@ -185,7 +185,7 @@ and got Clojure from here <a href="https://clojure.org/guides/install_clojure">h
 <p>
 and made it available on my path:</p>
 <div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/clojure/bin:</span>$PATH<span style="color:#e6db74">&#34;</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/clojure/bin:</span>$PATH<span style="color:#e6db74">&#34;</span></span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -205,7 +205,7 @@ The file <strong>was</strong> executable and did exist. Zie87&#39;s <a href="htt
 <p>
 When I ran <code class="verbatim">ldd</code> on the binary this is what I got:</p>
 <div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>┌─<span style="color:#f92672">[</span>person@blep<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>20:41<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>/home/person/jdk24/bin<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>🤚<span style="color:#f92672">]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>┌─<span style="color:#f92672">[</span>person@blep<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>20:41<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>/home/person/jdk24/bin<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>🤚<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>└─&gt; $ ldd java
 </span></span><span style="display:flex;"><span>	linux-vdso.so.1 <span style="color:#f92672">(</span>0x00007fd20d52d000<span style="color:#f92672">)</span>
 </span></span><span style="display:flex;"><span>	libjli.so <span style="color:#f92672">=</span>&gt; /home/person/jdk24/bin/../lib/libjli.so <span style="color:#f92672">(</span>0x00007fd20d510000<span style="color:#f92672">)</span>
@@ -223,7 +223,7 @@ Instead of modifying the binary I opted to just copy <code class="verbatim">libz
 <p>
 First, I needed to find the library on the filesystem</p>
 <div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>┌─<span style="color:#f92672">[</span>person@blep<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>20:45<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>/home/person/jdk24/bin<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>🤚<span style="color:#f92672">]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>┌─<span style="color:#f92672">[</span>person@blep<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>20:45<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>/home/person/jdk24/bin<span style="color:#f92672">]</span>──<span style="color:#f92672">[</span>🤚<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>└─&gt; $ guix locate libz.so.1
 </span></span><span style="display:flex;"><span>zlib@1.3             /gnu/store/3679z3xdyz7x8zrcwqzm86f9cf9i6p29-zlib-1.3/lib/libz.so.1
 </span></span><span style="display:flex;"><span>zlib@1.2.11          /gnu/store/8qv5kb2fgm4c3bf70zcg9l6hkf3qzpw9-zlib-1.2.11/lib/libz.so.1</span></span></code></pre></div>
@@ -231,7 +231,7 @@ First, I needed to find the library on the filesystem</p>
 <p>
 and then just copied the file to the java_home:</p>
 <div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mv /gnu/store/3679z3xdyz7x8zrcwqzm86f9cf9i6p29-zlib-1.3/lib/libz.so.1 $HOME/jdk24/lib</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mv /gnu/store/3679z3xdyz7x8zrcwqzm86f9cf9i6p29-zlib-1.3/lib/libz.so.1 $HOME/jdk24/lib</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -287,7 +287,7 @@ This got everything working and I&#39;m able to hack on my Clojure project. Howe
   <div class="footer__inner">
     
       <div class="copyright">
-        <span>© 2025 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>© 2026 Powered by <a href="http://gohugo.io">Hugo</a></span>
     
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>

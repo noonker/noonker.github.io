@@ -134,7 +134,7 @@ The fix here is fine but there&#39;s one gotcha:</p>
 <p>
 The documentation says that you should take two steps to install the packages with wine:</p>
 <div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>udisksctl loop-setup -f ~/Downloads/&lt;filename&gt;.iso <span style="color:#75715e"># load the .iso file</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>udisksctl loop-setup -f ~/Downloads/&lt;filename&gt;.iso <span style="color:#75715e"># load the .iso file</span>
 </span></span><span style="display:flex;"><span>udisksctl mount -t udf -o unhide -b /dev/loopX <span style="color:#75715e"># where /dev/loopX corresponds to the loop device printed by the loop-setup</span></span></span></code></pre></div>
 </div>
 <p>
@@ -144,7 +144,7 @@ This needs to be temporarily disabled otherwise it will not mount with the corre
 <p>
 (re-enable by changing the <code class="verbatim">false</code> to <code class="verbatim">true</code> and rerunning)</p>
 <div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gsettings set org.gnome.desktop.media-handling automount false
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gsettings set org.gnome.desktop.media-handling automount false
 </span></span><span style="display:flex;"><span>gsettings set org.gnome.desktop.media-handling automount-open false 
 </span></span><span style="display:flex;"><span>systemctl restart gdm.service</span></span></code></pre></div>
 </div>
@@ -153,7 +153,7 @@ then you should be able to install the plugins.</p>
 <p>
 It would also be very tedious to do this for all the packages in Komplete- I made a little helper script which can be used to speed up this process:</p>
 <div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Mounts a native ISO file to a loop device</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Mounts a native ISO file to a loop device</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>DEVICE<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>udisksctl loop-setup -f $1 | grep -E -o <span style="color:#e6db74">&#34;/dev/loop[0-9]{1,3}&#34;</span><span style="color:#66d9ef">)</span>
 </span></span><span style="display:flex;"><span>
@@ -234,7 +234,7 @@ This will:</p>
   <div class="footer__inner">
     
       <div class="copyright">
-        <span>© 2025 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>© 2026 Powered by <a href="http://gohugo.io">Hugo</a></span>
     
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>

